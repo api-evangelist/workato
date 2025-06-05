@@ -30,42 +30,58 @@ common:
   - url: https://github.com/workato
     name: GitHub Organization
     type: GitHubOrganization
-  - name: 'Workato Pricing Model: Heres How It Works | Workato'
-    description: 'null'
-    url: https://www.workato.com/pricing
+  - url: https://www.workato.com/pricing
+    name: 'Workato Pricing Model: Heres How It Works | Workato'
     type: Pricing
-  - name: Automation Governance and Data Security | Workato
     description: 'null'
-    url: https://www.workato.com/platform/security
+  - url: https://www.workato.com/platform/security
+    name: Automation Governance and Data Security | Workato
     type: Security
-  - name: Popular Use Cases | Workato
     description: 'null'
-    url: https://www.workato.com/use_cases
+  - url: https://www.workato.com/use_cases
+    name: Popular Use Cases | Workato
     type: UseCases
-  - name: Resources Library | Workato
     description: 'null'
-    url: https://www.workato.com/resources
+  - url: https://www.workato.com/resources
+    name: Resources Library | Workato
     type: Resources
-  - name: Workato Blog | Content for IT and RevOps professionals
     description: 'null'
-    url: https://www.workato.com/the-connector/
+  - url: https://www.workato.com/the-connector/
+    name: Workato Blog | Content for IT and RevOps professionals
     type: Blog
-  - name: Whats New | Product Hub
     description: 'null'
-    url: https://www.workato.com/product-hub/whats-new/
+  - url: https://www.workato.com/product-hub/whats-new/
+    name: Whats New | Product Hub
     type: ' WhatsNew'
-  - name: Whats New | Product Hub
     description: 'null'
-    url: https://www.workato.com/product-hub/whats-new/
+  - url: https://www.workato.com/product-hub/whats-new/
+    name: Whats New | Product Hub
     type: ' WhatsNew'
-  - name: Changelog Archive | Workato Product Hub
     description: 'null'
-    url: https://www.workato.com/product-hub/changelog/
+  - url: https://www.workato.com/product-hub/changelog/
+    name: Changelog Archive | Workato Product Hub
     type: ChangeLog
-  - name: Americas Archives
     description: 'null'
-    url: https://www.workato.com/the-connector/category/customer-stories/americas/
+  - url: https://www.workato.com/the-connector/category/customer-stories/americas/
+    name: Americas Archives
     type: Customers
+    description: 'null'
+  - name: Find the right Workato Service Partner
+    description: 'null'
+    url: https://partners.workato.com/consultants
+    type: Partners
+  - name: Workato Docs
+    description: 'null'
+    url: https://docs.workato.com/en/
+    type: Portal
+  - name: Workato Docs
+    description: 'null'
+    url: https://docs.workato.com/en/
+    type: Portal
+  - name: Workato Community Recipes | Workato
+    description: 'null'
+    url: https://app.workato.com/browse/recipes
+    type: Integrations
 created: '2025-06-05'
 modified: '2025-06-05'
 position: Consumer
