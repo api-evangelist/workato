@@ -10,14 +10,14 @@ apis:
     properties:
       - url: https://www.workato.com/
         type: Documentation
-      - name: Workato API - Introduction | Workato Docs
-        description: 'null'
-        url: https://docs.workato.com/en/workato-api.html#base-url
+      - url: https://docs.workato.com/en/workato-api.html#base-url
+        name: Workato API - Introduction | Workato Docs
         type: Documentation
-      - name: Workato API - Introduction | Workato Docs
         description: 'null'
-        url: https://docs.workato.com/en/workato-api.html#authentication
+      - url: https://docs.workato.com/en/workato-api.html#authentication
+        name: Workato API - Introduction | Workato Docs
         type: Authentication
+        description: 'null'
     description: >-
       Workato is an American multinational software company that provides a
       cloud-based platform for automation, integration, and artificial
@@ -90,22 +90,47 @@ common:
     name: Workato Community Recipes | Workato
     type: Integrations
     description: 'null'
-  - name: Workato Docs
-    description: 'null'
-    url: https://docs.workato.com/en/
+  - url: https://docs.workato.com/en/
+    name: Workato Docs
     type: Documentation
-  - name: Workato Community Recipes | Workato
     description: 'null'
-    url: https://app.workato.com/browse/recipes
+  - url: https://app.workato.com/browse/recipes
+    name: Workato Community Recipes | Workato
     type: Integrations
-  - name: Workato  Connect your apps. Automate your work. | Workato
     description: 'null'
-    url: https://www.workato.com/legal
+  - url: https://www.workato.com/legal
+    name: Workato  Connect your apps. Automate your work. | Workato
     type: PrivacyPolicy
+    description: 'null'
+  - url: https://www.workato.com/legal/terms-of-service
+    name: Workato  Connect your apps. Automate your work. | Workato
+    type: TermsOfService
+    description: 'null'
   - name: Workato  Connect your apps. Automate your work. | Workato
     description: 'null'
-    url: https://www.workato.com/legal/terms-of-service
-    type: TermsOfService
+    url: https://www.workato.com/legal/security
+    type: Security
+  - name: About Us | Workato
+    description: 'null'
+    url: https://www.workato.com/about_us
+    type: About
+  - name: 'The #1 iPaaS for the AI and Agentic Era | Workato'
+    description: 'null'
+    url: https://www.workato.com/
+    type: Website
+  - name: Login to build your integrations, automations | Workato
+    description: 'null'
+    url: >-
+      https://app.workato.com/users/sign_in?_gl=1*191kgyn*_gcl_au*MjA2NDIyNDEyNS4xNzQ5MTM5OTgw
+    type: Login
+  - name: Workato API - Introduction | Workato Docs
+    description: 'null'
+    url: https://docs.workato.com/en/workato-api.html#http-response-codes
+    type: Errors
+  - name: MCP | Workato Docs
+    description: 'null'
+    url: https://docs.workato.com/en/mcp.html
+    type: MCP
 created: '2025-06-05'
 modified: '2025-06-05'
 position: Consumer
