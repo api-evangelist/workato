@@ -10,6 +10,14 @@ apis:
     properties:
       - url: https://www.workato.com/
         type: Documentation
+      - name: Workato API - Introduction | Workato Docs
+        description: 'null'
+        url: https://docs.workato.com/en/workato-api.html#base-url
+        type: Documentation
+      - name: Workato API - Introduction | Workato Docs
+        description: 'null'
+        url: https://docs.workato.com/en/workato-api.html#authentication
+        type: Authentication
     description: >-
       Workato is an American multinational software company that provides a
       cloud-based platform for automation, integration, and artificial
@@ -66,22 +74,38 @@ common:
     name: Americas Archives
     type: Customers
     description: 'null'
-  - name: Find the right Workato Service Partner
-    description: 'null'
-    url: https://partners.workato.com/consultants
+  - url: https://partners.workato.com/consultants
+    name: Find the right Workato Service Partner
     type: Partners
+    description: 'null'
+  - url: https://docs.workato.com/en/
+    name: Workato Docs
+    type: Portal
+    description: 'null'
+  - url: https://docs.workato.com/en/
+    name: Workato Docs
+    type: Portal
+    description: 'null'
+  - url: https://app.workato.com/browse/recipes
+    name: Workato Community Recipes | Workato
+    type: Integrations
+    description: 'null'
   - name: Workato Docs
     description: 'null'
     url: https://docs.workato.com/en/
-    type: Portal
-  - name: Workato Docs
-    description: 'null'
-    url: https://docs.workato.com/en/
-    type: Portal
+    type: Documentation
   - name: Workato Community Recipes | Workato
     description: 'null'
     url: https://app.workato.com/browse/recipes
     type: Integrations
+  - name: Workato  Connect your apps. Automate your work. | Workato
+    description: 'null'
+    url: https://www.workato.com/legal
+    type: PrivacyPolicy
+  - name: Workato  Connect your apps. Automate your work. | Workato
+    description: 'null'
+    url: https://www.workato.com/legal/terms-of-service
+    type: TermsOfService
 created: '2025-06-05'
 modified: '2025-06-05'
 position: Consumer
