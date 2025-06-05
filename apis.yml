@@ -5,7 +5,11 @@ apis:
   - aid: workato:workato
     name: Workato
     tags:
-      - API
+      - Embedded SaaS Integration
+      - Orchestration
+      - Agentic
+      - iPaaS
+      - B2B
     humanURL: https://www.workato.com/
     properties:
       - url: https://www.workato.com/
