@@ -43,7 +43,7 @@ common:
     name: GitHub Organization
     type: GitHubOrganization
   - url: https://www.workato.com/pricing
-    name: 'Workato Pricing Model: Heres How It Works | Workato'
+    name: "Workato Pricing Model: Here\x19s How It Works | Workato"
     type: Pricing
     description: 'null'
   - url: https://www.workato.com/platform/security
@@ -58,61 +58,102 @@ common:
       - name: Actions by LLM Accelerator
         description: Pre-built solution to automate enterprise action with LLM & Workato
       - name: SAP Order-to-Cash Accelerator
-        description: Accelerate order to cash process implementation using SAP S/4 HANA with Salesforce CRM
+        description: >-
+          Accelerate order to cash process implementation using SAP S/4 HANA
+          with Salesforce CRM
       - name: Salesforce Workbot Accelerator
         description: Access Salesforce Seamlessly in Slack
       - name: Atlassian Virtual Agent Accelerator
-        description: Real-time request fulfilment and response to the users from Atlassian Virtual Agent
+        description: >-
+          Real-time request fulfilment and response to the users from Atlassian
+          Virtual Agent
       - name: NetSuite to Salesforce integration Accelerator
-        description: Automate lead-to-cash processes and get real-time visibility into back-office order, fulfillment, and financial operations
+        description: >-
+          Automate lead-to-cash processes and get real-time visibility into
+          back-office order, fulfillment, and financial operations
       - name: Workday Revenue Management
-        description: Helps organizations in syncing their CPQ orders from CRM into WRM as a contract
+        description: >-
+          Helps organizations in syncing their CPQ orders from CRM into WRM as a
+          contract
       - name: Security Orchestration, Automation & Response (SOAR) (AI@Work)
         description: Elevate your Security Posture with AI-Driven SOAR Excellence
       - name: Intelligent Invoice Processing
-        description: Experience AI-powered efficiency and superior accuracy in invoice processing with Cloudorizon's solution
+        description: >-
+          Experience AI-powered efficiency and superior accuracy in invoice
+          processing with Cloudorizon's solution
       - name: Automation Training Manager
         description: Provide personalized training plans based on individual learning needs
       - name: Sales Process & Forecasting Alignment
         description: The first step in achieving Pipeline Resilience
       - name: MindAssist
-        description: MindAssist automates support ticket creation & bot retriggering for Automation Anywhere A360, helping businesses build resilient automations with Workato's low-code platform.
+        description: >-
+          MindAssist automates support ticket creation & bot retriggering for
+          Automation Anywhere A360, helping businesses build resilient
+          automations with Workato's low-code platform.
       - name: Software License Optimization
-        description: Automate the process of identifying & deprovisioning underutilized app licenses
+        description: >-
+          Automate the process of identifying & deprovisioning underutilized app
+          licenses
       - name: AIML Accelerator
         description: Power up your automations using AIML PLatforms within your recipe
       - name: Automation Quality & Security
-        description: Standardize and automate quality and security best practices for your automations
+        description: >-
+          Standardize and automate quality and security best practices for your
+          automations
       - name: IT Help Desk Bot
-        description: Supercharge your helpdesk with self-service knowledge articles & service requests powered by intelligent bots
+        description: >-
+          Supercharge your helpdesk with self-service knowledge articles &
+          service requests powered by intelligent bots
       - name: OPA Manager
-        description: A standardized approach to automate the add agents, manage and troubleshoot OPAs
+        description: >-
+          A standardized approach to automate the add agents, manage and
+          troubleshoot OPAs
       - name: App Provision/Deprovisioning
-        description: Manage user access to applications Leverage a standardized approach to manage user access to applications
+        description: >-
+          Manage user access to applications Leverage a standardized approach to
+          manage user access to applications
       - name: Product-Led Sales
-        description: Take action on account signals at scale to increase customer acquisition, retention & expansion
+        description: >-
+          Take action on account signals at scale to increase customer
+          acquisition, retention & expansion
       - name: Order-to-Cash
         description: Transform your order-to-cash process into a competitive differentiator
       - name: Employee Onboarding
-        description: Improve the scale, speed & experience of your employee onboarding with fewer resources
+        description: >-
+          Improve the scale, speed & experience of your employee onboarding with
+          fewer resources
       - name: Productized Integrations
-        description: Supercharge your product with pre-built integrations to apps your customers need
+        description: >-
+          Supercharge your product with pre-built integrations to apps your
+          customers need
       - name: Centralize Integration/Automation
-        description: Harness the power of integration + automation across teams without sacrificing agility
+        description: >-
+          Harness the power of integration + automation across teams without
+          sacrificing agility
       - name: Enterprise Data Hub
-        description: Create a standardized and trusted source of truth for your critical records
+        description: >-
+          Create a standardized and trusted source of truth for your critical
+          records
       - name: Campaign Launchpad
-        description: Standardize your marketing campaign process & launch faster with automation
+        description: >-
+          Standardize your marketing campaign process & launch faster with
+          automation
       - name: Autonomous Operations Framework
-        description: Error handling, logging, notification, and automated recovery framework
+        description: >-
+          Error handling, logging, notification, and automated recovery
+          framework
       - name: Approvals bot for Slack/Teams
         description: Faster and easier approvals by utilizing Slack and Teams
       - name: ELT Pipeline for Snowflake
-        description: Standardized framework for ingesting data into Snowflake for reporting and analytics
+        description: >-
+          Standardized framework for ingesting data into Snowflake for reporting
+          and analytics
       - name: Back-to-Office Process
         description: Help your employees return to the office with a templatized framework
       - name: CI/CD Automation
-        description: Leverage a standardized approach to manage recipe promotion between Workato environments
+        description: >-
+          Leverage a standardized approach to manage recipe promotion between
+          Workato environments
   - url: https://www.workato.com/resources
     name: Resources Library | Workato
     type: Resources
@@ -334,7 +375,8 @@ common:
         url: https://app.workato.com/browse/recipes?q=app:aws-guardduty
       - aid: aws-key-management-service
         name: AWS Key Management Service
-        url: https://app.workato.com/browse/recipes?q=app:aws-key-management-service
+        url: >-
+          https://app.workato.com/browse/recipes?q=app:aws-key-management-service
       - aid: aws-product-advertising
         name: AWS Product Advertising
         url: https://app.workato.com/browse/recipes?q=app:aws-product-advertising
@@ -362,9 +404,9 @@ common:
       - aid: backlog
         name: Backlog
         url: https://app.workato.com/browse/recipes?q=app:backlog
-      - aid: bakuraku-(バクラク)
-        name: Bakuraku (バクラク)
-        url: https://app.workato.com/browse/recipes?q=app:bakuraku-(バクラク)
+      - aid: bakuraku-(Я�)
+        name: Bakuraku (Я�)
+        url: https://app.workato.com/browse/recipes?q=app:bakuraku-(Я�)
       - aid: barista
         name: Barista
         url: https://app.workato.com/browse/recipes?q=app:barista
@@ -770,7 +812,8 @@ common:
         url: https://app.workato.com/browse/recipes?q=app:elasticsearch
       - aid: ellucian-colleague-web-apis
         name: Ellucian Colleague Web APIs
-        url: https://app.workato.com/browse/recipes?q=app:ellucian-colleague-web-apis
+        url: >-
+          https://app.workato.com/browse/recipes?q=app:ellucian-colleague-web-apis
       - aid: email-(custom)
         name: Email (Custom)
         url: https://app.workato.com/browse/recipes?q=app:email-(custom)
@@ -834,15 +877,15 @@ common:
       - aid: fountain
         name: Fountain
         url: https://app.workato.com/browse/recipes?q=app:fountain
-      - aid: freee人事労務
-        name: freee人事労務
-        url: https://app.workato.com/browse/recipes?q=app:freee人事労務
-      - aid: freee会計
-        name: freee会計
-        url: https://app.workato.com/browse/recipes?q=app:freee会計
-      - aid: freee請求書
-        name: freee請求書
-        url: https://app.workato.com/browse/recipes?q=app:freee請求書
+      - aid: freee����
+        name: freee����
+        url: https://app.workato.com/browse/recipes?q=app:freee����
+      - aid: freee
+        name: freee
+        url: https://app.workato.com/browse/recipes?q=app:freee
+      - aid: freee�B�
+        name: freee�B�
+        url: https://app.workato.com/browse/recipes?q=app:freee�B�
       - aid: freshchat
         name: Freshchat
         url: https://app.workato.com/browse/recipes?q=app:freshchat
@@ -1059,7 +1102,8 @@ common:
         url: https://app.workato.com/browse/recipes?q=app:japan-corporate-numbers
       - aid: japanese-characters-converter
         name: Japanese characters converter
-        url: https://app.workato.com/browse/recipes?q=app:japanese-characters-converter
+        url: >-
+          https://app.workato.com/browse/recipes?q=app:japanese-characters-converter
       - aid: jd-edwards
         name: JD Edwards
         url: https://app.workato.com/browse/recipes?q=app:jd-edwards
@@ -1288,7 +1332,8 @@ common:
           https://app.workato.com/browse/recipes?q=app:microsoft-dynamics-finance-and-operations
       - aid: microsoft-dynamics-great-plains
         name: Microsoft Dynamics Great Plains
-        url: https://app.workato.com/browse/recipes?q=app:microsoft-dynamics-great-plains
+        url: >-
+          https://app.workato.com/browse/recipes?q=app:microsoft-dynamics-great-plains
       - aid: microsoft-fabric
         name: Microsoft Fabric
         url: https://app.workato.com/browse/recipes?q=app:microsoft-fabric
@@ -1439,7 +1484,8 @@ common:
           https://app.workato.com/browse/recipes?q=app:oracle-cloud-infrastructure---autonomous-database
       - aid: oracle-fusion-cloud-(soap)
         name: Oracle Fusion Cloud (SOAP)
-        url: https://app.workato.com/browse/recipes?q=app:oracle-fusion-cloud-(soap)
+        url: >-
+          https://app.workato.com/browse/recipes?q=app:oracle-fusion-cloud-(soap)
       - aid: oracle-hdl-file-creator
         name: Oracle HDL file creator
         url: https://app.workato.com/browse/recipes?q=app:oracle-hdl-file-creator
@@ -1710,7 +1756,8 @@ common:
         url: https://app.workato.com/browse/recipes?q=app:smartrecruiters
       - aid: sms77-sms-&-text2speech-gateway
         name: Sms77 Sms & Text2Speech Gateway
-        url: https://app.workato.com/browse/recipes?q=app:sms77-sms-&-text2speech-gateway
+        url: >-
+          https://app.workato.com/browse/recipes?q=app:sms77-sms-&-text2speech-gateway
       - aid: soap
         name: SOAP
         url: https://app.workato.com/browse/recipes?q=app:soap
@@ -1827,7 +1874,8 @@ common:
         url: https://app.workato.com/browse/recipes?q=app:trubot-datamatics
       - aid: trustarc-integrations-[winzel]
         name: TrustArc Integrations [winzel]
-        url: https://app.workato.com/browse/recipes?q=app:trustarc-integrations-[winzel]
+        url: >-
+          https://app.workato.com/browse/recipes?q=app:trustarc-integrations-[winzel]
       - aid: trustcruit
         name: Trustcruit
         url: https://app.workato.com/browse/recipes?q=app:trustcruit
@@ -1992,7 +2040,7 @@ common:
         url: https://app.workato.com/browse/recipes?q=app:zoom-team-chat
       - aid: zscaler-client-connector
         name: Zscaler Client Connector
-        url: https://app.workato.com/browse/recipes?q=app:zscaler-client-connector    
+        url: https://app.workato.com/browse/recipes?q=app:zscaler-client-connector
   - url: https://docs.workato.com/en/
     name: Workato Docs
     type: Documentation
@@ -2002,14 +2050,14 @@ common:
     type: Integrations
     description: 'null'
   - url: https://www.workato.com/legal
-    name: Workato  Connect your apps. Automate your work. | Workato
+    name: "Workato \x14 Connect your apps. Automate your work. | Workato"
     type: PrivacyPolicy
     description: 'null'
   - url: https://www.workato.com/legal/terms-of-service
-    name: Workato  Connect your apps. Automate your work. | Workato
+    name: "Workato \x14 Connect your apps. Automate your work. | Workato"
     type: TermsOfService
     description: 'null'
-  - name: Workato  Connect your apps. Automate your work. | Workato
+  - name: "Workato \x14 Connect your apps. Automate your work. | Workato"
     description: 'null'
     url: https://www.workato.com/legal/security
     type: Security
@@ -2037,19 +2085,19 @@ common:
   - name: Features
     type: Features
     data:
-      - name: iPaaS
-      - name: App Connectors
-      - name: Data Orchestration
+      - name: AI Workflows
       - name: API Management
-      - name: Data Hub
-      - name: Master Data Management (MDM)
-      - name: Workflow Bots
-      - name: Low Code Apps
-      - name: Process Insights
+      - name: App Connectors
       - name: Copilots
-      - name: AI Workflows        
-created: '2025-06-05'
-modified: '2025-06-05'
+      - name: Data Hub
+      - name: Data Orchestration
+      - name: iPaaS
+      - name: Low Code Apps
+      - name: Master Data Management (MDM)
+      - name: Process Insights
+      - name: Workflow Bots
+created: '2025-06-05T00:00:00.000Z'
+modified: '2025-06-10'
 position: Consumer
 description: >-
   Workato is an American multinational software company that provides a
