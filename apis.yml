@@ -404,9 +404,9 @@ common:
       - aid: backlog
         name: Backlog
         url: https://app.workato.com/browse/recipes?q=app:backlog
-      - aid: bakuraku-(Ğ¯é¯)
-        name: Bakuraku (Ğ¯é¯)
-        url: https://app.workato.com/browse/recipes?q=app:bakuraku-(Ğ¯é¯)
+      - aid: bakuraku-(ÃÂ¯Ã©Â¯)
+        name: Bakuraku (ÃÂ¯Ã©Â¯)
+        url: https://app.workato.com/browse/recipes?q=app:bakuraku-(ÃÂ¯Ã©Â¯)
       - aid: barista
         name: Barista
         url: https://app.workato.com/browse/recipes?q=app:barista
@@ -876,16 +876,7 @@ common:
         url: https://app.workato.com/browse/recipes?q=app:foundu
       - aid: fountain
         name: Fountain
-        url: https://app.workato.com/browse/recipes?q=app:fountain
-      - aid: freeeº‹´Ù
-        name: freeeº‹´Ù
-        url: https://app.workato.com/browse/recipes?q=app:freeeº‹´Ù
-      - aid: freee
-        name: freee
-        url: https://app.workato.com/browse/recipes?q=app:freee
-      - aid: freeeËBø
-        name: freeeËBø
-        url: https://app.workato.com/browse/recipes?q=app:freeeËBø
+        url: https://app.workato.com/browse/recipes?q=app
       - aid: freshchat
         name: Freshchat
         url: https://app.workato.com/browse/recipes?q=app:freshchat
