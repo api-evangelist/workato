@@ -1,5 +1,5 @@
 # Workato (workato)
-Workato is an American multinational software company that provides a cloud-based platform for automation, integration, and artificial intelligence orchestration across applications, data, and systems. The company was founded in 2013 and is headquartered in Mountain View, California.
+Workato is an enterprise automation and integration platform that enables organizations to integrate their apps and automate business workflows without extensive coding. It provides a low-code/no-code interface for creating integrations between cloud applications, on-premises systems, and databases.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/apis.yml)
 
@@ -11,12 +11,12 @@ Workato is an American multinational software company that provides a cloud-base
 
 ## Tags:
 
- - Embedded SaaS Integration, Orchestration, Agentic, iPaaS, B2B
+ - API Management, Agentic, Automation, B2B, Embedded iPaaS, Enterprise, Integration, Orchestration, Workflow, iPaaS
 
 ## Timestamps
 
-- **Created:** 2025-06-05 
-- **Modified:** 2025-06-05 
+- **Created:** 2025-06-05T00:00:00.000Z 
+- **Modified:** 2026-01-02 
 
 ## APIs
 
@@ -28,7 +28,7 @@ Workato is an American multinational software company that provides a cloud-base
 
 #### Tags:
 
- - Embedded SaaS Integration, Orchestration, Agentic, iPaaS, B2B
+ - Embedded SaaS Integration, Orchestration, Agentic, iPaaS
 
 #### Properties
 
@@ -62,11 +62,19 @@ Workato is an American multinational software company that provides a cloud-base
 - [Login](https://app.workato.com/users/sign_in?_gl=1*191kgyn*_gcl_au*MjA2NDIyNDEyNS4xNzQ5MTM5OTgw)
 - [Errors](https://docs.workato.com/en/workato-api.html#http-response-codes)
 - [MCP](https://docs.workato.com/en/mcp.html)
-- [Features](undefined)
+- [Developer Portal](https://docs.workato.com/)
+- [Authentication](https://docs.workato.com/workato-api/authentication.html)
+- [Rate Limits](https://docs.workato.com/workato-api/rate-limiting.html)
+- [Status Page](https://status.workato.com/)
+- [Community](https://community.workato.com/)
+- [Support](https://support.workato.com/)
+- [Sign Up](https://www.workato.com/users/sign_up)
 
 ## Maintainers
 
 **FN:** Kin Lane
 
 **Email:** info@apievangelist.com
+**FN:** Workato
 
+**Email:** support@workato.com
