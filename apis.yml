@@ -20,7 +20,88 @@ apis:
     name: Workato API - Introduction | Workato Docs
     type: Authentication
     description: 'null'
+  - url: https://docs.workato.com/workato-api.html
+    name: Workato Developer API - Introduction
+    type: API Documentation
+  - url: https://docs.workato.com/workato-api/resources.html
+    name: Workato API - Resources
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/recipes.html
+    name: Workato API - Recipes
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/api-connectors.html
+    name: Workato API - Connectors
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/api-client-apis.html
+    name: Workato API - API Clients
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/api-platform.html
+    name: Workato API - API Platform
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/custom_connectors.html
+    name: Workato API - Custom Connectors
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+    name: Workato API - Recipe Lifecycle Management
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/authentication.html
+    name: Workato API - Authentication
+    type: Authentication
+  - url: https://docs.workato.com/workato-api/rate-limiting.html
+    name: Workato API - Rate Limiting
+    type: Rate Limits
+  - url: https://docs.workato.com/developing-connectors/sdk.html
+    name: Workato Connector SDK - Developer Program
+    type: SDK
+  - url: https://github.com/workato/workato-connector-sdk
+    name: Workato Connector SDK - GitHub
+    type: SDK
+  - url: https://docs.workato.com/developing-connectors/custom-connector.html
+    name: Create a Custom Connector
+    type: SDK
   description: Workato is an American multinational software company that provides a cloud-based platform for automation, integration, and artificial intelligence orchestration across applications, data, and systems. The company was founded in 2013 and is headquartered in Mountain View, California.
+- aid: workato:embedded-api
+  name: Workato Embedded Partner API
+  tags:
+  - Embedded iPaaS
+  - OEM
+  - Partner API
+  humanURL: https://docs.workato.com/oem/oem-api.html
+  properties:
+  - url: https://docs.workato.com/oem/oem-api.html
+    name: Embedded Partner APIs
+    type: API Documentation
+  - url: https://docs.workato.com/oem/oem-api/managed-users.html
+    name: Embedded API - Managed Customers
+    type: API Reference
+  - url: https://docs.workato.com/oem/oem-api/connections.html
+    name: Embedded API - Connections
+    type: API Reference
+  - url: https://docs.workato.com/oem/oem-api/api-platform.html
+    name: Embedded API - API Platform
+    type: API Reference
+  - url: https://docs.workato.com/oem/oem-api/adapters.html
+    name: Embedded API - Connectors
+    type: API Reference
+  - url: https://docs.workato.com/oem/oem-api/jobs
+    name: Embedded API - Jobs
+    type: API Reference
+  - url: https://docs.workato.com/oem/oem-api/team.html
+    name: Embedded API - Customer Workspace Collaborators
+    type: API Reference
+  - url: https://docs.workato.com/oem/embedded-environments/embedded-environments-api.html
+    name: Embedded Environments APIs
+    type: API Reference
+  - url: https://docs.workato.com/oem/oem-api-faqs.html
+    name: Embedded Partner API FAQs
+    type: FAQ
+  - url: https://docs.workato.com/oem.html
+    name: Workato Embedded Documentation
+    type: Documentation
+  - url: https://docs.workato.com/oem/workato-embedded.html
+    name: Workato Fully Embedded
+    type: Documentation
+  description: The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes, connections, and other assets within the Workato Embedded platform. These APIs support provisioning customer workspaces, managing environments, and building fully embedded integration experiences within partner applications.
 name: Workato
 tags:
 - API Management
@@ -2035,8 +2116,68 @@ common:
   type: Support
 - url: https://www.workato.com/users/sign_up
   type: Sign Up
+- url: https://www.linkedin.com/company/workato/
+  name: Workato on LinkedIn
+  type: LinkedIn
+- url: https://twitter.com/workato
+  name: Workato on X (Twitter)
+  type: Twitter
+- url: https://www.youtube.com/user/workato
+  name: Workato on YouTube
+  type: YouTube
+- url: https://www.facebook.com/workato/
+  name: Workato on Facebook
+  type: Facebook
+- url: https://www.instagram.com/workatohq/
+  name: Workato on Instagram
+  type: Instagram
+- url: https://academy.workato.com/
+  name: Workato Academy
+  type: Academy
+- url: https://www.workato.com/certification
+  name: Workato Certification
+  type: Certification
+- url: https://systematic.workato.com/
+  name: Workato Systematic Community
+  type: Forum
+- url: https://www.workato.com/events
+  name: Workato Events
+  type: Events
+- url: https://trust.workato.com/
+  name: Workato Trust Center
+  type: TrustCenter
+- url: https://www.workato.com/press
+  name: Workato Press
+  type: Press
+- url: https://www.workato.com/careers
+  name: Workato Careers
+  type: Careers
+- url: https://www.workato.com/request_demo
+  name: Contact Sales | Workato
+  type: Contact
+- url: https://www.workato.com/embed-saas-integrations
+  name: Embedded iPaaS | Workato
+  type: Product
+- url: https://docs.workato.com/on-prem.html
+  name: On-Prem Connectivity | Workato Docs
+  type: Documentation
+- url: https://docs.workato.com/developing-connectors/sdk.html
+  name: Connector SDK Developer Program | Workato Docs
+  type: SDK
+- url: https://docs.workato.com/api-management.html
+  name: API Platform | Workato Docs
+  type: Documentation
+- url: https://docs.workato.com/api-mgmt/api-developer-portal.html
+  name: API Portal | Workato Docs
+  type: Portal
+- url: https://partners.workato.com/
+  name: Workato Partner Directory
+  type: Partners
+- url: https://www.workato.com/events/automate
+  name: Workato Automate Conference
+  type: Events
 created: '2025-06-05T00:00:00.000Z'
-modified: '2026-01-02'
+modified: '2026-03-03'
 position: Consumer
 segments:
   - iPaaS
@@ -2045,7 +2186,7 @@ segments:
 description: Workato is an enterprise automation and integration platform that enables organizations to integrate their apps and automate business workflows without extensive coding. It provides a low-code/no-code interface for creating integrations between cloud applications, on-premises systems, and databases.
 maintainers:
 - FN: Kin Lane
-  email: info@apievangelist.com
+  email: kin@apievangelist.com
 - name: Workato
   email: support@workato.com
   url: https://www.workato.com
