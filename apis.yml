@@ -2185,9 +2185,6 @@ segments:
   - Workflows
 description: Workato is an enterprise automation and integration platform that enables organizations to integrate their apps and automate business workflows without extensive coding. It provides a low-code/no-code interface for creating integrations between cloud applications, on-premises systems, and databases.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- name: Workato
-  email: support@workato.com
-  url: https://www.workato.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
