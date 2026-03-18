@@ -1,0 +1,760 @@
+openapi: 3.1.0
+info:
+  title: Workato Developer API
+  description: >-
+    The Workato Developer API provides programmatic access to manage all
+    aspects of a Workato workspace, including recipes, connections, jobs,
+    folders, data tables, and more. It enables automation of workspace
+    management, CI/CD pipeline integration, environment promotion, and
+    operational monitoring. Authentication uses Bearer tokens from API
+    clients configured in the Workato platform. Rate limits vary by
+    endpoint: 1 req/sec for recipe creation, 20 req/min for health analysis,
+    and 60 req/min for all other operations.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+externalDocs:
+  description: Workato Developer API Documentation
+  url: https://docs.workato.com/workato-api.html
+servers:
+  - url: https://www.workato.com
+    description: US Production
+  - url: https://app.eu.workato.com
+    description: EU Production
+  - url: https://app.jp.workato.com
+    description: JP Production
+  - url: https://app.sg.workato.com
+    description: SG Production
+  - url: https://app.au.workato.com
+    description: AU Production
+tags:
+  - name: Recipes
+    description: >-
+      Recipes are automated workflows that connect applications and services.
+      Manage recipe lifecycle including creation, activation, and versioning.
+  - name: Data Tables
+    description: >-
+      Data tables are structured storage within Workato for persisting and
+      querying records used in recipe automation.
+  - name: Folders
+    description: Workspace organizational folders for grouping recipes and assets.
+  - name: Connections
+    description: >-
+      Connections authenticate Workato to external applications and services
+      used in recipes.
+  - name: Jobs
+    description: >-
+      Jobs are individual recipe execution instances. Query and monitor job
+      history and status.
+security:
+  - bearerAuth: []
+paths:
+  /api/recipes:
+    get:
+      operationId: listRecipes
+      summary: List recipes
+      description: >-
+        Returns a paginated list of recipes in the workspace. Supports
+        filtering by folder, running state, adapter names, and update time.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/FolderId'
+        - name: with_subfolders
+          in: query
+          description: Include recipes in subfolders of the specified folder.
+          schema:
+            type: boolean
+        - name: order
+          in: query
+          description: Sort order for results.
+          schema:
+            type: string
+            enum: [asc, desc]
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - name: running
+          in: query
+          description: Filter by running state.
+          schema:
+            type: boolean
+        - name: adapter_names_all
+          in: query
+          description: >-
+            Comma-separated list of connector names. Returns only recipes
+            that use all of the specified connectors.
+          schema:
+            type: string
+        - name: adapter_names_any
+          in: query
+          description: >-
+            Comma-separated list of connector names. Returns recipes that
+            use at least one of the specified connectors.
+          schema:
+            type: string
+        - name: updated_after
+          in: query
+          description: Filter recipes updated after this ISO 8601 timestamp.
+          schema:
+            type: string
+            format: date-time
+        - name: stopped_after
+          in: query
+          description: Filter recipes stopped after this ISO 8601 timestamp.
+          schema:
+            type: string
+            format: date-time
+        - name: stop_cause
+          in: query
+          description: Filter by stop cause.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of recipes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recipe'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createRecipe
+      summary: Create a recipe
+      description: >-
+        Creates a new recipe in the workspace. Rate limited to 1 request per
+        second. The recipe code must be provided in JSON format.
+      tags:
+        - Recipes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeInput'
+      responses:
+        '200':
+          description: The created recipe.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/recipes/{id}:
+    get:
+      operationId: getRecipe
+      summary: Get a recipe
+      description: Returns the details of a specific recipe by its ID.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeId'
+      responses:
+        '200':
+          description: The recipe details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateRecipe
+      summary: Update a recipe
+      description: Updates an existing recipe's name, code, config, or description.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeInput'
+      responses:
+        '200':
+          description: The updated recipe.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteRecipe
+      summary: Delete a recipe
+      description: Permanently deletes a recipe from the workspace. The recipe must be stopped first.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/recipes/{id}/start:
+    put:
+      operationId: startRecipe
+      summary: Start a recipe
+      description: Activates a recipe, enabling it to process trigger events.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeId'
+      responses:
+        '200':
+          description: Start confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/recipes/{id}/stop:
+    put:
+      operationId: stopRecipe
+      summary: Stop a recipe
+      description: Deactivates a recipe, preventing it from processing new trigger events.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeId'
+      responses:
+        '200':
+          description: Stop confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/recipes/{id}/copy:
+    post:
+      operationId: copyRecipe
+      summary: Copy a recipe
+      description: Creates a duplicate of an existing recipe.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeId'
+      responses:
+        '200':
+          description: The copied recipe.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/recipes/{recipe_id}/versions:
+    get:
+      operationId: listRecipeVersions
+      summary: List recipe versions
+      description: Returns the version history of a recipe.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeIdPath'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of recipe versions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecipeVersion'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/recipes/{recipe_id}/versions/{id}:
+    get:
+      operationId: getRecipeVersion
+      summary: Get a recipe version
+      description: Returns the details of a specific version of a recipe.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeIdPath'
+        - name: id
+          in: path
+          required: true
+          description: Version number or ID.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The recipe version details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeVersion'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/recipes/{recipe_id}/health:
+    get:
+      operationId: getRecipeHealth
+      summary: Get recipe health report
+      description: >-
+        Retrieves the most recent performance analysis report for a recipe.
+        Rate limited to 20 requests per minute.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeIdPath'
+      responses:
+        '200':
+          description: The recipe health report.
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Recipe performance and health analysis report.
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: queueRecipeHealthAnalysis
+      summary: Queue recipe health analysis
+      description: >-
+        Queues a new performance analysis for a recipe. Analysis runs
+        asynchronously and results are retrievable via GET. Rate limited to
+        20 requests per minute.
+      tags:
+        - Recipes
+      parameters:
+        - $ref: '#/components/parameters/RecipeIdPath'
+      responses:
+        '200':
+          description: Health analysis queued confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/data_tables:
+    get:
+      operationId: listDataTables
+      summary: List data tables
+      description: Returns a paginated list of all data tables in the workspace.
+      tags:
+        - Data Tables
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - name: per_page
+          in: query
+          description: Number of results per page (maximum 100).
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 100
+      responses:
+        '200':
+          description: A list of data tables.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataTable'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createDataTable
+      summary: Create a data table
+      description: Creates a new data table with the specified schema.
+      tags:
+        - Data Tables
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataTableInput'
+      responses:
+        '200':
+          description: The created data table.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTable'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/data_tables/{data_table_id}:
+    get:
+      operationId: getDataTable
+      summary: Get a data table
+      description: Returns the details of a specific data table by its ID.
+      tags:
+        - Data Tables
+      parameters:
+        - $ref: '#/components/parameters/DataTableId'
+      responses:
+        '200':
+          description: The data table details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTable'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateDataTable
+      summary: Update a data table
+      description: Updates the name, folder, or schema of an existing data table.
+      tags:
+        - Data Tables
+      parameters:
+        - $ref: '#/components/parameters/DataTableId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataTableInput'
+      responses:
+        '200':
+          description: The updated data table.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTable'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteDataTable
+      summary: Delete a data table
+      description: Permanently deletes a data table and all its records.
+      tags:
+        - Data Tables
+      parameters:
+        - $ref: '#/components/parameters/DataTableId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/data_tables/{data_table_id}/truncate:
+    post:
+      operationId: truncateDataTable
+      summary: Truncate a data table
+      description: >-
+        Removes all records from a data table while preserving its structure
+        and schema.
+      tags:
+        - Data Tables
+      parameters:
+        - $ref: '#/components/parameters/DataTableId'
+      responses:
+        '200':
+          description: Truncation confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API client token obtained from the Workato platform. Include as
+        Authorization: Bearer {token}.
+  parameters:
+    RecipeId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the recipe.
+      schema:
+        type: integer
+    RecipeIdPath:
+      name: recipe_id
+      in: path
+      required: true
+      description: Unique identifier of the recipe.
+      schema:
+        type: integer
+    DataTableId:
+      name: data_table_id
+      in: path
+      required: true
+      description: Unique identifier of the data table.
+      schema:
+        type: integer
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  responses:
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Recipe:
+      type: object
+      description: A Workato recipe representing an automated workflow.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the recipe.
+        name:
+          type: string
+          description: Display name of the recipe.
+        description:
+          type: string
+          description: Human-readable description of what the recipe does.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this recipe.
+        running:
+          type: boolean
+          description: Whether the recipe is currently active and processing events.
+        trigger_application:
+          type: string
+          description: The connector used for the recipe's trigger.
+        action_applications:
+          type: array
+          items:
+            type: string
+          description: List of connectors used in the recipe's actions.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the recipe was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the recipe was last updated.
+        stopped_at:
+          type: string
+          format: date-time
+          description: Timestamp when the recipe was last stopped.
+        stop_cause:
+          type: string
+          description: Reason the recipe was stopped, if applicable.
+    RecipeInput:
+      type: object
+      description: Input schema for creating or updating a recipe.
+      properties:
+        recipe:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Display name for the recipe.
+            code:
+              type: string
+              description: JSON-encoded recipe definition code.
+            config:
+              type: string
+              description: JSON-encoded recipe configuration.
+            folder_id:
+              type: integer
+              description: ID of the folder to place the recipe in.
+            description:
+              type: string
+              description: Human-readable description of what the recipe does.
+    RecipeVersion:
+      type: object
+      description: A specific version snapshot of a recipe.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of this version.
+        version_no:
+          type: integer
+          description: Sequential version number.
+        comment:
+          type: string
+          description: Optional comment describing changes in this version.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this version was created.
+    DataTable:
+      type: object
+      description: A structured data storage table within the Workato workspace.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the data table.
+        name:
+          type: string
+          description: Display name of the data table.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this data table.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataTableColumn'
+          description: List of column definitions for the table.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the data table was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the data table was last updated.
+    DataTableInput:
+      type: object
+      description: Input schema for creating or updating a data table.
+      required: [name, folder_id, schema]
+      properties:
+        name:
+          type: string
+          description: Display name for the data table.
+        folder_id:
+          type: integer
+          description: ID of the folder to place the data table in.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataTableColumn'
+          description: Column definitions for the table.
+    DataTableColumn:
+      type: object
+      description: A column definition in a data table schema.
+      required: [name, type]
+      properties:
+        name:
+          type: string
+          description: Column name used as the field identifier.
+        type:
+          type: string
+          description: Data type of the column.
+          enum: [string, integer, number, boolean, date, datetime, object, array]
+        description:
+          type: string
+          description: Optional description of the column's purpose.
+        required:
+          type: boolean
+          description: Whether this column is required when creating records.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.

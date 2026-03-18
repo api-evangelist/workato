@@ -1,0 +1,1002 @@
+openapi: 3.1.0
+info:
+  title: Workato Agent Studio API
+  description: >-
+    The Workato Agent Studio API provides programmatic access to manage AI
+    agents (genies), skills, and knowledge bases within the Workato Agentic
+    Automation platform. Use this API to create and configure AI agents,
+    assign skills and knowledge bases, and control agent lifecycle. Rate limits
+    are 1,000 requests per minute for list/get operations and 60 requests per
+    minute for all other operations.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+externalDocs:
+  description: Workato Agent Studio API Documentation
+  url: https://docs.workato.com/workato-api/agent-studio.html
+servers:
+  - url: https://www.workato.com
+    description: US Production
+  - url: https://app.eu.workato.com
+    description: EU Production
+  - url: https://app.jp.workato.com
+    description: JP Production
+  - url: https://app.sg.workato.com
+    description: SG Production
+  - url: https://app.au.workato.com
+    description: AU Production
+tags:
+  - name: Genies
+    description: >-
+      AI agents (genies) that can be configured with skills, knowledge bases,
+      and instructions to automate complex workflows.
+  - name: Skills
+    description: >-
+      Skills are recipe-backed capabilities that can be assigned to AI agents
+      to give them actionable tools.
+  - name: Knowledge Bases
+    description: >-
+      Knowledge bases provide AI agents with contextual data from configured
+      data sources such as documents, tables, and external systems.
+security:
+  - bearerAuth: []
+paths:
+  /api/agentic/genies:
+    get:
+      operationId: listGenies
+      summary: List genies
+      description: >-
+        Returns a paginated list of AI agents (genies) in the workspace.
+        Supports filtering by folder, project, and state.
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/FolderId'
+        - $ref: '#/components/parameters/ProjectId'
+        - name: state
+          in: query
+          description: Filter genies by their current state.
+          schema:
+            type: string
+            enum: [running, stopped]
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of genies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Genie'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createGenie
+      summary: Create a genie
+      description: >-
+        Creates a new AI agent (genie) in the workspace with the specified
+        configuration including name, instructions, AI provider, and matrix
+        settings.
+      tags:
+        - Genies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenieInput'
+      responses:
+        '200':
+          description: The created genie's ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier of the created genie.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/agentic/genies/{id}:
+    get:
+      operationId: getGenie
+      summary: Get a genie
+      description: Returns the details of a specific AI agent (genie) by its ID.
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      responses:
+        '200':
+          description: The genie details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Genie'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateGenie
+      summary: Update a genie
+      description: Updates the configuration of an existing AI agent (genie).
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenieInput'
+      responses:
+        '200':
+          description: The updated genie.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Genie'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteGenie
+      summary: Delete a genie
+      description: Permanently deletes an AI agent (genie) from the workspace.
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/start:
+    post:
+      operationId: startGenie
+      summary: Start a genie
+      description: Activates an AI agent (genie), making it available to handle requests.
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      responses:
+        '200':
+          description: Start confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/stop:
+    post:
+      operationId: stopGenie
+      summary: Stop a genie
+      description: Deactivates an AI agent (genie), preventing it from handling new requests.
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      responses:
+        '200':
+          description: Stop confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/assign_skills:
+    post:
+      operationId: assignSkillsToGenie
+      summary: Assign skills to a genie
+      description: >-
+        Assigns one or more skills to an AI agent (genie). Skills are
+        recipe-backed capabilities that give the agent actionable tools.
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [skill_ids]
+              properties:
+                skill_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of skill IDs to assign to the genie.
+      responses:
+        '200':
+          description: Updated skills array.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Skill'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/remove_skills:
+    post:
+      operationId: removeSkillsFromGenie
+      summary: Remove skills from a genie
+      description: Removes one or more skills from an AI agent (genie).
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [skill_ids]
+              properties:
+                skill_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of skill IDs to remove from the genie.
+      responses:
+        '200':
+          description: Updated skills array.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Skill'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/assign_knowledge_bases:
+    post:
+      operationId: assignKnowledgeBasesToGenie
+      summary: Assign knowledge bases to a genie
+      description: Assigns one or more knowledge bases to an AI agent (genie).
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [knowledge_base_ids]
+              properties:
+                knowledge_base_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of knowledge base IDs to assign to the genie.
+      responses:
+        '200':
+          description: Updated knowledge bases array.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KnowledgeBase'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/remove_knowledge_bases:
+    post:
+      operationId: removeKnowledgeBasesFromGenie
+      summary: Remove knowledge bases from a genie
+      description: Removes one or more knowledge bases from an AI agent (genie).
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [knowledge_base_ids]
+              properties:
+                knowledge_base_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of knowledge base IDs to remove from the genie.
+      responses:
+        '200':
+          description: Updated knowledge bases array.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KnowledgeBase'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/assign_user_groups:
+    post:
+      operationId: assignUserGroupsToGenie
+      summary: Assign user groups to a genie
+      description: Assigns identity provider user groups to an AI agent (genie) to control access.
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user_group_ids]
+              properties:
+                user_group_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of user group IDs to assign.
+      responses:
+        '200':
+          description: Updated user groups array.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/genies/{id}/remove_user_groups:
+    post:
+      operationId: removeUserGroupsFromGenie
+      summary: Remove user groups from a genie
+      description: Removes identity provider user groups from an AI agent (genie).
+      tags:
+        - Genies
+      parameters:
+        - $ref: '#/components/parameters/GenieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user_group_ids]
+              properties:
+                user_group_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of user group IDs to remove.
+      responses:
+        '200':
+          description: Updated user groups array.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/skills:
+    get:
+      operationId: listSkills
+      summary: List skills
+      description: >-
+        Returns a paginated list of skills in the workspace. Skills are
+        recipe-backed capabilities that can be assigned to AI agents.
+      tags:
+        - Skills
+      parameters:
+        - $ref: '#/components/parameters/FolderId'
+        - $ref: '#/components/parameters/ProjectId'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/SortTerm'
+      responses:
+        '200':
+          description: A list of skills.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Skill'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createSkill
+      summary: Create a skill
+      description: >-
+        Creates a new skill from an existing recipe. The recipe must exist in
+        the workspace before it can be converted to a skill.
+      tags:
+        - Skills
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [recipe_id]
+              properties:
+                recipe_id:
+                  type: integer
+                  description: The ID of the recipe to convert into a skill.
+      responses:
+        '200':
+          description: The created skill with metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Skill'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/agentic/skills/{id}:
+    get:
+      operationId: getSkill
+      summary: Get a skill
+      description: Returns the details of a specific skill by its ID.
+      tags:
+        - Skills
+      parameters:
+        - $ref: '#/components/parameters/SkillId'
+      responses:
+        '200':
+          description: The skill details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Skill'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/knowledge_bases:
+    get:
+      operationId: listKnowledgeBases
+      summary: List knowledge bases
+      description: >-
+        Returns a paginated list of knowledge bases in the workspace.
+        Knowledge bases provide AI agents with contextual data from configured
+        data sources.
+      tags:
+        - Knowledge Bases
+      parameters:
+        - $ref: '#/components/parameters/FolderId'
+        - $ref: '#/components/parameters/ProjectId'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/SortTerm'
+      responses:
+        '200':
+          description: A list of knowledge bases.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KnowledgeBase'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createKnowledgeBase
+      summary: Create a knowledge base
+      description: >-
+        Creates a new knowledge base with the specified name, description,
+        source type, and data sources for use by AI agents.
+      tags:
+        - Knowledge Bases
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeBaseInput'
+      responses:
+        '200':
+          description: The created knowledge base.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeBase'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/agentic/knowledge_bases/{id}:
+    get:
+      operationId: getKnowledgeBase
+      summary: Get a knowledge base
+      description: Returns the details of a specific knowledge base by its ID.
+      tags:
+        - Knowledge Bases
+      parameters:
+        - $ref: '#/components/parameters/KnowledgeBaseId'
+      responses:
+        '200':
+          description: The knowledge base details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeBase'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateKnowledgeBase
+      summary: Update a knowledge base
+      description: Updates the configuration of an existing knowledge base.
+      tags:
+        - Knowledge Bases
+      parameters:
+        - $ref: '#/components/parameters/KnowledgeBaseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeBaseInput'
+      responses:
+        '200':
+          description: The updated knowledge base.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeBase'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteKnowledgeBase
+      summary: Delete a knowledge base
+      description: Permanently deletes a knowledge base from the workspace.
+      tags:
+        - Knowledge Bases
+      parameters:
+        - $ref: '#/components/parameters/KnowledgeBaseId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/knowledge_bases/{id}/data_sources:
+    get:
+      operationId: listKnowledgeBaseDataSources
+      summary: List knowledge base data sources
+      description: >-
+        Returns all data sources configured for a specific knowledge base,
+        including source type and connection details.
+      tags:
+        - Knowledge Bases
+      parameters:
+        - $ref: '#/components/parameters/KnowledgeBaseId'
+      responses:
+        '200':
+          description: Knowledge base ID and its configured data sources.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  knowledge_base_id:
+                    type: integer
+                    description: The ID of the knowledge base.
+                  data_sources:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataSource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/knowledge_bases/{id}/recipes:
+    get:
+      operationId: listKnowledgeBaseRecipes
+      summary: List recipes in a knowledge base
+      description: >-
+        Returns a paginated list of recipes associated with a specific
+        knowledge base.
+      tags:
+        - Knowledge Bases
+      parameters:
+        - $ref: '#/components/parameters/KnowledgeBaseId'
+        - $ref: '#/components/parameters/Query'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - $ref: '#/components/parameters/SortTerm'
+      responses:
+        '200':
+          description: A list of recipes associated with the knowledge base.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      description: Recipe summary object.
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API client token obtained from the Workato platform. Include as
+        Authorization: Bearer {token}.
+  parameters:
+    GenieId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the genie.
+      schema:
+        type: integer
+    SkillId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the skill.
+      schema:
+        type: integer
+    KnowledgeBaseId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the knowledge base.
+      schema:
+        type: integer
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
+    Query:
+      name: query
+      in: query
+      description: Search query to filter results by name.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    SortTerm:
+      name: sort_term
+      in: query
+      description: Field to sort results by.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Genie:
+      type: object
+      description: An AI agent configured to handle automated tasks using skills and knowledge bases.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the genie.
+        name:
+          type: string
+          description: Display name of the genie.
+        description:
+          type: string
+          description: Human-readable description of the genie's purpose.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this genie.
+        state:
+          type: string
+          description: Current operational state of the genie.
+          enum: [running, stopped]
+        instructions:
+          type: string
+          description: Natural language instructions that guide the genie's behavior.
+        ai_provider:
+          type: string
+          description: The AI model provider used by this genie.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the genie was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the genie was last updated.
+    GenieInput:
+      type: object
+      description: Input schema for creating or updating a genie.
+      properties:
+        name:
+          type: string
+          description: Display name of the genie.
+        description:
+          type: string
+          description: Human-readable description of the genie's purpose.
+        folder_id:
+          type: integer
+          description: ID of the folder to place this genie in.
+        instructions:
+          type: string
+          description: Natural language instructions that guide the genie's behavior.
+        ai_provider:
+          type: string
+          description: The AI model provider to use (e.g., openai, anthropic).
+        shared_account_id:
+          type: integer
+          description: ID of the shared account for AI provider credentials.
+        custom_oauth_key_id:
+          type: integer
+          description: ID of the custom OAuth profile for AI provider authentication.
+        matrix:
+          type: object
+          description: Additional configuration matrix for the genie.
+          additionalProperties: true
+    Skill:
+      type: object
+      description: A recipe-backed capability that can be assigned to an AI agent as a tool.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the skill.
+        name:
+          type: string
+          description: Display name of the skill.
+        description:
+          type: string
+          description: Description of what this skill enables the agent to do.
+        recipe_id:
+          type: integer
+          description: ID of the underlying recipe that powers this skill.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this skill.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the skill was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the skill was last updated.
+    KnowledgeBase:
+      type: object
+      description: >-
+        A collection of data sources that provides contextual information to
+        AI agents.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the knowledge base.
+        name:
+          type: string
+          description: Display name of the knowledge base.
+        description:
+          type: string
+          description: Human-readable description of the knowledge base's content.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this knowledge base.
+        source_type:
+          type: string
+          description: The type of data sources used in this knowledge base.
+        data_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSource'
+          description: List of data sources configured for this knowledge base.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the knowledge base was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the knowledge base was last updated.
+    KnowledgeBaseInput:
+      type: object
+      description: Input schema for creating or updating a knowledge base.
+      properties:
+        name:
+          type: string
+          description: Display name of the knowledge base.
+        description:
+          type: string
+          description: Human-readable description of the knowledge base's content.
+        folder_id:
+          type: integer
+          description: ID of the folder to place this knowledge base in.
+        source_type:
+          type: string
+          description: The type of data sources to use.
+        data_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSource'
+          description: List of data sources to configure.
+    DataSource:
+      type: object
+      description: A data source configuration for a knowledge base.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the data source.
+        source_type:
+          type: string
+          description: Type of the data source (e.g., document, table, api).
+        connection_id:
+          type: integer
+          description: ID of the connection used to access this data source.
+        config:
+          type: object
+          description: Source-specific configuration parameters.
+          additionalProperties: true
+    UserGroup:
+      type: object
+      description: An identity provider user group for access control.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the user group.
+        name:
+          type: string
+          description: Display name of the user group.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.

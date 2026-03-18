@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.workato.com/schemas/recipe.json",
+  "title": "Workato Recipe",
+  "description": "Represents a Workato recipe — an automated workflow connecting applications and services. Recipes consist of a trigger and one or more actions that run when the trigger fires.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique integer identifier of the recipe within the workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the recipe shown in the Workato UI.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable explanation of what the recipe does and when it runs."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the workspace folder that contains this recipe."
+    },
+    "running": {
+      "type": "boolean",
+      "description": "Whether the recipe is currently active and processing trigger events."
+    },
+    "trigger_application": {
+      "type": "string",
+      "description": "Name of the connector used for the recipe's trigger event."
+    },
+    "action_applications": {
+      "type": "array",
+      "description": "List of connector names used in the recipe's action steps.",
+      "items": {
+        "type": "string",
+        "description": "Connector name."
+      }
+    },
+    "code": {
+      "type": "string",
+      "description": "JSON-encoded recipe definition containing trigger and action configurations."
+    },
+    "config": {
+      "type": "string",
+      "description": "JSON-encoded recipe configuration for connection mappings and settings."
+    },
+    "stop_cause": {
+      "type": "string",
+      "description": "Reason the recipe was last stopped (e.g., error, manual stop).",
+      "enum": ["error", "manual", "test_mode_limit", "task_limit"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the recipe was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the recipe was last modified."
+    },
+    "stopped_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the recipe was last stopped, if applicable."
+    },
+    "last_run_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the most recent recipe job execution."
+    },
+    "job_succeeded_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of successfully completed jobs for this recipe."
+    },
+    "job_failed_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of failed jobs for this recipe."
+    },
+    "version_no": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Current version number of the recipe."
+    }
+  },
+  "required": ["id", "name"],
+  "$defs": {
+    "RecipeVersion": {
+      "type": "object",
+      "title": "Recipe Version",
+      "description": "A specific version snapshot of a recipe, created each time the recipe is saved.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of this version record."
+        },
+        "version_no": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Sequential version number, incrementing with each save."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Optional description of what changed in this version."
+        },
+        "code": {
+          "type": "string",
+          "description": "JSON-encoded recipe definition at this version."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when this version was saved."
+        }
+      },
+      "required": ["id", "version_no"]
+    },
+    "RecipeJob": {
+      "type": "object",
+      "title": "Recipe Job",
+      "description": "A single execution instance of a recipe triggered by an event.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the job."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the job execution.",
+          "enum": ["succeeded", "failed", "pending", "running"]
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the job started executing."
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the job finished executing."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message if the job failed."
+        }
+      },
+      "required": ["id", "status"]
+    }
+  }
+}

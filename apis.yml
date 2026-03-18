@@ -59,6 +59,35 @@ apis:
   - url: https://docs.workato.com/developing-connectors/custom-connector.html
     name: Create a Custom Connector
     type: SDK
+  - url: https://docs.workato.com/workato-api/pubsub.html
+    name: Workato API - Event Streams Public API
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/agent-studio.html
+    name: Workato API - Agent Studio
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/mcp-servers.html
+    name: Workato API - MCP Servers
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/test-automation.html
+    name: Workato API - Test Automation
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/data-tables.html
+    name: Workato API - Data Tables
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/tag-assignments.html
+    name: Workato API - Tag Assignments
+    type: API Reference
+  - url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+    name: Workato API - Custom OAuth Profiles
+    type: API Reference
+  - url: openapi/workato-developer-api-openapi.yml
+    type: OpenAPI
+  - url: openapi/workato-agent-studio-openapi.yml
+    type: OpenAPI
+  - url: json-schema/workato-recipe-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-genie-schema.json
+    type: JSONSchema
   description: Workato is an American multinational software company that provides a cloud-based platform for automation, integration, and artificial intelligence orchestration across applications, data, and systems. The company was founded in 2013 and is headquartered in Mountain View, California.
 - aid: workato:embedded-api
   name: Workato Embedded Partner API
@@ -102,6 +131,47 @@ apis:
     name: Workato Fully Embedded
     type: Documentation
   description: The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes, connections, and other assets within the Workato Embedded platform. These APIs support provisioning customer workspaces, managing environments, and building fully embedded integration experiences within partner applications.
+- aid: workato:event-streams-public-api
+  name: Workato Event Streams Public API
+  tags:
+  - Event Streams
+  - Messaging
+  - Pub/Sub
+  - REST
+  humanURL: https://docs.workato.com/workato-api/pubsub.html
+  properties:
+  - url: https://docs.workato.com/workato-api/pubsub.html
+    name: Workato API - Event Streams Public API
+    type: Documentation
+  - url: https://docs.workato.com/event-streams.html
+    name: Event Streams | Workato Docs
+    type: Documentation
+  - url: openapi/workato-event-streams-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/workato-event-streams-asyncapi.yml
+    type: AsyncAPI
+  description: The Workato Event Streams Public API enables HTTP-based clients to publish and consume messages from event topics. It supports single message publish, batch publish of up to 100 messages, and message consumption with long polling. The API is separate from the Developer API's event streams management endpoints and is rate limited to 60 requests per minute with a 1 MB maximum payload.
+- aid: workato:mcp-server-api
+  name: Workato MCP Server API
+  tags:
+  - MCP
+  - AI Agents
+  - Model Context Protocol
+  - REST
+  humanURL: https://docs.workato.com/mcp.html
+  properties:
+  - url: https://docs.workato.com/mcp.html
+    name: MCP | Workato Docs
+    type: Documentation
+  - url: https://docs.workato.com/workato-api/mcp-servers.html
+    name: Workato API - MCP Servers
+    type: API Reference
+  - url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+    name: Workato Developer API MCP | Workato Docs
+    type: Documentation
+  - url: openapi/workato-mcp-server-openapi.yml
+    type: OpenAPI
+  description: The Workato MCP Server API provides endpoints for creating, configuring, and managing Model Context Protocol (MCP) servers that expose Workato API collections as tools for AI agents. It supports server creation, tool management, user group assignment, and policy configuration. MCP servers generate unique authenticated URLs usable by AI development environments like Claude Desktop and Cursor.
 name: Workato
 tags:
 - API Management
@@ -192,6 +262,173 @@ common:
   name: Popular Use Cases
   type: UseCases
   description: 'null'
+- url: https://www.workato.com/solutions/
+  name: Workato Solutions
+  type: Solutions
+- url: https://www.workato.com/solutions/
+  data:
+  - name: Order-to-Cash
+    url: https://www.workato.com/use_cases/order_to_cash
+    features:
+      - Order To Cash
+      - ERP Integration
+      - CRM Automation
+      - Invoice Processing
+      - Revenue Operations
+      - Deal Desk Automation
+      - Days Sales Outstanding
+  - name: Employee Onboarding
+    url: https://www.workato.com/use_cases/employee_onboarding
+    features:
+      - Employee Onboarding
+      - HR Automation
+      - ATS Integration
+      - HRIS Integration
+      - Application Provisioning
+      - Talent Acquisition
+      - Workflow Automation
+  - name: Product-Led Sales
+    url: https://www.workato.com/use_cases/product_led_sales
+    features:
+      - Product Led Sales
+      - Customer 360
+      - Reverse ETL
+      - Go-To-Market Automation
+      - Sales Signals
+      - Data Synchronization
+      - Revenue Operations
+  - name: IT Automation
+    url: https://www.workato.com/editions/it
+    features:
+      - IT Automation
+      - Incident Management
+      - Help Desk
+      - Employee Onboarding
+      - ChatOps
+      - Access Management
+      - Workflow Automation
+  - name: Finance Automation
+    url: https://www.workato.com/editions/finance
+    features:
+      - Finance Automation
+      - Order To Cash
+      - Accounts Payable
+      - Financial Reporting
+      - Month End Close
+      - ERP Integration
+      - Revenue Realization
+  - name: HR Automation
+    url: https://www.workato.com/editions/hr
+    features:
+      - HR Automation
+      - Talent Acquisition
+      - Employee Onboarding
+      - People Operations
+      - Offboarding
+      - Workday Integration
+      - Workflow Automation
+  - name: Sales Automation
+    url: https://www.workato.com/editions/sales
+    features:
+      - Sales Automation
+      - Lead To Opportunity
+      - Deal Desk
+      - Order To Cash
+      - Account Management
+      - CRM Integration
+      - Pipeline Management
+  - name: Marketing Operations
+    url: https://www.workato.com/editions/marketing
+    features:
+      - Marketing Automation
+      - Campaign Operations
+      - Lead Management
+      - Data Orchestration
+      - CRM Integration
+      - Demand Generation
+      - Customer Journey
+  - name: Support Automation
+    url: https://www.workato.com/editions/support
+    features:
+      - Support Automation
+      - Customer Experience
+      - Ticket Management
+      - Churn Prevention
+      - Customer Intelligence
+      - Mean Time To Resolution
+      - AI Powered Support
+  - name: Revenue Operations
+    url: https://www.workato.com/revops
+    features:
+      - Revenue Operations
+      - Pipeline Generation
+      - Deal Management
+      - Customer Retention
+      - Sales Operations
+      - Marketing Operations
+      - Customer Success
+  - name: Manufacturing
+    url: https://www.workato.com/industry/manufacturing
+    features:
+      - Manufacturing Automation
+      - Supply Chain
+      - Factory Automation
+      - ERP Integration
+      - Inventory Management
+      - Workforce Productivity
+      - Data Integration
+  - name: Financial Services
+    url: https://www.workato.com/industry/financial_services
+    features:
+      - Financial Services
+      - Banking Automation
+      - KYC AML Compliance
+      - Customer Onboarding
+      - Claims Processing
+      - Regulatory Reporting
+      - AI Agents
+  - name: Retail
+    url: https://www.workato.com/industry/retail
+    features:
+      - Retail Automation
+      - Order Management
+      - Inventory Synchronization
+      - Supply Chain
+      - EDI Integration
+      - E-Commerce Integration
+      - Omnichannel
+  - name: Logistics
+    url: https://www.workato.com/industry/logistics
+    features:
+      - Logistics Automation
+      - Supply Chain Visibility
+      - Quote To Cash
+      - Workforce Optimization
+      - Green Logistics
+      - Partner Portal Integration
+      - Administrative Automation
+  - name: Healthcare
+    url: https://www.workato.com/industry/healthcare
+    features:
+      - Healthcare Automation
+      - Patient Data Integration
+      - Compliance Automation
+      - Interoperability
+      - Value Based Care
+      - Legacy System Integration
+      - Regulatory Compliance
+  - name: Media
+    url: https://www.workato.com/industry/media
+    features:
+      - Media Automation
+      - Content Distribution
+      - Hyper Personalization
+      - Campaign Optimization
+      - Media Production
+      - Data Integration
+      - Workflow Automation
+  name: Use Cases
+  type: UseCases
 - url: https://www.workato.com/resources
   name: Resources Library | Workato
   type: Resources
@@ -2056,6 +2293,219 @@ common:
   name: Workato Community Recipes | Workato
   type: Integrations
   description: 'null'
+- data:
+  - name: Salesforce
+    url: https://www.workato.com/integrations/salesforce
+    features:
+      - Salesforce
+      - CRM
+      - Lead Management
+      - Order-To-Cash
+      - Sales Automation
+      - Data Synchronization
+      - Workflow Automation
+  - name: Slack
+    url: https://www.workato.com/integrations/slack
+    features:
+      - Slack
+      - Team Messaging
+      - Approval Workflows
+      - ChatOps
+      - Notifications
+      - Workbot
+      - Collaboration
+  - name: Marketo
+    url: https://www.workato.com/integrations/marketo
+    features:
+      - Marketo
+      - Marketing Automation
+      - Lead Management
+      - Lead Scoring
+      - Campaign Management
+      - Sales Alignment
+      - Demand Generation
+  - name: NetSuite REST
+    url: https://www.workato.com/integrations/netsuite_rest
+    features:
+      - NetSuite
+      - ERP
+      - Financial Management
+      - Record Management
+      - SuiteQL
+      - Order Management
+      - Enterprise Resource Planning
+  - name: Google Drive
+    url: https://www.workato.com/integrations/google_drive
+    features:
+      - Google Drive
+      - Cloud Storage
+      - File Management
+      - Document Automation
+      - Sales Enablement
+      - Folder Monitoring
+      - Google Workspace
+  - name: Workday
+    url: https://www.workato.com/integrations/workday
+    features:
+      - Workday
+      - HRIS
+      - Employee Onboarding
+      - Offboarding
+      - Recruiting Automation
+      - HR Workflows
+      - Payroll
+  - name: ServiceNow
+    url: https://www.workato.com/integrations/service_now
+    features:
+      - ServiceNow
+      - ITSM
+      - Incident Management
+      - IT Operations
+      - Help Desk
+      - Employee Onboarding
+      - Ticket Routing
+  - name: Snowflake
+    url: https://www.workato.com/integrations/snowflake
+    features:
+      - Snowflake
+      - Data Warehouse
+      - Data Synchronization
+      - SQL Queries
+      - Data Consolidation
+      - Analytics
+      - Cloud Database
+  - name: Zendesk
+    url: https://www.workato.com/integrations/zendesk
+    features:
+      - Zendesk
+      - Customer Support
+      - Ticket Management
+      - Help Desk
+      - Cross-System Routing
+      - Notifications
+      - CRM Integration
+  - name: Jira
+    url: https://www.workato.com/integrations/jira
+    features:
+      - Jira
+      - Project Management
+      - DevOps Automation
+      - Issue Tracking
+      - Support Escalation
+      - Agile Workflows
+      - ChatOps
+  - name: OpenAI
+    url: https://www.workato.com/integrations/open_ai
+    features:
+      - OpenAI
+      - Artificial Intelligence
+      - Text Analysis
+      - Content Generation
+      - Image Processing
+      - Language Translation
+      - AI Automation
+  - name: DeepSeek
+    url: https://www.workato.com/integrations/deepseek
+    features:
+      - DeepSeek
+      - Artificial Intelligence
+      - Chat Completion
+      - Large Language Model
+      - AI Automation
+      - Model Integration
+      - Generative AI
+  - name: Google Gemini
+    url: https://www.workato.com/integrations/google-gemini
+    features:
+      - Google Gemini
+      - Artificial Intelligence
+      - Text Analysis
+      - Content Generation
+      - Image Analysis
+      - Language Translation
+      - Google AI
+  - name: AWS Bedrock
+    url: https://www.workato.com/integrations/aws-bedrock
+    features:
+      - AWS Bedrock
+      - Amazon Web Services
+      - Foundation Models
+      - Text Generation
+      - Image Generation
+      - AI Automation
+      - Cloud AI
+  - name: Azure OpenAI
+    url: https://www.workato.com/integrations/azure_open_ai
+    features:
+      - Azure OpenAI
+      - Microsoft Azure
+      - Artificial Intelligence
+      - Text Analysis
+      - Content Generation
+      - Language Translation
+      - Enterprise AI
+  - name: Amazon S3
+    url: https://www.workato.com/integrations/amazon_s3
+    features:
+      - Amazon S3
+      - Cloud Storage
+      - File Management
+      - Data Consolidation
+      - AWS
+      - Object Storage
+      - Data Pipeline
+  - name: Amazon Redshift
+    url: https://www.workato.com/integrations/redshift
+    features:
+      - Amazon Redshift
+      - Data Warehouse
+      - Cloud Analytics
+      - Data Centralization
+      - SQL
+      - AWS
+      - Business Intelligence
+  - name: Azure Blob Storage
+    url: https://www.workato.com/integrations/azure_blob_storage
+    features:
+      - Azure Blob Storage
+      - Microsoft Azure
+      - Cloud Storage
+      - File Management
+      - Blob Management
+      - Event Triggers
+      - Data Pipeline
+  - name: MongoDB Atlas
+    url: https://www.workato.com/integrations/mongodb
+    features:
+      - MongoDB
+      - NoSQL Database
+      - Document Management
+      - Data Synchronization
+      - Cloud Database
+      - Atlas
+      - Data Replication
+  - name: PostgreSQL
+    url: https://www.workato.com/integrations/postgresql
+    features:
+      - PostgreSQL
+      - Relational Database
+      - Data Migration
+      - SQL Queries
+      - Data Pipeline
+      - Backup Automation
+      - Data Warehouse Integration
+  - name: Microsoft SQL Server
+    url: https://www.workato.com/integrations/microsoftsqlserver
+    features:
+      - Microsoft SQL Server
+      - Relational Database
+      - SQL
+      - Data Integration
+      - Enterprise Database
+      - Workflow Automation
+      - Data Synchronization
+  name: Integrations
+  type: Integrations
 - url: https://www.workato.com/legal
   name: "Workato \x14 Connect your apps. Automate your work. | Workato"
   type: PrivacyPolicy
@@ -2089,17 +2539,166 @@ common:
   type: MCP
   description: 'null'
 - data:
-  - name: AI Workflows
+  - name: Agent Studio
+    url: https://www.workato.com/agentstudio
+    features:
+      - Enterprise Skills
+      - Knowledge Bases
+      - Agent Orchestration
+      - Genie Configuration
+      - Enterprise Security
+      - Test And Deploy
+      - KPI Tracking
+  - name: Agent Orchestration
+    url: https://www.workato.com/agentic/agent-orchestration
+    features:
+      - Autonomous Execution
+      - Multi-Agent Collaboration
+      - Event-Driven Triggering
+      - Enterprise MCP Integration
+      - Full Audit Trails
+      - Cross-Department Scaling
+      - Compliance And Governance
+  - name: Workato GO
+    url: https://www.workato.com/go
+    features:
+      - Enterprise Search
+      - Deep Action
+      - Employee Assistant
+      - Action Board
+      - AI-Powered Agentic Execution
+      - Universal Connectivity
+      - Human-In-The-Loop Control
+  - name: Enterprise MCP
+    url: https://www.workato.com/agentic/mcp
+    features:
+      - Verified User Access
+      - Universal Agent Compatibility
+      - Unified Gateway Control
+      - Instant AI Enablement
+      - Enterprise-Grade Governance
+      - Comprehensive Audit Trails
+      - Production-Ready Architecture
+  - name: Modern iPaaS
+    url: https://www.workato.com/products/ipaas
+    features:
+      - Enterprise MCP Connectivity
+      - AI-Powered Workflow Design
+      - Pre-Built Connectors
+      - Unified Orchestration Engine
+      - Enterprise Security
+      - Cloud-Native Scalability
+      - Low-Code No-Code Integration
   - name: API Management
-  - name: App Connectors
-  - name: Copilots
-  - name: Data Hub
+    url: https://www.workato.com/platform/api-management
+    features:
+      - Enterprise Security And Authentication
+      - Policy Management And Governance
+      - API Modernization
+      - Self-Service Developer Portal
+      - Real-Time Monitoring And Analytics
+      - High-Performance Deployment
+      - AI-Powered API Development
   - name: Data Orchestration
-  - name: iPaaS
-  - name: Low Code Apps
-  - name: Master Data Management (MDM)
-  - name: Process Insights
-  - name: Workflow Bots
+    url: https://www.workato.com/platform/data-orchestration
+    features:
+      - Data Pipeline Orchestration
+      - ETL ELT Capabilities
+      - Real-Time Data Activation
+      - Reverse ETL
+      - Multi-Connector Integration
+      - AI-Powered Transformations
+      - Unified Governance And Observability
+  - name: AI Workflows
+    url: https://www.workato.com/platform/ai-by-workato
+    features:
+      - Pre-Built AI Connectors
+      - Built-In AI Services
+      - Email Generation And Text Parsing
+      - Advanced Privacy Controls
+      - Role-Based Access Controls
+      - Secure AI Deployment
+      - Workflow Integration
+  - name: Data Hub
+    url: https://www.workato.com/platform/mdm
+    features:
+      - Data Unification
+      - AI-Powered Matching
+      - Data Governance And Quality
+      - Real-Time Activation
+      - Pre-Built Connectors
+      - Low-Code No-Code Interface
+      - Velocity Packs
+  - name: Workflow Apps
+    url: https://www.workato.com/platform/workflow-apps
+    features:
+      - Low-Code No-Code Visual Builder
+      - Seamless App Connectivity
+      - Automated Task Management
+      - Built-In Data Storage
+      - Branded App Portal
+      - SSO And User Security
+      - Drag-And-Drop Interface
+  - name: Copilots
+    url: https://www.workato.com/platform/copilots
+    features:
+      - Natural Language Workflow Creation
+      - Context-Aware Orchestration
+      - Workspace Visibility And Control
+      - Intelligent Data Mapping
+      - Formula Automation
+      - Performance Optimization
+      - Connector Development Assistance
+  - name: Workbot
+    url: https://www.workato.com/platform/workbot
+    features:
+      - Slack And Microsoft Teams Integration
+      - Natural Language Processing
+      - Multi-Tasking Capabilities
+      - Pre-Built App Connectors
+      - Real-Time Access Verification
+      - Custom Form-Triggered Automation
+      - Personalized User Experiences
+  - name: B2B EDI
+    url: https://www.workato.com/platform/b2b-edi
+    features:
+      - Partner Onboarding
+      - Multiple Format Support
+      - EDI Standards Support
+      - Workflow Orchestration
+      - Real-Time SLA Monitoring
+      - Partner Data Activation
+      - Customizable Templates
+  - name: Intelligent Document Processing
+    url: https://www.workato.com/platform/idp
+    features:
+      - AI-Powered Data Extraction
+      - Document Automation Workflows
+      - Pre-Trained Document Models
+      - Human-In-The-Loop Validation
+      - Multi-Document Type Support
+      - Business Process Integration
+      - Low-Code Implementation
+  - name: Embedded iPaaS
+    url: https://www.workato.com/embed-saas-integrations
+    features:
+      - Pre-Built Connectors
+      - AI-Powered Automation
+      - White-Label Deployment
+      - Managed Service Capabilities
+      - Full Embed API Access
+      - Ready-To-Use Recipes
+      - Integration Health Monitoring
+  - name: Security And Governance
+    url: https://www.workato.com/platform/security
+    features:
+      - User Management
+      - Advanced RBAC
+      - Data Encryption
+      - Compliance Certifications
+      - Audit And Monitoring
+      - SIEM Integration
+      - Vulnerability Management
   name: Features
   type: Features
 - url: https://docs.workato.com/
@@ -2176,8 +2775,14 @@ common:
 - url: https://www.workato.com/events/automate
   name: Workato Automate Conference
   type: Events
+- url: json-ld/workato-context.jsonld
+  type: JSON-LD
+- url: json-schema/workato-recipe-schema.json
+  type: JSONSchema
+- url: json-schema/workato-genie-schema.json
+  type: JSONSchema
 created: '2025-06-05T00:00:00.000Z'
-modified: '2026-03-03'
+modified: '2026-03-17'
 position: Consumer
 segments:
   - iPaaS

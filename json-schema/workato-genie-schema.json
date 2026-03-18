@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.workato.com/schemas/genie.json",
+  "title": "Workato Genie",
+  "description": "Represents a Workato AI agent (genie) — an entity that uses large language models and recipe-backed skills to autonomously handle tasks and answer questions. Genies are configured with instructions, an AI provider, skills, and knowledge bases.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique integer identifier of the genie within the workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the genie.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the genie's purpose and capabilities."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the workspace folder that contains this genie."
+    },
+    "state": {
+      "type": "string",
+      "description": "Current operational state of the genie.",
+      "enum": ["running", "stopped"]
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Natural language instructions that define the genie's behavior, persona, and decision-making approach."
+    },
+    "ai_provider": {
+      "type": "string",
+      "description": "The AI model provider powering this genie (e.g., openai, anthropic, workato)."
+    },
+    "shared_account_id": {
+      "type": "integer",
+      "description": "ID of the shared account providing credentials for the AI provider."
+    },
+    "custom_oauth_key_id": {
+      "type": "integer",
+      "description": "ID of the custom OAuth profile used for AI provider authentication."
+    },
+    "matrix": {
+      "type": "object",
+      "description": "Advanced configuration settings for the genie's behavior and model parameters.",
+      "additionalProperties": true
+    },
+    "skills": {
+      "type": "array",
+      "description": "List of skills (recipe-backed tools) assigned to this genie.",
+      "items": {
+        "$ref": "#/$defs/SkillRef"
+      }
+    },
+    "knowledge_bases": {
+      "type": "array",
+      "description": "List of knowledge bases assigned to this genie for contextual data retrieval.",
+      "items": {
+        "$ref": "#/$defs/KnowledgeBaseRef"
+      }
+    },
+    "user_groups": {
+      "type": "array",
+      "description": "Identity provider user groups that have access to interact with this genie.",
+      "items": {
+        "$ref": "#/$defs/UserGroupRef"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the genie was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the genie was last updated."
+    }
+  },
+  "$defs": {
+    "SkillRef": {
+      "type": "object",
+      "title": "Skill Reference",
+      "description": "A reference to a skill assigned to a genie.",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the skill."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the skill."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the capability this skill provides the genie."
+        },
+        "recipe_id": {
+          "type": "integer",
+          "description": "ID of the underlying recipe that implements this skill."
+        }
+      }
+    },
+    "KnowledgeBaseRef": {
+      "type": "object",
+      "title": "Knowledge Base Reference",
+      "description": "A reference to a knowledge base assigned to a genie.",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the knowledge base."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the knowledge base."
+        },
+        "source_type": {
+          "type": "string",
+          "description": "The type of data sources used in the knowledge base."
+        }
+      }
+    },
+    "UserGroupRef": {
+      "type": "object",
+      "title": "User Group Reference",
+      "description": "A reference to an identity provider user group.",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the user group."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the user group."
+        }
+      }
+    },
+    "DataSource": {
+      "type": "object",
+      "title": "Data Source",
+      "description": "A configured data source that feeds information into a knowledge base.",
+      "required": ["source_type"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier of the data source."
+        },
+        "source_type": {
+          "type": "string",
+          "description": "Type of data source.",
+          "enum": ["document", "table", "api", "database", "web"]
+        },
+        "connection_id": {
+          "type": "integer",
+          "description": "ID of the Workato connection used to authenticate to the data source."
+        },
+        "config": {
+          "type": "object",
+          "description": "Source-specific configuration including paths, queries, or selectors.",
+          "additionalProperties": true
+        },
+        "sync_frequency": {
+          "type": "string",
+          "description": "How often the data source is synchronized.",
+          "enum": ["manual", "hourly", "daily", "weekly"]
+        }
+      }
+    },
+    "McpServer": {
+      "type": "object",
+      "title": "MCP Server",
+      "description": "A Model Context Protocol server that exposes Workato API collections as tools for external AI agents.",
+      "required": ["handle", "name"],
+      "properties": {
+        "handle": {
+          "type": "string",
+          "description": "Unique slug identifier of the MCP server.",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the MCP server.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "folder_id": {
+          "type": "integer",
+          "description": "ID of the folder containing this MCP server."
+        },
+        "mcp_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The authenticated MCP URL for AI agents to connect to."
+        },
+        "authentication_method": {
+          "type": "string",
+          "description": "Authentication method used by the MCP server."
+        },
+        "tools": {
+          "type": "array",
+          "description": "List of tools (API endpoints) exposed through this MCP server.",
+          "items": {
+            "$ref": "#/$defs/McpTool"
+          }
+        },
+        "policies": {
+          "$ref": "#/$defs/ServerPolicy"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the MCP server was created."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp when the MCP server was last updated."
+        }
+      }
+    },
+    "McpTool": {
+      "type": "object",
+      "title": "MCP Tool",
+      "description": "An individual API endpoint exposed as a callable tool through an MCP server.",
+      "required": ["id", "trigger_application"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the tool within its application."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the tool shown to AI agents."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of what the tool does and when AI agents should use it."
+        },
+        "trigger_application": {
+          "type": "string",
+          "description": "The application or API collection that owns this tool."
+        }
+      }
+    },
+    "ServerPolicy": {
+      "type": "object",
+      "title": "Server Policy",
+      "description": "Security and rate limiting policies for an MCP server.",
+      "properties": {
+        "rate_limit": {
+          "type": "object",
+          "description": "Rate limiting configuration.",
+          "properties": {
+            "requests_per_minute": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Maximum requests allowed per minute."
+            },
+            "requests_per_hour": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Maximum requests allowed per hour."
+            }
+          }
+        },
+        "quota_limit": {
+          "type": "object",
+          "description": "Monthly quota configuration.",
+          "properties": {
+            "requests_per_month": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Maximum requests allowed per month."
+            }
+          }
+        },
+        "ip_allowlist": {
+          "type": "array",
+          "description": "IP addresses or CIDR ranges permitted to access the server.",
+          "items": {
+            "type": "string",
+            "description": "IP address or CIDR range."
+          }
+        },
+        "ip_denylist": {
+          "type": "array",
+          "description": "IP addresses or CIDR ranges blocked from accessing the server.",
+          "items": {
+            "type": "string",
+            "description": "IP address or CIDR range."
+          }
+        }
+      }
+    }
+  }
+}

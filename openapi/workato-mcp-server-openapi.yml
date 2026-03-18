@@ -1,0 +1,738 @@
+openapi: 3.1.0
+info:
+  title: Workato MCP Server API
+  description: >-
+    The Workato MCP Server API provides programmatic management of Model
+    Context Protocol (MCP) servers that expose Workato API collections as
+    tools for AI agents. Use this API to create MCP servers, assign tools,
+    configure access policies, and manage user group access. MCP servers
+    generate unique authenticated URLs usable by AI development environments
+    such as Claude Desktop and Cursor. Rate limit is 60 requests per minute.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+externalDocs:
+  description: Workato MCP Server API Documentation
+  url: https://docs.workato.com/workato-api/mcp-servers.html
+servers:
+  - url: https://www.workato.com
+    description: US Production
+  - url: https://app.eu.workato.com
+    description: EU Production
+  - url: https://app.jp.workato.com
+    description: JP Production
+  - url: https://app.sg.workato.com
+    description: SG Production
+  - url: https://app.au.workato.com
+    description: AU Production
+tags:
+  - name: MCP Servers
+    description: >-
+      MCP servers expose Workato API endpoints as tools accessible to AI
+      agents via the Model Context Protocol.
+  - name: Tools
+    description: >-
+      Tools are individual API endpoints or actions exposed through an MCP
+      server and available to AI agents.
+  - name: Policies
+    description: >-
+      Security policies that govern rate limits, quotas, and IP access
+      controls for MCP servers.
+  - name: User Groups
+    description: Identity provider user groups used to control access to MCP servers.
+security:
+  - bearerAuth: []
+paths:
+  /api/mcp/mcp_servers:
+    get:
+      operationId: listMcpServers
+      summary: List MCP servers
+      description: >-
+        Returns a paginated list of MCP servers in the workspace, with
+        optional filtering by project, folder, authentication method, and
+        other criteria.
+      tags:
+        - MCP Servers
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - $ref: '#/components/parameters/FolderId'
+        - name: authentication_method
+          in: query
+          description: Filter by authentication method.
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Search term to filter servers by name.
+          schema:
+            type: string
+        - name: vua_required
+          in: query
+          description: Filter by whether virtual user account is required.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of MCP servers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/McpServer'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createMcpServer
+      summary: Create an MCP server
+      description: >-
+        Creates a new MCP server in the workspace. The server will generate
+        a unique authenticated URL that AI agents can use to discover and
+        invoke tools.
+      tags:
+        - MCP Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpServerInput'
+      responses:
+        '200':
+          description: The created MCP server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/mcp/mcp_servers/{handle}:
+    get:
+      operationId: getMcpServer
+      summary: Get an MCP server
+      description: Returns the details of a specific MCP server by its handle.
+      tags:
+        - MCP Servers
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      responses:
+        '200':
+          description: The MCP server details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpServer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateMcpServer
+      summary: Update an MCP server
+      description: Updates the configuration of an existing MCP server.
+      tags:
+        - MCP Servers
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpServerInput'
+      responses:
+        '200':
+          description: The updated MCP server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteMcpServer
+      summary: Delete an MCP server
+      description: Permanently deletes an MCP server from the workspace.
+      tags:
+        - MCP Servers
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{handle}/token_renew:
+    post:
+      operationId: renewMcpServerToken
+      summary: Renew MCP server token
+      description: >-
+        Generates a new authentication token for an MCP server. The previous
+        token is invalidated immediately.
+      tags:
+        - MCP Servers
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      responses:
+        '200':
+          description: The new authentication token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: The new authentication token for the MCP server.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{handle}/assign_tools:
+    post:
+      operationId: assignToolsToMcpServer
+      summary: Assign tools to an MCP server
+      description: >-
+        Assigns one or more tools to an MCP server. Tools are API endpoints
+        from connected recipe collections that AI agents can invoke.
+      tags:
+        - MCP Servers
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tools]
+              properties:
+                tools:
+                  type: array
+                  items:
+                    type: object
+                    required: [trigger_application, id]
+                    properties:
+                      trigger_application:
+                        type: string
+                        description: The application or collection that owns the tool.
+                      id:
+                        type: string
+                        description: Unique identifier of the tool within its application.
+      responses:
+        '200':
+          description: The updated tools list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{handle}/assign_user_groups:
+    post:
+      operationId: assignUserGroupsToMcpServer
+      summary: Assign user groups to an MCP server
+      description: >-
+        Assigns identity provider user groups to an MCP server to control
+        which users can access it.
+      tags:
+        - User Groups
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user_group_ids]
+              properties:
+                user_group_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of user group IDs to assign.
+      responses:
+        '200':
+          description: Updated user groups list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{handle}/remove_user_groups:
+    post:
+      operationId: removeUserGroupsFromMcpServer
+      summary: Remove user groups from an MCP server
+      description: Removes identity provider user groups from an MCP server.
+      tags:
+        - User Groups
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [user_group_ids]
+              properties:
+                user_group_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of user group IDs to remove.
+      responses:
+        '200':
+          description: Updated user groups list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{handle}/update_folder:
+    put:
+      operationId: moveMcpServerToFolder
+      summary: Move MCP server to folder
+      description: Moves an MCP server to a different folder in the workspace.
+      tags:
+        - MCP Servers
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [folder_id]
+              properties:
+                folder_id:
+                  type: integer
+                  description: ID of the destination folder.
+      responses:
+        '200':
+          description: The updated MCP server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/McpServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{mcp_server_handle}/server_policies:
+    get:
+      operationId: getMcpServerPolicies
+      summary: Get server policies
+      description: >-
+        Retrieves the security policy configuration for an MCP server,
+        including rate limits, quota limits, and IP access controls.
+      tags:
+        - Policies
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandleForPolicies'
+      responses:
+        '200':
+          description: The server policy configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerPolicy'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateMcpServerPolicies
+      summary: Update server policies
+      description: >-
+        Updates the security policy configuration for an MCP server, including
+        rate limits, quota limits, and IP allow/deny lists.
+      tags:
+        - Policies
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandleForPolicies'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerPolicy'
+      responses:
+        '200':
+          description: The updated server policy configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerPolicy'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{mcp_server_handle}/tools:
+    get:
+      operationId: listMcpServerTools
+      summary: List MCP server tools
+      description: Returns a paginated list of tools assigned to an MCP server.
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandleForPolicies'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of tools assigned to the MCP server.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tool'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{mcp_server_handle}/tools/{id}:
+    put:
+      operationId: updateMcpServerTool
+      summary: Update a tool
+      description: >-
+        Updates the description of a specific tool assigned to an MCP server.
+        Tool descriptions help AI agents understand when and how to use the tool.
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandleForPolicies'
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the tool.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: Updated description of what the tool does and when to use it.
+      responses:
+        '200':
+          description: The updated tool.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: removeMcpServerTool
+      summary: Remove a tool from MCP server
+      description: Removes a specific tool from an MCP server.
+      tags:
+        - Tools
+      parameters:
+        - $ref: '#/components/parameters/McpServerHandleForPolicies'
+        - name: id
+          in: path
+          required: true
+          description: Unique identifier of the tool to remove.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Removal confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/user_groups:
+    get:
+      operationId: listMcpUserGroups
+      summary: List user groups
+      description: Returns a list of identity provider user groups available for MCP server assignment.
+      tags:
+        - User Groups
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of user groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API client token obtained from the Workato platform. Include as
+        Authorization: Bearer {token}.
+  parameters:
+    McpServerHandle:
+      name: handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+    McpServerHandleForPolicies:
+      name: mcp_server_handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  responses:
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    McpServer:
+      type: object
+      description: An MCP server that exposes Workato API endpoints as tools for AI agents.
+      properties:
+        handle:
+          type: string
+          description: Unique slug identifier of the MCP server.
+        name:
+          type: string
+          description: Display name of the MCP server.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this MCP server.
+        mcp_url:
+          type: string
+          format: uri
+          description: The authenticated MCP URL that AI agents connect to.
+        authentication_method:
+          type: string
+          description: Authentication method used by this MCP server.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the MCP server was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the MCP server was last updated.
+    McpServerInput:
+      type: object
+      description: Input schema for creating or updating an MCP server.
+      required: [name, folder_id]
+      properties:
+        name:
+          type: string
+          description: Display name for the MCP server.
+        folder_id:
+          type: integer
+          description: ID of the folder to place the MCP server in.
+        authentication_method:
+          type: string
+          description: Authentication method to use for the MCP server.
+    Tool:
+      type: object
+      description: An API endpoint or action exposed through an MCP server as a callable tool.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the tool within its application.
+        name:
+          type: string
+          description: Display name of the tool.
+        description:
+          type: string
+          description: Description of what the tool does and when AI agents should use it.
+        trigger_application:
+          type: string
+          description: The application or API collection that owns this tool.
+    ServerPolicy:
+      type: object
+      description: Security policy configuration for an MCP server.
+      properties:
+        rate_limit:
+          type: object
+          description: Rate limiting configuration.
+          properties:
+            requests_per_minute:
+              type: integer
+              description: Maximum number of requests allowed per minute.
+            requests_per_hour:
+              type: integer
+              description: Maximum number of requests allowed per hour.
+        quota_limit:
+          type: object
+          description: Quota configuration.
+          properties:
+            requests_per_month:
+              type: integer
+              description: Maximum number of requests allowed per month.
+        ip_allowlist:
+          type: array
+          items:
+            type: string
+          description: >-
+            List of IP addresses or CIDR ranges that are allowed to access
+            this MCP server.
+        ip_denylist:
+          type: array
+          items:
+            type: string
+          description: >-
+            List of IP addresses or CIDR ranges that are denied access to
+            this MCP server.
+    UserGroup:
+      type: object
+      description: An identity provider user group for access control.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the user group.
+        name:
+          type: string
+          description: Display name of the user group.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.

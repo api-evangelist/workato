@@ -1,0 +1,288 @@
+openapi: 3.1.0
+info:
+  title: Workato Event Streams Public API
+  description: >-
+    The Workato Event Streams Public API enables HTTP-based clients to publish
+    and consume messages from event topics. It supports single message publish,
+    batch publish of up to 100 messages, and message consumption with optional
+    long polling. This API uses region-specific base URLs and is separate from
+    the Developer API's event streams management endpoints. Rate limit is 60
+    requests per minute with a maximum payload size of 1 MB.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+externalDocs:
+  description: Workato Event Streams Public API Documentation
+  url: https://docs.workato.com/workato-api/pubsub.html
+servers:
+  - url: https://event-streams.workato.com
+    description: US Production
+  - url: https://event-streams.eu.workato.com
+    description: EU Production
+  - url: https://event-streams.jp.workato.com
+    description: JP Production
+  - url: https://event-streams.sg.workato.com
+    description: SG Production
+  - url: https://event-streams.au.workato.com
+    description: AU Production
+  - url: https://event-streams.trial.workato.com
+    description: Developer Sandbox
+tags:
+  - name: Messages
+    description: >-
+      Endpoints for publishing messages to event topics and consuming messages
+      from event topics.
+security:
+  - bearerAuth: []
+paths:
+  /api/v1/topics/{topic_id}/consume:
+    post:
+      operationId: consumeMessages
+      summary: Consume messages from a topic
+      description: >-
+        Retrieves messages from an event topic. Supports filtering by message
+        ID or timestamp, configurable batch sizes up to 50, and long polling
+        with timeouts up to 60 seconds. Returns at most 50 messages per request.
+      tags:
+        - Messages
+      parameters:
+        - $ref: '#/components/parameters/TopicId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConsumeRequest'
+      responses:
+        '200':
+          description: A batch of messages from the topic.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumeResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/v1/topics/{topic_id}/publish:
+    post:
+      operationId: publishMessage
+      summary: Publish a message to a topic
+      description: >-
+        Publishes a single message to an event topic. The message payload must
+        conform to the topic's defined schema. Maximum payload size is 1 MB.
+      tags:
+        - Messages
+      parameters:
+        - $ref: '#/components/parameters/TopicId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: >-
+                Message payload. Must conform to the topic's schema definition.
+              additionalProperties: true
+      responses:
+        '200':
+          description: The published message ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+  /api/v1/batch/topics/{topic_id}/publish:
+    post:
+      operationId: publishBatchMessages
+      summary: Publish a batch of messages to a topic
+      description: >-
+        Publishes multiple messages to an event topic in a single request.
+        Supports up to 100 messages per batch. Each payload must conform to
+        the topic's schema. Partial failures are indicated in the response.
+      tags:
+        - Messages
+      parameters:
+        - $ref: '#/components/parameters/TopicId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchPublishRequest'
+      responses:
+        '200':
+          description: Batch publish results with individual message IDs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchPublishResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/RateLimitExceeded'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API client token obtained from the Workato platform. Include as
+        Authorization: Bearer {token}.
+  parameters:
+    TopicId:
+      name: topic_id
+      in: path
+      required: true
+      description: Unique integer identifier of the event topic.
+      schema:
+        type: integer
+  responses:
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request payload is invalid or does not match the topic schema.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified topic was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimitExceeded:
+      description: Rate limit of 60 requests per minute has been exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ConsumeRequest:
+      type: object
+      description: Options for consuming messages from a topic.
+      properties:
+        after_message_id:
+          type: string
+          description: >-
+            Retrieve messages published after this message ID. Cannot be used
+            together with since_time.
+        since_time:
+          type: string
+          format: date-time
+          description: >-
+            Retrieve messages published after this RFC 3339 timestamp. Cannot
+            be used together with after_message_id.
+        batch_size:
+          type: integer
+          description: Maximum number of messages to return. Must be between 1 and 50.
+          minimum: 1
+          maximum: 50
+        timeout_secs:
+          type: integer
+          description: >-
+            Long-polling timeout in seconds. If no messages are available,
+            the server waits up to this many seconds before returning an empty
+            response. Maximum is 60 seconds. Default is 0 (no long polling).
+          minimum: 0
+          maximum: 60
+          default: 0
+    ConsumeResponse:
+      type: object
+      description: A batch of messages consumed from a topic.
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          description: List of messages retrieved from the topic.
+    Message:
+      type: object
+      description: A single message from an event topic.
+      properties:
+        message_id:
+          type: string
+          description: Unique identifier of the message within the topic.
+        payload:
+          type: object
+          description: The message payload conforming to the topic's schema.
+          additionalProperties: true
+        time:
+          type: string
+          format: date-time
+          description: RFC 3339 timestamp when the message was published.
+    PublishResponse:
+      type: object
+      description: Response from a successful single message publish.
+      properties:
+        message_id:
+          type: string
+          description: Unique identifier assigned to the published message.
+    BatchPublishRequest:
+      type: object
+      description: Request body for batch publishing messages.
+      required: [payloads]
+      properties:
+        payloads:
+          type: array
+          description: >-
+            Array of message payloads to publish. Each must conform to the
+            topic's schema. Maximum 100 items.
+          maxItems: 100
+          items:
+            type: object
+            description: A message payload conforming to the topic's schema.
+            additionalProperties: true
+    BatchPublishResponse:
+      type: object
+      description: Results of a batch publish operation.
+      properties:
+        is_partial_error:
+          type: boolean
+          description: >-
+            Whether some messages in the batch failed to publish. If true,
+            check individual message results for failures.
+        message_ids:
+          type: object
+          description: >-
+            Map of array index (as string) to individual publish result.
+            Keys correspond to positions in the submitted payloads array.
+          additionalProperties:
+            type: object
+            properties:
+              message_id:
+                type: string
+                description: Unique identifier assigned to the published message.
+              result:
+                type: string
+                description: Result status for this individual message.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.

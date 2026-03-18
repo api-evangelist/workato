@@ -1,0 +1,205 @@
+asyncapi: 2.6.0
+info:
+  title: Workato Event Streams
+  description: >-
+    Workato Event Streams provides a publish-subscribe messaging system within
+    the Workato platform. Topics act as channels through which producers publish
+    messages and consumers retrieve them. Event Streams integrate with Workato
+    recipes as triggers and actions, enabling loosely coupled, event-driven
+    automation workflows. Messages are persisted and consumers can replay from
+    a specific message ID or timestamp.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  license:
+    name: Workato Terms of Service
+    url: https://www.workato.com/legal
+externalDocs:
+  description: Workato Event Streams Documentation
+  url: https://docs.workato.com/event-streams.html
+servers:
+  us-production:
+    url: event-streams.workato.com
+    protocol: https
+    description: US Production event streams endpoint.
+    security:
+      - bearerAuth: []
+  eu-production:
+    url: event-streams.eu.workato.com
+    protocol: https
+    description: EU Production event streams endpoint.
+    security:
+      - bearerAuth: []
+  jp-production:
+    url: event-streams.jp.workato.com
+    protocol: https
+    description: JP Production event streams endpoint.
+    security:
+      - bearerAuth: []
+  sg-production:
+    url: event-streams.sg.workato.com
+    protocol: https
+    description: SG Production event streams endpoint.
+    security:
+      - bearerAuth: []
+  au-production:
+    url: event-streams.au.workato.com
+    protocol: https
+    description: AU Production event streams endpoint.
+    security:
+      - bearerAuth: []
+  sandbox:
+    url: event-streams.trial.workato.com
+    protocol: https
+    description: Developer sandbox for testing event streams integration.
+    security:
+      - bearerAuth: []
+channels:
+  /api/v1/topics/{topic_id}/publish:
+    description: >-
+      Channel for publishing a single message to an event topic. The message
+      payload must conform to the topic's defined schema. Maximum payload
+      size is 1 MB.
+    parameters:
+      topic_id:
+        description: Unique integer identifier of the event topic.
+        schema:
+          type: integer
+    publish:
+      operationId: publishMessage
+      summary: Publish a message
+      description: >-
+        Publish a single message to the event topic. The payload must match
+        the topic's schema definition. Rate limit is 60 requests per minute.
+      message:
+        $ref: '#/components/messages/TopicMessage'
+  /api/v1/batch/topics/{topic_id}/publish:
+    description: >-
+      Channel for publishing a batch of up to 100 messages to an event topic
+      in a single request. Enables efficient bulk event production.
+    parameters:
+      topic_id:
+        description: Unique integer identifier of the event topic.
+        schema:
+          type: integer
+    publish:
+      operationId: publishBatchMessages
+      summary: Publish a batch of messages
+      description: >-
+        Publish up to 100 messages to the event topic in a single request.
+        Each payload in the batch must match the topic's schema definition.
+        Partial failures are indicated in the response.
+      message:
+        $ref: '#/components/messages/BatchTopicMessage'
+  /api/v1/topics/{topic_id}/consume:
+    description: >-
+      Channel for consuming messages from an event topic. Supports replay
+      from a message ID or timestamp, configurable batch sizes, and long
+      polling for real-time consumption.
+    parameters:
+      topic_id:
+        description: Unique integer identifier of the event topic.
+        schema:
+          type: integer
+    subscribe:
+      operationId: consumeMessages
+      summary: Consume messages from a topic
+      description: >-
+        Retrieve messages from the event topic. Use after_message_id or
+        since_time for replay. Set timeout_secs for long polling. Returns
+        at most 50 messages per request.
+      message:
+        $ref: '#/components/messages/ConsumedMessages'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        API client token obtained from the Workato platform. Include as
+        Authorization: Bearer {token}.
+  messages:
+    TopicMessage:
+      name: TopicMessage
+      title: Topic Message
+      summary: A single message published to an event topic.
+      description: >-
+        A message payload that conforms to the topic's schema definition.
+        The exact structure depends on the schema configured for the topic.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/MessagePayload'
+    BatchTopicMessage:
+      name: BatchTopicMessage
+      title: Batch Topic Message
+      summary: A batch of messages published to an event topic.
+      description: >-
+        An array of message payloads, each conforming to the topic's schema.
+        Maximum 100 messages per batch.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BatchMessagePayload'
+    ConsumedMessages:
+      name: ConsumedMessages
+      title: Consumed Messages
+      summary: A batch of messages consumed from an event topic.
+      description: >-
+        An array of messages retrieved from the event topic, each containing
+        a message ID, payload, and publication timestamp.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ConsumedMessagesPayload'
+  schemas:
+    MessagePayload:
+      type: object
+      description: >-
+        A single message payload published to an event topic. The exact
+        properties depend on the topic's configured schema.
+      properties:
+        payloads:
+          type: object
+          description: The message data conforming to the topic's schema.
+          additionalProperties: true
+      additionalProperties: true
+    BatchMessagePayload:
+      type: object
+      description: Request payload for batch publishing messages to a topic.
+      required:
+        - payloads
+      properties:
+        payloads:
+          type: array
+          description: Array of message payloads, each conforming to the topic's schema.
+          maxItems: 100
+          items:
+            type: object
+            description: A single message payload.
+            additionalProperties: true
+    ConsumedMessagesPayload:
+      type: object
+      description: Response payload containing consumed messages from a topic.
+      properties:
+        messages:
+          type: array
+          description: List of messages retrieved from the topic.
+          items:
+            $ref: '#/components/schemas/Message'
+    Message:
+      type: object
+      description: A single message retrieved from an event topic.
+      properties:
+        message_id:
+          type: string
+          description: >-
+            Unique identifier of the message within the topic. Use this
+            value as after_message_id in subsequent consume requests to
+            retrieve only newer messages.
+        payload:
+          type: object
+          description: The message data conforming to the topic's schema.
+          additionalProperties: true
+        time:
+          type: string
+          format: date-time
+          description: RFC 3339 timestamp when the message was published to the topic.
