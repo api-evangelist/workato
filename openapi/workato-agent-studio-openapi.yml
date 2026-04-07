@@ -32,14 +32,14 @@ tags:
     description: >-
       AI agents (genies) that can be configured with skills, knowledge bases,
       and instructions to automate complex workflows.
-  - name: Skills
-    description: >-
-      Skills are recipe-backed capabilities that can be assigned to AI agents
-      to give them actionable tools.
   - name: Knowledge Bases
     description: >-
       Knowledge bases provide AI agents with contextual data from configured
       data sources such as documents, tables, and external systems.
+  - name: Skills
+    description: >-
+      Skills are recipe-backed capabilities that can be assigned to AI agents
+      to give them actionable tools.
 security:
   - bearerAuth: []
 paths:

@@ -32,14 +32,14 @@ tags:
     description: >-
       MCP servers expose Workato API endpoints as tools accessible to AI
       agents via the Model Context Protocol.
-  - name: Tools
-    description: >-
-      Tools are individual API endpoints or actions exposed through an MCP
-      server and available to AI agents.
   - name: Policies
     description: >-
       Security policies that govern rate limits, quotas, and IP access
       controls for MCP servers.
+  - name: Tools
+    description: >-
+      Tools are individual API endpoints or actions exposed through an MCP
+      server and available to AI agents.
   - name: User Groups
     description: Identity provider user groups used to control access to MCP servers.
 security:

@@ -30,24 +30,14 @@ servers:
   - url: https://app.au.workato.com
     description: AU Production
 tags:
-  - name: Recipes
-    description: >-
-      Recipes are automated workflows that connect applications and services.
-      Manage recipe lifecycle including creation, activation, and versioning.
   - name: Data Tables
     description: >-
       Data tables are structured storage within Workato for persisting and
       querying records used in recipe automation.
-  - name: Folders
-    description: Workspace organizational folders for grouping recipes and assets.
-  - name: Connections
+  - name: Recipes
     description: >-
-      Connections authenticate Workato to external applications and services
-      used in recipes.
-  - name: Jobs
-    description: >-
-      Jobs are individual recipe execution instances. Query and monitor job
-      history and status.
+      Recipes are automated workflows that connect applications and services.
+      Manage recipe lifecycle including creation, activation, and versioning.
 security:
   - bearerAuth: []
 paths:
