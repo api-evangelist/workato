@@ -46,7 +46,7 @@ paths:
   /api/agentic/genies:
     get:
       operationId: listGenies
-      summary: List genies
+      summary: Workato List genies
       description: >-
         Returns a paginated list of AI agents (genies) in the workspace.
         Supports filtering by folder, project, and state.
@@ -82,7 +82,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createGenie
-      summary: Create a genie
+      summary: Workato Create a genie
       description: >-
         Creates a new AI agent (genie) in the workspace with the specified
         configuration including name, instructions, AI provider, and matrix
@@ -113,7 +113,7 @@ paths:
   /api/agentic/genies/{id}:
     get:
       operationId: getGenie
-      summary: Get a genie
+      summary: Workato Get a genie
       description: Returns the details of a specific AI agent (genie) by its ID.
       tags:
         - Genies
@@ -132,7 +132,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateGenie
-      summary: Update a genie
+      summary: Workato Update a genie
       description: Updates the configuration of an existing AI agent (genie).
       tags:
         - Genies
@@ -159,7 +159,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteGenie
-      summary: Delete a genie
+      summary: Workato Delete a genie
       description: Permanently deletes an AI agent (genie) from the workspace.
       tags:
         - Genies
@@ -179,7 +179,7 @@ paths:
   /api/agentic/genies/{id}/start:
     post:
       operationId: startGenie
-      summary: Start a genie
+      summary: Workato Start a genie
       description: Activates an AI agent (genie), making it available to handle requests.
       tags:
         - Genies
@@ -199,7 +199,7 @@ paths:
   /api/agentic/genies/{id}/stop:
     post:
       operationId: stopGenie
-      summary: Stop a genie
+      summary: Workato Stop a genie
       description: Deactivates an AI agent (genie), preventing it from handling new requests.
       tags:
         - Genies
@@ -219,7 +219,7 @@ paths:
   /api/agentic/genies/{id}/assign_skills:
     post:
       operationId: assignSkillsToGenie
-      summary: Assign skills to a genie
+      summary: Workato Assign skills to a genie
       description: >-
         Assigns one or more skills to an AI agent (genie). Skills are
         recipe-backed capabilities that give the agent actionable tools.
@@ -259,7 +259,7 @@ paths:
   /api/agentic/genies/{id}/remove_skills:
     post:
       operationId: removeSkillsFromGenie
-      summary: Remove skills from a genie
+      summary: Workato Remove skills from a genie
       description: Removes one or more skills from an AI agent (genie).
       tags:
         - Genies
@@ -297,7 +297,7 @@ paths:
   /api/agentic/genies/{id}/assign_knowledge_bases:
     post:
       operationId: assignKnowledgeBasesToGenie
-      summary: Assign knowledge bases to a genie
+      summary: Workato Assign knowledge bases to a genie
       description: Assigns one or more knowledge bases to an AI agent (genie).
       tags:
         - Genies
@@ -335,7 +335,7 @@ paths:
   /api/agentic/genies/{id}/remove_knowledge_bases:
     post:
       operationId: removeKnowledgeBasesFromGenie
-      summary: Remove knowledge bases from a genie
+      summary: Workato Remove knowledge bases from a genie
       description: Removes one or more knowledge bases from an AI agent (genie).
       tags:
         - Genies
@@ -373,7 +373,7 @@ paths:
   /api/agentic/genies/{id}/assign_user_groups:
     post:
       operationId: assignUserGroupsToGenie
-      summary: Assign user groups to a genie
+      summary: Workato Assign user groups to a genie
       description: Assigns identity provider user groups to an AI agent (genie) to control access.
       tags:
         - Genies
@@ -411,7 +411,7 @@ paths:
   /api/agentic/genies/{id}/remove_user_groups:
     post:
       operationId: removeUserGroupsFromGenie
-      summary: Remove user groups from a genie
+      summary: Workato Remove user groups from a genie
       description: Removes identity provider user groups from an AI agent (genie).
       tags:
         - Genies
@@ -449,7 +449,7 @@ paths:
   /api/agentic/skills:
     get:
       operationId: listSkills
-      summary: List skills
+      summary: Workato List skills
       description: >-
         Returns a paginated list of skills in the workspace. Skills are
         recipe-backed capabilities that can be assigned to AI agents.
@@ -481,7 +481,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createSkill
-      summary: Create a skill
+      summary: Workato Create a skill
       description: >-
         Creates a new skill from an existing recipe. The recipe must exist in
         the workspace before it can be converted to a skill.
@@ -512,7 +512,7 @@ paths:
   /api/agentic/skills/{id}:
     get:
       operationId: getSkill
-      summary: Get a skill
+      summary: Workato Get a skill
       description: Returns the details of a specific skill by its ID.
       tags:
         - Skills
@@ -532,7 +532,7 @@ paths:
   /api/agentic/knowledge_bases:
     get:
       operationId: listKnowledgeBases
-      summary: List knowledge bases
+      summary: Workato List knowledge bases
       description: >-
         Returns a paginated list of knowledge bases in the workspace.
         Knowledge bases provide AI agents with contextual data from configured
@@ -565,7 +565,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createKnowledgeBase
-      summary: Create a knowledge base
+      summary: Workato Create a knowledge base
       description: >-
         Creates a new knowledge base with the specified name, description,
         source type, and data sources for use by AI agents.
@@ -591,7 +591,7 @@ paths:
   /api/agentic/knowledge_bases/{id}:
     get:
       operationId: getKnowledgeBase
-      summary: Get a knowledge base
+      summary: Workato Get a knowledge base
       description: Returns the details of a specific knowledge base by its ID.
       tags:
         - Knowledge Bases
@@ -610,7 +610,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateKnowledgeBase
-      summary: Update a knowledge base
+      summary: Workato Update a knowledge base
       description: Updates the configuration of an existing knowledge base.
       tags:
         - Knowledge Bases
@@ -637,7 +637,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteKnowledgeBase
-      summary: Delete a knowledge base
+      summary: Workato Delete a knowledge base
       description: Permanently deletes a knowledge base from the workspace.
       tags:
         - Knowledge Bases
@@ -657,7 +657,7 @@ paths:
   /api/agentic/knowledge_bases/{id}/data_sources:
     get:
       operationId: listKnowledgeBaseDataSources
-      summary: List knowledge base data sources
+      summary: Workato List knowledge base data sources
       description: >-
         Returns all data sources configured for a specific knowledge base,
         including source type and connection details.
@@ -687,7 +687,7 @@ paths:
   /api/agentic/knowledge_bases/{id}/recipes:
     get:
       operationId: listKnowledgeBaseRecipes
-      summary: List recipes in a knowledge base
+      summary: Workato List recipes in a knowledge base
       description: >-
         Returns a paginated list of recipes associated with a specific
         knowledge base.

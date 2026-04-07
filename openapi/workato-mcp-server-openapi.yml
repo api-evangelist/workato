@@ -48,7 +48,7 @@ paths:
   /api/mcp/mcp_servers:
     get:
       operationId: listMcpServers
-      summary: List MCP servers
+      summary: Workato List MCP servers
       description: >-
         Returns a paginated list of MCP servers in the workspace, with
         optional filtering by project, folder, authentication method, and
@@ -94,7 +94,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createMcpServer
-      summary: Create an MCP server
+      summary: Workato Create an MCP server
       description: >-
         Creates a new MCP server in the workspace. The server will generate
         a unique authenticated URL that AI agents can use to discover and
@@ -121,7 +121,7 @@ paths:
   /api/mcp/mcp_servers/{handle}:
     get:
       operationId: getMcpServer
-      summary: Get an MCP server
+      summary: Workato Get an MCP server
       description: Returns the details of a specific MCP server by its handle.
       tags:
         - MCP Servers
@@ -140,7 +140,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateMcpServer
-      summary: Update an MCP server
+      summary: Workato Update an MCP server
       description: Updates the configuration of an existing MCP server.
       tags:
         - MCP Servers
@@ -167,7 +167,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteMcpServer
-      summary: Delete an MCP server
+      summary: Workato Delete an MCP server
       description: Permanently deletes an MCP server from the workspace.
       tags:
         - MCP Servers
@@ -187,7 +187,7 @@ paths:
   /api/mcp/mcp_servers/{handle}/token_renew:
     post:
       operationId: renewMcpServerToken
-      summary: Renew MCP server token
+      summary: Workato Renew MCP server token
       description: >-
         Generates a new authentication token for an MCP server. The previous
         token is invalidated immediately.
@@ -213,7 +213,7 @@ paths:
   /api/mcp/mcp_servers/{handle}/assign_tools:
     post:
       operationId: assignToolsToMcpServer
-      summary: Assign tools to an MCP server
+      summary: Workato Assign tools to an MCP server
       description: >-
         Assigns one or more tools to an MCP server. Tools are API endpoints
         from connected recipe collections that AI agents can invoke.
@@ -262,7 +262,7 @@ paths:
   /api/mcp/mcp_servers/{handle}/assign_user_groups:
     post:
       operationId: assignUserGroupsToMcpServer
-      summary: Assign user groups to an MCP server
+      summary: Workato Assign user groups to an MCP server
       description: >-
         Assigns identity provider user groups to an MCP server to control
         which users can access it.
@@ -302,7 +302,7 @@ paths:
   /api/mcp/mcp_servers/{handle}/remove_user_groups:
     post:
       operationId: removeUserGroupsFromMcpServer
-      summary: Remove user groups from an MCP server
+      summary: Workato Remove user groups from an MCP server
       description: Removes identity provider user groups from an MCP server.
       tags:
         - User Groups
@@ -340,7 +340,7 @@ paths:
   /api/mcp/mcp_servers/{handle}/update_folder:
     put:
       operationId: moveMcpServerToFolder
-      summary: Move MCP server to folder
+      summary: Workato Move MCP server to folder
       description: Moves an MCP server to a different folder in the workspace.
       tags:
         - MCP Servers
@@ -373,7 +373,7 @@ paths:
   /api/mcp/mcp_servers/{mcp_server_handle}/server_policies:
     get:
       operationId: getMcpServerPolicies
-      summary: Get server policies
+      summary: Workato Get server policies
       description: >-
         Retrieves the security policy configuration for an MCP server,
         including rate limits, quota limits, and IP access controls.
@@ -394,7 +394,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateMcpServerPolicies
-      summary: Update server policies
+      summary: Workato Update server policies
       description: >-
         Updates the security policy configuration for an MCP server, including
         rate limits, quota limits, and IP allow/deny lists.
@@ -424,7 +424,7 @@ paths:
   /api/mcp/mcp_servers/{mcp_server_handle}/tools:
     get:
       operationId: listMcpServerTools
-      summary: List MCP server tools
+      summary: Workato List MCP server tools
       description: Returns a paginated list of tools assigned to an MCP server.
       tags:
         - Tools
@@ -454,7 +454,7 @@ paths:
   /api/mcp/mcp_servers/{mcp_server_handle}/tools/{id}:
     put:
       operationId: updateMcpServerTool
-      summary: Update a tool
+      summary: Workato Update a tool
       description: >-
         Updates the description of a specific tool assigned to an MCP server.
         Tool descriptions help AI agents understand when and how to use the tool.
@@ -493,7 +493,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: removeMcpServerTool
-      summary: Remove a tool from MCP server
+      summary: Workato Remove a tool from MCP server
       description: Removes a specific tool from an MCP server.
       tags:
         - Tools
@@ -519,7 +519,7 @@ paths:
   /api/mcp/user_groups:
     get:
       operationId: listMcpUserGroups
-      summary: List user groups
+      summary: Workato List user groups
       description: Returns a list of identity provider user groups available for MCP server assignment.
       tags:
         - User Groups

@@ -54,7 +54,7 @@ paths:
   /api/recipes:
     get:
       operationId: listRecipes
-      summary: List recipes
+      summary: Workato List recipes
       description: >-
         Returns a paginated list of recipes in the workspace. Supports
         filtering by folder, running state, adapter names, and update time.
@@ -130,7 +130,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createRecipe
-      summary: Create a recipe
+      summary: Workato Create a recipe
       description: >-
         Creates a new recipe in the workspace. Rate limited to 1 request per
         second. The recipe code must be provided in JSON format.
@@ -156,7 +156,7 @@ paths:
   /api/recipes/{id}:
     get:
       operationId: getRecipe
-      summary: Get a recipe
+      summary: Workato Get a recipe
       description: Returns the details of a specific recipe by its ID.
       tags:
         - Recipes
@@ -175,7 +175,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateRecipe
-      summary: Update a recipe
+      summary: Workato Update a recipe
       description: Updates an existing recipe's name, code, config, or description.
       tags:
         - Recipes
@@ -202,7 +202,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteRecipe
-      summary: Delete a recipe
+      summary: Workato Delete a recipe
       description: Permanently deletes a recipe from the workspace. The recipe must be stopped first.
       tags:
         - Recipes
@@ -222,7 +222,7 @@ paths:
   /api/recipes/{id}/start:
     put:
       operationId: startRecipe
-      summary: Start a recipe
+      summary: Workato Start a recipe
       description: Activates a recipe, enabling it to process trigger events.
       tags:
         - Recipes
@@ -242,7 +242,7 @@ paths:
   /api/recipes/{id}/stop:
     put:
       operationId: stopRecipe
-      summary: Stop a recipe
+      summary: Workato Stop a recipe
       description: Deactivates a recipe, preventing it from processing new trigger events.
       tags:
         - Recipes
@@ -262,7 +262,7 @@ paths:
   /api/recipes/{id}/copy:
     post:
       operationId: copyRecipe
-      summary: Copy a recipe
+      summary: Workato Copy a recipe
       description: Creates a duplicate of an existing recipe.
       tags:
         - Recipes
@@ -282,7 +282,7 @@ paths:
   /api/recipes/{recipe_id}/versions:
     get:
       operationId: listRecipeVersions
-      summary: List recipe versions
+      summary: Workato List recipe versions
       description: Returns the version history of a recipe.
       tags:
         - Recipes
@@ -312,7 +312,7 @@ paths:
   /api/recipes/{recipe_id}/versions/{id}:
     get:
       operationId: getRecipeVersion
-      summary: Get a recipe version
+      summary: Workato Get a recipe version
       description: Returns the details of a specific version of a recipe.
       tags:
         - Recipes
@@ -338,7 +338,7 @@ paths:
   /api/recipes/{recipe_id}/health:
     get:
       operationId: getRecipeHealth
-      summary: Get recipe health report
+      summary: Workato Get recipe health report
       description: >-
         Retrieves the most recent performance analysis report for a recipe.
         Rate limited to 20 requests per minute.
@@ -361,7 +361,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: queueRecipeHealthAnalysis
-      summary: Queue recipe health analysis
+      summary: Workato Queue recipe health analysis
       description: >-
         Queues a new performance analysis for a recipe. Analysis runs
         asynchronously and results are retrievable via GET. Rate limited to
@@ -384,7 +384,7 @@ paths:
   /api/data_tables:
     get:
       operationId: listDataTables
-      summary: List data tables
+      summary: Workato List data tables
       description: Returns a paginated list of all data tables in the workspace.
       tags:
         - Data Tables
@@ -417,7 +417,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createDataTable
-      summary: Create a data table
+      summary: Workato Create a data table
       description: Creates a new data table with the specified schema.
       tags:
         - Data Tables
@@ -441,7 +441,7 @@ paths:
   /api/data_tables/{data_table_id}:
     get:
       operationId: getDataTable
-      summary: Get a data table
+      summary: Workato Get a data table
       description: Returns the details of a specific data table by its ID.
       tags:
         - Data Tables
@@ -460,7 +460,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateDataTable
-      summary: Update a data table
+      summary: Workato Update a data table
       description: Updates the name, folder, or schema of an existing data table.
       tags:
         - Data Tables
@@ -487,7 +487,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteDataTable
-      summary: Delete a data table
+      summary: Workato Delete a data table
       description: Permanently deletes a data table and all its records.
       tags:
         - Data Tables
@@ -507,7 +507,7 @@ paths:
   /api/data_tables/{data_table_id}/truncate:
     post:
       operationId: truncateDataTable
-      summary: Truncate a data table
+      summary: Workato Truncate a data table
       description: >-
         Removes all records from a data table while preserving its structure
         and schema.

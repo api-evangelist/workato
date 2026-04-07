@@ -40,7 +40,7 @@ paths:
   /api/v1/topics/{topic_id}/consume:
     post:
       operationId: consumeMessages
-      summary: Consume messages from a topic
+      summary: Workato Consume messages from a topic
       description: >-
         Retrieves messages from an event topic. Supports filtering by message
         ID or timestamp, configurable batch sizes up to 50, and long polling
@@ -71,7 +71,7 @@ paths:
   /api/v1/topics/{topic_id}/publish:
     post:
       operationId: publishMessage
-      summary: Publish a message to a topic
+      summary: Workato Publish a message to a topic
       description: >-
         Publishes a single message to an event topic. The message payload must
         conform to the topic's defined schema. Maximum payload size is 1 MB.
@@ -106,7 +106,7 @@ paths:
   /api/v1/batch/topics/{topic_id}/publish:
     post:
       operationId: publishBatchMessages
-      summary: Publish a batch of messages to a topic
+      summary: Workato Publish a batch of messages to a topic
       description: >-
         Publishes multiple messages to an event topic in a single request.
         Supports up to 100 messages per batch. Each payload must conform to
