@@ -1,0 +1,311 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Workato"
+  description: "Unified vocabulary mapping operational (OpenAPI) and capability (Naftiko) dimensions for the Workato iPaaS automation platform"
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+operational:
+  apis:
+    - name: Workato Developer API
+      namespace: workato-developer
+      version: v1
+      baseUrl: https://www.workato.com
+      status: active
+    - name: Workato Agent Studio API
+      namespace: workato-agent-studio
+      version: v1
+      baseUrl: https://www.workato.com
+      status: active
+    - name: Workato Event Streams API
+      namespace: workato-events
+      version: v1
+      baseUrl: https://www.workato.com
+      status: active
+    - name: Workato MCP Server API
+      namespace: workato-mcp
+      version: v1
+      baseUrl: https://www.workato.com
+      status: active
+
+  resources:
+    - name: recipes
+      api: workato-developer
+      actions: [list, get, create, update, delete, start, stop]
+      description: Automation workflows connecting apps, data, and AI
+    - name: recipe-versions
+      api: workato-developer
+      actions: [list, get]
+      description: Version history for recipe configurations
+    - name: recipe-health
+      api: workato-developer
+      actions: [get, queue]
+      description: Health monitoring and analysis reports for recipes
+    - name: data-tables
+      api: workato-developer
+      actions: [list, get, create, update, delete, truncate]
+      description: Structured data storage tables within Workato
+    - name: genies
+      api: workato-agent-studio
+      actions: [list, get, create, update, delete, start, stop]
+      description: AI agents (genies) for agentic automation workflows
+    - name: skills
+      api: workato-agent-studio
+      actions: [list, get, create]
+      description: Capabilities and actions that AI genies can perform
+    - name: knowledge-bases
+      api: workato-agent-studio
+      actions: [list, get, create, update, delete]
+      description: Knowledge repositories used by AI genies for context and lookups
+    - name: topics
+      api: workato-events
+      actions: [publish, batch-publish, consume]
+      description: Event stream topics for pub/sub messaging
+    - name: mcp-servers
+      api: workato-mcp
+      actions: [list, get, create, update, delete]
+      description: Model Context Protocol servers exposing Workato tools to AI agents
+    - name: server-tools
+      api: workato-mcp
+      actions: [list, update, delete]
+      description: Tools exposed by MCP servers for AI agent consumption
+    - name: user-groups
+      api: workato-mcp
+      actions: [list]
+      description: User groups for MCP server access control
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+      description: Retrieve a paginated collection
+    - name: get
+      httpMethod: GET
+      pattern: read
+      description: Retrieve a single resource by identifier
+    - name: create
+      httpMethod: POST
+      pattern: write
+      description: Create a new resource
+    - name: update
+      httpMethod: PUT
+      pattern: write
+      description: Update an existing resource
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+      description: Delete a resource
+    - name: start
+      httpMethod: PUT
+      pattern: write
+      description: Activate/start a resource (recipe or genie)
+    - name: stop
+      httpMethod: PUT
+      pattern: write
+      description: Deactivate/stop a resource
+    - name: publish
+      httpMethod: POST
+      pattern: write
+      description: Publish a message to an event topic
+    - name: consume
+      httpMethod: POST
+      pattern: query
+      description: Consume messages from an event topic
+    - name: queue
+      httpMethod: POST
+      pattern: write
+      description: Queue an async operation (health analysis)
+    - name: truncate
+      httpMethod: POST
+      pattern: destructive
+      description: Remove all rows from a data table
+
+  schemas:
+    core:
+      - name: Recipe
+        description: Automation workflow connecting triggers and actions across apps
+      - name: RecipeVersion
+        description: Versioned snapshot of a recipe configuration
+      - name: DataTable
+        description: Structured table for storing and querying data within Workato
+    agentic:
+      - name: Genie
+        description: AI agent configured with skills and knowledge for autonomous task execution
+      - name: Skill
+        description: Discrete capability that an AI genie can invoke during task execution
+      - name: KnowledgeBase
+        description: Curated knowledge repository for AI genie context and Q&A
+    messaging:
+      - name: Message
+        description: Event message payload for pub/sub communication
+      - name: ConsumeResponse
+        description: Response containing consumed messages from an event topic
+    mcp:
+      - name: McpServer
+        description: MCP-compliant server exposing Workato API tools to AI development environments
+      - name: Tool
+        description: Individual API operation exposed as an MCP tool
+
+  parameters:
+    pagination:
+      - name: page
+        type: integer
+        description: Page number for paginated results
+      - name: per_page
+        type: integer
+        description: Items per page
+    identifiers:
+      - name: id
+        type: integer
+        description: Numeric resource identifier
+      - name: handle
+        type: string
+        description: Unique string handle for MCP servers
+      - name: topic_id
+        type: string
+        description: Event topic identifier
+      - name: recipe_id
+        type: integer
+        description: Recipe identifier for sub-resources
+    messaging:
+      - name: timeout
+        type: integer
+        description: Long-polling timeout in seconds for message consumption
+
+  enums:
+    recipe-statuses:
+      - running
+      - stopped
+      - failed
+    genie-statuses:
+      - active
+      - inactive
+    message-formats:
+      - json
+      - string
+
+  authentication:
+    schemes:
+      - name: Bearer Token
+        type: bearer
+        description: API token in Authorization header as Bearer token (WORKATO_API_TOKEN)
+        apis: [Workato Developer API, Workato Agent Studio API, Workato Event Streams API, Workato MCP Server API]
+
+capability:
+  workflows:
+    - name: Automation Management
+      file: capabilities/automation-management.yaml
+      description: Unified workflow for integration engineers managing recipes, AI genies, MCP servers, and event streams
+      apisUsed: [Workato Developer API, Workato Agent Studio API, Workato MCP Server API, Workato Event Streams API]
+      toolCount: 18
+      personas: [Integration Engineer, Automation Admin, AI Developer]
+      domains: [Automation, AI Agents, Messaging, Integration]
+
+  personas:
+    - id: integration-engineer
+      name: Integration Engineer
+      description: Builds and manages Workato recipes connecting enterprise applications
+      workflows: [Automation Management]
+    - id: automation-admin
+      name: Automation Admin
+      description: Administers Workato workspaces, monitors recipe health, and manages data tables
+      workflows: [Automation Management]
+    - id: ai-developer
+      name: AI Developer
+      description: Creates AI genies, configures skills, manages knowledge bases, and exposes MCP servers for AI agents
+      workflows: [Automation Management]
+    - id: platform-engineer
+      name: Platform Engineer
+      description: Manages event streams, embedded platform configurations, and lifecycle management
+      workflows: [Automation Management]
+
+  domains:
+    - name: Automation
+      description: Recipe lifecycle management and automation workflow operations
+      resources: [recipes, recipe-versions, recipe-health, data-tables]
+    - name: AI Agents
+      description: Agentic automation with genies, skills, and knowledge bases
+      resources: [genies, skills, knowledge-bases]
+    - name: Messaging
+      description: Event-driven communication via pub/sub topics
+      resources: [topics]
+    - name: Integration
+      description: MCP server management and tool exposure for AI systems
+      resources: [mcp-servers, server-tools, user-groups]
+
+  namespaces:
+    consumed:
+      - name: workato-developer
+        baseUri: https://www.workato.com
+        description: Workato Developer API
+      - name: workato-agent-studio
+        baseUri: https://www.workato.com
+        description: Workato Agent Studio API
+      - name: workato-events
+        baseUri: https://www.workato.com
+        description: Workato Event Streams API
+      - name: workato-mcp
+        baseUri: https://www.workato.com
+        description: Workato MCP Server API
+    exposed-rest:
+      - name: workato-automation-api
+        port: 8080
+      - name: workato-developer-api
+        port: 8100
+      - name: workato-agent-studio-api
+        port: 8101
+      - name: workato-mcp-server-api
+        port: 8102
+      - name: workato-event-streams-api
+        port: 8103
+    exposed-mcp:
+      - name: workato-automation-mcp
+        port: 9080
+      - name: workato-developer-mcp
+        port: 9100
+      - name: workato-agent-studio-mcp
+        port: 9101
+      - name: workato-mcp-server-mcp
+        port: 9102
+      - name: workato-event-streams-mcp
+        port: 9103
+
+  binds:
+    - name: WORKATO_API_TOKEN
+      description: Workato API bearer token for authentication across all Workato APIs
+      workflows: [Automation Management]
+
+crossReference:
+  - resource: recipes
+    operations: [listRecipes, getRecipe, createRecipe, updateRecipe, deleteRecipe, startRecipe, stopRecipe]
+    workflows: [Automation Management]
+    personas: [Integration Engineer, Automation Admin]
+  - resource: recipe-health
+    operations: [getRecipeHealth, queueRecipeHealthAnalysis]
+    workflows: [Automation Management]
+    personas: [Automation Admin]
+  - resource: data-tables
+    operations: [listDataTables, getDataTable, createDataTable, updateDataTable, deleteDataTable]
+    workflows: [Automation Management]
+    personas: [Integration Engineer, Automation Admin]
+  - resource: genies
+    operations: [listGenies, getGenie, createGenie, updateGenie, deleteGenie]
+    workflows: [Automation Management]
+    personas: [AI Developer]
+  - resource: skills
+    operations: [listSkills, getSkill, createSkill]
+    workflows: [Automation Management]
+    personas: [AI Developer]
+  - resource: knowledge-bases
+    operations: [listKnowledgeBases, getKnowledgeBase, createKnowledgeBase]
+    workflows: [Automation Management]
+    personas: [AI Developer]
+  - resource: topics
+    operations: [publishMessage, batchPublishMessages, consumeMessages]
+    workflows: [Automation Management]
+    personas: [Integration Engineer, Platform Engineer]
+  - resource: mcp-servers
+    operations: [listMcpServers, getMcpServer, createMcpServer]
+    workflows: [Automation Management]
+    personas: [AI Developer, Platform Engineer]

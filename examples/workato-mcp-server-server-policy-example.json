@@ -1,0 +1,15 @@
+{
+  "rate_limit": {
+    "requests_per_minute": 51,
+    "requests_per_hour": 78
+  },
+  "quota_limit": {
+    "requests_per_month": 14
+  },
+  "ip_allowlist": [
+    "sample-ip_allowlist_item"
+  ],
+  "ip_denylist": [
+    "sample-ip_denylist_item"
+  ]
+}

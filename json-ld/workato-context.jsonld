@@ -1,228 +1,251 @@
 {
   "@context": {
     "@version": 1.1,
-    "workato": "https://www.workato.com/vocab/",
-    "schema": "https://schema.org/",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "workato": "https://www.workato.com/schema/",
+    "schema": {
+      "@id": "workato:schema",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
     "dcterms": "http://purl.org/dc/terms/",
-
-    "Recipe": {
-      "@id": "workato:Recipe",
-      "@context": {
-        "id": "@id",
-        "name": {
-          "@id": "schema:name"
-        },
-        "description": {
-          "@id": "schema:description"
-        },
-        "running": {
-          "@id": "workato:running",
-          "@type": "xsd:boolean"
-        },
-        "folder_id": {
-          "@id": "workato:folderId",
-          "@type": "xsd:integer"
-        },
-        "trigger_application": {
-          "@id": "workato:triggerApplication"
-        },
-        "action_applications": {
-          "@id": "workato:actionApplications",
-          "@container": "@set"
-        },
-        "stop_cause": {
-          "@id": "workato:stopCause"
-        },
-        "created_at": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "updated_at": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        },
-        "stopped_at": {
-          "@id": "workato:stoppedAt",
-          "@type": "xsd:dateTime"
-        },
-        "job_succeeded_count": {
-          "@id": "workato:jobSucceededCount",
-          "@type": "xsd:integer"
-        },
-        "job_failed_count": {
-          "@id": "workato:jobFailedCount",
-          "@type": "xsd:integer"
-        },
-        "version_no": {
-          "@id": "workato:versionNumber",
-          "@type": "xsd:integer"
-        }
-      }
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "BatchPublishRequest": "workato:BatchPublishRequest",
+    "BatchPublishResponse": "workato:BatchPublishResponse",
+    "ConsumeRequest": "workato:ConsumeRequest",
+    "ConsumeResponse": "workato:ConsumeResponse",
+    "DataSource": "workato:DataSource",
+    "DataTable": "workato:DataTable",
+    "DataTableColumn": "workato:DataTableColumn",
+    "DataTableInput": "workato:DataTableInput",
+    "Genie": "workato:Genie",
+    "GenieInput": "workato:GenieInput",
+    "KnowledgeBase": "workato:KnowledgeBase",
+    "KnowledgeBaseInput": "workato:KnowledgeBaseInput",
+    "McpServer": "workato:McpServer",
+    "McpServerInput": "workato:McpServerInput",
+    "Message": "workato:Message",
+    "PublishResponse": "workato:PublishResponse",
+    "Recipe": "workato:Recipe",
+    "RecipeInput": "workato:RecipeInput",
+    "RecipeVersion": "workato:RecipeVersion",
+    "ServerPolicy": "workato:ServerPolicy",
+    "Skill": "workato:Skill",
+    "Tool": "workato:Tool",
+    "UserGroup": "workato:UserGroup",
+    "Workato Genie": "workato:Workato Genie",
+    "Workato Recipe": "workato:Workato Recipe",
+    "actionApplications": {
+      "@id": "workato:action_applications",
+      "@container": "@set",
+      "@type": "xsd:string"
     },
-
-    "Genie": {
-      "@id": "workato:Genie",
-      "@context": {
-        "id": "@id",
-        "name": {
-          "@id": "schema:name"
-        },
-        "description": {
-          "@id": "schema:description"
-        },
-        "state": {
-          "@id": "workato:state"
-        },
-        "instructions": {
-          "@id": "workato:instructions"
-        },
-        "ai_provider": {
-          "@id": "workato:aiProvider"
-        },
-        "folder_id": {
-          "@id": "workato:folderId",
-          "@type": "xsd:integer"
-        },
-        "skills": {
-          "@id": "workato:hasSkill",
-          "@type": "@id",
-          "@container": "@set"
-        },
-        "knowledge_bases": {
-          "@id": "workato:hasKnowledgeBase",
-          "@type": "@id",
-          "@container": "@set"
-        },
-        "created_at": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "updated_at": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        }
-      }
+    "afterMessageId": {
+      "@id": "workato:after_message_id",
+      "@type": "xsd:string"
     },
-
-    "Skill": {
-      "@id": "workato:Skill",
-      "@context": {
-        "id": "@id",
-        "name": {
-          "@id": "schema:name"
-        },
-        "description": {
-          "@id": "schema:description"
-        },
-        "recipe_id": {
-          "@id": "workato:recipeId",
-          "@type": "xsd:integer"
-        },
-        "folder_id": {
-          "@id": "workato:folderId",
-          "@type": "xsd:integer"
-        },
-        "created_at": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "updated_at": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        }
-      }
+    "aiProvider": {
+      "@id": "workato:ai_provider",
+      "@type": "xsd:string"
     },
-
-    "KnowledgeBase": {
-      "@id": "workato:KnowledgeBase",
-      "@context": {
-        "id": "@id",
-        "name": {
-          "@id": "schema:name"
-        },
-        "description": {
-          "@id": "schema:description"
-        },
-        "source_type": {
-          "@id": "workato:sourceType"
-        },
-        "folder_id": {
-          "@id": "workato:folderId",
-          "@type": "xsd:integer"
-        },
-        "data_sources": {
-          "@id": "workato:hasDataSource",
-          "@type": "@id",
-          "@container": "@set"
-        },
-        "created_at": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "updated_at": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        }
-      }
+    "authenticationMethod": {
+      "@id": "workato:authentication_method",
+      "@type": "xsd:string"
     },
-
-    "DataSource": {
-      "@id": "workato:DataSource",
-      "@context": {
-        "id": "@id",
-        "source_type": {
-          "@id": "workato:sourceType"
-        },
-        "connection_id": {
-          "@id": "workato:connectionId",
-          "@type": "xsd:integer"
-        },
-        "sync_frequency": {
-          "@id": "workato:syncFrequency"
-        },
-        "config": {
-          "@id": "workato:config"
-        }
-      }
+    "batchSize": {
+      "@id": "workato:batch_size",
+      "@type": "xsd:integer"
     },
-
-    "McpServer": {
-      "@id": "workato:McpServer",
-      "@context": {
-        "handle": {
-          "@id": "schema:identifier"
-        },
-        "name": {
-          "@id": "schema:name"
-        },
-        "mcp_url": {
-          "@id": "schema:url",
-          "@type": "@id"
-        },
-        "authentication_method": {
-          "@id": "workato:authenticationMethod"
-        },
-        "folder_id": {
-          "@id": "workato:folderId",
-          "@type": "xsd:integer"
-        },
-        "tools": {
-          "@id": "workato:hasTool",
-          "@type": "@id",
-          "@container": "@set"
-        },
-        "created_at": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "updated_at": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        }
-      }
+    "code": {
+      "@id": "workato:code",
+      "@type": "xsd:string"
     },
-
+    "comment": {
+      "@id": "workato:comment",
+      "@type": "xsd:string"
+    },
+    "config": {
+      "@id": "workato:config",
+      "@type": "xsd:string"
+    },
+    "connectionId": {
+      "@id": "workato:connection_id",
+      "@type": "xsd:integer"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated"
+    },
+    "customOauthKeyId": {
+      "@id": "workato:custom_oauth_key_id",
+      "@type": "xsd:integer"
+    },
+    "dataSources": {
+      "@id": "workato:data_sources",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "folderId": {
+      "@id": "workato:folder_id",
+      "@type": "xsd:integer"
+    },
+    "handle": {
+      "@id": "workato:handle",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "workato:id",
+      "@type": "xsd:integer"
+    },
+    "instructions": {
+      "@id": "workato:instructions",
+      "@type": "xsd:string"
+    },
+    "ipAllowlist": {
+      "@id": "workato:ip_allowlist",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "ipDenylist": {
+      "@id": "workato:ip_denylist",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "isPartialError": {
+      "@id": "workato:is_partial_error",
+      "@type": "xsd:boolean"
+    },
+    "jobFailedCount": {
+      "@id": "workato:job_failed_count",
+      "@type": "xsd:integer"
+    },
+    "jobSucceededCount": {
+      "@id": "workato:job_succeeded_count",
+      "@type": "xsd:integer"
+    },
+    "knowledgeBases": {
+      "@id": "workato:knowledge_bases",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "lastRunAt": {
+      "@id": "workato:last_run_at",
+      "@type": "xsd:dateTime"
+    },
+    "matrix": {
+      "@id": "workato:matrix",
+      "@type": "@id"
+    },
+    "mcpUrl": {
+      "@id": "workato:mcp_url",
+      "@type": "@id"
+    },
+    "messageId": {
+      "@id": "workato:message_id",
+      "@type": "xsd:string"
+    },
+    "messageIds": {
+      "@id": "workato:message_ids",
+      "@type": "@id"
+    },
+    "messages": {
+      "@id": "workato:messages",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "payload": {
+      "@id": "workato:payload",
+      "@type": "@id"
+    },
+    "payloads": {
+      "@id": "workato:payloads",
+      "@container": "@set"
+    },
+    "quotaLimit": {
+      "@id": "workato:quota_limit",
+      "@type": "@id"
+    },
+    "rateLimit": {
+      "@id": "workato:rate_limit",
+      "@type": "@id"
+    },
+    "recipe": {
+      "@id": "workato:recipe",
+      "@type": "@id"
+    },
+    "recipeId": {
+      "@id": "workato:recipe_id",
+      "@type": "xsd:integer"
+    },
+    "required": {
+      "@id": "workato:required",
+      "@type": "xsd:boolean"
+    },
+    "running": {
+      "@id": "workato:running",
+      "@type": "xsd:boolean"
+    },
+    "sharedAccountId": {
+      "@id": "workato:shared_account_id",
+      "@type": "xsd:integer"
+    },
+    "sinceTime": {
+      "@id": "workato:since_time",
+      "@type": "xsd:dateTime"
+    },
+    "skills": {
+      "@id": "workato:skills",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "sourceType": {
+      "@id": "workato:source_type",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "workato:state",
+      "@type": "xsd:string"
+    },
+    "stopCause": {
+      "@id": "workato:stop_cause",
+      "@type": "xsd:string"
+    },
+    "stoppedAt": {
+      "@id": "workato:stopped_at",
+      "@type": "xsd:dateTime"
+    },
+    "time": {
+      "@id": "workato:time",
+      "@type": "xsd:dateTime"
+    },
+    "timeoutSecs": {
+      "@id": "workato:timeout_secs",
+      "@type": "xsd:integer"
+    },
+    "triggerApplication": {
+      "@id": "workato:trigger_application",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "workato:type",
+      "@type": "xsd:string"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified"
+    },
+    "userGroups": {
+      "@id": "workato:user_groups",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "versionNo": {
+      "@id": "workato:version_no",
+      "@type": "xsd:integer"
+    },
     "McpTool": {
       "@id": "workato:McpTool",
       "@context": {
@@ -238,7 +261,6 @@
         }
       }
     },
-
     "Connection": {
       "@id": "workato:Connection",
       "@context": {
@@ -263,33 +285,6 @@
         }
       }
     },
-
-    "DataTable": {
-      "@id": "workato:DataTable",
-      "@context": {
-        "id": "@id",
-        "name": {
-          "@id": "schema:name"
-        },
-        "folder_id": {
-          "@id": "workato:folderId",
-          "@type": "xsd:integer"
-        },
-        "schema": {
-          "@id": "workato:tableSchema",
-          "@container": "@set"
-        },
-        "created_at": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
-        },
-        "updated_at": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
-        }
-      }
-    },
-
     "EventTopic": {
       "@id": "workato:EventTopic",
       "@context": {

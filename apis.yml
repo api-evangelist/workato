@@ -2781,8 +2781,43 @@ common:
     type: JSONSchema
   - url: json-schema/workato-genie-schema.json
     type: JSONSchema
+  - url: json-schema/workato-developer-api-recipe-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-developer-api-data-table-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-agent-studio-genie-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-agent-studio-skill-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-agent-studio-knowledge-base-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-event-streams-message-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-mcp-server-mcp-server-schema.json
+    type: JSONSchema
+  - url: json-schema/workato-mcp-server-tool-schema.json
+    type: JSONSchema
+  - url: rules/workato-spectral-rules.yml
+    type: SpectralRules
+  - url: capabilities/automation-management.yaml
+    type: NaftikoCapability
+    title: Automation Management
+  - url: capabilities/shared/developer-api.yaml
+    type: NaftikoCapability
+    title: Developer API (Shared)
+  - url: capabilities/shared/agent-studio.yaml
+    type: NaftikoCapability
+    title: Agent Studio (Shared)
+  - url: capabilities/shared/mcp-server.yaml
+    type: NaftikoCapability
+    title: MCP Server (Shared)
+  - url: capabilities/shared/event-streams.yaml
+    type: NaftikoCapability
+    title: Event Streams (Shared)
+  - url: vocabulary/workato-vocabulary.yml
+    type: Vocabulary
 created: '2025-06-05T00:00:00.000Z'
-modified: '2026-03-17'
+modified: '2026-05-03'
 position: Consumer
 segments:
   - iPaaS

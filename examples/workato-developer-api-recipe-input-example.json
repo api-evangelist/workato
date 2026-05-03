@@ -1,0 +1,9 @@
+{
+  "recipe": {
+    "name": "Sample Workato Recipe",
+    "code": "sample-code",
+    "config": "sample-config",
+    "folder_id": 97,
+    "description": "Automated workflow for connecting enterprise applications."
+  }
+}

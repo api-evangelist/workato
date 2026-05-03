@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-event-streams-message-schema.json",
+  "title": "Message",
+  "description": "A single message from an event topic.",
+  "type": "object",
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "description": "Unique identifier of the message within the topic."
+    },
+    "payload": {
+      "type": "object",
+      "description": "The message payload conforming to the topic's schema.",
+      "additionalProperties": true
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC 3339 timestamp when the message was published."
+    }
+  }
+}

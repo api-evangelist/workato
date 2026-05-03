@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-developer-api-recipe-schema.json",
+  "title": "Recipe",
+  "description": "A Workato recipe representing an automated workflow.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the recipe."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the recipe."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of what the recipe does."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the folder containing this recipe."
+    },
+    "running": {
+      "type": "boolean",
+      "description": "Whether the recipe is currently active and processing events."
+    },
+    "trigger_application": {
+      "type": "string",
+      "description": "The connector used for the recipe's trigger."
+    },
+    "action_applications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of connectors used in the recipe's actions."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the recipe was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the recipe was last updated."
+    },
+    "stopped_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the recipe was last stopped."
+    },
+    "stop_cause": {
+      "type": "string",
+      "description": "Reason the recipe was stopped, if applicable."
+    }
+  }
+}

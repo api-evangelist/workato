@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-developer-api-data-table-input-schema.json",
+  "title": "DataTableInput",
+  "description": "Input schema for creating or updating a data table.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name for the data table."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the folder to place the data table in."
+    },
+    "schema": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataTableColumn"
+      },
+      "description": "Column definitions for the table."
+    }
+  },
+  "required": [
+    "name",
+    "folder_id",
+    "schema"
+  ]
+}

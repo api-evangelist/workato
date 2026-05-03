@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-agent-studio-knowledge-base-schema.json",
+  "title": "KnowledgeBase",
+  "description": "A collection of data sources that provides contextual information to AI agents.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the knowledge base."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the knowledge base."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the knowledge base's content."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the folder containing this knowledge base."
+    },
+    "source_type": {
+      "type": "string",
+      "description": "The type of data sources used in this knowledge base."
+    },
+    "data_sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataSource"
+      },
+      "description": "List of data sources configured for this knowledge base."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the knowledge base was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the knowledge base was last updated."
+    }
+  }
+}

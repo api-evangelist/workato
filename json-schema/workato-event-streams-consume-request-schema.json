@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-event-streams-consume-request-schema.json",
+  "title": "ConsumeRequest",
+  "description": "Options for consuming messages from a topic.",
+  "type": "object",
+  "properties": {
+    "after_message_id": {
+      "type": "string",
+      "description": "Retrieve messages published after this message ID. Cannot be used together with since_time."
+    },
+    "since_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Retrieve messages published after this RFC 3339 timestamp. Cannot be used together with after_message_id."
+    },
+    "batch_size": {
+      "type": "integer",
+      "description": "Maximum number of messages to return. Must be between 1 and 50.",
+      "minimum": 1,
+      "maximum": 50
+    },
+    "timeout_secs": {
+      "type": "integer",
+      "description": "Long-polling timeout in seconds. If no messages are available, the server waits up to this many seconds before returning an empty response. Maximum is 60 seconds. Default is 0 (no long polling).",
+      "minimum": 0,
+      "maximum": 60,
+      "default": 0
+    }
+  }
+}

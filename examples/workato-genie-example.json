@@ -1,0 +1,23 @@
+{
+  "id": 295957,
+  "name": "Sample Workato Recipe",
+  "description": "Automated workflow for connecting enterprise applications.",
+  "folder_id": 95,
+  "state": "running",
+  "instructions": "sample-instructions",
+  "ai_provider": "sample-ai_provider",
+  "shared_account_id": 48,
+  "custom_oauth_key_id": 16,
+  "matrix": {},
+  "skills": [
+    "sample-skills_item"
+  ],
+  "knowledge_bases": [
+    "sample-knowledge_bases_item"
+  ],
+  "user_groups": [
+    "sample-user_groups_item"
+  ],
+  "created_at": "2026-01-15T10:00:00Z",
+  "updated_at": "2026-04-20T14:30:00Z"
+}

@@ -17,52 +17,52 @@ externalDocs:
   description: Workato Agent Studio API Documentation
   url: https://docs.workato.com/workato-api/agent-studio.html
 servers:
-  - url: https://www.workato.com
-    description: US Production
-  - url: https://app.eu.workato.com
-    description: EU Production
-  - url: https://app.jp.workato.com
-    description: JP Production
-  - url: https://app.sg.workato.com
-    description: SG Production
-  - url: https://app.au.workato.com
-    description: AU Production
+- url: https://www.workato.com
+  description: US Production
+- url: https://app.eu.workato.com
+  description: EU Production
+- url: https://app.jp.workato.com
+  description: JP Production
+- url: https://app.sg.workato.com
+  description: SG Production
+- url: https://app.au.workato.com
+  description: AU Production
 tags:
-  - name: Genies
-    description: >-
-      AI agents (genies) that can be configured with skills, knowledge bases,
-      and instructions to automate complex workflows.
-  - name: Knowledge Bases
-    description: >-
-      Knowledge bases provide AI agents with contextual data from configured
-      data sources such as documents, tables, and external systems.
-  - name: Skills
-    description: >-
-      Skills are recipe-backed capabilities that can be assigned to AI agents
-      to give them actionable tools.
+- name: Genies
+  description: >-
+    AI agents (genies) that can be configured with skills, knowledge bases,
+    and instructions to automate complex workflows.
+- name: Knowledge Bases
+  description: >-
+    Knowledge bases provide AI agents with contextual data from configured
+    data sources such as documents, tables, and external systems.
+- name: Skills
+  description: >-
+    Skills are recipe-backed capabilities that can be assigned to AI agents
+    to give them actionable tools.
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /api/agentic/genies:
     get:
       operationId: listGenies
-      summary: Workato List genies
+      summary: Workato List Genies
       description: >-
         Returns a paginated list of AI agents (genies) in the workspace.
         Supports filtering by folder, project, and state.
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/FolderId'
-        - $ref: '#/components/parameters/ProjectId'
-        - name: state
-          in: query
-          description: Filter genies by their current state.
-          schema:
-            type: string
-            enum: [running, stopped]
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/FolderId'
+      - $ref: '#/components/parameters/ProjectId'
+      - name: state
+        in: query
+        description: Filter genies by their current state.
+        schema:
+          type: string
+          enum: [running, stopped]
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
       responses:
         '200':
           description: A list of genies.
@@ -82,13 +82,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createGenie
-      summary: Workato Create a genie
+      summary: Workato Create a Genie
       description: >-
         Creates a new AI agent (genie) in the workspace with the specified
         configuration including name, instructions, AI provider, and matrix
         settings.
       tags:
-        - Genies
+      - Genies
       requestBody:
         required: true
         content:
@@ -113,12 +113,12 @@ paths:
   /api/agentic/genies/{id}:
     get:
       operationId: getGenie
-      summary: Workato Get a genie
+      summary: Workato Get a Genie
       description: Returns the details of a specific AI agent (genie) by its ID.
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       responses:
         '200':
           description: The genie details.
@@ -132,12 +132,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateGenie
-      summary: Workato Update a genie
+      summary: Workato Update a Genie
       description: Updates the configuration of an existing AI agent (genie).
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       requestBody:
         required: true
         content:
@@ -159,12 +159,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteGenie
-      summary: Workato Delete a genie
+      summary: Workato Delete a Genie
       description: Permanently deletes an AI agent (genie) from the workspace.
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       responses:
         '200':
           description: Deletion confirmation.
@@ -179,12 +179,12 @@ paths:
   /api/agentic/genies/{id}/start:
     post:
       operationId: startGenie
-      summary: Workato Start a genie
+      summary: Workato Start a Genie
       description: Activates an AI agent (genie), making it available to handle requests.
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       responses:
         '200':
           description: Start confirmation.
@@ -199,12 +199,12 @@ paths:
   /api/agentic/genies/{id}/stop:
     post:
       operationId: stopGenie
-      summary: Workato Stop a genie
+      summary: Workato Stop a Genie
       description: Deactivates an AI agent (genie), preventing it from handling new requests.
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       responses:
         '200':
           description: Stop confirmation.
@@ -219,14 +219,14 @@ paths:
   /api/agentic/genies/{id}/assign_skills:
     post:
       operationId: assignSkillsToGenie
-      summary: Workato Assign skills to a genie
+      summary: Workato Assign Skills to a Genie
       description: >-
         Assigns one or more skills to an AI agent (genie). Skills are
         recipe-backed capabilities that give the agent actionable tools.
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       requestBody:
         required: true
         content:
@@ -259,12 +259,12 @@ paths:
   /api/agentic/genies/{id}/remove_skills:
     post:
       operationId: removeSkillsFromGenie
-      summary: Workato Remove skills from a genie
+      summary: Workato Remove Skills from a Genie
       description: Removes one or more skills from an AI agent (genie).
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       requestBody:
         required: true
         content:
@@ -297,12 +297,12 @@ paths:
   /api/agentic/genies/{id}/assign_knowledge_bases:
     post:
       operationId: assignKnowledgeBasesToGenie
-      summary: Workato Assign knowledge bases to a genie
+      summary: Workato Assign Knowledge Bases to a Genie
       description: Assigns one or more knowledge bases to an AI agent (genie).
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       requestBody:
         required: true
         content:
@@ -335,12 +335,12 @@ paths:
   /api/agentic/genies/{id}/remove_knowledge_bases:
     post:
       operationId: removeKnowledgeBasesFromGenie
-      summary: Workato Remove knowledge bases from a genie
+      summary: Workato Remove Knowledge Bases from a Genie
       description: Removes one or more knowledge bases from an AI agent (genie).
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       requestBody:
         required: true
         content:
@@ -373,12 +373,12 @@ paths:
   /api/agentic/genies/{id}/assign_user_groups:
     post:
       operationId: assignUserGroupsToGenie
-      summary: Workato Assign user groups to a genie
+      summary: Workato Assign User Groups to a Genie
       description: Assigns identity provider user groups to an AI agent (genie) to control access.
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       requestBody:
         required: true
         content:
@@ -411,12 +411,12 @@ paths:
   /api/agentic/genies/{id}/remove_user_groups:
     post:
       operationId: removeUserGroupsFromGenie
-      summary: Workato Remove user groups from a genie
+      summary: Workato Remove User Groups from a Genie
       description: Removes identity provider user groups from an AI agent (genie).
       tags:
-        - Genies
+      - Genies
       parameters:
-        - $ref: '#/components/parameters/GenieId'
+      - $ref: '#/components/parameters/GenieId'
       requestBody:
         required: true
         content:
@@ -449,19 +449,19 @@ paths:
   /api/agentic/skills:
     get:
       operationId: listSkills
-      summary: Workato List skills
+      summary: Workato List Skills
       description: >-
         Returns a paginated list of skills in the workspace. Skills are
         recipe-backed capabilities that can be assigned to AI agents.
       tags:
-        - Skills
+      - Skills
       parameters:
-        - $ref: '#/components/parameters/FolderId'
-        - $ref: '#/components/parameters/ProjectId'
-        - $ref: '#/components/parameters/Query'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/SortTerm'
+      - $ref: '#/components/parameters/FolderId'
+      - $ref: '#/components/parameters/ProjectId'
+      - $ref: '#/components/parameters/Query'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/SortTerm'
       responses:
         '200':
           description: A list of skills.
@@ -481,12 +481,12 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createSkill
-      summary: Workato Create a skill
+      summary: Workato Create a Skill
       description: >-
         Creates a new skill from an existing recipe. The recipe must exist in
         the workspace before it can be converted to a skill.
       tags:
-        - Skills
+      - Skills
       requestBody:
         required: true
         content:
@@ -512,12 +512,12 @@ paths:
   /api/agentic/skills/{id}:
     get:
       operationId: getSkill
-      summary: Workato Get a skill
+      summary: Workato Get a Skill
       description: Returns the details of a specific skill by its ID.
       tags:
-        - Skills
+      - Skills
       parameters:
-        - $ref: '#/components/parameters/SkillId'
+      - $ref: '#/components/parameters/SkillId'
       responses:
         '200':
           description: The skill details.
@@ -532,20 +532,20 @@ paths:
   /api/agentic/knowledge_bases:
     get:
       operationId: listKnowledgeBases
-      summary: Workato List knowledge bases
+      summary: Workato List Knowledge Bases
       description: >-
         Returns a paginated list of knowledge bases in the workspace.
         Knowledge bases provide AI agents with contextual data from configured
         data sources.
       tags:
-        - Knowledge Bases
+      - Knowledge Bases
       parameters:
-        - $ref: '#/components/parameters/FolderId'
-        - $ref: '#/components/parameters/ProjectId'
-        - $ref: '#/components/parameters/Query'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/SortTerm'
+      - $ref: '#/components/parameters/FolderId'
+      - $ref: '#/components/parameters/ProjectId'
+      - $ref: '#/components/parameters/Query'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/SortTerm'
       responses:
         '200':
           description: A list of knowledge bases.
@@ -565,12 +565,12 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createKnowledgeBase
-      summary: Workato Create a knowledge base
+      summary: Workato Create a Knowledge Base
       description: >-
         Creates a new knowledge base with the specified name, description,
         source type, and data sources for use by AI agents.
       tags:
-        - Knowledge Bases
+      - Knowledge Bases
       requestBody:
         required: true
         content:
@@ -591,12 +591,12 @@ paths:
   /api/agentic/knowledge_bases/{id}:
     get:
       operationId: getKnowledgeBase
-      summary: Workato Get a knowledge base
+      summary: Workato Get a Knowledge Base
       description: Returns the details of a specific knowledge base by its ID.
       tags:
-        - Knowledge Bases
+      - Knowledge Bases
       parameters:
-        - $ref: '#/components/parameters/KnowledgeBaseId'
+      - $ref: '#/components/parameters/KnowledgeBaseId'
       responses:
         '200':
           description: The knowledge base details.
@@ -610,12 +610,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateKnowledgeBase
-      summary: Workato Update a knowledge base
+      summary: Workato Update a Knowledge Base
       description: Updates the configuration of an existing knowledge base.
       tags:
-        - Knowledge Bases
+      - Knowledge Bases
       parameters:
-        - $ref: '#/components/parameters/KnowledgeBaseId'
+      - $ref: '#/components/parameters/KnowledgeBaseId'
       requestBody:
         required: true
         content:
@@ -637,12 +637,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteKnowledgeBase
-      summary: Workato Delete a knowledge base
+      summary: Workato Delete a Knowledge Base
       description: Permanently deletes a knowledge base from the workspace.
       tags:
-        - Knowledge Bases
+      - Knowledge Bases
       parameters:
-        - $ref: '#/components/parameters/KnowledgeBaseId'
+      - $ref: '#/components/parameters/KnowledgeBaseId'
       responses:
         '200':
           description: Deletion confirmation.
@@ -657,14 +657,14 @@ paths:
   /api/agentic/knowledge_bases/{id}/data_sources:
     get:
       operationId: listKnowledgeBaseDataSources
-      summary: Workato List knowledge base data sources
+      summary: Workato List Knowledge Base Data Sources
       description: >-
         Returns all data sources configured for a specific knowledge base,
         including source type and connection details.
       tags:
-        - Knowledge Bases
+      - Knowledge Bases
       parameters:
-        - $ref: '#/components/parameters/KnowledgeBaseId'
+      - $ref: '#/components/parameters/KnowledgeBaseId'
       responses:
         '200':
           description: Knowledge base ID and its configured data sources.
@@ -687,18 +687,18 @@ paths:
   /api/agentic/knowledge_bases/{id}/recipes:
     get:
       operationId: listKnowledgeBaseRecipes
-      summary: Workato List recipes in a knowledge base
+      summary: Workato List Recipes in a Knowledge Base
       description: >-
         Returns a paginated list of recipes associated with a specific
         knowledge base.
       tags:
-        - Knowledge Bases
+      - Knowledge Bases
       parameters:
-        - $ref: '#/components/parameters/KnowledgeBaseId'
-        - $ref: '#/components/parameters/Query'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
-        - $ref: '#/components/parameters/SortTerm'
+      - $ref: '#/components/parameters/KnowledgeBaseId'
+      - $ref: '#/components/parameters/Query'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/SortTerm'
       responses:
         '200':
           description: A list of recipes associated with the knowledge base.

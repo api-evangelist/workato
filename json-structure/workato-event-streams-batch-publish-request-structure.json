@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-event-streams-batch-publish-request-structure.json",
+  "name": "BatchPublishRequest",
+  "description": "Request body for batch publishing messages.",
+  "type": "object",
+  "properties": {
+    "payloads": {
+      "type": "array",
+      "description": "Array of message payloads to publish. Each must conform to the topic's schema. Maximum 100 items.",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "description": "A message payload conforming to the topic's schema.",
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": [
+    "payloads"
+  ]
+}

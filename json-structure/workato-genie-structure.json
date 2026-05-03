@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-genie-structure.json",
+  "name": "Workato Genie",
+  "description": "Represents a Workato AI agent (genie) \u2014 an entity that uses large language models and recipe-backed skills to autonomously handle tasks and answer questions. Genies are configured with instructions, an AI provider, skills, and knowledge bases.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique integer identifier of the genie within the workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the genie.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the genie's purpose and capabilities."
+    },
+    "folder_id": {
+      "type": "int32",
+      "description": "ID of the workspace folder that contains this genie."
+    },
+    "state": {
+      "type": "string",
+      "description": "Current operational state of the genie.",
+      "enum": [
+        "running",
+        "stopped"
+      ]
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Natural language instructions that define the genie's behavior, persona, and decision-making approach."
+    },
+    "ai_provider": {
+      "type": "string",
+      "description": "The AI model provider powering this genie (e.g., openai, anthropic, workato)."
+    },
+    "shared_account_id": {
+      "type": "int32",
+      "description": "ID of the shared account providing credentials for the AI provider."
+    },
+    "custom_oauth_key_id": {
+      "type": "int32",
+      "description": "ID of the custom OAuth profile used for AI provider authentication."
+    },
+    "matrix": {
+      "type": "object",
+      "description": "Advanced configuration settings for the genie's behavior and model parameters.",
+      "additionalProperties": true
+    },
+    "skills": {
+      "type": "array",
+      "description": "List of skills (recipe-backed tools) assigned to this genie.",
+      "items": {
+        "$ref": "#/$defs/SkillRef"
+      }
+    },
+    "knowledge_bases": {
+      "type": "array",
+      "description": "List of knowledge bases assigned to this genie for contextual data retrieval.",
+      "items": {
+        "$ref": "#/$defs/KnowledgeBaseRef"
+      }
+    },
+    "user_groups": {
+      "type": "array",
+      "description": "Identity provider user groups that have access to interact with this genie.",
+      "items": {
+        "$ref": "#/$defs/UserGroupRef"
+      }
+    },
+    "created_at": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp when the genie was created."
+    },
+    "updated_at": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp when the genie was last updated."
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

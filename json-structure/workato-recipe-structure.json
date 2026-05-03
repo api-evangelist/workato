@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-recipe-structure.json",
+  "name": "Workato Recipe",
+  "description": "Represents a Workato recipe \u2014 an automated workflow connecting applications and services. Recipes consist of a trigger and one or more actions that run when the trigger fires.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique integer identifier of the recipe within the workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the recipe shown in the Workato UI.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable explanation of what the recipe does and when it runs."
+    },
+    "folder_id": {
+      "type": "int32",
+      "description": "ID of the workspace folder that contains this recipe."
+    },
+    "running": {
+      "type": "boolean",
+      "description": "Whether the recipe is currently active and processing trigger events."
+    },
+    "trigger_application": {
+      "type": "string",
+      "description": "Name of the connector used for the recipe's trigger event."
+    },
+    "action_applications": {
+      "type": "array",
+      "description": "List of connector names used in the recipe's action steps.",
+      "items": {
+        "type": "string",
+        "description": "Connector name."
+      }
+    },
+    "code": {
+      "type": "string",
+      "description": "JSON-encoded recipe definition containing trigger and action configurations."
+    },
+    "config": {
+      "type": "string",
+      "description": "JSON-encoded recipe configuration for connection mappings and settings."
+    },
+    "stop_cause": {
+      "type": "string",
+      "description": "Reason the recipe was last stopped (e.g., error, manual stop).",
+      "enum": [
+        "error",
+        "manual",
+        "test_mode_limit",
+        "task_limit"
+      ]
+    },
+    "created_at": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp when the recipe was created."
+    },
+    "updated_at": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp when the recipe was last modified."
+    },
+    "stopped_at": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp when the recipe was last stopped, if applicable."
+    },
+    "last_run_at": {
+      "type": "datetime",
+      "description": "ISO 8601 timestamp of the most recent recipe job execution."
+    },
+    "job_succeeded_count": {
+      "type": "int32",
+      "minimum": 0,
+      "description": "Total number of successfully completed jobs for this recipe."
+    },
+    "job_failed_count": {
+      "type": "int32",
+      "minimum": 0,
+      "description": "Total number of failed jobs for this recipe."
+    },
+    "version_no": {
+      "type": "int32",
+      "minimum": 1,
+      "description": "Current version number of the recipe."
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-developer-api-recipe-version-schema.json",
+  "title": "RecipeVersion",
+  "description": "A specific version snapshot of a recipe.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of this version."
+    },
+    "version_no": {
+      "type": "integer",
+      "description": "Sequential version number."
+    },
+    "comment": {
+      "type": "string",
+      "description": "Optional comment describing changes in this version."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this version was created."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-event-streams-publish-response-structure.json",
+  "name": "PublishResponse",
+  "description": "Response from a successful single message publish.",
+  "type": "object",
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "description": "Unique identifier assigned to the published message."
+    }
+  }
+}

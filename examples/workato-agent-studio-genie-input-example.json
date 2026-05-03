@@ -1,0 +1,10 @@
+{
+  "name": "Sample Workato Recipe",
+  "description": "Automated workflow for connecting enterprise applications.",
+  "folder_id": 15,
+  "instructions": "sample-instructions",
+  "ai_provider": "sample-ai_provider",
+  "shared_account_id": 98,
+  "custom_oauth_key_id": 45,
+  "matrix": {}
+}

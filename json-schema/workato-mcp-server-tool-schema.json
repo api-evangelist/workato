@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-mcp-server-tool-schema.json",
+  "title": "Tool",
+  "description": "An API endpoint or action exposed through an MCP server as a callable tool.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the tool within its application."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the tool."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the tool does and when AI agents should use it."
+    },
+    "trigger_application": {
+      "type": "string",
+      "description": "The application or API collection that owns this tool."
+    }
+  }
+}

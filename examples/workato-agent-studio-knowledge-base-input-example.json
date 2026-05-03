@@ -1,0 +1,9 @@
+{
+  "name": "Sample Workato Recipe",
+  "description": "Automated workflow for connecting enterprise applications.",
+  "folder_id": 47,
+  "source_type": "sample-source_type",
+  "data_sources": [
+    "sample-data_sources_item"
+  ]
+}

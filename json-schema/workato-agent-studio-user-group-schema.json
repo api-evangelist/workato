@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-agent-studio-user-group-schema.json",
+  "title": "UserGroup",
+  "description": "An identity provider user group for access control.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the user group."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the user group."
+    }
+  }
+}

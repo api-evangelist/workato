@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-agent-studio-skill-schema.json",
+  "title": "Skill",
+  "description": "A recipe-backed capability that can be assigned to an AI agent as a tool.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique identifier of the skill."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the skill."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what this skill enables the agent to do."
+    },
+    "recipe_id": {
+      "type": "integer",
+      "description": "ID of the underlying recipe that powers this skill."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the folder containing this skill."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the skill was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the skill was last updated."
+    }
+  }
+}

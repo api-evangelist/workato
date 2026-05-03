@@ -1,0 +1,6 @@
+{
+  "id": 793722,
+  "name": "Sample Workato Recipe",
+  "description": "Automated workflow for connecting enterprise applications.",
+  "trigger_application": "sample-trigger_application"
+}

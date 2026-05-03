@@ -1,0 +1,331 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Workato Developer API"
+  description: "Core Workato Developer API providing management of recipes, recipe versions, data tables, and health monitoring for automation workflows."
+  tags:
+    - Automation
+    - Integration
+    - iPaaS
+    - Recipes
+    - Workato
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WORKATO_API_TOKEN: WORKATO_API_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: workato-developer
+      baseUri: https://www.workato.com
+      description: "Workato Developer API for recipe and data table management"
+      authentication:
+        type: bearer
+        token: "{{WORKATO_API_TOKEN}}"
+      resources:
+        - name: recipes
+          path: /api/recipes
+          description: "Workato automation recipes"
+          operations:
+            - name: list-recipes
+              method: GET
+              description: "List automation recipes"
+              inputParameters:
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: Page number
+                - name: per_page
+                  in: query
+                  type: integer
+                  required: false
+                  description: Items per page
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-recipe
+              method: POST
+              description: "Create a new recipe"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  description: "{{tools.description}}"
+
+        - name: recipe-by-id
+          path: /api/recipes/{id}
+          description: "Single recipe operations"
+          operations:
+            - name: get-recipe
+              method: GET
+              description: "Get a recipe by ID"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: Recipe ID
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-recipe
+              method: PUT
+              description: "Update a recipe"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: Recipe ID
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+            - name: delete-recipe
+              method: DELETE
+              description: "Delete a recipe"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: Recipe ID
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: recipe-start
+          path: /api/recipes/{id}/start
+          description: "Start a recipe"
+          operations:
+            - name: start-recipe
+              method: PUT
+              description: "Start running a recipe"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: Recipe ID
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: recipe-stop
+          path: /api/recipes/{id}/stop
+          description: "Stop a recipe"
+          operations:
+            - name: stop-recipe
+              method: PUT
+              description: "Stop a running recipe"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: integer
+                  required: true
+                  description: Recipe ID
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: recipe-health
+          path: /api/recipes/{recipe_id}/health
+          description: "Recipe health monitoring"
+          operations:
+            - name: get-recipe-health
+              method: GET
+              description: "Get recipe health report"
+              inputParameters:
+                - name: recipe_id
+                  in: path
+                  type: integer
+                  required: true
+                  description: Recipe ID
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: data-tables
+          path: /api/data_tables
+          description: "Workato data tables"
+          operations:
+            - name: list-data-tables
+              method: GET
+              description: "List all data tables"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-data-table
+              method: POST
+              description: "Create a new data table"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: workato-developer-api
+      resources:
+        - path: /v1/recipes
+          name: recipes
+          operations:
+            - method: GET
+              name: list-recipes
+              description: "List recipes"
+              call: "workato-developer.list-recipes"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-recipe
+              description: "Create recipe"
+              call: "workato-developer.create-recipe"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/recipes/{id}
+          name: recipe-by-id
+          operations:
+            - method: GET
+              name: get-recipe
+              description: "Get recipe by ID"
+              call: "workato-developer.get-recipe"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-recipe
+              description: "Update recipe"
+              call: "workato-developer.update-recipe"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-recipe
+              description: "Delete recipe"
+              call: "workato-developer.delete-recipe"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: workato-developer-mcp
+      transport: http
+      tools:
+        - name: list-recipes
+          description: "List Workato automation recipes"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "workato-developer.list-recipes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-recipe
+          description: "Get a Workato recipe by ID"
+          hints:
+            readOnly: true
+          call: "workato-developer.get-recipe"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-recipe
+          description: "Create a new Workato automation recipe"
+          hints:
+            readOnly: false
+          call: "workato-developer.create-recipe"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: start-recipe
+          description: "Start a Workato recipe"
+          hints:
+            readOnly: false
+          call: "workato-developer.start-recipe"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: stop-recipe
+          description: "Stop a running Workato recipe"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "workato-developer.stop-recipe"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-recipe-health
+          description: "Get health report for a Workato recipe"
+          hints:
+            readOnly: true
+          call: "workato-developer.get-recipe-health"
+          with:
+            recipe_id: "tools.recipe_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-data-tables
+          description: "List Workato data tables"
+          hints:
+            readOnly: true
+          call: "workato-developer.list-data-tables"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-data-table
+          description: "Create a new Workato data table"
+          hints:
+            readOnly: false
+          call: "workato-developer.create-data-table"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,10 @@
+{
+  "messages": [
+    {
+      "payload": "hello"
+    },
+    {
+      "payload": "world"
+    }
+  ]
+}

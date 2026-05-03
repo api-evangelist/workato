@@ -19,88 +19,88 @@ externalDocs:
   description: Workato Developer API Documentation
   url: https://docs.workato.com/workato-api.html
 servers:
-  - url: https://www.workato.com
-    description: US Production
-  - url: https://app.eu.workato.com
-    description: EU Production
-  - url: https://app.jp.workato.com
-    description: JP Production
-  - url: https://app.sg.workato.com
-    description: SG Production
-  - url: https://app.au.workato.com
-    description: AU Production
+- url: https://www.workato.com
+  description: US Production
+- url: https://app.eu.workato.com
+  description: EU Production
+- url: https://app.jp.workato.com
+  description: JP Production
+- url: https://app.sg.workato.com
+  description: SG Production
+- url: https://app.au.workato.com
+  description: AU Production
 tags:
-  - name: Data Tables
-    description: >-
-      Data tables are structured storage within Workato for persisting and
-      querying records used in recipe automation.
-  - name: Recipes
-    description: >-
-      Recipes are automated workflows that connect applications and services.
-      Manage recipe lifecycle including creation, activation, and versioning.
+- name: Data Tables
+  description: >-
+    Data tables are structured storage within Workato for persisting and
+    querying records used in recipe automation.
+- name: Recipes
+  description: >-
+    Recipes are automated workflows that connect applications and services.
+    Manage recipe lifecycle including creation, activation, and versioning.
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /api/recipes:
     get:
       operationId: listRecipes
-      summary: Workato List recipes
+      summary: Workato List Recipes
       description: >-
         Returns a paginated list of recipes in the workspace. Supports
         filtering by folder, running state, adapter names, and update time.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/FolderId'
-        - name: with_subfolders
-          in: query
-          description: Include recipes in subfolders of the specified folder.
-          schema:
-            type: boolean
-        - name: order
-          in: query
-          description: Sort order for results.
-          schema:
-            type: string
-            enum: [asc, desc]
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
-        - name: running
-          in: query
-          description: Filter by running state.
-          schema:
-            type: boolean
-        - name: adapter_names_all
-          in: query
-          description: >-
-            Comma-separated list of connector names. Returns only recipes
-            that use all of the specified connectors.
-          schema:
-            type: string
-        - name: adapter_names_any
-          in: query
-          description: >-
-            Comma-separated list of connector names. Returns recipes that
-            use at least one of the specified connectors.
-          schema:
-            type: string
-        - name: updated_after
-          in: query
-          description: Filter recipes updated after this ISO 8601 timestamp.
-          schema:
-            type: string
-            format: date-time
-        - name: stopped_after
-          in: query
-          description: Filter recipes stopped after this ISO 8601 timestamp.
-          schema:
-            type: string
-            format: date-time
-        - name: stop_cause
-          in: query
-          description: Filter by stop cause.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/FolderId'
+      - name: with_subfolders
+        in: query
+        description: Include recipes in subfolders of the specified folder.
+        schema:
+          type: boolean
+      - name: order
+        in: query
+        description: Sort order for results.
+        schema:
+          type: string
+          enum: [asc, desc]
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: running
+        in: query
+        description: Filter by running state.
+        schema:
+          type: boolean
+      - name: adapter_names_all
+        in: query
+        description: >-
+          Comma-separated list of connector names. Returns only recipes
+          that use all of the specified connectors.
+        schema:
+          type: string
+      - name: adapter_names_any
+        in: query
+        description: >-
+          Comma-separated list of connector names. Returns recipes that
+          use at least one of the specified connectors.
+        schema:
+          type: string
+      - name: updated_after
+        in: query
+        description: Filter recipes updated after this ISO 8601 timestamp.
+        schema:
+          type: string
+          format: date-time
+      - name: stopped_after
+        in: query
+        description: Filter recipes stopped after this ISO 8601 timestamp.
+        schema:
+          type: string
+          format: date-time
+      - name: stop_cause
+        in: query
+        description: Filter by stop cause.
+        schema:
+          type: string
       responses:
         '200':
           description: A list of recipes.
@@ -120,12 +120,12 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createRecipe
-      summary: Workato Create a recipe
+      summary: Workato Create a Recipe
       description: >-
         Creates a new recipe in the workspace. Rate limited to 1 request per
         second. The recipe code must be provided in JSON format.
       tags:
-        - Recipes
+      - Recipes
       requestBody:
         required: true
         content:
@@ -146,12 +146,12 @@ paths:
   /api/recipes/{id}:
     get:
       operationId: getRecipe
-      summary: Workato Get a recipe
+      summary: Workato Get a Recipe
       description: Returns the details of a specific recipe by its ID.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeId'
+      - $ref: '#/components/parameters/RecipeId'
       responses:
         '200':
           description: The recipe details.
@@ -165,12 +165,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateRecipe
-      summary: Workato Update a recipe
+      summary: Workato Update a Recipe
       description: Updates an existing recipe's name, code, config, or description.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeId'
+      - $ref: '#/components/parameters/RecipeId'
       requestBody:
         required: true
         content:
@@ -192,12 +192,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteRecipe
-      summary: Workato Delete a recipe
+      summary: Workato Delete a Recipe
       description: Permanently deletes a recipe from the workspace. The recipe must be stopped first.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeId'
+      - $ref: '#/components/parameters/RecipeId'
       responses:
         '200':
           description: Deletion confirmation.
@@ -212,12 +212,12 @@ paths:
   /api/recipes/{id}/start:
     put:
       operationId: startRecipe
-      summary: Workato Start a recipe
+      summary: Workato Start a Recipe
       description: Activates a recipe, enabling it to process trigger events.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeId'
+      - $ref: '#/components/parameters/RecipeId'
       responses:
         '200':
           description: Start confirmation.
@@ -232,12 +232,12 @@ paths:
   /api/recipes/{id}/stop:
     put:
       operationId: stopRecipe
-      summary: Workato Stop a recipe
+      summary: Workato Stop a Recipe
       description: Deactivates a recipe, preventing it from processing new trigger events.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeId'
+      - $ref: '#/components/parameters/RecipeId'
       responses:
         '200':
           description: Stop confirmation.
@@ -252,12 +252,12 @@ paths:
   /api/recipes/{id}/copy:
     post:
       operationId: copyRecipe
-      summary: Workato Copy a recipe
+      summary: Workato Copy a Recipe
       description: Creates a duplicate of an existing recipe.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeId'
+      - $ref: '#/components/parameters/RecipeId'
       responses:
         '200':
           description: The copied recipe.
@@ -272,14 +272,14 @@ paths:
   /api/recipes/{recipe_id}/versions:
     get:
       operationId: listRecipeVersions
-      summary: Workato List recipe versions
+      summary: Workato List Recipe Versions
       description: Returns the version history of a recipe.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeIdPath'
-        - $ref: '#/components/parameters/Page'
-        - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/RecipeIdPath'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
       responses:
         '200':
           description: A list of recipe versions.
@@ -302,18 +302,18 @@ paths:
   /api/recipes/{recipe_id}/versions/{id}:
     get:
       operationId: getRecipeVersion
-      summary: Workato Get a recipe version
+      summary: Workato Get a Recipe Version
       description: Returns the details of a specific version of a recipe.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeIdPath'
-        - name: id
-          in: path
-          required: true
-          description: Version number or ID.
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/RecipeIdPath'
+      - name: id
+        in: path
+        required: true
+        description: Version number or ID.
+        schema:
+          type: integer
       responses:
         '200':
           description: The recipe version details.
@@ -328,14 +328,14 @@ paths:
   /api/recipes/{recipe_id}/health:
     get:
       operationId: getRecipeHealth
-      summary: Workato Get recipe health report
+      summary: Workato Get Recipe Health Report
       description: >-
         Retrieves the most recent performance analysis report for a recipe.
         Rate limited to 20 requests per minute.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeIdPath'
+      - $ref: '#/components/parameters/RecipeIdPath'
       responses:
         '200':
           description: The recipe health report.
@@ -351,15 +351,15 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: queueRecipeHealthAnalysis
-      summary: Workato Queue recipe health analysis
+      summary: Workato Queue Recipe Health Analysis
       description: >-
         Queues a new performance analysis for a recipe. Analysis runs
         asynchronously and results are retrievable via GET. Rate limited to
         20 requests per minute.
       tags:
-        - Recipes
+      - Recipes
       parameters:
-        - $ref: '#/components/parameters/RecipeIdPath'
+      - $ref: '#/components/parameters/RecipeIdPath'
       responses:
         '200':
           description: Health analysis queued confirmation.
@@ -374,20 +374,20 @@ paths:
   /api/data_tables:
     get:
       operationId: listDataTables
-      summary: Workato List data tables
+      summary: Workato List Data Tables
       description: Returns a paginated list of all data tables in the workspace.
       tags:
-        - Data Tables
+      - Data Tables
       parameters:
-        - $ref: '#/components/parameters/Page'
-        - name: per_page
-          in: query
-          description: Number of results per page (maximum 100).
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
-            default: 100
+      - $ref: '#/components/parameters/Page'
+      - name: per_page
+        in: query
+        description: Number of results per page (maximum 100).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
       responses:
         '200':
           description: A list of data tables.
@@ -407,10 +407,10 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createDataTable
-      summary: Workato Create a data table
+      summary: Workato Create a Data Table
       description: Creates a new data table with the specified schema.
       tags:
-        - Data Tables
+      - Data Tables
       requestBody:
         required: true
         content:
@@ -431,12 +431,12 @@ paths:
   /api/data_tables/{data_table_id}:
     get:
       operationId: getDataTable
-      summary: Workato Get a data table
+      summary: Workato Get a Data Table
       description: Returns the details of a specific data table by its ID.
       tags:
-        - Data Tables
+      - Data Tables
       parameters:
-        - $ref: '#/components/parameters/DataTableId'
+      - $ref: '#/components/parameters/DataTableId'
       responses:
         '200':
           description: The data table details.
@@ -450,12 +450,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateDataTable
-      summary: Workato Update a data table
+      summary: Workato Update a Data Table
       description: Updates the name, folder, or schema of an existing data table.
       tags:
-        - Data Tables
+      - Data Tables
       parameters:
-        - $ref: '#/components/parameters/DataTableId'
+      - $ref: '#/components/parameters/DataTableId'
       requestBody:
         required: true
         content:
@@ -477,12 +477,12 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteDataTable
-      summary: Workato Delete a data table
+      summary: Workato Delete a Data Table
       description: Permanently deletes a data table and all its records.
       tags:
-        - Data Tables
+      - Data Tables
       parameters:
-        - $ref: '#/components/parameters/DataTableId'
+      - $ref: '#/components/parameters/DataTableId'
       responses:
         '200':
           description: Deletion confirmation.
@@ -497,14 +497,14 @@ paths:
   /api/data_tables/{data_table_id}/truncate:
     post:
       operationId: truncateDataTable
-      summary: Workato Truncate a data table
+      summary: Workato Truncate a Data Table
       description: >-
         Removes all records from a data table while preserving its structure
         and schema.
       tags:
-        - Data Tables
+      - Data Tables
       parameters:
-        - $ref: '#/components/parameters/DataTableId'
+      - $ref: '#/components/parameters/DataTableId'
       responses:
         '200':
           description: Truncation confirmation.

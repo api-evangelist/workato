@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-mcp-server-mcp-server-input-structure.json",
+  "name": "McpServerInput",
+  "description": "Input schema for creating or updating an MCP server.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name for the MCP server."
+    },
+    "folder_id": {
+      "type": "int32",
+      "description": "ID of the folder to place the MCP server in."
+    },
+    "authentication_method": {
+      "type": "string",
+      "description": "Authentication method to use for the MCP server."
+    }
+  },
+  "required": [
+    "name",
+    "folder_id"
+  ]
+}

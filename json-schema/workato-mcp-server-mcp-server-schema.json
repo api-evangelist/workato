@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-mcp-server-mcp-server-schema.json",
+  "title": "McpServer",
+  "description": "An MCP server that exposes Workato API endpoints as tools for AI agents.",
+  "type": "object",
+  "properties": {
+    "handle": {
+      "type": "string",
+      "description": "Unique slug identifier of the MCP server."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the MCP server."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the folder containing this MCP server."
+    },
+    "mcp_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The authenticated MCP URL that AI agents connect to."
+    },
+    "authentication_method": {
+      "type": "string",
+      "description": "Authentication method used by this MCP server."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the MCP server was created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the MCP server was last updated."
+    }
+  }
+}

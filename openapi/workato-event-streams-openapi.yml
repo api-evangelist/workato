@@ -17,38 +17,38 @@ externalDocs:
   description: Workato Event Streams Public API Documentation
   url: https://docs.workato.com/workato-api/pubsub.html
 servers:
-  - url: https://event-streams.workato.com
-    description: US Production
-  - url: https://event-streams.eu.workato.com
-    description: EU Production
-  - url: https://event-streams.jp.workato.com
-    description: JP Production
-  - url: https://event-streams.sg.workato.com
-    description: SG Production
-  - url: https://event-streams.au.workato.com
-    description: AU Production
-  - url: https://event-streams.trial.workato.com
-    description: Developer Sandbox
+- url: https://event-streams.workato.com
+  description: US Production
+- url: https://event-streams.eu.workato.com
+  description: EU Production
+- url: https://event-streams.jp.workato.com
+  description: JP Production
+- url: https://event-streams.sg.workato.com
+  description: SG Production
+- url: https://event-streams.au.workato.com
+  description: AU Production
+- url: https://event-streams.trial.workato.com
+  description: Developer Sandbox
 tags:
-  - name: Messages
-    description: >-
-      Endpoints for publishing messages to event topics and consuming messages
-      from event topics.
+- name: Messages
+  description: >-
+    Endpoints for publishing messages to event topics and consuming messages
+    from event topics.
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /api/v1/topics/{topic_id}/consume:
     post:
       operationId: consumeMessages
-      summary: Workato Consume messages from a topic
+      summary: Workato Consume Messages from a Topic
       description: >-
         Retrieves messages from an event topic. Supports filtering by message
         ID or timestamp, configurable batch sizes up to 50, and long polling
         with timeouts up to 60 seconds. Returns at most 50 messages per request.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - $ref: '#/components/parameters/TopicId'
+      - $ref: '#/components/parameters/TopicId'
       requestBody:
         required: false
         content:
@@ -71,14 +71,14 @@ paths:
   /api/v1/topics/{topic_id}/publish:
     post:
       operationId: publishMessage
-      summary: Workato Publish a message to a topic
+      summary: Workato Publish a Message to a Topic
       description: >-
         Publishes a single message to an event topic. The message payload must
         conform to the topic's defined schema. Maximum payload size is 1 MB.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - $ref: '#/components/parameters/TopicId'
+      - $ref: '#/components/parameters/TopicId'
       requestBody:
         required: true
         content:
@@ -106,15 +106,15 @@ paths:
   /api/v1/batch/topics/{topic_id}/publish:
     post:
       operationId: publishBatchMessages
-      summary: Workato Publish a batch of messages to a topic
+      summary: Workato Publish a Batch of Messages to a Topic
       description: >-
         Publishes multiple messages to an event topic in a single request.
         Supports up to 100 messages per batch. Each payload must conform to
         the topic's schema. Partial failures are indicated in the response.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - $ref: '#/components/parameters/TopicId'
+      - $ref: '#/components/parameters/TopicId'
       requestBody:
         required: true
         content:

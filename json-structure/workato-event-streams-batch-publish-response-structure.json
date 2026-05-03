@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-event-streams-batch-publish-response-structure.json",
+  "name": "BatchPublishResponse",
+  "description": "Results of a batch publish operation.",
+  "type": "object",
+  "properties": {
+    "is_partial_error": {
+      "type": "boolean",
+      "description": "Whether some messages in the batch failed to publish. If true, check individual message results for failures."
+    },
+    "message_ids": {
+      "type": "object",
+      "description": "Map of array index (as string) to individual publish result. Keys correspond to positions in the submitted payloads array.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "message_id": {
+            "type": "string",
+            "description": "Unique identifier assigned to the published message."
+          },
+          "result": {
+            "type": "string",
+            "description": "Result status for this individual message."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-agent-studio-genie-input-schema.json",
+  "title": "GenieInput",
+  "description": "Input schema for creating or updating a genie.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the genie."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the genie's purpose."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the folder to place this genie in."
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Natural language instructions that guide the genie's behavior."
+    },
+    "ai_provider": {
+      "type": "string",
+      "description": "The AI model provider to use (e.g., openai, anthropic)."
+    },
+    "shared_account_id": {
+      "type": "integer",
+      "description": "ID of the shared account for AI provider credentials."
+    },
+    "custom_oauth_key_id": {
+      "type": "integer",
+      "description": "ID of the custom OAuth profile for AI provider authentication."
+    },
+    "matrix": {
+      "type": "object",
+      "description": "Additional configuration matrix for the genie.",
+      "additionalProperties": true
+    }
+  }
+}

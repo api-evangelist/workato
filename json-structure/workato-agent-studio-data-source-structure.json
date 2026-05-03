@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-agent-studio-data-source-structure.json",
+  "name": "DataSource",
+  "description": "A data source configuration for a knowledge base.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of the data source."
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Type of the data source (e.g., document, table, api)."
+    },
+    "connection_id": {
+      "type": "int32",
+      "description": "ID of the connection used to access this data source."
+    },
+    "config": {
+      "type": "object",
+      "description": "Source-specific configuration parameters.",
+      "additionalProperties": true
+    }
+  }
+}

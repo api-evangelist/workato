@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-developer-api-data-table-column-schema.json",
+  "title": "DataTableColumn",
+  "description": "A column definition in a data table schema.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Column name used as the field identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Data type of the column.",
+      "enum": [
+        "string",
+        "integer",
+        "number",
+        "boolean",
+        "date",
+        "datetime",
+        "object",
+        "array"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description of the column's purpose."
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Whether this column is required when creating records."
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
+}

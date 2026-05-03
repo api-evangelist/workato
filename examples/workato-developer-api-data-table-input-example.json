@@ -1,0 +1,7 @@
+{
+  "name": "Sample Workato Recipe",
+  "folder_id": 68,
+  "schema": [
+    "sample-schema_item"
+  ]
+}

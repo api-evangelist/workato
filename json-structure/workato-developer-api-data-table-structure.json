@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-developer-api-data-table-structure.json",
+  "name": "DataTable",
+  "description": "A structured data storage table within the Workato workspace.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of the data table."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the data table."
+    },
+    "folder_id": {
+      "type": "int32",
+      "description": "ID of the folder containing this data table."
+    },
+    "schema": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataTableColumn"
+      },
+      "description": "List of column definitions for the table."
+    },
+    "created_at": {
+      "type": "datetime",
+      "description": "Timestamp when the data table was created."
+    },
+    "updated_at": {
+      "type": "datetime",
+      "description": "Timestamp when the data table was last updated."
+    }
+  }
+}

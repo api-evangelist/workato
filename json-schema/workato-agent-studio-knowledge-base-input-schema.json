@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-schema/workato-agent-studio-knowledge-base-input-schema.json",
+  "title": "KnowledgeBaseInput",
+  "description": "Input schema for creating or updating a knowledge base.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the knowledge base."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the knowledge base's content."
+    },
+    "folder_id": {
+      "type": "integer",
+      "description": "ID of the folder to place this knowledge base in."
+    },
+    "source_type": {
+      "type": "string",
+      "description": "The type of data sources to use."
+    },
+    "data_sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataSource"
+      },
+      "description": "List of data sources to configure."
+    }
+  }
+}

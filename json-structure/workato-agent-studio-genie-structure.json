@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-agent-studio-genie-structure.json",
+  "name": "Genie",
+  "description": "An AI agent configured to handle automated tasks using skills and knowledge bases.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of the genie."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the genie."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the genie's purpose."
+    },
+    "folder_id": {
+      "type": "int32",
+      "description": "ID of the folder containing this genie."
+    },
+    "state": {
+      "type": "string",
+      "description": "Current operational state of the genie.",
+      "enum": [
+        "running",
+        "stopped"
+      ]
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Natural language instructions that guide the genie's behavior."
+    },
+    "ai_provider": {
+      "type": "string",
+      "description": "The AI model provider used by this genie."
+    },
+    "created_at": {
+      "type": "datetime",
+      "description": "Timestamp when the genie was created."
+    },
+    "updated_at": {
+      "type": "datetime",
+      "description": "Timestamp when the genie was last updated."
+    }
+  }
+}

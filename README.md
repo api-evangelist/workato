@@ -3,6 +3,8 @@ Workato is an enterprise automation and integration platform that enables organi
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/apis.yml)
 
+**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+
 ## Scope
 
 - **Type:** Contract
@@ -176,9 +178,72 @@ The Workato MCP Server API provides endpoints for creating, configuring, and man
 - [JSON-LD](json-ld/workato-context.jsonld)
 - [JSONSchema](json-schema/workato-recipe-schema.json)
 - [JSONSchema](json-schema/workato-genie-schema.json)
+- [SpectralRules](rules/workato-spectral-rules.yml)
+- [NaftikoCapability - Automation Management](capabilities/automation-management.yaml)
+- [NaftikoCapability - Developer API (Shared)](capabilities/shared/developer-api.yaml)
+- [NaftikoCapability - Agent Studio (Shared)](capabilities/shared/agent-studio.yaml)
+- [NaftikoCapability - MCP Server (Shared)](capabilities/shared/mcp-server.yaml)
+- [NaftikoCapability - Event Streams (Shared)](capabilities/shared/event-streams.yaml)
+- [Vocabulary](vocabulary/workato-vocabulary.yml)
+
+## Artifacts
+
+Machine-readable API specifications organized by format.
+
+### OpenAPI
+
+- [Workato Developer API](openapi/workato-developer-api-openapi.yml)
+- [Workato Agent Studio API](openapi/workato-agent-studio-openapi.yml)
+- [Workato Event Streams API](openapi/workato-event-streams-openapi.yml)
+- [Workato MCP Server API](openapi/workato-mcp-server-openapi.yml)
+
+### AsyncAPI
+
+- [Workato Event Streams](asyncapi/workato-event-streams-asyncapi.yml)
+
+### JSON Schema
+
+- [Recipe](json-schema/workato-developer-api-recipe-schema.json)
+- [Recipe Input](json-schema/workato-developer-api-recipe-input-schema.json)
+- [Data Table](json-schema/workato-developer-api-data-table-schema.json)
+- [Genie](json-schema/workato-agent-studio-genie-schema.json)
+- [Skill](json-schema/workato-agent-studio-skill-schema.json)
+- [Knowledge Base](json-schema/workato-agent-studio-knowledge-base-schema.json)
+- [Message](json-schema/workato-event-streams-message-schema.json)
+- [MCP Server](json-schema/workato-mcp-server-mcp-server-schema.json)
+- [Tool](json-schema/workato-mcp-server-tool-schema.json)
+
+### JSON-LD
+
+- [Workato Context](json-ld/workato-context.jsonld)
+
+## Capabilities
+
+Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
+
+### Shared Per-API Definitions
+
+- [Developer API](capabilities/shared/developer-api.yaml) — 8 operations for recipe and data table management
+- [Agent Studio](capabilities/shared/agent-studio.yaml) — 6 operations for AI genies, skills, and knowledge bases
+- [MCP Server](capabilities/shared/mcp-server.yaml) — 5 operations for MCP server management
+- [Event Streams](capabilities/shared/event-streams.yaml) — 3 operations for pub/sub messaging
+
+### Workflow Capabilities
+
+| Workflow | APIs Combined | Tools | Persona |
+|----------|--------------|-------|---------|
+| [Automation Management](capabilities/automation-management.yaml) | Developer API, Agent Studio, MCP Server, Event Streams | 18 | Integration Engineer, AI Developer |
+
+## Vocabulary
+
+- [Workato Vocabulary](vocabulary/workato-vocabulary.yml) — Unified taxonomy mapping 11 resources, 12 actions, 1 workflow, and 4 personas across operational (OpenAPI) and capability (Naftiko) dimensions
+
+## Rules
+
+- [Workato Spectral Rules](rules/workato-spectral-rules.yml) — 40 rules across 13 categories enforcing Workato API conventions
 
 ## Maintainers
 
-**FN:** API Evangelist
+**FN:** Kin Lane
 
-**Email:** info@apievangelist.com
+**Email:** kin@apievangelist.com

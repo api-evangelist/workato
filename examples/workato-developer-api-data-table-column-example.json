@@ -1,0 +1,6 @@
+{
+  "name": "Sample Workato Recipe",
+  "type": "boolean",
+  "description": "Automated workflow for connecting enterprise applications.",
+  "required": true
+}

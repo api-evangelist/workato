@@ -1,0 +1,6 @@
+{
+  "after_message_id": "sample-after_message_id",
+  "since_time": "2026-04-15T10:30:00Z",
+  "batch_size": 47,
+  "timeout_secs": 0
+}

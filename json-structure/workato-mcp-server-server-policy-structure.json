@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-mcp-server-server-policy-structure.json",
+  "name": "ServerPolicy",
+  "description": "Security policy configuration for an MCP server.",
+  "type": "object",
+  "properties": {
+    "rate_limit": {
+      "type": "object",
+      "description": "Rate limiting configuration.",
+      "properties": {
+        "requests_per_minute": {
+          "type": "int32",
+          "description": "Maximum number of requests allowed per minute."
+        },
+        "requests_per_hour": {
+          "type": "int32",
+          "description": "Maximum number of requests allowed per hour."
+        }
+      }
+    },
+    "quota_limit": {
+      "type": "object",
+      "description": "Quota configuration.",
+      "properties": {
+        "requests_per_month": {
+          "type": "int32",
+          "description": "Maximum number of requests allowed per month."
+        }
+      }
+    },
+    "ip_allowlist": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of IP addresses or CIDR ranges that are allowed to access this MCP server."
+    },
+    "ip_denylist": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of IP addresses or CIDR ranges that are denied access to this MCP server."
+    }
+  }
+}

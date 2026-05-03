@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/json-structure/workato-developer-api-recipe-version-structure.json",
+  "name": "RecipeVersion",
+  "description": "A specific version snapshot of a recipe.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "Unique identifier of this version."
+    },
+    "version_no": {
+      "type": "int32",
+      "description": "Sequential version number."
+    },
+    "comment": {
+      "type": "string",
+      "description": "Optional comment describing changes in this version."
+    },
+    "created_at": {
+      "type": "datetime",
+      "description": "Timestamp when this version was created."
+    }
+  }
+}
