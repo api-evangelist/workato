@@ -88,7 +88,9 @@ apis:
         type: JSONSchema
       - url: json-schema/workato-genie-schema.json
         type: JSONSchema
-    description: Workato is an American multinational software company that provides a cloud-based platform for automation, integration, and artificial intelligence orchestration across applications, data, and systems. The company was founded in 2013 and is headquartered in Mountain View, California.
+    description: Workato is an American multinational software company that provides a cloud-based platform
+      for automation, integration, and artificial intelligence orchestration across applications, data,
+      and systems. The company was founded in 2013 and is headquartered in Mountain View, California.
   - aid: workato:embedded-api
     name: Workato Embedded Partner API
     tags:
@@ -130,7 +132,10 @@ apis:
       - url: https://docs.workato.com/oem/workato-embedded.html
         name: Workato Fully Embedded
         type: Documentation
-    description: The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes, connections, and other assets within the Workato Embedded platform. These APIs support provisioning customer workspaces, managing environments, and building fully embedded integration experiences within partner applications.
+    description: The Workato Embedded Partner APIs enable partners to programmatically create and manage
+      customers, recipes, connections, and other assets within the Workato Embedded platform. These APIs
+      support provisioning customer workspaces, managing environments, and building fully embedded integration
+      experiences within partner applications.
   - aid: workato:event-streams-public-api
     name: Workato Event Streams Public API
     tags:
@@ -150,7 +155,10 @@ apis:
         type: OpenAPI
       - url: asyncapi/workato-event-streams-asyncapi.yml
         type: AsyncAPI
-    description: The Workato Event Streams Public API enables HTTP-based clients to publish and consume messages from event topics. It supports single message publish, batch publish of up to 100 messages, and message consumption with long polling. The API is separate from the Developer API's event streams management endpoints and is rate limited to 60 requests per minute with a 1 MB maximum payload.
+    description: The Workato Event Streams Public API enables HTTP-based clients to publish and consume
+      messages from event topics. It supports single message publish, batch publish of up to 100 messages,
+      and message consumption with long polling. The API is separate from the Developer API's event streams
+      management endpoints and is rate limited to 60 requests per minute with a 1 MB maximum payload.
   - aid: workato:mcp-server-api
     name: Workato MCP Server API
     tags:
@@ -171,7 +179,11 @@ apis:
         type: Documentation
       - url: openapi/workato-mcp-server-openapi.yml
         type: OpenAPI
-    description: The Workato MCP Server API provides endpoints for creating, configuring, and managing Model Context Protocol (MCP) servers that expose Workato API collections as tools for AI agents. It supports server creation, tool management, user group assignment, and policy configuration. MCP servers generate unique authenticated URLs usable by AI development environments like Claude Desktop and Cursor.
+    description: The Workato MCP Server API provides endpoints for creating, configuring, and managing
+      Model Context Protocol (MCP) servers that expose Workato API collections as tools for AI agents.
+      It supports server creation, tool management, user group assignment, and policy configuration. MCP
+      servers generate unique authenticated URLs usable by AI development environments like Claude Desktop
+      and Cursor.
 name: Workato
 tags:
   - Agentic
@@ -204,25 +216,29 @@ common:
       - name: Actions by LLM Accelerator
         description: Pre-built solution to automate enterprise action with LLM & Workato
       - name: SAP Order-to-Cash Accelerator
-        description: Accelerate order to cash process implementation using SAP S/4 HANA with Salesforce CRM
+        description: Accelerate order to cash process implementation using SAP S/4 HANA with Salesforce
+          CRM
       - name: Salesforce Workbot Accelerator
         description: Access Salesforce Seamlessly in Slack
       - name: Atlassian Virtual Agent Accelerator
         description: Real-time request fulfilment and response to the users from Atlassian Virtual Agent
       - name: NetSuite to Salesforce integration Accelerator
-        description: Automate lead-to-cash processes and get real-time visibility into back-office order, fulfillment, and financial operations
+        description: Automate lead-to-cash processes and get real-time visibility into back-office order,
+          fulfillment, and financial operations
       - name: Workday Revenue Management
         description: Helps organizations in syncing their CPQ orders from CRM into WRM as a contract
       - name: Security Orchestration, Automation & Response (SOAR) (AI@Work)
         description: Elevate your Security Posture with AI-Driven SOAR Excellence
       - name: Intelligent Invoice Processing
-        description: Experience AI-powered efficiency and superior accuracy in invoice processing with Cloudorizon's solution
+        description: Experience AI-powered efficiency and superior accuracy in invoice processing with
+          Cloudorizon's solution
       - name: Automation Training Manager
         description: Provide personalized training plans based on individual learning needs
       - name: Sales Process & Forecasting Alignment
         description: The first step in achieving Pipeline Resilience
       - name: MindAssist
-        description: MindAssist automates support ticket creation & bot retriggering for Automation Anywhere A360, helping businesses build resilient automations with Workato's low-code platform.
+        description: MindAssist automates support ticket creation & bot retriggering for Automation Anywhere
+          A360, helping businesses build resilient automations with Workato's low-code platform.
       - name: Software License Optimization
         description: Automate the process of identifying & deprovisioning underutilized app licenses
       - name: AIML Accelerator
@@ -230,13 +246,16 @@ common:
       - name: Automation Quality & Security
         description: Standardize and automate quality and security best practices for your automations
       - name: IT Help Desk Bot
-        description: Supercharge your helpdesk with self-service knowledge articles & service requests powered by intelligent bots
+        description: Supercharge your helpdesk with self-service knowledge articles & service requests
+          powered by intelligent bots
       - name: OPA Manager
         description: A standardized approach to automate the add agents, manage and troubleshoot OPAs
       - name: App Provision/Deprovisioning
-        description: Manage user access to applications Leverage a standardized approach to manage user access to applications
+        description: Manage user access to applications Leverage a standardized approach to manage user
+          access to applications
       - name: Product-Led Sales
-        description: Take action on account signals at scale to increase customer acquisition, retention & expansion
+        description: Take action on account signals at scale to increase customer acquisition, retention
+          & expansion
       - name: Order-to-Cash
         description: Transform your order-to-cash process into a competitive differentiator
       - name: Employee Onboarding
@@ -2539,168 +2558,27 @@ common:
     type: MCP
     description: 'null'
   - data:
-      - name: Agent Studio
-        url: https://www.workato.com/agentstudio
-        features:
-          - Enterprise Skills
-          - Knowledge Bases
-          - Agent Orchestration
-          - Genie Configuration
-          - Enterprise Security
-          - Test And Deploy
-          - KPI Tracking
-      - name: Agent Orchestration
-        url: https://www.workato.com/agentic/agent-orchestration
-        features:
-          - Autonomous Execution
-          - Multi-Agent Collaboration
-          - Event-Driven Triggering
-          - Enterprise MCP Integration
-          - Full Audit Trails
-          - Cross-Department Scaling
-          - Compliance And Governance
-      - name: Workato GO
-        url: https://www.workato.com/go
-        features:
-          - Enterprise Search
-          - Deep Action
-          - Employee Assistant
-          - Action Board
-          - AI-Powered Agentic Execution
-          - Universal Connectivity
-          - Human-In-The-Loop Control
-      - name: Enterprise MCP
-        url: https://www.workato.com/agentic/mcp
-        features:
-          - Verified User Access
-          - Universal Agent Compatibility
-          - Unified Gateway Control
-          - Instant AI Enablement
-          - Enterprise-Grade Governance
-          - Comprehensive Audit Trails
-          - Production-Ready Architecture
-      - name: Modern iPaaS
-        url: https://www.workato.com/products/ipaas
-        features:
-          - Enterprise MCP Connectivity
-          - AI-Powered Workflow Design
-          - Pre-Built Connectors
-          - Unified Orchestration Engine
-          - Enterprise Security
-          - Cloud-Native Scalability
-          - Low-Code No-Code Integration
-      - name: API Management
-        url: https://www.workato.com/platform/api-management
-        features:
-          - Enterprise Security And Authentication
-          - Policy Management And Governance
-          - API Modernization
-          - Self-Service Developer Portal
-          - Real-Time Monitoring And Analytics
-          - High-Performance Deployment
-          - AI-Powered API Development
-      - name: Data Orchestration
-        url: https://www.workato.com/platform/data-orchestration
-        features:
-          - Data Pipeline Orchestration
-          - ETL ELT Capabilities
-          - Real-Time Data Activation
-          - Reverse ETL
-          - Multi-Connector Integration
-          - AI-Powered Transformations
-          - Unified Governance And Observability
-      - name: AI Workflows
-        url: https://www.workato.com/platform/ai-by-workato
-        features:
-          - Pre-Built AI Connectors
-          - Built-In AI Services
-          - Email Generation And Text Parsing
-          - Advanced Privacy Controls
-          - Role-Based Access Controls
-          - Secure AI Deployment
-          - Workflow Integration
-      - name: Data Hub
-        url: https://www.workato.com/platform/mdm
-        features:
-          - Data Unification
-          - AI-Powered Matching
-          - Data Governance And Quality
-          - Real-Time Activation
-          - Pre-Built Connectors
-          - Low-Code No-Code Interface
-          - Velocity Packs
-      - name: Workflow Apps
-        url: https://www.workato.com/platform/workflow-apps
-        features:
-          - Low-Code No-Code Visual Builder
-          - Seamless App Connectivity
-          - Automated Task Management
-          - Built-In Data Storage
-          - Branded App Portal
-          - SSO And User Security
-          - Drag-And-Drop Interface
-      - name: Copilots
-        url: https://www.workato.com/platform/copilots
-        features:
-          - Natural Language Workflow Creation
-          - Context-Aware Orchestration
-          - Workspace Visibility And Control
-          - Intelligent Data Mapping
-          - Formula Automation
-          - Performance Optimization
-          - Connector Development Assistance
-      - name: Workbot
-        url: https://www.workato.com/platform/workbot
-        features:
-          - Slack And Microsoft Teams Integration
-          - Natural Language Processing
-          - Multi-Tasking Capabilities
-          - Pre-Built App Connectors
-          - Real-Time Access Verification
-          - Custom Form-Triggered Automation
-          - Personalized User Experiences
-      - name: B2B EDI
-        url: https://www.workato.com/platform/b2b-edi
-        features:
-          - Partner Onboarding
-          - Multiple Format Support
-          - EDI Standards Support
-          - Workflow Orchestration
-          - Real-Time SLA Monitoring
-          - Partner Data Activation
-          - Customizable Templates
-      - name: Intelligent Document Processing
-        url: https://www.workato.com/platform/idp
-        features:
-          - AI-Powered Data Extraction
-          - Document Automation Workflows
-          - Pre-Trained Document Models
-          - Human-In-The-Loop Validation
-          - Multi-Document Type Support
-          - Business Process Integration
-          - Low-Code Implementation
-      - name: Embedded iPaaS
-        url: https://www.workato.com/embed-saas-integrations
-        features:
-          - Pre-Built Connectors
-          - AI-Powered Automation
-          - White-Label Deployment
-          - Managed Service Capabilities
-          - Full Embed API Access
-          - Ready-To-Use Recipes
-          - Integration Health Monitoring
-      - name: Security And Governance
-        url: https://www.workato.com/platform/security
-        features:
-          - User Management
-          - Advanced RBAC
-          - Data Encryption
-          - Compliance Certifications
-          - Audit And Monitoring
-          - SIEM Integration
-          - Vulnerability Management
+      - Base Workspace from ~$10K/year
+      - 'Typical mid-market: $15K-$50K/year'
+      - Cost based on recipes + tasks + connectors + user seats
+      - High-Volume Recipes (HVR) flat-rate option
+      - 'Enterprise: on-prem agent, dedicated support'
+      - 1,200+ pre-built connectors
+      - Recipes (workflows) and Tasks (actions)
+      - Workbot for chat-driven automation
+      - Embedded iPaaS for SaaS vendors
+      - AI Copilot for recipe generation
+      - RecipeIQ for performance tuning
+      - 'Recipe API trigger: 6,000 req/min/recipe'
+      - 'Concurrent runtime: 100 per workspace'
+      - Connector SDK for custom integrations
+      - SOC 2 Type 2 + HIPAA + GDPR compliant
+      - On-prem agent for behind-the-firewall systems
     name: Features
     type: Features
+    sources:
+      - https://www.workato.com/pricing
+    updated: '2026-05-04'
   - url: https://docs.workato.com/
     type: Developer Portal
   - url: https://docs.workato.com/workato-api/authentication.html
@@ -2817,13 +2695,15 @@ common:
   - url: vocabulary/workato-vocabulary.yml
     type: Vocabulary
 created: '2025-06-05T00:00:00.000Z'
-modified: '2026-05-03'
+modified: '2026-05-04'
 position: Consumer
 segments:
   - iPaaS
   - Embedded_iPaaS
   - Workflows
-description: Workato is an enterprise automation and integration platform that enables organizations to integrate their apps and automate business workflows without extensive coding. It provides a low-code/no-code interface for creating integrations between cloud applications, on-premises systems, and databases.
+description: Workato is an enterprise automation and integration platform that enables organizations to
+  integrate their apps and automate business workflows without extensive coding. It provides a low-code/no-code
+  interface for creating integrations between cloud applications, on-premises systems, and databases.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

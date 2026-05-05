@@ -1,0 +1,34 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Workato
+providerId: workato
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - iPaaS
+description: Workato API rate limits per workspace.
+sources:
+  - https://www.workato.com/pricing
+  - https://docs.workato.com/oem/rate-limit.html
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+limits:
+  - name: Recipe API trigger
+    scope: recipe
+    metric: requests_per_minute
+    limit: 6000
+    timeFrame: minute
+  - name: Recipe runtime calls
+    scope: workspace
+    metric: concurrent
+    limit: 100
+  - name: Workato API (Embedded)
+    scope: workspace
+    metric: requests_per_minute
+    limit: 200
+    timeFrame: minute
