@@ -2704,6 +2704,107 @@ segments:
 description: Workato is an enterprise automation and integration platform that enables organizations to
   integrate their apps and automate business workflows without extensive coding. It provides a low-code/no-code
   interface for creating integrations between cloud applications, on-premises systems, and databases.
+integrations:
+  - name: Salesforce
+  - name: Slack
+  - name: Marketo
+  - name: NetSuite
+  - name: ServiceNow
+  - name: Workday
+  - name: NetSuite REST
+  - name: Google Drive
+  - name: Snowflake
+  - name: Zendesk
+  - name: Jira
+  - name: Zoom
+  - name: OpenAI
+  - name: DeepSeek
+  - name: Ollama
+  - name: Google Gemini
+  - name: Amazon S3
+  - name: Redshift
+  - name: Microsoft SQL Server
+  - name: Azure Blob Storage
+  - name: 0codekit
+  - name: 3 D Repo
+  - name: Abbyy Flexicapture
+  - name: Abbyy Vantage
+  - name: AbuseIPDB
+  - name: Accredible
+  - name: Aconex
+  - name: Action Network
+  - name: Actionstep
+  - name: Active Directory
+  - name: RegOnline® by Lanyon
+  - name: ActiveCampaign
+  - name: Acumatica ERP
+  - name: Adaptive Insights
+  - name: Adaptive Shield
+  - name: AdBook
+  - name: Address Validator
+  - name: Adeona PIM
+  - name: Adobe Admin
+  - name: Adobe Sign
+  - name: Adobe Campaign
+  - name: Adobe Experience Manager
+  - name: Adobe Analytics
+  - name: Adp Wisely
+  - name: Adp Workforce Now
+  - name: Adroll
+  - name: Adyen
+  - name: AfterShip
+  - name: Agile CRM
+  - name: Agiloft
+  - name: Aimtec ClouEDI
+  - name: AirREGI
+  - name: Airbrake
+  - name: Aircall
+  - name: Airship
+  - name: Airtable
+  - name: Airwallex
+  - name: Akamai EAA
+  - name: Akeneo
+  - name: AlayaCare
+  - name: Alexa Top Sites
+  - name: Alfresco Content Services
+  - name: Algolia
+  - name: Amazon CloudWatch
+  - name: Amazon Dynamo DB
+  - name: Amazon Inspector2
+  - name: Amazon Kinesis
+  - name: Amazon Lex
+  - name: Amazon Sage Maker
+  - name: Amazon Seller Central
+  - name: Amazon SES
+  - name: Amazon Textract
+  - name: Amazon CloudFront
+  - name: Amazon EC2
+  - name: Amazon Polly
+  - name: Amazon RDS
+  - name: Ambassador
+  - name: AMcards
+  - name: Amplify
+  - name: Amplitude
+  - name: AMQP
+  - name: Anaplan
+  - name: AngelList
+  - name: AnonyFlow
+  - name: Ansible
+  - name: Anthology Blackboard
+  - name: Anthropic
+  - name: Anvyl
+  - name: AnyMeeting
+  - name: Apex (LMS)
+  - name: Api Void
+  - name: Google Dialogflow
+  - name: Apify
+  - name: APOD
+  - name: Apollo.io
+  - name: App Store Connect
+  - name: Appcues
+  - name: AppDirect
+  - name: AppDynamics
+  - name: Applaud
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
