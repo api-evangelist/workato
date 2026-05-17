@@ -25,31 +25,31 @@ apis:
         type: API Documentation
       - url: https://docs.workato.com/workato-api/resources.html
         name: Workato API - Resources
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/recipes.html
         name: Workato API - Recipes
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/api-connectors.html
         name: Workato API - Connectors
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/api-client-apis.html
         name: Workato API - API Clients
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/api-platform.html
         name: Workato API - API Platform
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/custom_connectors.html
         name: Workato API - Custom Connectors
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
         name: Workato API - Recipe Lifecycle Management
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/authentication.html
         name: Workato API - Authentication
         type: Authentication
       - url: https://docs.workato.com/workato-api/rate-limiting.html
         name: Workato API - Rate Limiting
-        type: Rate Limits
+        type: RateLimits
       - url: https://docs.workato.com/developing-connectors/sdk.html
         name: Workato Connector SDK - Developer Program
         type: SDK
@@ -61,25 +61,25 @@ apis:
         type: SDK
       - url: https://docs.workato.com/workato-api/pubsub.html
         name: Workato API - Event Streams Public API
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/agent-studio.html
         name: Workato API - Agent Studio
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/mcp-servers.html
         name: Workato API - MCP Servers
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/test-automation.html
         name: Workato API - Test Automation
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/data-tables.html
         name: Workato API - Data Tables
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/tag-assignments.html
         name: Workato API - Tag Assignments
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
         name: Workato API - Custom OAuth Profiles
-        type: API Reference
+        type: APIReference
       - url: openapi/workato-developer-api-openapi.yml
         type: OpenAPI
       - url: openapi/workato-agent-studio-openapi.yml
@@ -104,25 +104,25 @@ apis:
         type: API Documentation
       - url: https://docs.workato.com/oem/oem-api/managed-users.html
         name: Embedded API - Managed Customers
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/oem/oem-api/connections.html
         name: Embedded API - Connections
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/oem/oem-api/api-platform.html
         name: Embedded API - API Platform
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/oem/oem-api/adapters.html
         name: Embedded API - Connectors
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/oem/oem-api/jobs
         name: Embedded API - Jobs
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/oem/oem-api/team.html
         name: Embedded API - Customer Workspace Collaborators
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/oem/embedded-environments/embedded-environments-api.html
         name: Embedded Environments APIs
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/oem/oem-api-faqs.html
         name: Embedded Partner API FAQs
         type: FAQ
@@ -173,7 +173,7 @@ apis:
         type: Documentation
       - url: https://docs.workato.com/workato-api/mcp-servers.html
         name: Workato API - MCP Servers
-        type: API Reference
+        type: APIReference
       - url: https://docs.workato.com/en/mcp/expose-developer-apis.html
         name: Workato Developer API MCP | Workato Docs
         type: Documentation
@@ -2584,15 +2584,15 @@ common:
   - url: https://docs.workato.com/workato-api/authentication.html
     type: Authentication
   - url: https://docs.workato.com/workato-api/rate-limiting.html
-    type: Rate Limits
+    type: RateLimits
   - url: https://status.workato.com/
-    type: Status Page
+    type: StatusPage
   - url: https://community.workato.com/
     type: Community
   - url: https://support.workato.com/
     type: Support
   - url: https://www.workato.com/users/sign_up
-    type: Sign Up
+    type: SignUp
   - url: https://www.linkedin.com/company/workato/
     name: Workato on LinkedIn
     type: LinkedIn
@@ -2654,7 +2654,7 @@ common:
     name: Workato Automate Conference
     type: Events
   - url: json-ld/workato-context.jsonld
-    type: JSON-LD
+    type: JSONLD
   - url: json-schema/workato-recipe-schema.json
     type: JSONSchema
   - url: json-schema/workato-genie-schema.json
