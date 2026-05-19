@@ -1,0 +1,475 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workato Developer API — Recipes
+  description: 'Workato Developer API — Recipes. 12 operations. Lead operation: Workato List Recipes. Self-contained Naftiko
+    capability covering one Workato business surface.'
+  tags:
+  - Workato
+  - Recipes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKATO_API_KEY: WORKATO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-recipes
+    baseUri: https://www.workato.com
+    description: Workato Developer API — Recipes business capability. Self-contained, no shared references.
+    resources:
+    - name: api-recipes
+      path: /api/recipes
+      operations:
+      - name: listrecipes
+        method: GET
+        description: Workato List Recipes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: with_subfolders
+          in: query
+          type: boolean
+          description: Include recipes in subfolders of the specified folder.
+        - name: order
+          in: query
+          type: string
+          description: Sort order for results.
+        - name: running
+          in: query
+          type: boolean
+          description: Filter by running state.
+        - name: adapter_names_all
+          in: query
+          type: string
+          description: Comma-separated list of connector names. Returns only recipes that use all of the specified connectors.
+        - name: adapter_names_any
+          in: query
+          type: string
+          description: Comma-separated list of connector names. Returns recipes that use at least one of the specified connectors.
+        - name: updated_after
+          in: query
+          type: string
+          description: Filter recipes updated after this ISO 8601 timestamp.
+        - name: stopped_after
+          in: query
+          type: string
+          description: Filter recipes stopped after this ISO 8601 timestamp.
+        - name: stop_cause
+          in: query
+          type: string
+          description: Filter by stop cause.
+      - name: createrecipe
+        method: POST
+        description: Workato Create a Recipe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-recipes-id
+      path: /api/recipes/{id}
+      operations:
+      - name: getrecipe
+        method: GET
+        description: Workato Get a Recipe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updaterecipe
+        method: PUT
+        description: Workato Update a Recipe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleterecipe
+        method: DELETE
+        description: Workato Delete a Recipe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-recipes-id-copy
+      path: /api/recipes/{id}/copy
+      operations:
+      - name: copyrecipe
+        method: POST
+        description: Workato Copy a Recipe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-recipes-id-start
+      path: /api/recipes/{id}/start
+      operations:
+      - name: startrecipe
+        method: PUT
+        description: Workato Start a Recipe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-recipes-id-stop
+      path: /api/recipes/{id}/stop
+      operations:
+      - name: stoprecipe
+        method: PUT
+        description: Workato Stop a Recipe
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-recipes-recipe_id-health
+      path: /api/recipes/{recipe_id}/health
+      operations:
+      - name: getrecipehealth
+        method: GET
+        description: Workato Get Recipe Health Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: queuerecipehealthanalysis
+        method: POST
+        description: Workato Queue Recipe Health Analysis
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-recipes-recipe_id-versions
+      path: /api/recipes/{recipe_id}/versions
+      operations:
+      - name: listrecipeversions
+        method: GET
+        description: Workato List Recipe Versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-recipes-recipe_id-versions-id
+      path: /api/recipes/{recipe_id}/versions/{id}
+      operations:
+      - name: getrecipeversion
+        method: GET
+        description: Workato Get a Recipe Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Version number or ID.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WORKATO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-recipes-rest
+    port: 8080
+    description: REST adapter for Workato Developer API — Recipes. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/recipes
+      name: api-recipes
+      description: REST surface for api-recipes.
+      operations:
+      - method: GET
+        name: listrecipes
+        description: Workato List Recipes
+        call: developer-recipes.listrecipes
+        with:
+          with_subfolders: rest.with_subfolders
+          order: rest.order
+          running: rest.running
+          adapter_names_all: rest.adapter_names_all
+          adapter_names_any: rest.adapter_names_any
+          updated_after: rest.updated_after
+          stopped_after: rest.stopped_after
+          stop_cause: rest.stop_cause
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createrecipe
+        description: Workato Create a Recipe
+        call: developer-recipes.createrecipe
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/recipes/{id}
+      name: api-recipes-id
+      description: REST surface for api-recipes-id.
+      operations:
+      - method: GET
+        name: getrecipe
+        description: Workato Get a Recipe
+        call: developer-recipes.getrecipe
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updaterecipe
+        description: Workato Update a Recipe
+        call: developer-recipes.updaterecipe
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleterecipe
+        description: Workato Delete a Recipe
+        call: developer-recipes.deleterecipe
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/recipes/{id}/copy
+      name: api-recipes-id-copy
+      description: REST surface for api-recipes-id-copy.
+      operations:
+      - method: POST
+        name: copyrecipe
+        description: Workato Copy a Recipe
+        call: developer-recipes.copyrecipe
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/recipes/{id}/start
+      name: api-recipes-id-start
+      description: REST surface for api-recipes-id-start.
+      operations:
+      - method: PUT
+        name: startrecipe
+        description: Workato Start a Recipe
+        call: developer-recipes.startrecipe
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/recipes/{id}/stop
+      name: api-recipes-id-stop
+      description: REST surface for api-recipes-id-stop.
+      operations:
+      - method: PUT
+        name: stoprecipe
+        description: Workato Stop a Recipe
+        call: developer-recipes.stoprecipe
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/recipes/{recipe-id}/health
+      name: api-recipes-recipe-id-health
+      description: REST surface for api-recipes-recipe_id-health.
+      operations:
+      - method: GET
+        name: getrecipehealth
+        description: Workato Get Recipe Health Report
+        call: developer-recipes.getrecipehealth
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: queuerecipehealthanalysis
+        description: Workato Queue Recipe Health Analysis
+        call: developer-recipes.queuerecipehealthanalysis
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/recipes/{recipe-id}/versions
+      name: api-recipes-recipe-id-versions
+      description: REST surface for api-recipes-recipe_id-versions.
+      operations:
+      - method: GET
+        name: listrecipeversions
+        description: Workato List Recipe Versions
+        call: developer-recipes.listrecipeversions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/recipes/{recipe-id}/versions/{id}
+      name: api-recipes-recipe-id-versions-id
+      description: REST surface for api-recipes-recipe_id-versions-id.
+      operations:
+      - method: GET
+        name: getrecipeversion
+        description: Workato Get a Recipe Version
+        call: developer-recipes.getrecipeversion
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-recipes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workato Developer API — Recipes. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: workato-list-recipes
+      description: Workato List Recipes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-recipes.listrecipes
+      with:
+        with_subfolders: tools.with_subfolders
+        order: tools.order
+        running: tools.running
+        adapter_names_all: tools.adapter_names_all
+        adapter_names_any: tools.adapter_names_any
+        updated_after: tools.updated_after
+        stopped_after: tools.stopped_after
+        stop_cause: tools.stop_cause
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-create-recipe
+      description: Workato Create a Recipe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-recipes.createrecipe
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-get-recipe
+      description: Workato Get a Recipe
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-recipes.getrecipe
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-update-recipe
+      description: Workato Update a Recipe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: developer-recipes.updaterecipe
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-delete-recipe
+      description: Workato Delete a Recipe
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: developer-recipes.deleterecipe
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-copy-recipe
+      description: Workato Copy a Recipe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-recipes.copyrecipe
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-start-recipe
+      description: Workato Start a Recipe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: developer-recipes.startrecipe
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-stop-recipe
+      description: Workato Stop a Recipe
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: developer-recipes.stoprecipe
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-get-recipe-health-report
+      description: Workato Get Recipe Health Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-recipes.getrecipehealth
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-queue-recipe-health-analysis
+      description: Workato Queue Recipe Health Analysis
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-recipes.queuerecipehealthanalysis
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-list-recipe-versions
+      description: Workato List Recipe Versions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-recipes.listrecipeversions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-get-recipe-version
+      description: Workato Get a Recipe Version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-recipes.getrecipeversion
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

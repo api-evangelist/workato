@@ -1,0 +1,238 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workato Developer API — Data Tables
+  description: 'Workato Developer API — Data Tables. 6 operations. Lead operation: Workato List Data Tables. Self-contained
+    Naftiko capability covering one Workato business surface.'
+  tags:
+  - Workato
+  - Data Tables
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKATO_API_KEY: WORKATO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: developer-data-tables
+    baseUri: https://www.workato.com
+    description: Workato Developer API — Data Tables business capability. Self-contained, no shared references.
+    resources:
+    - name: api-data_tables
+      path: /api/data_tables
+      operations:
+      - name: listdatatables
+        method: GET
+        description: Workato List Data Tables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of results per page (maximum 100).
+      - name: createdatatable
+        method: POST
+        description: Workato Create a Data Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-data_tables-data_table_id
+      path: /api/data_tables/{data_table_id}
+      operations:
+      - name: getdatatable
+        method: GET
+        description: Workato Get a Data Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatedatatable
+        method: PUT
+        description: Workato Update a Data Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletedatatable
+        method: DELETE
+        description: Workato Delete a Data Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-data_tables-data_table_id-truncate
+      path: /api/data_tables/{data_table_id}/truncate
+      operations:
+      - name: truncatedatatable
+        method: POST
+        description: Workato Truncate a Data Table
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKATO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: developer-data-tables-rest
+    port: 8080
+    description: REST adapter for Workato Developer API — Data Tables. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/data-tables
+      name: api-data-tables
+      description: REST surface for api-data_tables.
+      operations:
+      - method: GET
+        name: listdatatables
+        description: Workato List Data Tables
+        call: developer-data-tables.listdatatables
+        with:
+          per_page: rest.per_page
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdatatable
+        description: Workato Create a Data Table
+        call: developer-data-tables.createdatatable
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/data-tables/{data-table-id}
+      name: api-data-tables-data-table-id
+      description: REST surface for api-data_tables-data_table_id.
+      operations:
+      - method: GET
+        name: getdatatable
+        description: Workato Get a Data Table
+        call: developer-data-tables.getdatatable
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatedatatable
+        description: Workato Update a Data Table
+        call: developer-data-tables.updatedatatable
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedatatable
+        description: Workato Delete a Data Table
+        call: developer-data-tables.deletedatatable
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/data-tables/{data-table-id}/truncate
+      name: api-data-tables-data-table-id-truncate
+      description: REST surface for api-data_tables-data_table_id-truncate.
+      operations:
+      - method: POST
+        name: truncatedatatable
+        description: Workato Truncate a Data Table
+        call: developer-data-tables.truncatedatatable
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: developer-data-tables-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workato Developer API — Data Tables. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: workato-list-data-tables
+      description: Workato List Data Tables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-data-tables.listdatatables
+      with:
+        per_page: tools.per_page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-create-data-table
+      description: Workato Create a Data Table
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-data-tables.createdatatable
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-get-data-table
+      description: Workato Get a Data Table
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: developer-data-tables.getdatatable
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-update-data-table
+      description: Workato Update a Data Table
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: developer-data-tables.updatedatatable
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-delete-data-table
+      description: Workato Delete a Data Table
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: developer-data-tables.deletedatatable
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-truncate-data-table
+      description: Workato Truncate a Data Table
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: developer-data-tables.truncatedatatable
+      outputParameters:
+      - type: object
+        mapping: $.

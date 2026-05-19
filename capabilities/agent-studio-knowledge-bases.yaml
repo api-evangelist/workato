@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Workato Agent Studio API — Knowledge Bases
+  description: 'Workato Agent Studio API — Knowledge Bases. 7 operations. Lead operation: Workato List Knowledge Bases. Self-contained
+    Naftiko capability covering one Workato business surface.'
+  tags:
+  - Workato
+  - Knowledge Bases
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WORKATO_API_KEY: WORKATO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-studio-knowledge-bases
+    baseUri: https://www.workato.com
+    description: Workato Agent Studio API — Knowledge Bases business capability. Self-contained, no shared references.
+    resources:
+    - name: api-agentic-knowledge_bases
+      path: /api/agentic/knowledge_bases
+      operations:
+      - name: listknowledgebases
+        method: GET
+        description: Workato List Knowledge Bases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createknowledgebase
+        method: POST
+        description: Workato Create a Knowledge Base
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-agentic-knowledge_bases-id
+      path: /api/agentic/knowledge_bases/{id}
+      operations:
+      - name: getknowledgebase
+        method: GET
+        description: Workato Get a Knowledge Base
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateknowledgebase
+        method: PUT
+        description: Workato Update a Knowledge Base
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteknowledgebase
+        method: DELETE
+        description: Workato Delete a Knowledge Base
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-agentic-knowledge_bases-id-data_sources
+      path: /api/agentic/knowledge_bases/{id}/data_sources
+      operations:
+      - name: listknowledgebasedatasources
+        method: GET
+        description: Workato List Knowledge Base Data Sources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-agentic-knowledge_bases-id-recipes
+      path: /api/agentic/knowledge_bases/{id}/recipes
+      operations:
+      - name: listknowledgebaserecipes
+        method: GET
+        description: Workato List Recipes in a Knowledge Base
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WORKATO_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: agent-studio-knowledge-bases-rest
+    port: 8080
+    description: REST adapter for Workato Agent Studio API — Knowledge Bases. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/agentic/knowledge-bases
+      name: api-agentic-knowledge-bases
+      description: REST surface for api-agentic-knowledge_bases.
+      operations:
+      - method: GET
+        name: listknowledgebases
+        description: Workato List Knowledge Bases
+        call: agent-studio-knowledge-bases.listknowledgebases
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createknowledgebase
+        description: Workato Create a Knowledge Base
+        call: agent-studio-knowledge-bases.createknowledgebase
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/agentic/knowledge-bases/{id}
+      name: api-agentic-knowledge-bases-id
+      description: REST surface for api-agentic-knowledge_bases-id.
+      operations:
+      - method: GET
+        name: getknowledgebase
+        description: Workato Get a Knowledge Base
+        call: agent-studio-knowledge-bases.getknowledgebase
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateknowledgebase
+        description: Workato Update a Knowledge Base
+        call: agent-studio-knowledge-bases.updateknowledgebase
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteknowledgebase
+        description: Workato Delete a Knowledge Base
+        call: agent-studio-knowledge-bases.deleteknowledgebase
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/agentic/knowledge-bases/{id}/data-sources
+      name: api-agentic-knowledge-bases-id-data-sources
+      description: REST surface for api-agentic-knowledge_bases-id-data_sources.
+      operations:
+      - method: GET
+        name: listknowledgebasedatasources
+        description: Workato List Knowledge Base Data Sources
+        call: agent-studio-knowledge-bases.listknowledgebasedatasources
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/agentic/knowledge-bases/{id}/recipes
+      name: api-agentic-knowledge-bases-id-recipes
+      description: REST surface for api-agentic-knowledge_bases-id-recipes.
+      operations:
+      - method: GET
+        name: listknowledgebaserecipes
+        description: Workato List Recipes in a Knowledge Base
+        call: agent-studio-knowledge-bases.listknowledgebaserecipes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-studio-knowledge-bases-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Workato Agent Studio API — Knowledge Bases. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: workato-list-knowledge-bases
+      description: Workato List Knowledge Bases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-studio-knowledge-bases.listknowledgebases
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-create-knowledge-base
+      description: Workato Create a Knowledge Base
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-studio-knowledge-bases.createknowledgebase
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-get-knowledge-base
+      description: Workato Get a Knowledge Base
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-studio-knowledge-bases.getknowledgebase
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-update-knowledge-base
+      description: Workato Update a Knowledge Base
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: agent-studio-knowledge-bases.updateknowledgebase
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-delete-knowledge-base
+      description: Workato Delete a Knowledge Base
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: agent-studio-knowledge-bases.deleteknowledgebase
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-list-knowledge-base-data
+      description: Workato List Knowledge Base Data Sources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-studio-knowledge-bases.listknowledgebasedatasources
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: workato-list-recipes-knowledge-base
+      description: Workato List Recipes in a Knowledge Base
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-studio-knowledge-bases.listknowledgebaserecipes
+      outputParameters:
+      - type: object
+        mapping: $.
