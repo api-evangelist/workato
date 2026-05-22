@@ -100,7 +100,9 @@ apis:
     url: capabilities/developer-recipes.yaml
   description: Workato is an American multinational software company that provides a cloud-based platform for automation,
     integration, and artificial intelligence orchestration across applications, data, and systems. The company was founded
-    in 2013 and is headquartered in Mountain View, California.
+    in 2013 and is headquartered in Mountain View, California. Workato has been recognized as an 8x Leader and 3x Furthest
+    in Vision in the 2026 Gartner Magic Quadrant for Integration Platform as a Service, and now positions Enterprise MCP,
+    Workato Genies, and Agent Studio as the agentic AI surface built on top of its iPaaS foundation.
 - aid: workato:embedded-api
   name: Workato Embedded Partner API
   tags:
@@ -201,7 +203,9 @@ apis:
   description: The Workato MCP Server API provides endpoints for creating, configuring, and managing Model Context Protocol
     (MCP) servers that expose Workato API collections as tools for AI agents. It supports server creation, tool management,
     user group assignment, and policy configuration. MCP servers generate unique authenticated URLs usable by AI development
-    environments like Claude Desktop and Cursor.
+    environments like Claude Desktop and Cursor. Workato now markets this as Enterprise MCP, the agentic AI surface built
+    on top of the iPaaS, and recently added nine prebuilt MCP servers including Dropbox, Freshdesk, ZoomInfo, Notion,
+    Discord, and Microsoft Teams. MCP is available in the US, EU, AU, JP, and SG data centers.
 name: Workato
 tags:
 - Agentic
@@ -221,10 +225,13 @@ common:
 - url: https://github.com/workato
   name: GitHub Organization
   type: GitHubOrganization
+  description: 67 public repositories including workato-connector-sdk (Ruby), custom_connector_docs, opa-extensions, full-embed-sample,
+    connection-embed-sample, and edge-gateway-helm-charts.
 - url: https://www.workato.com/pricing
-  name: "Workato Pricing Model: Here\x19s How It Works | Workato"
+  name: "Workato Pricing Model: Here's How It Works | Workato"
   type: Pricing
-  description: 'null'
+  description: Contact-sales / quote-based; "Workato offers a customer-first pricing model optimized for predictability and
+    maximum value." No public price table.
 - url: https://www.workato.com/platform/security
   name: Automation Governance and Data Security | Workato
   type: Security
@@ -481,7 +488,9 @@ common:
 - url: https://www.workato.com/product-hub/changelog/
   name: Changelog Archive | Workato Product Hub
   type: ChangeLog
-  description: 'null'
+  description: Recent releases include nine new MCP servers (Dropbox, Freshdesk, ZoomInfo, Notion, Discord, Microsoft Teams,
+    and others), Agent Studio cross-workspace asset sharing, Genies native Slack channel support, Data Tables CSV import,
+    API Edge Gateway for on-prem, Developer Portal SSO, and RBAC 2.0 with environment- and project-scoped roles.
 - url: https://www.workato.com/the-connector/category/customer-stories/americas/
   name: Americas Archives
   type: Customers
@@ -2694,7 +2703,7 @@ common:
 - url: vocabulary/workato-vocabulary.yml
   type: Vocabulary
 created: '2025-06-05T00:00:00.000Z'
-modified: '2026-05-19'
+modified: '2026-05-22'
 position: Consumer
 segments:
 - iPaaS
@@ -2702,7 +2711,9 @@ segments:
 - Workflows
 description: Workato is an enterprise automation and integration platform that enables organizations to integrate their apps
   and automate business workflows without extensive coding. It provides a low-code/no-code interface for creating integrations
-  between cloud applications, on-premises systems, and databases.
+  between cloud applications, on-premises systems, and databases. The platform now layers Enterprise MCP, Workato Genies
+  AI agents, Agent Studio, and Workato Embedded on top of its iPaaS foundation, with API Edge Gateway for on-premises
+  deployment and RBAC 2.0 with environment- and project-scoped roles.
 integrations:
 - name: Salesforce
 - name: Slack
