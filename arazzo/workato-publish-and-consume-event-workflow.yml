@@ -1,0 +1,70 @@
+arazzo: 1.0.1
+info:
+  title: Workato Publish and Verify an Event Message
+  summary: Publish a message to a topic, then long-poll to consume it back.
+  description: >-
+    A round-trip validation of an event topic. The workflow publishes a single
+    message to the topic, captures its message ID, and then consumes from the
+    topic with long polling using that message ID as the cursor — confirming
+    the published message can be read back. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: eventStreamsApi
+  url: ../openapi/workato-event-streams-openapi.yml
+  type: openapi
+workflows:
+- workflowId: publish-and-consume-event
+  summary: Publish a message to a topic and consume it back for verification.
+  description: >-
+    Publishes a single message to an event topic, then long-polls the topic
+    starting after the published message ID to confirm delivery.
+  inputs:
+    type: object
+    required:
+    - topicId
+    - payload
+    properties:
+      topicId:
+        type: integer
+        description: The unique integer identifier of the event topic.
+      payload:
+        type: object
+        description: The message payload conforming to the topic's schema.
+  steps:
+  - stepId: publishMessage
+    description: Publish a single message to the topic and capture its message ID.
+    operationId: publishMessage
+    parameters:
+    - name: topic_id
+      in: path
+      value: $inputs.topicId
+    requestBody:
+      contentType: application/json
+      payload: $inputs.payload
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messageId: $response.body#/message_id
+  - stepId: consumeMessages
+    description: >-
+      Long-poll the topic for up to 30 seconds, reading messages published
+      after the message just sent, to confirm it can be consumed.
+    operationId: consumeMessages
+    parameters:
+    - name: topic_id
+      in: path
+      value: $inputs.topicId
+    requestBody:
+      contentType: application/json
+      payload:
+        batch_size: 50
+        timeout_secs: 30
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messages: $response.body#/messages
+  outputs:
+    publishedMessageId: $steps.publishMessage.outputs.messageId
+    consumedMessages: $steps.consumeMessages.outputs.messages

@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Workato Reset a Data Table's Data and Schema
+  summary: Truncate a data table's records, then update its schema in place.
+  description: >-
+    A maintenance pattern for evolving a data table without destroying it. The
+    workflow reads the existing table, truncates all of its records while
+    preserving the table itself, applies an updated schema, and reads the table
+    back to confirm the new schema is in place. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: reset-data-table-schema
+  summary: Truncate a data table and apply a new schema to it.
+  description: >-
+    Reads a data table, removes all of its records, updates its name and
+    column schema, and confirms the new schema took effect.
+  inputs:
+    type: object
+    required:
+    - dataTableId
+    - name
+    - folderId
+    - schema
+    properties:
+      dataTableId:
+        type: integer
+        description: The unique identifier of the data table to reset.
+      name:
+        type: string
+        description: Display name to apply to the data table.
+      folderId:
+        type: integer
+        description: ID of the folder the data table belongs to.
+      schema:
+        type: array
+        description: The new array of column definitions to apply.
+        items:
+          type: object
+  steps:
+  - stepId: getTable
+    description: Read the data table to confirm it exists before resetting it.
+    operationId: getDataTable
+    parameters:
+    - name: data_table_id
+      in: path
+      value: $inputs.dataTableId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentName: $response.body#/name
+  - stepId: truncateTable
+    description: Remove all records from the data table while preserving its structure.
+    operationId: truncateDataTable
+    parameters:
+    - name: data_table_id
+      in: path
+      value: $inputs.dataTableId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      truncated: $response.body#/success
+  - stepId: updateSchema
+    description: Apply the updated name, folder, and column schema to the table.
+    operationId: updateDataTable
+    parameters:
+    - name: data_table_id
+      in: path
+      value: $inputs.dataTableId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        folder_id: $inputs.folderId
+        schema: $inputs.schema
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedAt: $response.body#/updated_at
+  - stepId: confirmSchema
+    description: Read the data table back to confirm the new schema is in place.
+    operationId: getDataTable
+    parameters:
+    - name: data_table_id
+      in: path
+      value: $inputs.dataTableId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      schema: $response.body#/schema
+  outputs:
+    dataTableId: $inputs.dataTableId
+    truncated: $steps.truncateTable.outputs.truncated
+    schema: $steps.confirmSchema.outputs.schema

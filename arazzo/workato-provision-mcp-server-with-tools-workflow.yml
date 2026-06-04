@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: Workato Provision an MCP Server with Tools
+  summary: Create an MCP server, assign tools, and confirm the tool list.
+  description: >-
+    Stands up a Model Context Protocol server that exposes Workato endpoints to
+    AI development environments. The workflow creates the MCP server, reads it
+    back to capture its authenticated URL, assigns a set of tools to it, and
+    lists the assigned tools to confirm they registered. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: mcpServerApi
+  url: ../openapi/workato-mcp-server-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-mcp-server-with-tools
+  summary: Create an MCP server, assign tools, and verify them.
+  description: >-
+    Creates an MCP server, reads its handle and URL, assigns tools, and lists
+    the resulting tools.
+  inputs:
+    type: object
+    required:
+    - name
+    - folderId
+    - tools
+    properties:
+      name:
+        type: string
+        description: Display name for the MCP server.
+      folderId:
+        type: integer
+        description: ID of the folder to place the MCP server in.
+      authenticationMethod:
+        type: string
+        description: Authentication method to use for the MCP server.
+      tools:
+        type: array
+        description: Array of tools to assign (each with trigger_application and id).
+        items:
+          type: object
+  steps:
+  - stepId: createServer
+    description: Create the MCP server in the target folder.
+    operationId: createMcpServer
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        folder_id: $inputs.folderId
+        authentication_method: $inputs.authenticationMethod
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      handle: $response.body#/handle
+      mcpUrl: $response.body#/mcp_url
+  - stepId: confirmServer
+    description: Read the MCP server back to confirm it exists and capture its URL.
+    operationId: getMcpServer
+    parameters:
+    - name: handle
+      in: path
+      value: $steps.createServer.outputs.handle
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      mcpUrl: $response.body#/mcp_url
+  - stepId: assignTools
+    description: Assign the supplied tools to the MCP server.
+    operationId: assignToolsToMcpServer
+    parameters:
+    - name: handle
+      in: path
+      value: $steps.createServer.outputs.handle
+    requestBody:
+      contentType: application/json
+      payload:
+        tools: $inputs.tools
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tools: $response.body#/items
+  - stepId: listTools
+    description: List the server's tools to confirm the assignment took effect.
+    operationId: listMcpServerTools
+    parameters:
+    - name: mcp_server_handle
+      in: path
+      value: $steps.createServer.outputs.handle
+    - name: per_page
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignedTools: $response.body#/items
+  outputs:
+    handle: $steps.createServer.outputs.handle
+    mcpUrl: $steps.confirmServer.outputs.mcpUrl
+    assignedTools: $steps.listTools.outputs.assignedTools

@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Workato Stop and Delete a Recipe
+  summary: Safely decommission a recipe by stopping it before deletion.
+  description: >-
+    The Workato API requires a recipe to be stopped before it can be deleted.
+    This workflow reads the recipe, branches on its running state to stop it
+    only when needed, confirms it is no longer running, and then permanently
+    deletes it. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: stop-and-delete-recipe
+  summary: Stop a running recipe if needed, then permanently delete it.
+  description: >-
+    Reads a recipe, stops it only when it is currently running, verifies it has
+    stopped, and deletes it from the workspace.
+  inputs:
+    type: object
+    required:
+    - recipeId
+    properties:
+      recipeId:
+        type: integer
+        description: The unique identifier of the recipe to decommission.
+  steps:
+  - stepId: getRecipe
+    description: >-
+      Read the recipe to confirm it exists and determine whether it is
+      currently running before deletion.
+    operationId: getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recipeName: $response.body#/name
+      running: $response.body#/running
+    onSuccess:
+    - name: stopFirst
+      type: goto
+      stepId: stopRecipe
+      criteria:
+      - context: $response.body
+        condition: $.running == true
+        type: jsonpath
+    - name: alreadyStopped
+      type: goto
+      stepId: deleteRecipe
+      criteria:
+      - context: $response.body
+        condition: $.running == false
+        type: jsonpath
+  - stepId: stopRecipe
+    description: Deactivate the recipe so it no longer processes trigger events.
+    operationId: stopRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stopped: $response.body#/success
+  - stepId: confirmStopped
+    description: Re-read the recipe and confirm the running flag is now false.
+    operationId: getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.running == false
+      type: jsonpath
+    outputs:
+      running: $response.body#/running
+  - stepId: deleteRecipe
+    description: Permanently delete the stopped recipe from the workspace.
+    operationId: deleteRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deleted: $response.body#/success
+  outputs:
+    recipeName: $steps.getRecipe.outputs.recipeName
+    deleted: $steps.deleteRecipe.outputs.deleted

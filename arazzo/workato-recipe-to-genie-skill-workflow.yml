@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Workato Turn a Recipe into a Genie Skill
+  summary: Convert an existing recipe into a skill and assign it to an AI agent.
+  description: >-
+    Bridges the Developer API and Agent Studio. The workflow reads a recipe to
+    confirm it exists, converts it into a recipe-backed skill, reads the skill
+    to confirm the conversion, and assigns the new skill to a genie so the
+    agent gains the recipe as an actionable tool. Because two operationIds are
+    drawn from different specs, source-qualified operationIds are used. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+- name: agentStudioApi
+  url: ../openapi/workato-agent-studio-openapi.yml
+  type: openapi
+workflows:
+- workflowId: recipe-to-genie-skill
+  summary: Create a skill from a recipe and assign it to a genie.
+  description: >-
+    Confirms a recipe exists, converts it into a skill, verifies the skill, and
+    assigns the skill to the target genie.
+  inputs:
+    type: object
+    required:
+    - recipeId
+    - genieId
+    properties:
+      recipeId:
+        type: integer
+        description: The recipe to convert into a skill.
+      genieId:
+        type: integer
+        description: The genie that should receive the new skill.
+  steps:
+  - stepId: getRecipe
+    description: Confirm the source recipe exists before converting it into a skill.
+    operationId: $sourceDescriptions.developerApi.getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recipeName: $response.body#/name
+  - stepId: createSkill
+    description: Convert the recipe into a recipe-backed skill.
+    operationId: $sourceDescriptions.agentStudioApi.createSkill
+    requestBody:
+      contentType: application/json
+      payload:
+        recipe_id: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      skillId: $response.body#/id
+      skillName: $response.body#/name
+  - stepId: confirmSkill
+    description: Read the created skill back to confirm the conversion succeeded.
+    operationId: $sourceDescriptions.agentStudioApi.getSkill
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createSkill.outputs.skillId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      backingRecipeId: $response.body#/recipe_id
+  - stepId: assignSkill
+    description: Assign the new skill to the genie as an actionable tool.
+    operationId: $sourceDescriptions.agentStudioApi.assignSkillsToGenie
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.genieId
+    requestBody:
+      contentType: application/json
+      payload:
+        skill_ids:
+        - $steps.createSkill.outputs.skillId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignedSkills: $response.body#/items
+  outputs:
+    skillId: $steps.createSkill.outputs.skillId
+    skillName: $steps.createSkill.outputs.skillName
+    assignedSkills: $steps.assignSkill.outputs.assignedSkills

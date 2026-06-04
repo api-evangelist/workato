@@ -1,0 +1,73 @@
+arazzo: 1.0.1
+info:
+  title: Workato Rotate an MCP Server Token
+  summary: Find an MCP server by name and renew its authentication token.
+  description: >-
+    A credential-hygiene pattern for Model Context Protocol servers. The
+    workflow searches for an MCP server by name, confirms the match by reading
+    it, and renews its authentication token — immediately invalidating the
+    previous one. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: mcpServerApi
+  url: ../openapi/workato-mcp-server-openapi.yml
+  type: openapi
+workflows:
+- workflowId: rotate-mcp-server-token
+  summary: Locate an MCP server by name and rotate its token.
+  description: >-
+    Searches for an MCP server, confirms the matched server, and renews its
+    authentication token.
+  inputs:
+    type: object
+    required:
+    - search
+    properties:
+      search:
+        type: string
+        description: Search term to locate the MCP server by name.
+  steps:
+  - stepId: findServer
+    description: Search for the MCP server by name and select the first match.
+    operationId: listMcpServers
+    parameters:
+    - name: search
+      in: query
+      value: $inputs.search
+    - name: per_page
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.items.length > 0
+      type: jsonpath
+    outputs:
+      handle: $response.body#/items/0/handle
+  - stepId: confirmServer
+    description: Read the matched server to confirm its identity before rotating the token.
+    operationId: getMcpServer
+    parameters:
+    - name: handle
+      in: path
+      value: $steps.findServer.outputs.handle
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      serverName: $response.body#/name
+  - stepId: renewToken
+    description: Renew the MCP server token, invalidating the previous one.
+    operationId: renewMcpServerToken
+    parameters:
+    - name: handle
+      in: path
+      value: $steps.findServer.outputs.handle
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      token: $response.body#/token
+  outputs:
+    handle: $steps.findServer.outputs.handle
+    serverName: $steps.confirmServer.outputs.serverName
+    token: $steps.renewToken.outputs.token

@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Workato Inspect and Roll Back a Recipe Version
+  summary: Review a recipe's version history and restore an earlier version's code.
+  description: >-
+    Supports change management for recipes. The workflow lists a recipe's
+    version history, reads the details of a chosen prior version to extract its
+    code, and updates the recipe to restore that code — effectively rolling the
+    recipe back to a known-good state. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: recipe-version-rollback
+  summary: List recipe versions, fetch one, and restore its code to the recipe.
+  description: >-
+    Reads the version history of a recipe, retrieves a specific version, and
+    updates the recipe with that version's code to perform a rollback.
+  inputs:
+    type: object
+    required:
+    - recipeId
+    - versionId
+    - restoredCode
+    properties:
+      recipeId:
+        type: integer
+        description: The unique identifier of the recipe to roll back.
+      versionId:
+        type: integer
+        description: The version number or ID to inspect and restore.
+      restoredCode:
+        type: string
+        description: >-
+          The JSON-encoded recipe code to write back, typically taken from the
+          inspected version's code.
+  steps:
+  - stepId: listVersions
+    description: List the version history of the recipe to confirm prior versions exist.
+    operationId: listRecipeVersions
+    parameters:
+    - name: recipe_id
+      in: path
+      value: $inputs.recipeId
+    - name: per_page
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.items.length > 0
+      type: jsonpath
+    outputs:
+      latestVersionNo: $response.body#/items/0/version_no
+  - stepId: getVersion
+    description: Read the chosen version's details to capture its snapshot metadata.
+    operationId: getRecipeVersion
+    parameters:
+    - name: recipe_id
+      in: path
+      value: $inputs.recipeId
+    - name: id
+      in: path
+      value: $inputs.versionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      versionNo: $response.body#/version_no
+      comment: $response.body#/comment
+  - stepId: restoreVersion
+    description: >-
+      Update the recipe with the restored code, rolling it back to the chosen
+      version's state.
+    operationId: updateRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    requestBody:
+      contentType: application/json
+      payload:
+        recipe:
+          code: $inputs.restoredCode
+          description: Rolled back via Arazzo recipe-version-rollback workflow.
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recipeId: $response.body#/id
+      updatedAt: $response.body#/updated_at
+  outputs:
+    restoredFromVersion: $steps.getVersion.outputs.versionNo
+    recipeId: $steps.restoreVersion.outputs.recipeId
+    updatedAt: $steps.restoreVersion.outputs.updatedAt

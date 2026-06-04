@@ -1,0 +1,89 @@
+arazzo: 1.0.1
+info:
+  title: Workato Start a Recipe and Verify Its Health
+  summary: Activate a recipe and confirm it is running and healthy.
+  description: >-
+    Brings a recipe online and verifies the outcome. The workflow reads the
+    recipe to confirm it exists, starts it, re-reads it to confirm the running
+    flag flipped, and queues a fresh health analysis so an operator can review
+    the recipe's performance report. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: start-recipe-with-health-check
+  summary: Start a recipe, confirm it is running, and queue a health analysis.
+  description: >-
+    Reads a recipe by ID, starts it, verifies the running state, and queues a
+    new performance analysis whose report can be retrieved later.
+  inputs:
+    type: object
+    required:
+    - recipeId
+    properties:
+      recipeId:
+        type: integer
+        description: The unique identifier of the recipe to start.
+  steps:
+  - stepId: getRecipe
+    description: >-
+      Read the recipe to confirm it exists and capture its current running
+      state before attempting to start it.
+    operationId: getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recipeName: $response.body#/name
+      wasRunning: $response.body#/running
+  - stepId: startRecipe
+    description: Activate the recipe so it begins processing trigger events.
+    operationId: startRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      started: $response.body#/success
+  - stepId: confirmRunning
+    description: >-
+      Re-read the recipe and confirm the running flag is now true after the
+      start request.
+    operationId: getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.running == true
+      type: jsonpath
+    outputs:
+      running: $response.body#/running
+  - stepId: queueHealthAnalysis
+    description: >-
+      Queue a fresh performance analysis for the now-running recipe so a
+      health report becomes available for review.
+    operationId: queueRecipeHealthAnalysis
+    parameters:
+    - name: recipe_id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      queued: $response.body#/success
+  outputs:
+    recipeName: $steps.getRecipe.outputs.recipeName
+    running: $steps.confirmRunning.outputs.running
+    healthAnalysisQueued: $steps.queueHealthAnalysis.outputs.queued

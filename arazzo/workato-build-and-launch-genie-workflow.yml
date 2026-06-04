@@ -1,0 +1,87 @@
+arazzo: 1.0.1
+info:
+  title: Workato Build and Launch an AI Agent
+  summary: Create a genie, confirm it, and start it so it can handle requests.
+  description: >-
+    The end-to-end provisioning path for a Workato Agent Studio AI agent. The
+    workflow creates a genie with its name, instructions, and AI provider,
+    reads it back to confirm the configuration landed, and then starts it so it
+    becomes available to handle requests. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: agentStudioApi
+  url: ../openapi/workato-agent-studio-openapi.yml
+  type: openapi
+workflows:
+- workflowId: build-and-launch-genie
+  summary: Create an AI agent, verify it, and activate it.
+  description: >-
+    Creates a genie with the supplied configuration, reads it back to confirm
+    its state, and starts it so it can begin handling requests.
+  inputs:
+    type: object
+    required:
+    - name
+    - instructions
+    - aiProvider
+    properties:
+      name:
+        type: string
+        description: Display name for the genie.
+      description:
+        type: string
+        description: Human-readable description of the genie's purpose.
+      folderId:
+        type: integer
+        description: ID of the folder to place the genie in.
+      instructions:
+        type: string
+        description: Natural language instructions guiding the genie's behavior.
+      aiProvider:
+        type: string
+        description: The AI model provider to use (e.g. openai, anthropic).
+  steps:
+  - stepId: createGenie
+    description: Create the genie with the supplied name, instructions, and AI provider.
+    operationId: createGenie
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        description: $inputs.description
+        folder_id: $inputs.folderId
+        instructions: $inputs.instructions
+        ai_provider: $inputs.aiProvider
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      genieId: $response.body#/id
+  - stepId: confirmGenie
+    description: Read the created genie back to confirm its configuration and state.
+    operationId: getGenie
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createGenie.outputs.genieId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/state
+      genieName: $response.body#/name
+  - stepId: startGenie
+    description: Activate the genie so it becomes available to handle requests.
+    operationId: startGenie
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createGenie.outputs.genieId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      started: $response.body#/success
+  outputs:
+    genieId: $steps.createGenie.outputs.genieId
+    genieName: $steps.confirmGenie.outputs.genieName
+    started: $steps.startGenie.outputs.started

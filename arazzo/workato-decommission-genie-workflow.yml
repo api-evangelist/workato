@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Workato Decommission an AI Agent
+  summary: Stop a genie if running, then permanently delete it.
+  description: >-
+    Safely retires an AI agent. The workflow reads the genie, branches on its
+    state to stop it only when it is running, confirms it has stopped, and then
+    permanently deletes it from the workspace. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: agentStudioApi
+  url: ../openapi/workato-agent-studio-openapi.yml
+  type: openapi
+workflows:
+- workflowId: decommission-genie
+  summary: Stop a running genie if needed, then delete it.
+  description: >-
+    Reads a genie, stops it only when its state is running, confirms it is
+    stopped, and deletes it.
+  inputs:
+    type: object
+    required:
+    - genieId
+    properties:
+      genieId:
+        type: integer
+        description: The unique identifier of the genie to decommission.
+  steps:
+  - stepId: getGenie
+    description: Read the genie to confirm it exists and determine its current state.
+    operationId: getGenie
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.genieId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      genieName: $response.body#/name
+      state: $response.body#/state
+    onSuccess:
+    - name: stopFirst
+      type: goto
+      stepId: stopGenie
+      criteria:
+      - context: $response.body
+        condition: $.state == "running"
+        type: jsonpath
+    - name: alreadyStopped
+      type: goto
+      stepId: deleteGenie
+      criteria:
+      - context: $response.body
+        condition: $.state == "stopped"
+        type: jsonpath
+  - stepId: stopGenie
+    description: Deactivate the genie so it stops handling new requests.
+    operationId: stopGenie
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.genieId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stopped: $response.body#/success
+  - stepId: confirmStopped
+    description: Re-read the genie and confirm its state is now stopped.
+    operationId: getGenie
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.genieId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.state == "stopped"
+      type: jsonpath
+    outputs:
+      state: $response.body#/state
+  - stepId: deleteGenie
+    description: Permanently delete the genie from the workspace.
+    operationId: deleteGenie
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.genieId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deleted: $response.body#/success
+  outputs:
+    genieName: $steps.getGenie.outputs.genieName
+    deleted: $steps.deleteGenie.outputs.deleted

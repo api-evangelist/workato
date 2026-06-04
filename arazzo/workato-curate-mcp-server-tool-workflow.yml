@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Workato Curate an MCP Server's Tools
+  summary: Refine a tool's description on an MCP server, or remove it.
+  description: >-
+    Improves the tools an AI agent sees through a Model Context Protocol server.
+    The workflow lists the server's tools, branches on whether any exist,
+    updates the first tool's description so agents understand when to use it,
+    and re-lists the tools to confirm the change. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: mcpServerApi
+  url: ../openapi/workato-mcp-server-openapi.yml
+  type: openapi
+workflows:
+- workflowId: curate-mcp-server-tool
+  summary: Update the description of the first tool on an MCP server.
+  description: >-
+    Lists an MCP server's tools, branches when at least one exists, updates the
+    first tool's description, and re-lists the tools to verify.
+  inputs:
+    type: object
+    required:
+    - handle
+    - description
+    properties:
+      handle:
+        type: string
+        description: The handle (slug) of the MCP server whose tool is curated.
+      description:
+        type: string
+        description: The updated tool description explaining when and how to use it.
+  steps:
+  - stepId: listTools
+    description: List the server's tools and select the first one to curate.
+    operationId: listMcpServerTools
+    parameters:
+    - name: mcp_server_handle
+      in: path
+      value: $inputs.handle
+    - name: per_page
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstToolId: $response.body#/items/0/id
+    onSuccess:
+    - name: hasTools
+      type: goto
+      stepId: updateTool
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+    - name: noTools
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.items.length == 0
+        type: jsonpath
+  - stepId: updateTool
+    description: Update the first tool's description to guide AI agent usage.
+    operationId: updateMcpServerTool
+    parameters:
+    - name: mcp_server_handle
+      in: path
+      value: $inputs.handle
+    - name: id
+      in: path
+      value: $steps.listTools.outputs.firstToolId
+    requestBody:
+      contentType: application/json
+      payload:
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedToolId: $response.body#/id
+  - stepId: confirmTools
+    description: Re-list the server's tools to confirm the description was updated.
+    operationId: listMcpServerTools
+    parameters:
+    - name: mcp_server_handle
+      in: path
+      value: $inputs.handle
+    - name: per_page
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tools: $response.body#/items
+  outputs:
+    updatedToolId: $steps.updateTool.outputs.updatedToolId
+    tools: $steps.confirmTools.outputs.tools

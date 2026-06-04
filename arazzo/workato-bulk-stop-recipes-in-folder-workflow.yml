@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Workato Stop the First Running Recipe in a Folder
+  summary: Find running recipes in a folder and stop the first match.
+  description: >-
+    An operational safety pattern for pausing automation in a project folder.
+    The workflow lists the recipes in a folder that are currently running,
+    branches on whether any matched, stops the first running recipe, and
+    re-reads it to confirm it stopped. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: stop-running-recipe-in-folder
+  summary: List running recipes in a folder and stop the first one found.
+  description: >-
+    Lists running recipes scoped to a folder, branches when at least one is
+    returned, stops the first running recipe, and confirms it is stopped.
+  inputs:
+    type: object
+    required:
+    - folderId
+    properties:
+      folderId:
+        type: integer
+        description: The folder ID to scope the running-recipe search to.
+  steps:
+  - stepId: listRunningRecipes
+    description: >-
+      List recipes in the folder that are currently running, including
+      subfolders, returning the most recently updated first.
+    operationId: listRecipes
+    parameters:
+    - name: folder_id
+      in: query
+      value: $inputs.folderId
+    - name: with_subfolders
+      in: query
+      value: true
+    - name: running
+      in: query
+      value: true
+    - name: order
+      in: query
+      value: desc
+    - name: per_page
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstRecipeId: $response.body#/items/0/id
+    onSuccess:
+    - name: foundRunning
+      type: goto
+      stepId: stopRecipe
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+    - name: noneRunning
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.items.length == 0
+        type: jsonpath
+  - stepId: stopRecipe
+    description: Stop the first running recipe returned by the listing.
+    operationId: stopRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $steps.listRunningRecipes.outputs.firstRecipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stopped: $response.body#/success
+  - stepId: confirmStopped
+    description: Re-read the recipe and confirm it is no longer running.
+    operationId: getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $steps.listRunningRecipes.outputs.firstRecipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.running == false
+      type: jsonpath
+    outputs:
+      running: $response.body#/running
+  outputs:
+    stoppedRecipeId: $steps.listRunningRecipes.outputs.firstRecipeId
+    running: $steps.confirmStopped.outputs.running

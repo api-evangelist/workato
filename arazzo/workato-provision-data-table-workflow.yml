@@ -1,0 +1,72 @@
+arazzo: 1.0.1
+info:
+  title: Workato Provision a Data Table
+  summary: Create a data table with a schema and confirm it was provisioned.
+  description: >-
+    Stands up structured storage for recipe automation. The workflow creates a
+    new data table with a defined column schema in a target folder and then
+    reads the table back to confirm its schema landed exactly as requested.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-data-table
+  summary: Create a data table with a schema and verify it exists.
+  description: >-
+    Creates a data table with the supplied name, folder, and column schema,
+    then reads it back to confirm provisioning succeeded.
+  inputs:
+    type: object
+    required:
+    - name
+    - folderId
+    - schema
+    properties:
+      name:
+        type: string
+        description: Display name for the new data table.
+      folderId:
+        type: integer
+        description: ID of the folder to place the data table in.
+      schema:
+        type: array
+        description: Array of column definitions (name, type, optional required).
+        items:
+          type: object
+  steps:
+  - stepId: createTable
+    description: Create the data table with the supplied name, folder, and schema.
+    operationId: createDataTable
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        folder_id: $inputs.folderId
+        schema: $inputs.schema
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tableId: $response.body#/id
+      tableName: $response.body#/name
+  - stepId: confirmTable
+    description: >-
+      Read the created data table back to confirm it exists and its schema was
+      stored.
+    operationId: getDataTable
+    parameters:
+    - name: data_table_id
+      in: path
+      value: $steps.createTable.outputs.tableId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      schema: $response.body#/schema
+      createdAt: $response.body#/created_at
+  outputs:
+    tableId: $steps.createTable.outputs.tableId
+    tableName: $steps.createTable.outputs.tableName
+    schema: $steps.confirmTable.outputs.schema

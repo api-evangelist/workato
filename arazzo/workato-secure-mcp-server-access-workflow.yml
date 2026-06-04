@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: Workato Secure MCP Server Access
+  summary: Apply security policies and grant a user group access to an MCP server.
+  description: >-
+    Locks down a Model Context Protocol server. The workflow confirms the MCP
+    server exists, looks up an available identity provider user group, updates
+    the server's security policies with rate limits and IP controls, and grants
+    the user group access. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: mcpServerApi
+  url: ../openapi/workato-mcp-server-openapi.yml
+  type: openapi
+workflows:
+- workflowId: secure-mcp-server-access
+  summary: Set policies and assign a user group to an MCP server.
+  description: >-
+    Confirms an MCP server, finds a user group, applies security policies, and
+    assigns the group to the server.
+  inputs:
+    type: object
+    required:
+    - handle
+    - requestsPerMinute
+    properties:
+      handle:
+        type: string
+        description: The handle (slug) of the MCP server to secure.
+      requestsPerMinute:
+        type: integer
+        description: Maximum number of requests allowed per minute.
+      ipAllowlist:
+        type: array
+        description: List of IP addresses or CIDR ranges allowed to access the server.
+        items:
+          type: string
+  steps:
+  - stepId: getServer
+    description: Confirm the MCP server exists before changing its policies.
+    operationId: getMcpServer
+    parameters:
+    - name: handle
+      in: path
+      value: $inputs.handle
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      serverName: $response.body#/name
+  - stepId: findUserGroup
+    description: List available user groups and select the first one to grant access.
+    operationId: listMcpUserGroups
+    parameters:
+    - name: per_page
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.items.length > 0
+      type: jsonpath
+    outputs:
+      userGroupId: $response.body#/items/0/id
+  - stepId: updatePolicies
+    description: Apply rate-limit and IP-allowlist security policies to the server.
+    operationId: updateMcpServerPolicies
+    parameters:
+    - name: mcp_server_handle
+      in: path
+      value: $inputs.handle
+    requestBody:
+      contentType: application/json
+      payload:
+        rate_limit:
+          requests_per_minute: $inputs.requestsPerMinute
+        ip_allowlist: $inputs.ipAllowlist
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      appliedRateLimit: $response.body#/rate_limit
+  - stepId: grantAccess
+    description: Grant the selected user group access to the MCP server.
+    operationId: assignUserGroupsToMcpServer
+    parameters:
+    - name: handle
+      in: path
+      value: $inputs.handle
+    requestBody:
+      contentType: application/json
+      payload:
+        user_group_ids:
+        - $steps.findUserGroup.outputs.userGroupId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userGroups: $response.body#/items
+  outputs:
+    serverName: $steps.getServer.outputs.serverName
+    appliedRateLimit: $steps.updatePolicies.outputs.appliedRateLimit
+    userGroups: $steps.grantAccess.outputs.userGroups

@@ -1,0 +1,80 @@
+arazzo: 1.0.1
+info:
+  title: Workato Clone and Activate a Recipe
+  summary: Duplicate an existing recipe and bring the copy online.
+  description: >-
+    A common promotion pattern: take a proven recipe, make a copy of it, and
+    activate the copy. The workflow reads the source recipe, copies it, reads
+    the new copy to confirm it landed, and starts the copy so it begins
+    processing events. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: developerApi
+  url: ../openapi/workato-developer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: clone-and-activate-recipe
+  summary: Copy a source recipe and start the resulting duplicate.
+  description: >-
+    Reads a source recipe, creates a duplicate of it, reads the duplicate to
+    confirm its identity, and activates the duplicate.
+  inputs:
+    type: object
+    required:
+    - recipeId
+    properties:
+      recipeId:
+        type: integer
+        description: The unique identifier of the source recipe to clone.
+  steps:
+  - stepId: getSourceRecipe
+    description: Read the source recipe to confirm it exists before copying it.
+    operationId: getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sourceName: $response.body#/name
+      folderId: $response.body#/folder_id
+  - stepId: copyRecipe
+    description: Create a duplicate of the source recipe in the workspace.
+    operationId: copyRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.recipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      newRecipeId: $response.body#/id
+      newRecipeName: $response.body#/name
+  - stepId: getCopy
+    description: Read the newly created copy to confirm it was created correctly.
+    operationId: getRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $steps.copyRecipe.outputs.newRecipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      running: $response.body#/running
+  - stepId: startCopy
+    description: Activate the copied recipe so it begins processing trigger events.
+    operationId: startRecipe
+    parameters:
+    - name: id
+      in: path
+      value: $steps.copyRecipe.outputs.newRecipeId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      started: $response.body#/success
+  outputs:
+    sourceName: $steps.getSourceRecipe.outputs.sourceName
+    newRecipeId: $steps.copyRecipe.outputs.newRecipeId
+    started: $steps.startCopy.outputs.started

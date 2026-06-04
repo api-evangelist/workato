@@ -1,0 +1,79 @@
+arazzo: 1.0.1
+info:
+  title: Workato Batch Publish Events and Drain the Topic
+  summary: Publish a batch of messages to a topic, then consume them back.
+  description: >-
+    Loads many events at once and verifies they landed. The workflow publishes
+    a batch of up to 100 message payloads to an event topic, checks the
+    response for partial failures, and then consumes from the topic with long
+    polling to read the batch back. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: eventStreamsApi
+  url: ../openapi/workato-event-streams-openapi.yml
+  type: openapi
+workflows:
+- workflowId: batch-publish-events
+  summary: Batch-publish messages to a topic and consume them back.
+  description: >-
+    Publishes an array of message payloads to a topic, confirms there were no
+    partial failures, and consumes a batch back from the topic.
+  inputs:
+    type: object
+    required:
+    - topicId
+    - payloads
+    properties:
+      topicId:
+        type: integer
+        description: The unique integer identifier of the event topic.
+      payloads:
+        type: array
+        description: Array of message payloads to publish (maximum 100 items).
+        maxItems: 100
+        items:
+          type: object
+  steps:
+  - stepId: batchPublish
+    description: Publish the batch of message payloads to the topic in a single request.
+    operationId: publishBatchMessages
+    parameters:
+    - name: topic_id
+      in: path
+      value: $inputs.topicId
+    requestBody:
+      contentType: application/json
+      payload:
+        payloads: $inputs.payloads
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.is_partial_error == false
+      type: jsonpath
+    outputs:
+      messageIds: $response.body#/message_ids
+      isPartialError: $response.body#/is_partial_error
+  - stepId: consumeBatch
+    description: >-
+      Long-poll the topic for up to 60 seconds and read up to 50 messages back
+      to confirm the batch was delivered.
+    operationId: consumeMessages
+    parameters:
+    - name: topic_id
+      in: path
+      value: $inputs.topicId
+    requestBody:
+      contentType: application/json
+      payload:
+        batch_size: 50
+        timeout_secs: 60
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messages: $response.body#/messages
+  outputs:
+    isPartialError: $steps.batchPublish.outputs.isPartialError
+    messageIds: $steps.batchPublish.outputs.messageIds
+    consumedMessages: $steps.consumeBatch.outputs.messages

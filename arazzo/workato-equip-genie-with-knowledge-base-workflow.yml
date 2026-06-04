@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Workato Equip a Genie with a Knowledge Base
+  summary: Create a knowledge base and attach it to an AI agent for context.
+  description: >-
+    Gives an AI agent contextual grounding data. The workflow creates a
+    knowledge base with its data sources, reads it back to confirm provisioning,
+    lists its configured data sources, and assigns the knowledge base to a genie
+    so the agent can draw on it. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: agentStudioApi
+  url: ../openapi/workato-agent-studio-openapi.yml
+  type: openapi
+workflows:
+- workflowId: equip-genie-with-knowledge-base
+  summary: Create a knowledge base and assign it to a genie.
+  description: >-
+    Creates a knowledge base, confirms it, lists its data sources, and assigns
+    it to the target genie.
+  inputs:
+    type: object
+    required:
+    - name
+    - sourceType
+    - genieId
+    properties:
+      name:
+        type: string
+        description: Display name for the knowledge base.
+      description:
+        type: string
+        description: Human-readable description of the knowledge base's content.
+      folderId:
+        type: integer
+        description: ID of the folder to place the knowledge base in.
+      sourceType:
+        type: string
+        description: The type of data sources used in this knowledge base.
+      dataSources:
+        type: array
+        description: List of data source configurations for the knowledge base.
+        items:
+          type: object
+      genieId:
+        type: integer
+        description: The genie that should receive the knowledge base.
+  steps:
+  - stepId: createKnowledgeBase
+    description: Create the knowledge base with the supplied name, source type, and data sources.
+    operationId: createKnowledgeBase
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        description: $inputs.description
+        folder_id: $inputs.folderId
+        source_type: $inputs.sourceType
+        data_sources: $inputs.dataSources
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      knowledgeBaseId: $response.body#/id
+      kbName: $response.body#/name
+  - stepId: confirmKnowledgeBase
+    description: Read the knowledge base back to confirm it was provisioned.
+    operationId: getKnowledgeBase
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createKnowledgeBase.outputs.knowledgeBaseId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sourceType: $response.body#/source_type
+  - stepId: listDataSources
+    description: List the configured data sources to confirm they were registered.
+    operationId: listKnowledgeBaseDataSources
+    parameters:
+    - name: id
+      in: path
+      value: $steps.createKnowledgeBase.outputs.knowledgeBaseId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      dataSources: $response.body#/data_sources
+  - stepId: assignKnowledgeBase
+    description: Assign the knowledge base to the genie for contextual grounding.
+    operationId: assignKnowledgeBasesToGenie
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.genieId
+    requestBody:
+      contentType: application/json
+      payload:
+        knowledge_base_ids:
+        - $steps.createKnowledgeBase.outputs.knowledgeBaseId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      assignedKnowledgeBases: $response.body#/items
+  outputs:
+    knowledgeBaseId: $steps.createKnowledgeBase.outputs.knowledgeBaseId
+    kbName: $steps.createKnowledgeBase.outputs.kbName
+    assignedKnowledgeBases: $steps.assignKnowledgeBase.outputs.assignedKnowledgeBases
