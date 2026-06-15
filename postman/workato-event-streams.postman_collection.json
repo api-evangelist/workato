@@ -1,0 +1,1207 @@
+{
+  "info": {
+    "_postman_id": "8276d592-925b-4ba9-a11d-7c9809c51d77",
+    "name": "Workato Event Streams Public API",
+    "description": "The Workato Event Streams Public API enables HTTP-based clients to publish and consume messages from event topics. It supports single message publish, batch publish of up to 100 messages, and message consumption with optional long polling. This API uses region-specific base URLs and is separate from the Developer API's event streams management endpoints. Rate limit is 60 requests per minute with a maximum payload size of 1 MB.\n\nContact Support:\n Name: Workato Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T13:07:24.000Z",
+    "updatedAt": "2026-06-05T13:07:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8276d592-925b-4ba9-a11d-7c9809c51d77"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "topics",
+              "item": [
+                {
+                  "name": "{topic_id}",
+                  "item": [
+                    {
+                      "name": "consume",
+                      "item": [
+                        {
+                          "name": "Workato Consume Messages from a Topic",
+                          "id": "ed89d38d-8b8b-4978-947d-ea6c2940ef88",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"after_message_id\": \"<string>\",\n  \"since_time\": \"<dateTime>\",\n  \"batch_size\": \"<integer>\",\n  \"timeout_secs\": 0\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/topics/:topic_id/consume",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "topics",
+                                ":topic_id",
+                                "consume"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5d97316d-163a-4314-a09c-6e882e5b57cc",
+                                  "key": "topic_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Unique integer identifier of the event topic."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves messages from an event topic. Supports filtering by message ID or timestamp, configurable batch sizes up to 50, and long polling with timeouts up to 60 seconds. Returns at most 50 messages per request."
+                          },
+                          "response": [
+                            {
+                              "id": "438e5396-a137-4014-8aea-aa713bec0fb1",
+                              "name": "A batch of messages from the topic.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"after_message_id\": \"<string>\",\n  \"since_time\": \"<dateTime>\",\n  \"batch_size\": \"<integer>\",\n  \"timeout_secs\": 0\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/consume",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "consume"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"messages\": [\n    {\n      \"message_id\": \"<string>\",\n      \"payload\": {\n        \"laborum_cc\": 39261069\n      },\n      \"time\": \"<dateTime>\"\n    },\n    {\n      \"message_id\": \"<string>\",\n      \"payload\": {\n        \"et_870\": false\n      },\n      \"time\": \"<dateTime>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-438e5396-a137-4014-8aea-aa713bec0fb1"
+                            },
+                            {
+                              "id": "1ca89443-0968-43bf-88dc-6f4b23f02717",
+                              "name": "Authentication token is missing or invalid.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"after_message_id\": \"<string>\",\n  \"since_time\": \"<dateTime>\",\n  \"batch_size\": \"<integer>\",\n  \"timeout_secs\": 0\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/consume",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "consume"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-1ca89443-0968-43bf-88dc-6f4b23f02717"
+                            },
+                            {
+                              "id": "14ffaee5-0179-4533-8901-930f55b3a7c8",
+                              "name": "The specified topic was not found.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"after_message_id\": \"<string>\",\n  \"since_time\": \"<dateTime>\",\n  \"batch_size\": \"<integer>\",\n  \"timeout_secs\": 0\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/consume",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "consume"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-14ffaee5-0179-4533-8901-930f55b3a7c8"
+                            },
+                            {
+                              "id": "ffd0ae07-a60a-4d02-bcca-180cfe48f1fc",
+                              "name": "Rate limit of 60 requests per minute has been exceeded.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"after_message_id\": \"<string>\",\n  \"since_time\": \"<dateTime>\",\n  \"batch_size\": \"<integer>\",\n  \"timeout_secs\": 0\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/consume",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "consume"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-ffd0ae07-a60a-4d02-bcca-180cfe48f1fc"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T13:07:25.000Z",
+                          "updatedAt": "2026-06-05T13:07:25.000Z",
+                          "uid": "35240-ed89d38d-8b8b-4978-947d-ea6c2940ef88"
+                        }
+                      ],
+                      "id": "0a7cc074-403f-413f-9e29-ce904ad67e96",
+                      "createdAt": "2026-06-05T13:07:25.000Z",
+                      "updatedAt": "2026-06-05T13:07:25.000Z",
+                      "uid": "35240-0a7cc074-403f-413f-9e29-ce904ad67e96"
+                    },
+                    {
+                      "name": "publish",
+                      "item": [
+                        {
+                          "name": "Workato Publish a Message to a Topic",
+                          "id": "1988fbe0-782c-4194-b6e4-4411462eb975",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"eiusmod2b7\": -87171550.25800873\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/topics/:topic_id/publish",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "topics",
+                                ":topic_id",
+                                "publish"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "db2eb8d0-a2be-4668-9c31-ea9bc1a1396b",
+                                  "key": "topic_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Unique integer identifier of the event topic."
+                                }
+                              ]
+                            },
+                            "description": "Publishes a single message to an event topic. The message payload must conform to the topic's defined schema. Maximum payload size is 1 MB."
+                          },
+                          "response": [
+                            {
+                              "id": "7da2e315-e8e3-4510-b897-011d3963658b",
+                              "name": "The published message ID.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"eiusmod2b7\": -87171550.25800873\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-7da2e315-e8e3-4510-b897-011d3963658b"
+                            },
+                            {
+                              "id": "62678f5d-a021-435d-b652-d9fd045ab411",
+                              "name": "The request payload is invalid or does not match the topic schema.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"eiusmod2b7\": -87171550.25800873\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-62678f5d-a021-435d-b652-d9fd045ab411"
+                            },
+                            {
+                              "id": "cd712caf-4c3c-4d0d-8f7d-c46a578edbab",
+                              "name": "Authentication token is missing or invalid.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"eiusmod2b7\": -87171550.25800873\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-cd712caf-4c3c-4d0d-8f7d-c46a578edbab"
+                            },
+                            {
+                              "id": "cb698527-b9be-41fe-a6af-d5cd66efc13b",
+                              "name": "The specified topic was not found.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"eiusmod2b7\": -87171550.25800873\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-cb698527-b9be-41fe-a6af-d5cd66efc13b"
+                            },
+                            {
+                              "id": "ec2cca71-0748-4f20-9d15-59fc25be5e05",
+                              "name": "Rate limit of 60 requests per minute has been exceeded.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"eiusmod2b7\": -87171550.25800873\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/topics/:topic_id/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "topics",
+                                    ":topic_id",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "topic_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-ec2cca71-0748-4f20-9d15-59fc25be5e05"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T13:07:25.000Z",
+                          "updatedAt": "2026-06-05T13:07:25.000Z",
+                          "uid": "35240-1988fbe0-782c-4194-b6e4-4411462eb975"
+                        }
+                      ],
+                      "id": "50be36f2-39fc-41aa-bcd4-e13f2d5f02d5",
+                      "createdAt": "2026-06-05T13:07:25.000Z",
+                      "updatedAt": "2026-06-05T13:07:25.000Z",
+                      "uid": "35240-50be36f2-39fc-41aa-bcd4-e13f2d5f02d5"
+                    }
+                  ],
+                  "id": "31523122-d13c-4796-867e-849e38f98ffd",
+                  "createdAt": "2026-06-05T13:07:25.000Z",
+                  "updatedAt": "2026-06-05T13:07:25.000Z",
+                  "uid": "35240-31523122-d13c-4796-867e-849e38f98ffd"
+                }
+              ],
+              "id": "ffe3ad13-f92c-4212-ba93-65c522fea9aa",
+              "createdAt": "2026-06-05T13:07:25.000Z",
+              "updatedAt": "2026-06-05T13:07:25.000Z",
+              "uid": "35240-ffe3ad13-f92c-4212-ba93-65c522fea9aa"
+            },
+            {
+              "name": "batch",
+              "item": [
+                {
+                  "name": "topics",
+                  "item": [
+                    {
+                      "name": "{topic_id}",
+                      "item": [
+                        {
+                          "name": "publish",
+                          "item": [
+                            {
+                              "name": "Workato Publish a Batch of Messages to a Topic",
+                              "id": "3db833c3-e0eb-4a77-9117-2bf86ef91607",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"payloads\": [\n    {\n      \"esse_045\": \"aute\",\n      \"pariatur195\": false\n    },\n    {\n      \"do6a3\": 50866574.00139111,\n      \"sed_8\": false,\n      \"ipsum_6\": false\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/batch/topics/:topic_id/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "batch",
+                                    "topics",
+                                    ":topic_id",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a9b8b3dd-78a9-4ed0-bd36-510c207380a4",
+                                      "key": "topic_id",
+                                      "value": "<integer>",
+                                      "description": "(Required) Unique integer identifier of the event topic."
+                                    }
+                                  ]
+                                },
+                                "description": "Publishes multiple messages to an event topic in a single request. Supports up to 100 messages per batch. Each payload must conform to the topic's schema. Partial failures are indicated in the response."
+                              },
+                              "response": [
+                                {
+                                  "id": "18dad00e-21b1-40b2-9fed-2b5c8175f286",
+                                  "name": "Batch publish results with individual message IDs.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"payloads\": [\n    {\n      \"esse_045\": \"aute\",\n      \"pariatur195\": false\n    },\n    {\n      \"do6a3\": 50866574.00139111,\n      \"sed_8\": false,\n      \"ipsum_6\": false\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/batch/topics/:topic_id/publish",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "batch",
+                                        "topics",
+                                        ":topic_id",
+                                        "publish"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "topic_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"is_partial_error\": \"<boolean>\",\n  \"message_ids\": {\n    \"esse_c2\": {\n      \"message_id\": \"<string>\",\n      \"result\": \"<string>\"\n    },\n    \"eiusmod_945\": {\n      \"message_id\": \"<string>\",\n      \"result\": \"<string>\"\n    }\n  }\n}",
+                                  "createdAt": "2026-06-05T13:07:25.000Z",
+                                  "updatedAt": "2026-06-05T13:07:25.000Z",
+                                  "uid": "35240-18dad00e-21b1-40b2-9fed-2b5c8175f286"
+                                },
+                                {
+                                  "id": "674041fc-3376-4719-a199-1d652d13d955",
+                                  "name": "The request payload is invalid or does not match the topic schema.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"payloads\": [\n    {\n      \"esse_045\": \"aute\",\n      \"pariatur195\": false\n    },\n    {\n      \"do6a3\": 50866574.00139111,\n      \"sed_8\": false,\n      \"ipsum_6\": false\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/batch/topics/:topic_id/publish",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "batch",
+                                        "topics",
+                                        ":topic_id",
+                                        "publish"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "topic_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T13:07:25.000Z",
+                                  "updatedAt": "2026-06-05T13:07:25.000Z",
+                                  "uid": "35240-674041fc-3376-4719-a199-1d652d13d955"
+                                },
+                                {
+                                  "id": "f3765e69-e3b4-4d12-9952-2b330637d72e",
+                                  "name": "Authentication token is missing or invalid.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"payloads\": [\n    {\n      \"esse_045\": \"aute\",\n      \"pariatur195\": false\n    },\n    {\n      \"do6a3\": 50866574.00139111,\n      \"sed_8\": false,\n      \"ipsum_6\": false\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/batch/topics/:topic_id/publish",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "batch",
+                                        "topics",
+                                        ":topic_id",
+                                        "publish"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "topic_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T13:07:25.000Z",
+                                  "updatedAt": "2026-06-05T13:07:25.000Z",
+                                  "uid": "35240-f3765e69-e3b4-4d12-9952-2b330637d72e"
+                                },
+                                {
+                                  "id": "aafebe56-9e9d-473b-98d7-af9bb128dbfb",
+                                  "name": "The specified topic was not found.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"payloads\": [\n    {\n      \"esse_045\": \"aute\",\n      \"pariatur195\": false\n    },\n    {\n      \"do6a3\": 50866574.00139111,\n      \"sed_8\": false,\n      \"ipsum_6\": false\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/batch/topics/:topic_id/publish",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "batch",
+                                        "topics",
+                                        ":topic_id",
+                                        "publish"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "topic_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T13:07:25.000Z",
+                                  "updatedAt": "2026-06-05T13:07:25.000Z",
+                                  "uid": "35240-aafebe56-9e9d-473b-98d7-af9bb128dbfb"
+                                },
+                                {
+                                  "id": "44bde6c3-59bd-435a-9d9b-43ed4d00b6a1",
+                                  "name": "Rate limit of 60 requests per minute has been exceeded.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"payloads\": [\n    {\n      \"esse_045\": \"aute\",\n      \"pariatur195\": false\n    },\n    {\n      \"do6a3\": 50866574.00139111,\n      \"sed_8\": false,\n      \"ipsum_6\": false\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/batch/topics/:topic_id/publish",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "batch",
+                                        "topics",
+                                        ":topic_id",
+                                        "publish"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "topic_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Too Many Requests",
+                                  "code": 429,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                                  "createdAt": "2026-06-05T13:07:25.000Z",
+                                  "updatedAt": "2026-06-05T13:07:25.000Z",
+                                  "uid": "35240-44bde6c3-59bd-435a-9d9b-43ed4d00b6a1"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T13:07:25.000Z",
+                              "updatedAt": "2026-06-05T13:07:25.000Z",
+                              "uid": "35240-3db833c3-e0eb-4a77-9117-2bf86ef91607"
+                            }
+                          ],
+                          "id": "0a9f34ed-1d30-45c7-a6de-2aa85a45ef0b",
+                          "createdAt": "2026-06-05T13:07:25.000Z",
+                          "updatedAt": "2026-06-05T13:07:25.000Z",
+                          "uid": "35240-0a9f34ed-1d30-45c7-a6de-2aa85a45ef0b"
+                        }
+                      ],
+                      "id": "621d30a0-adc2-4fc0-ac4a-d00f02e75f35",
+                      "createdAt": "2026-06-05T13:07:25.000Z",
+                      "updatedAt": "2026-06-05T13:07:25.000Z",
+                      "uid": "35240-621d30a0-adc2-4fc0-ac4a-d00f02e75f35"
+                    }
+                  ],
+                  "id": "502a69a1-de6a-4d65-8dcd-acb9c1d7d311",
+                  "createdAt": "2026-06-05T13:07:25.000Z",
+                  "updatedAt": "2026-06-05T13:07:25.000Z",
+                  "uid": "35240-502a69a1-de6a-4d65-8dcd-acb9c1d7d311"
+                }
+              ],
+              "id": "8153122a-a4a8-4b3b-86d1-7ab7b1798809",
+              "createdAt": "2026-06-05T13:07:25.000Z",
+              "updatedAt": "2026-06-05T13:07:25.000Z",
+              "uid": "35240-8153122a-a4a8-4b3b-86d1-7ab7b1798809"
+            }
+          ],
+          "id": "bc9b608b-0a76-4527-8d08-5b405635d7d0",
+          "createdAt": "2026-06-05T13:07:25.000Z",
+          "updatedAt": "2026-06-05T13:07:25.000Z",
+          "uid": "35240-bc9b608b-0a76-4527-8d08-5b405635d7d0"
+        }
+      ],
+      "id": "25b06805-029e-4d50-875e-b416382d467d",
+      "createdAt": "2026-06-05T13:07:25.000Z",
+      "updatedAt": "2026-06-05T13:07:25.000Z",
+      "uid": "35240-25b06805-029e-4d50-875e-b416382d467d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://event-streams.workato.com"
+    }
+  ]
+}

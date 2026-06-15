@@ -1,0 +1,3993 @@
+{
+  "info": {
+    "_postman_id": "060fe43a-1734-411a-9bda-79f4ab0c057f",
+    "name": "Workato Developer API",
+    "description": "The Workato Developer API provides programmatic access to manage all aspects of a Workato workspace, including recipes, connections, jobs, folders, data tables, and more. It enables automation of workspace management, CI/CD pipeline integration, environment promotion, and operational monitoring. Authentication uses Bearer tokens from API clients configured in the Workato platform. Rate limits vary by endpoint: 1 req/sec for recipe creation, 20 req/min for health analysis, and 60 req/min for all other operations.\n\nContact Support:\n Name: Workato Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T13:07:07.000Z",
+    "updatedAt": "2026-06-05T13:07:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-060fe43a-1734-411a-9bda-79f4ab0c057f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "recipes",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "start",
+                  "item": [
+                    {
+                      "name": "Workato Start a Recipe",
+                      "id": "e1716558-12d4-4d7f-a9f7-faaa6bc58b8b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id",
+                            "start"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ca477182-2614-4cc8-80f0-2425d6829906",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) Unique identifier of the recipe."
+                            }
+                          ]
+                        },
+                        "description": "Activates a recipe, enabling it to process trigger events."
+                      },
+                      "response": [
+                        {
+                          "id": "ef293225-4a32-4013-9525-1aa0c88e13c5",
+                          "name": "Start confirmation.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/start",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "start"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-ef293225-4a32-4013-9525-1aa0c88e13c5"
+                        },
+                        {
+                          "id": "e77ab83d-6df6-48c8-a58d-08a7c0d956b1",
+                          "name": "Authentication token is missing or invalid.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/start",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "start"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-e77ab83d-6df6-48c8-a58d-08a7c0d956b1"
+                        },
+                        {
+                          "id": "9730656c-44c5-4d3b-9e1c-4035a9c41c02",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/start",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "start"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-9730656c-44c5-4d3b-9e1c-4035a9c41c02"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-e1716558-12d4-4d7f-a9f7-faaa6bc58b8b"
+                    }
+                  ],
+                  "id": "6957d806-b986-41c4-be7e-fe264cbe2d05",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-6957d806-b986-41c4-be7e-fe264cbe2d05"
+                },
+                {
+                  "name": "stop",
+                  "item": [
+                    {
+                      "name": "Workato Stop a Recipe",
+                      "id": "a043037a-6b18-4f98-be47-c1171c66913d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "id": "dfc49588-4267-45c6-ab2e-6dfd9457526c",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) Unique identifier of the recipe."
+                            }
+                          ]
+                        },
+                        "description": "Deactivates a recipe, preventing it from processing new trigger events."
+                      },
+                      "response": [
+                        {
+                          "id": "50267ff2-90cc-41b6-a0ba-2ab073970ff7",
+                          "name": "Stop confirmation.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-50267ff2-90cc-41b6-a0ba-2ab073970ff7"
+                        },
+                        {
+                          "id": "cfb47bdb-49ce-4b8b-bafc-a20a0a4af837",
+                          "name": "Authentication token is missing or invalid.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-cfb47bdb-49ce-4b8b-bafc-a20a0a4af837"
+                        },
+                        {
+                          "id": "5a9767bd-6444-410f-bbb3-4c3a91e834b5",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-5a9767bd-6444-410f-bbb3-4c3a91e834b5"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-a043037a-6b18-4f98-be47-c1171c66913d"
+                    }
+                  ],
+                  "id": "bac75814-c225-464a-9463-444bedca10fd",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-bac75814-c225-464a-9463-444bedca10fd"
+                },
+                {
+                  "name": "copy",
+                  "item": [
+                    {
+                      "name": "Workato Copy a Recipe",
+                      "id": "1c692962-c4ac-4e52-b4d3-0dabd71ddd9a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id/copy",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id",
+                            "copy"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3a2ea5ce-0395-4da2-adc1-c1a5bd365e45",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) Unique identifier of the recipe."
+                            }
+                          ]
+                        },
+                        "description": "Creates a duplicate of an existing recipe."
+                      },
+                      "response": [
+                        {
+                          "id": "90e034d6-3636-417d-beb8-be43a28e1035",
+                          "name": "The copied recipe.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/copy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "copy"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"running\": \"<boolean>\",\n  \"trigger_application\": \"<string>\",\n  \"action_applications\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\",\n  \"stop_cause\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-90e034d6-3636-417d-beb8-be43a28e1035"
+                        },
+                        {
+                          "id": "f9259d00-5445-42ff-857c-3b2d69bda79d",
+                          "name": "Authentication token is missing or invalid.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/copy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "copy"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-f9259d00-5445-42ff-857c-3b2d69bda79d"
+                        },
+                        {
+                          "id": "e7ce04db-e55a-473e-a6ef-116ef2393afc",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:id/copy",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":id",
+                                "copy"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-e7ce04db-e55a-473e-a6ef-116ef2393afc"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-1c692962-c4ac-4e52-b4d3-0dabd71ddd9a"
+                    }
+                  ],
+                  "id": "79ba38c9-72e0-4380-9c7d-1041b8e76d7d",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-79ba38c9-72e0-4380-9c7d-1041b8e76d7d"
+                },
+                {
+                  "name": "Workato Get a Recipe",
+                  "id": "18ae0c2a-2941-4923-9876-11e08da70710",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5d772ec6-f882-435e-ad5f-f1cd2ab2d78e",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique identifier of the recipe."
+                        }
+                      ]
+                    },
+                    "description": "Returns the details of a specific recipe by its ID."
+                  },
+                  "response": [
+                    {
+                      "id": "86cb1273-f595-4e66-830b-d25849f0a266",
+                      "name": "The recipe details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"running\": \"<boolean>\",\n  \"trigger_application\": \"<string>\",\n  \"action_applications\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\",\n  \"stop_cause\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-86cb1273-f595-4e66-830b-d25849f0a266"
+                    },
+                    {
+                      "id": "cc23d134-3f43-48af-b5c8-62a49113e3d4",
+                      "name": "Authentication token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-cc23d134-3f43-48af-b5c8-62a49113e3d4"
+                    },
+                    {
+                      "id": "52fbd509-0f56-4199-81db-f56cf56145ee",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-52fbd509-0f56-4199-81db-f56cf56145ee"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-18ae0c2a-2941-4923-9876-11e08da70710"
+                },
+                {
+                  "name": "Workato Update a Recipe",
+                  "id": "efb60efd-61bc-401b-922b-b578d15d3a93",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "6419585c-e7d7-451a-9b6e-dd69f093bbaa",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique identifier of the recipe."
+                        }
+                      ]
+                    },
+                    "description": "Updates an existing recipe's name, code, config, or description."
+                  },
+                  "response": [
+                    {
+                      "id": "7b6a4e5b-eb26-4554-8a6e-ebd9f5d57db8",
+                      "name": "The updated recipe.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"running\": \"<boolean>\",\n  \"trigger_application\": \"<string>\",\n  \"action_applications\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\",\n  \"stop_cause\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-7b6a4e5b-eb26-4554-8a6e-ebd9f5d57db8"
+                    },
+                    {
+                      "id": "b899b082-915d-43f0-9835-287fdaba4fc3",
+                      "name": "The request body is invalid or missing required fields.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-b899b082-915d-43f0-9835-287fdaba4fc3"
+                    },
+                    {
+                      "id": "ac8541f1-703e-4b64-be98-456b50195c25",
+                      "name": "Authentication token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-ac8541f1-703e-4b64-be98-456b50195c25"
+                    },
+                    {
+                      "id": "d88e6ad3-f0c9-46a1-9024-52ee9ab7a93a",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-d88e6ad3-f0c9-46a1-9024-52ee9ab7a93a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-efb60efd-61bc-401b-922b-b578d15d3a93"
+                },
+                {
+                  "name": "Workato Delete a Recipe",
+                  "id": "2eb21f17-17ab-4c23-bc37-bdc7987ff9cc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0b8da756-48bb-470a-b272-4c157d50f0a3",
+                          "key": "id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique identifier of the recipe."
+                        }
+                      ]
+                    },
+                    "description": "Permanently deletes a recipe from the workspace. The recipe must be stopped first."
+                  },
+                  "response": [
+                    {
+                      "id": "240a12f1-3304-4c4e-aff8-8861eb8c332b",
+                      "name": "Deletion confirmation.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-240a12f1-3304-4c4e-aff8-8861eb8c332b"
+                    },
+                    {
+                      "id": "c1ebab57-bb3b-4ecb-ab9a-0e34258e4522",
+                      "name": "Authentication token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-c1ebab57-bb3b-4ecb-ab9a-0e34258e4522"
+                    },
+                    {
+                      "id": "62f18417-59e2-41bc-8ee7-fbffa0c9e946",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-62f18417-59e2-41bc-8ee7-fbffa0c9e946"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-2eb21f17-17ab-4c23-bc37-bdc7987ff9cc"
+                }
+              ],
+              "id": "195016ad-b7d6-41d7-b56d-34c074246ad4",
+              "createdAt": "2026-06-05T13:07:07.000Z",
+              "updatedAt": "2026-06-05T13:07:07.000Z",
+              "uid": "35240-195016ad-b7d6-41d7-b56d-34c074246ad4"
+            },
+            {
+              "name": "{recipe_id}",
+              "item": [
+                {
+                  "name": "versions",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Workato Get a Recipe Version",
+                          "id": "6b3e2558-19cf-4c66-8de7-16678a3a52b2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "versions",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e1d6eb52-d01c-4e1a-9335-e79175a187aa",
+                                  "key": "recipe_id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Unique identifier of the recipe."
+                                },
+                                {
+                                  "id": "893f8634-29f9-490b-9e5e-b07909603d22",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) Version number or ID."
+                                }
+                              ]
+                            },
+                            "description": "Returns the details of a specific version of a recipe."
+                          },
+                          "response": [
+                            {
+                              "id": "4f13b07a-dd74-400a-8a45-4c09fbfc4828",
+                              "name": "The recipe version details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "recipes",
+                                    ":recipe_id",
+                                    "versions",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "recipe_id"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"version_no\": \"<integer>\",\n  \"comment\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-06-05T13:07:07.000Z",
+                              "updatedAt": "2026-06-05T13:07:07.000Z",
+                              "uid": "35240-4f13b07a-dd74-400a-8a45-4c09fbfc4828"
+                            },
+                            {
+                              "id": "e916fc52-08ef-44e7-a0bf-3d9622ff6600",
+                              "name": "Authentication token is missing or invalid.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "recipes",
+                                    ":recipe_id",
+                                    "versions",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "recipe_id"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:07.000Z",
+                              "updatedAt": "2026-06-05T13:07:07.000Z",
+                              "uid": "35240-e916fc52-08ef-44e7-a0bf-3d9622ff6600"
+                            },
+                            {
+                              "id": "cba7b0d2-e015-4d1a-a17a-6fbd88155a7f",
+                              "name": "The requested resource was not found.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "recipes",
+                                    ":recipe_id",
+                                    "versions",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "recipe_id"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T13:07:07.000Z",
+                              "updatedAt": "2026-06-05T13:07:07.000Z",
+                              "uid": "35240-cba7b0d2-e015-4d1a-a17a-6fbd88155a7f"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-6b3e2558-19cf-4c66-8de7-16678a3a52b2"
+                        }
+                      ],
+                      "id": "b8062934-94c1-4b49-b6f3-41094e2d899c",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-b8062934-94c1-4b49-b6f3-41094e2d899c"
+                    },
+                    {
+                      "name": "Workato List Recipe Versions",
+                      "id": "04aa37fa-0081-412b-89a0-13fefddeab15",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions?page=1&per_page=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":recipe_id",
+                            "versions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination (1-based).",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of results per page.",
+                              "key": "per_page",
+                              "value": "100"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "842f5127-3ea5-48a2-a5c7-9ae3a2a0fb43",
+                              "key": "recipe_id",
+                              "value": "<integer>",
+                              "description": "(Required) Unique identifier of the recipe."
+                            }
+                          ]
+                        },
+                        "description": "Returns the version history of a recipe."
+                      },
+                      "response": [
+                        {
+                          "id": "e833d7ea-3e27-466e-a25e-fd9469102318",
+                          "name": "A list of recipe versions.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions?page=1&per_page=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "versions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination (1-based).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page.",
+                                  "key": "per_page",
+                                  "value": "100"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"items\": [\n    {\n      \"id\": \"<integer>\",\n      \"version_no\": \"<integer>\",\n      \"comment\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"version_no\": \"<integer>\",\n      \"comment\": \"<string>\",\n      \"created_at\": \"<dateTime>\"\n    }\n  ],\n  \"next_page\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-e833d7ea-3e27-466e-a25e-fd9469102318"
+                        },
+                        {
+                          "id": "2f709fe0-5efd-441b-8aa5-aaec11001ac1",
+                          "name": "Authentication token is missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions?page=1&per_page=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "versions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination (1-based).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page.",
+                                  "key": "per_page",
+                                  "value": "100"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-2f709fe0-5efd-441b-8aa5-aaec11001ac1"
+                        },
+                        {
+                          "id": "2898079c-3732-4547-9468-ec532ef57fe9",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/versions?page=1&per_page=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "versions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for pagination (1-based).",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of results per page.",
+                                  "key": "per_page",
+                                  "value": "100"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-2898079c-3732-4547-9468-ec532ef57fe9"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-04aa37fa-0081-412b-89a0-13fefddeab15"
+                    }
+                  ],
+                  "id": "d16df27e-407e-4b3f-ae29-329606e2932a",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-d16df27e-407e-4b3f-ae29-329606e2932a"
+                },
+                {
+                  "name": "health",
+                  "item": [
+                    {
+                      "name": "Workato Get Recipe Health Report",
+                      "id": "4f6afd16-a27e-4e5c-8752-ce715b516454",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":recipe_id",
+                            "health"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1b4f3128-27d7-4f3d-a129-f86097b873d2",
+                              "key": "recipe_id",
+                              "value": "<integer>",
+                              "description": "(Required) Unique identifier of the recipe."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the most recent performance analysis report for a recipe. Rate limited to 20 requests per minute."
+                      },
+                      "response": [
+                        {
+                          "id": "f3ad9aba-0a50-43fa-9950-fb94abc8edaf",
+                          "name": "The recipe health report.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "health"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"nulla_adb\": \"consequat te\",\n  \"ullamco_fc1\": true\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-f3ad9aba-0a50-43fa-9950-fb94abc8edaf"
+                        },
+                        {
+                          "id": "9faeca26-e434-4881-bd37-41b83b4a4dfb",
+                          "name": "Authentication token is missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "health"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-9faeca26-e434-4881-bd37-41b83b4a4dfb"
+                        },
+                        {
+                          "id": "9d48a38c-f433-4e17-89fb-f6345f8017c5",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "health"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-9d48a38c-f433-4e17-89fb-f6345f8017c5"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-4f6afd16-a27e-4e5c-8752-ce715b516454"
+                    },
+                    {
+                      "name": "Workato Queue Recipe Health Analysis",
+                      "id": "5302e02c-1212-451a-a793-22e57b10e619",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "recipes",
+                            ":recipe_id",
+                            "health"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9f494ae7-7904-4b56-9f65-1b2db03ff28d",
+                              "key": "recipe_id",
+                              "value": "<integer>",
+                              "description": "(Required) Unique identifier of the recipe."
+                            }
+                          ]
+                        },
+                        "description": "Queues a new performance analysis for a recipe. Analysis runs asynchronously and results are retrievable via GET. Rate limited to 20 requests per minute."
+                      },
+                      "response": [
+                        {
+                          "id": "bdcf3a4c-ac28-452e-8e3c-95eb0fd4c36c",
+                          "name": "Health analysis queued confirmation.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "health"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-bdcf3a4c-ac28-452e-8e3c-95eb0fd4c36c"
+                        },
+                        {
+                          "id": "6e6fdb37-1609-48ef-8f99-cf6a03632039",
+                          "name": "Authentication token is missing or invalid.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "health"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-6e6fdb37-1609-48ef-8f99-cf6a03632039"
+                        },
+                        {
+                          "id": "84918520-d531-4ee7-84fa-581263b771be",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/recipes/:recipe_id/health",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "recipes",
+                                ":recipe_id",
+                                "health"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "recipe_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-84918520-d531-4ee7-84fa-581263b771be"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-5302e02c-1212-451a-a793-22e57b10e619"
+                    }
+                  ],
+                  "id": "d15f1362-1eb4-4d1d-9e09-905dbdeebc35",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-d15f1362-1eb4-4d1d-9e09-905dbdeebc35"
+                }
+              ],
+              "id": "897241ba-5f88-4363-9582-7431135c2cfe",
+              "createdAt": "2026-06-05T13:07:07.000Z",
+              "updatedAt": "2026-06-05T13:07:07.000Z",
+              "uid": "35240-897241ba-5f88-4363-9582-7431135c2cfe"
+            },
+            {
+              "name": "Workato List Recipes",
+              "id": "07c48b2e-ce79-4810-b3ac-fc8f27cf6873",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/recipes?folder_id=<integer>&with_subfolders=<boolean>&order=desc&page=1&per_page=100&running=<boolean>&adapter_names_all=<string>&adapter_names_any=<string>&updated_after=<dateTime>&stopped_after=<dateTime>&stop_cause=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "recipes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results by folder ID.",
+                      "key": "folder_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Include recipes in subfolders of the specified folder.",
+                      "key": "with_subfolders",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Sort order for results.",
+                      "key": "order",
+                      "value": "desc"
+                    },
+                    {
+                      "description": "Page number for pagination (1-based).",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "per_page",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Filter by running state.",
+                      "key": "running",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Comma-separated list of connector names. Returns only recipes that use all of the specified connectors.",
+                      "key": "adapter_names_all",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Comma-separated list of connector names. Returns recipes that use at least one of the specified connectors.",
+                      "key": "adapter_names_any",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter recipes updated after this ISO 8601 timestamp.",
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter recipes stopped after this ISO 8601 timestamp.",
+                      "key": "stopped_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by stop cause.",
+                      "key": "stop_cause",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of recipes in the workspace. Supports filtering by folder, running state, adapter names, and update time."
+              },
+              "response": [
+                {
+                  "id": "ded03e5f-f9ae-4138-803e-15f9d77cc903",
+                  "name": "A list of recipes.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes?folder_id=<integer>&with_subfolders=<boolean>&order=desc&page=1&per_page=100&running=<boolean>&adapter_names_all=<string>&adapter_names_any=<string>&updated_after=<dateTime>&stopped_after=<dateTime>&stop_cause=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results by folder ID.",
+                          "key": "folder_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Include recipes in subfolders of the specified folder.",
+                          "key": "with_subfolders",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Sort order for results.",
+                          "key": "order",
+                          "value": "desc"
+                        },
+                        {
+                          "description": "Page number for pagination (1-based).",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "per_page",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Filter by running state.",
+                          "key": "running",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Comma-separated list of connector names. Returns only recipes that use all of the specified connectors.",
+                          "key": "adapter_names_all",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated list of connector names. Returns recipes that use at least one of the specified connectors.",
+                          "key": "adapter_names_any",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter recipes updated after this ISO 8601 timestamp.",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter recipes stopped after this ISO 8601 timestamp.",
+                          "key": "stopped_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by stop cause.",
+                          "key": "stop_cause",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"folder_id\": \"<integer>\",\n      \"running\": \"<boolean>\",\n      \"trigger_application\": \"<string>\",\n      \"action_applications\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"stopped_at\": \"<dateTime>\",\n      \"stop_cause\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"folder_id\": \"<integer>\",\n      \"running\": \"<boolean>\",\n      \"trigger_application\": \"<string>\",\n      \"action_applications\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"stopped_at\": \"<dateTime>\",\n      \"stop_cause\": \"<string>\"\n    }\n  ],\n  \"next_page\": \"<boolean>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-ded03e5f-f9ae-4138-803e-15f9d77cc903"
+                },
+                {
+                  "id": "1faa9745-a7c5-4a3d-8fd7-eab85b5183f4",
+                  "name": "Authentication token is missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes?folder_id=<integer>&with_subfolders=<boolean>&order=desc&page=1&per_page=100&running=<boolean>&adapter_names_all=<string>&adapter_names_any=<string>&updated_after=<dateTime>&stopped_after=<dateTime>&stop_cause=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results by folder ID.",
+                          "key": "folder_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Include recipes in subfolders of the specified folder.",
+                          "key": "with_subfolders",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Sort order for results.",
+                          "key": "order",
+                          "value": "desc"
+                        },
+                        {
+                          "description": "Page number for pagination (1-based).",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "per_page",
+                          "value": "100"
+                        },
+                        {
+                          "description": "Filter by running state.",
+                          "key": "running",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Comma-separated list of connector names. Returns only recipes that use all of the specified connectors.",
+                          "key": "adapter_names_all",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated list of connector names. Returns recipes that use at least one of the specified connectors.",
+                          "key": "adapter_names_any",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter recipes updated after this ISO 8601 timestamp.",
+                          "key": "updated_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter recipes stopped after this ISO 8601 timestamp.",
+                          "key": "stopped_after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by stop cause.",
+                          "key": "stop_cause",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-1faa9745-a7c5-4a3d-8fd7-eab85b5183f4"
+                }
+              ],
+              "createdAt": "2026-06-05T13:07:07.000Z",
+              "updatedAt": "2026-06-05T13:07:07.000Z",
+              "uid": "35240-07c48b2e-ce79-4810-b3ac-fc8f27cf6873"
+            },
+            {
+              "name": "Workato Create a Recipe",
+              "id": "2b769aa4-ff71-468c-a9b9-be2502faf068",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/recipes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "recipes"
+                  ]
+                },
+                "description": "Creates a new recipe in the workspace. Rate limited to 1 request per second. The recipe code must be provided in JSON format."
+              },
+              "response": [
+                {
+                  "id": "4c4952d6-ea99-45d3-9119-d7ce845b1377",
+                  "name": "The created recipe.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"running\": \"<boolean>\",\n  \"trigger_application\": \"<string>\",\n  \"action_applications\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"stopped_at\": \"<dateTime>\",\n  \"stop_cause\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-4c4952d6-ea99-45d3-9119-d7ce845b1377"
+                },
+                {
+                  "id": "cfd5a7ca-c4f8-481b-a0a2-47680e9b8a3d",
+                  "name": "The request body is invalid or missing required fields.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-cfd5a7ca-c4f8-481b-a0a2-47680e9b8a3d"
+                },
+                {
+                  "id": "62d2bcf9-8485-4a2a-9d39-10d5175f4ca7",
+                  "name": "Authentication token is missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"recipe\": {\n    \"name\": \"<string>\",\n    \"code\": \"<string>\",\n    \"config\": \"<string>\",\n    \"folder_id\": \"<integer>\",\n    \"description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/recipes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recipes"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-62d2bcf9-8485-4a2a-9d39-10d5175f4ca7"
+                }
+              ],
+              "createdAt": "2026-06-05T13:07:07.000Z",
+              "updatedAt": "2026-06-05T13:07:07.000Z",
+              "uid": "35240-2b769aa4-ff71-468c-a9b9-be2502faf068"
+            }
+          ],
+          "id": "6637470c-80f3-4fa6-a0bd-1ca8fe23af32",
+          "createdAt": "2026-06-05T13:07:07.000Z",
+          "updatedAt": "2026-06-05T13:07:07.000Z",
+          "uid": "35240-6637470c-80f3-4fa6-a0bd-1ca8fe23af32"
+        },
+        {
+          "name": "data_tables",
+          "item": [
+            {
+              "name": "{data_table_id}",
+              "item": [
+                {
+                  "name": "truncate",
+                  "item": [
+                    {
+                      "name": "Workato Truncate a Data Table",
+                      "id": "4f02b004-52fa-40bf-859b-7113ee25ab26",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id/truncate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id",
+                            "truncate"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5f4d5ab0-8021-4044-bb34-6835584c7e02",
+                              "key": "data_table_id",
+                              "value": "<integer>",
+                              "description": "(Required) Unique identifier of the data table."
+                            }
+                          ]
+                        },
+                        "description": "Removes all records from a data table while preserving its structure and schema."
+                      },
+                      "response": [
+                        {
+                          "id": "6ed1517b-2067-4aac-b43e-5037e88391cd",
+                          "name": "Truncation confirmation.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/data_tables/:data_table_id/truncate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "data_tables",
+                                ":data_table_id",
+                                "truncate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "data_table_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-6ed1517b-2067-4aac-b43e-5037e88391cd"
+                        },
+                        {
+                          "id": "27c24d10-cdf3-47db-8b41-339488e8beca",
+                          "name": "Authentication token is missing or invalid.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/data_tables/:data_table_id/truncate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "data_tables",
+                                ":data_table_id",
+                                "truncate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "data_table_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-27c24d10-cdf3-47db-8b41-339488e8beca"
+                        },
+                        {
+                          "id": "0ad3142a-5c3b-44f6-bbe7-aab462022530",
+                          "name": "The requested resource was not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/data_tables/:data_table_id/truncate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "data_tables",
+                                ":data_table_id",
+                                "truncate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "data_table_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T13:07:07.000Z",
+                          "updatedAt": "2026-06-05T13:07:07.000Z",
+                          "uid": "35240-0ad3142a-5c3b-44f6-bbe7-aab462022530"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-4f02b004-52fa-40bf-859b-7113ee25ab26"
+                    }
+                  ],
+                  "id": "4f91d8ac-543b-42b8-ad05-8afaf05a09e5",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-4f91d8ac-543b-42b8-ad05-8afaf05a09e5"
+                },
+                {
+                  "name": "Workato Get a Data Table",
+                  "id": "1b52b5f7-2f19-4cc1-aa8c-436b77d7b837",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables",
+                        ":data_table_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3748a22a-3cf1-4b2e-94d8-6a9fa9860754",
+                          "key": "data_table_id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique identifier of the data table."
+                        }
+                      ]
+                    },
+                    "description": "Returns the details of a specific data table by its ID."
+                  },
+                  "response": [
+                    {
+                      "id": "65bd76cf-7c4e-4bb2-88c2-1e508e5fd5f3",
+                      "name": "The data table details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"array\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"datetime\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-65bd76cf-7c4e-4bb2-88c2-1e508e5fd5f3"
+                    },
+                    {
+                      "id": "d99e2081-45e4-457f-a2d4-16556876e32d",
+                      "name": "Authentication token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-d99e2081-45e4-457f-a2d4-16556876e32d"
+                    },
+                    {
+                      "id": "933705b1-21cc-4a7f-afb3-ed04f2999116",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-933705b1-21cc-4a7f-afb3-ed04f2999116"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-1b52b5f7-2f19-4cc1-aa8c-436b77d7b837"
+                },
+                {
+                  "name": "Workato Update a Data Table",
+                  "id": "4e1779b5-c351-4b21-a5ec-383770c2a37c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables",
+                        ":data_table_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e9e847ce-d1f8-42ce-9086-9d445726fb27",
+                          "key": "data_table_id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique identifier of the data table."
+                        }
+                      ]
+                    },
+                    "description": "Updates the name, folder, or schema of an existing data table."
+                  },
+                  "response": [
+                    {
+                      "id": "9d45829b-1894-492b-a8d1-2eb512e79ab9",
+                      "name": "The updated data table.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"array\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"datetime\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-9d45829b-1894-492b-a8d1-2eb512e79ab9"
+                    },
+                    {
+                      "id": "188e0fba-5363-4110-883b-86909037910a",
+                      "name": "The request body is invalid or missing required fields.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-188e0fba-5363-4110-883b-86909037910a"
+                    },
+                    {
+                      "id": "ef6c0633-3bae-491f-92dc-b7a6257e46ad",
+                      "name": "Authentication token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-ef6c0633-3bae-491f-92dc-b7a6257e46ad"
+                    },
+                    {
+                      "id": "012290ea-6d49-4e5e-8c69-581d81c31c95",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-012290ea-6d49-4e5e-8c69-581d81c31c95"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-4e1779b5-c351-4b21-a5ec-383770c2a37c"
+                },
+                {
+                  "name": "Workato Delete a Data Table",
+                  "id": "ec7e3b2b-ab76-4e36-adcf-cbaebe0ee12d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables",
+                        ":data_table_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "052d7440-31d0-4d42-a20d-d9e483475e39",
+                          "key": "data_table_id",
+                          "value": "<integer>",
+                          "description": "(Required) Unique identifier of the data table."
+                        }
+                      ]
+                    },
+                    "description": "Permanently deletes a data table and all its records."
+                  },
+                  "response": [
+                    {
+                      "id": "53ecb348-124b-4e09-8ee8-2686ce650bac",
+                      "name": "Deletion confirmation.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-53ecb348-124b-4e09-8ee8-2686ce650bac"
+                    },
+                    {
+                      "id": "4930ac5c-7128-4c7e-b033-489a6a0ba47c",
+                      "name": "Authentication token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-4930ac5c-7128-4c7e-b033-489a6a0ba47c"
+                    },
+                    {
+                      "id": "39c73639-8dbe-4a32-bb5f-dc20b93f2c5b",
+                      "name": "The requested resource was not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/data_tables/:data_table_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "data_tables",
+                            ":data_table_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "data_table_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:07:07.000Z",
+                      "updatedAt": "2026-06-05T13:07:07.000Z",
+                      "uid": "35240-39c73639-8dbe-4a32-bb5f-dc20b93f2c5b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-ec7e3b2b-ab76-4e36-adcf-cbaebe0ee12d"
+                }
+              ],
+              "id": "b6bc6e16-911e-4445-a913-99447938eec3",
+              "createdAt": "2026-06-05T13:07:07.000Z",
+              "updatedAt": "2026-06-05T13:07:07.000Z",
+              "uid": "35240-b6bc6e16-911e-4445-a913-99447938eec3"
+            },
+            {
+              "name": "Workato List Data Tables",
+              "id": "8b1ec518-7484-4c86-96f8-9752254ac6fd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/data_tables?page=1&per_page=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data_tables"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination (1-based).",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of results per page (maximum 100).",
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of all data tables in the workspace."
+              },
+              "response": [
+                {
+                  "id": "b550359d-51d1-44c2-8c23-f31ff28bc382",
+                  "name": "A list of data tables.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables?page=1&per_page=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination (1-based).",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of results per page (maximum 100).",
+                          "key": "per_page",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"items\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"folder_id\": \"<integer>\",\n      \"schema\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"date\",\n          \"description\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"datetime\",\n          \"description\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"folder_id\": \"<integer>\",\n      \"schema\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"number\",\n          \"description\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"datetime\",\n          \"description\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"next_page\": \"<boolean>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-b550359d-51d1-44c2-8c23-f31ff28bc382"
+                },
+                {
+                  "id": "af67e6e2-06d2-43b9-b8c8-6a65624a93ab",
+                  "name": "Authentication token is missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables?page=1&per_page=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination (1-based).",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of results per page (maximum 100).",
+                          "key": "per_page",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-af67e6e2-06d2-43b9-b8c8-6a65624a93ab"
+                }
+              ],
+              "createdAt": "2026-06-05T13:07:07.000Z",
+              "updatedAt": "2026-06-05T13:07:07.000Z",
+              "uid": "35240-8b1ec518-7484-4c86-96f8-9752254ac6fd"
+            },
+            {
+              "name": "Workato Create a Data Table",
+              "id": "87a2bed6-e87a-474f-8354-9e69ffc510ea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/data_tables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "data_tables"
+                  ]
+                },
+                "description": "Creates a new data table with the specified schema."
+              },
+              "response": [
+                {
+                  "id": "5e2026cd-a99a-4a07-bb1a-edc93fb99f52",
+                  "name": "The created data table.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"array\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"datetime\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-5e2026cd-a99a-4a07-bb1a-edc93fb99f52"
+                },
+                {
+                  "id": "35a7bdd0-cc23-4e2d-9517-0bb86e2d43d6",
+                  "name": "The request body is invalid or missing required fields.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-35a7bdd0-cc23-4e2d-9517-0bb86e2d43d6"
+                },
+                {
+                  "id": "3dc8d99e-0f74-48ad-8e18-fbab9f17d47e",
+                  "name": "Authentication token is missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"folder_id\": \"<integer>\",\n  \"schema\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"object\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"date\",\n      \"description\": \"<string>\",\n      \"required\": \"<boolean>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/data_tables",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "data_tables"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T13:07:07.000Z",
+                  "updatedAt": "2026-06-05T13:07:07.000Z",
+                  "uid": "35240-3dc8d99e-0f74-48ad-8e18-fbab9f17d47e"
+                }
+              ],
+              "createdAt": "2026-06-05T13:07:07.000Z",
+              "updatedAt": "2026-06-05T13:07:07.000Z",
+              "uid": "35240-87a2bed6-e87a-474f-8354-9e69ffc510ea"
+            }
+          ],
+          "id": "bef0b3bb-809e-4a8d-8e24-7ae4dbe8ba7c",
+          "createdAt": "2026-06-05T13:07:07.000Z",
+          "updatedAt": "2026-06-05T13:07:07.000Z",
+          "uid": "35240-bef0b3bb-809e-4a8d-8e24-7ae4dbe8ba7c"
+        }
+      ],
+      "id": "9cf390ac-c63a-4c74-8061-569c4f33e6e2",
+      "createdAt": "2026-06-05T13:07:07.000Z",
+      "updatedAt": "2026-06-05T13:07:07.000Z",
+      "uid": "35240-9cf390ac-c63a-4c74-8061-569c4f33e6e2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.workato.com"
+    }
+  ]
+}

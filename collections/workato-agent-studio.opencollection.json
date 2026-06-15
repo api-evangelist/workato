@@ -1,0 +1,605 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workato Agent Studio API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Genies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List Genies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/genies",
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by folder ID."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by project ID."
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter genies by their current state."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of AI agents (genies) in the workspace. Supports filtering by folder, project, and state."
+        },
+        {
+          "info": {
+            "name": "Workato Create a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new AI agent (genie) in the workspace with the specified configuration including name, instructions, AI provider, and matrix settings."
+        },
+        {
+          "info": {
+            "name": "Workato Get a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/genies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific AI agent (genie) by its ID."
+        },
+        {
+          "info": {
+            "name": "Workato Update a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/agentic/genies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing AI agent (genie)."
+        },
+        {
+          "info": {
+            "name": "Workato Delete a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/agentic/genies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ]
+          },
+          "docs": "Permanently deletes an AI agent (genie) from the workspace."
+        },
+        {
+          "info": {
+            "name": "Workato Start a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ]
+          },
+          "docs": "Activates an AI agent (genie), making it available to handle requests."
+        },
+        {
+          "info": {
+            "name": "Workato Stop a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ]
+          },
+          "docs": "Deactivates an AI agent (genie), preventing it from handling new requests."
+        },
+        {
+          "info": {
+            "name": "Workato Assign Skills to a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/assign_skills",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns one or more skills to an AI agent (genie). Skills are recipe-backed capabilities that give the agent actionable tools."
+        },
+        {
+          "info": {
+            "name": "Workato Remove Skills from a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/remove_skills",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes one or more skills from an AI agent (genie)."
+        },
+        {
+          "info": {
+            "name": "Workato Assign Knowledge Bases to a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/assign_knowledge_bases",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns one or more knowledge bases to an AI agent (genie)."
+        },
+        {
+          "info": {
+            "name": "Workato Remove Knowledge Bases from a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/remove_knowledge_bases",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes one or more knowledge bases from an AI agent (genie)."
+        },
+        {
+          "info": {
+            "name": "Workato Assign User Groups to a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/assign_user_groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns identity provider user groups to an AI agent (genie) to control access."
+        },
+        {
+          "info": {
+            "name": "Workato Remove User Groups from a Genie",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/genies/:id/remove_user_groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the genie."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes identity provider user groups from an AI agent (genie)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Skills",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List Skills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/skills",
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by folder ID."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by project ID."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query to filter results by name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "sort_term",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of skills in the workspace. Skills are recipe-backed capabilities that can be assigned to AI agents."
+        },
+        {
+          "info": {
+            "name": "Workato Create a Skill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/skills",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new skill from an existing recipe. The recipe must exist in the workspace before it can be converted to a skill."
+        },
+        {
+          "info": {
+            "name": "Workato Get a Skill",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/skills/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the skill."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific skill by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Knowledge Bases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List Knowledge Bases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/knowledge_bases",
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by folder ID."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by project ID."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query to filter results by name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "sort_term",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of knowledge bases in the workspace. Knowledge bases provide AI agents with contextual data from configured data sources."
+        },
+        {
+          "info": {
+            "name": "Workato Create a Knowledge Base",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/agentic/knowledge_bases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new knowledge base with the specified name, description, source type, and data sources for use by AI agents."
+        },
+        {
+          "info": {
+            "name": "Workato Get a Knowledge Base",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/knowledge_bases/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the knowledge base."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific knowledge base by its ID."
+        },
+        {
+          "info": {
+            "name": "Workato Update a Knowledge Base",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/agentic/knowledge_bases/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the knowledge base."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing knowledge base."
+        },
+        {
+          "info": {
+            "name": "Workato Delete a Knowledge Base",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/agentic/knowledge_bases/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the knowledge base."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a knowledge base from the workspace."
+        },
+        {
+          "info": {
+            "name": "Workato List Knowledge Base Data Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/knowledge_bases/:id/data_sources",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the knowledge base."
+              }
+            ]
+          },
+          "docs": "Returns all data sources configured for a specific knowledge base, including source type and connection details."
+        },
+        {
+          "info": {
+            "name": "Workato List Recipes in a Knowledge Base",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/agentic/knowledge_bases/:id/recipes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the knowledge base."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query to filter results by name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "sort_term",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of recipes associated with a specific knowledge base."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

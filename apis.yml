@@ -88,21 +88,14 @@ apis:
     type: JSONSchema
   - url: json-schema/workato-genie-schema.json
     type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/agent-studio-genies.yaml
-  - type: NaftikoCapability
-    url: capabilities/agent-studio-knowledge-bases.yaml
-  - type: NaftikoCapability
-    url: capabilities/agent-studio-skills.yaml
-  - type: NaftikoCapability
-    url: capabilities/developer-data-tables.yaml
-  - type: NaftikoCapability
-    url: capabilities/developer-recipes.yaml
-  description: Workato is an American multinational software company that provides a cloud-based platform for automation,
-    integration, and artificial intelligence orchestration across applications, data, and systems. The company was founded
-    in 2013 and is headquartered in Mountain View, California. Workato has been recognized as an 8x Leader and 3x Furthest
-    in Vision in the 2026 Gartner Magic Quadrant for Integration Platform as a Service, and now positions Enterprise MCP,
-    Workato Genies, and Agent Studio as the agentic AI surface built on top of its iPaaS foundation.
+  - url: graphql/workato-graphql.md
+    type: GraphQL
+  description: >-
+    Workato is an American multinational software company that provides a cloud-based platform for automation,
+    integration, and artificial intelligence orchestration across applications, data, and systems. The company was
+    founded in 2013 and is headquartered in Mountain View, California. Workato has been recognized as an 8x Leader and
+    3x Furthest in Vision in the 2026 Gartner Magic Quadrant for Integration Platform as a Service, and now positions
+    Enterprise MCP, Workato Genies, and Agent Studio as the agentic AI surface built on top of its iPaaS foundation.
 - aid: workato:embedded-api
   name: Workato Embedded Partner API
   tags:
@@ -144,9 +137,11 @@ apis:
   - url: https://docs.workato.com/oem/workato-embedded.html
     name: Workato Fully Embedded
     type: Documentation
-  description: The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes,
-    connections, and other assets within the Workato Embedded platform. These APIs support provisioning customer workspaces,
-    managing environments, and building fully embedded integration experiences within partner applications.
+  description: >-
+    The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes,
+    connections, and other assets within the Workato Embedded platform. These APIs support provisioning customer
+    workspaces, managing environments, and building fully embedded integration experiences within partner
+    applications.
 - aid: workato:event-streams-public-api
   name: Workato Event Streams Public API
   tags:
@@ -166,12 +161,11 @@ apis:
     type: OpenAPI
   - url: asyncapi/workato-event-streams-asyncapi.yml
     type: AsyncAPI
-  - type: NaftikoCapability
-    url: capabilities/event-streams-messages.yaml
-  description: The Workato Event Streams Public API enables HTTP-based clients to publish and consume messages from event
-    topics. It supports single message publish, batch publish of up to 100 messages, and message consumption with long polling.
-    The API is separate from the Developer API's event streams management endpoints and is rate limited to 60 requests per
-    minute with a 1 MB maximum payload.
+  description: >-
+    The Workato Event Streams Public API enables HTTP-based clients to publish and consume messages from event topics.
+    It supports single message publish, batch publish of up to 100 messages, and message consumption with long
+    polling. The API is separate from the Developer API's event streams management endpoints and is rate limited to 60
+    requests per minute with a 1 MB maximum payload.
 - aid: workato:mcp-server-api
   name: Workato MCP Server API
   tags:
@@ -192,20 +186,13 @@ apis:
     type: Documentation
   - url: openapi/workato-mcp-server-openapi.yml
     type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/mcp-server-mcp-servers.yaml
-  - type: NaftikoCapability
-    url: capabilities/mcp-server-policies.yaml
-  - type: NaftikoCapability
-    url: capabilities/mcp-server-tools.yaml
-  - type: NaftikoCapability
-    url: capabilities/mcp-server-user-groups.yaml
-  description: The Workato MCP Server API provides endpoints for creating, configuring, and managing Model Context Protocol
-    (MCP) servers that expose Workato API collections as tools for AI agents. It supports server creation, tool management,
-    user group assignment, and policy configuration. MCP servers generate unique authenticated URLs usable by AI development
-    environments like Claude Desktop and Cursor. Workato now markets this as Enterprise MCP, the agentic AI surface built
-    on top of the iPaaS, and recently added nine prebuilt MCP servers including Dropbox, Freshdesk, ZoomInfo, Notion,
-    Discord, and Microsoft Teams. MCP is available in the US, EU, AU, JP, and SG data centers.
+  description: >-
+    The Workato MCP Server API provides endpoints for creating, configuring, and managing Model Context Protocol (MCP)
+    servers that expose Workato API collections as tools for AI agents. It supports server creation, tool management,
+    user group assignment, and policy configuration. MCP servers generate unique authenticated URLs usable by AI
+    development environments like Claude Desktop and Cursor. Workato now markets this as Enterprise MCP, the agentic
+    AI surface built on top of the iPaaS, and recently added nine prebuilt MCP servers including Dropbox, Freshdesk,
+    ZoomInfo, Notion, Discord, and Microsoft Teams. MCP is available in the US, EU, AU, JP, and SG data centers.
 name: Workato
 tags:
 - Agentic
@@ -222,6 +209,8 @@ type: Index
 image: https://www.workato.com/wp-content/uploads/2023/01/workato-logo.svg
 access: 3rd-Party
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/workato/overview
 - type: ArazzoWorkflows
   url: arazzo/
   workflows:
@@ -279,12 +268,14 @@ common:
 - url: https://github.com/workato
   name: GitHub Organization
   type: GitHubOrganization
-  description: 67 public repositories including workato-connector-sdk (Ruby), custom_connector_docs, opa-extensions, full-embed-sample,
-    connection-embed-sample, and edge-gateway-helm-charts.
+  description: >-
+    67 public repositories including workato-connector-sdk (Ruby), custom_connector_docs, opa-extensions,
+    full-embed-sample, connection-embed-sample, and edge-gateway-helm-charts.
 - url: https://www.workato.com/pricing
-  name: "Workato Pricing Model: Here's How It Works | Workato"
+  name: 'Workato Pricing Model: Here''s How It Works | Workato'
   type: Pricing
-  description: Contact-sales / quote-based; "Workato offers a customer-first pricing model optimized for predictability and
+  description: >-
+    Contact-sales / quote-based; "Workato offers a customer-first pricing model optimized for predictability and
     maximum value." No public price table.
 - url: https://www.workato.com/platform/security
   name: Automation Governance and Data Security | Workato
@@ -301,8 +292,9 @@ common:
   - name: Atlassian Virtual Agent Accelerator
     description: Real-time request fulfilment and response to the users from Atlassian Virtual Agent
   - name: NetSuite to Salesforce integration Accelerator
-    description: Automate lead-to-cash processes and get real-time visibility into back-office order, fulfillment, and financial
-      operations
+    description: >-
+      Automate lead-to-cash processes and get real-time visibility into back-office order, fulfillment, and
+      financial operations
   - name: Workday Revenue Management
     description: Helps organizations in syncing their CPQ orders from CRM into WRM as a contract
   - name: Security Orchestration, Automation & Response (SOAR) (AI@Work)
@@ -314,8 +306,9 @@ common:
   - name: Sales Process & Forecasting Alignment
     description: The first step in achieving Pipeline Resilience
   - name: MindAssist
-    description: MindAssist automates support ticket creation & bot retriggering for Automation Anywhere A360, helping businesses
-      build resilient automations with Workato's low-code platform.
+    description: >-
+      MindAssist automates support ticket creation & bot retriggering for Automation Anywhere A360, helping
+      businesses build resilient automations with Workato's low-code platform.
   - name: Software License Optimization
     description: Automate the process of identifying & deprovisioning underutilized app licenses
   - name: AIML Accelerator
@@ -323,8 +316,7 @@ common:
   - name: Automation Quality & Security
     description: Standardize and automate quality and security best practices for your automations
   - name: IT Help Desk Bot
-    description: Supercharge your helpdesk with self-service knowledge articles & service requests powered by intelligent
-      bots
+    description: Supercharge your helpdesk with self-service knowledge articles & service requests powered by intelligent bots
   - name: OPA Manager
     description: A standardized approach to automate the add agents, manage and troubleshoot OPAs
   - name: App Provision/Deprovisioning
@@ -542,8 +534,9 @@ common:
 - url: https://www.workato.com/product-hub/changelog/
   name: Changelog Archive | Workato Product Hub
   type: ChangeLog
-  description: Recent releases include nine new MCP servers (Dropbox, Freshdesk, ZoomInfo, Notion, Discord, Microsoft Teams,
-    and others), Agent Studio cross-workspace asset sharing, Genies native Slack channel support, Data Tables CSV import,
+  description: >-
+    Recent releases include nine new MCP servers (Dropbox, Freshdesk, ZoomInfo, Notion, Discord, Microsoft Teams, and
+    others), Agent Studio cross-workspace asset sharing, Genies native Slack channel support, Data Tables CSV import,
     API Edge Gateway for on-prem, Developer Portal SSO, and RBAC 2.0 with environment- and project-scoped roles.
 - url: https://www.workato.com/the-connector/category/customer-stories/americas/
   name: Americas Archives
@@ -2763,11 +2756,12 @@ segments:
 - iPaaS
 - Embedded_iPaaS
 - Workflows
-description: Workato is an enterprise automation and integration platform that enables organizations to integrate their apps
-  and automate business workflows without extensive coding. It provides a low-code/no-code interface for creating integrations
-  between cloud applications, on-premises systems, and databases. The platform now layers Enterprise MCP, Workato Genies
-  AI agents, Agent Studio, and Workato Embedded on top of its iPaaS foundation, with API Edge Gateway for on-premises
-  deployment and RBAC 2.0 with environment- and project-scoped roles.
+description: >-
+  Workato is an enterprise automation and integration platform that enables organizations to integrate their apps and
+  automate business workflows without extensive coding. It provides a low-code/no-code interface for creating
+  integrations between cloud applications, on-premises systems, and databases. The platform now layers Enterprise MCP,
+  Workato Genies AI agents, Agent Studio, and Workato Embedded on top of its iPaaS foundation, with API Edge Gateway for
+  on-premises deployment and RBAC 2.0 with environment- and project-scoped roles.
 integrations:
 - name: Salesforce
 - name: Slack

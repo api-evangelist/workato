@@ -1,0 +1,458 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workato Developer API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recipes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List Recipes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/recipes",
+            "params": [
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by folder ID."
+              },
+              {
+                "name": "with_subfolders",
+                "value": "",
+                "type": "query",
+                "description": "Include recipes in subfolders of the specified folder."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for results."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query",
+                "description": "Filter by running state."
+              },
+              {
+                "name": "adapter_names_all",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of connector names. Returns only recipes that use all of the specified connectors."
+              },
+              {
+                "name": "adapter_names_any",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of connector names. Returns recipes that use at least one of the specified connectors."
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter recipes updated after this ISO 8601 timestamp."
+              },
+              {
+                "name": "stopped_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter recipes stopped after this ISO 8601 timestamp."
+              },
+              {
+                "name": "stop_cause",
+                "value": "",
+                "type": "query",
+                "description": "Filter by stop cause."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of recipes in the workspace. Supports filtering by folder, running state, adapter names, and update time."
+        },
+        {
+          "info": {
+            "name": "Workato Create a Recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/recipes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new recipe in the workspace. Rate limited to 1 request per second. The recipe code must be provided in JSON format."
+        },
+        {
+          "info": {
+            "name": "Workato Get a Recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/recipes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific recipe by its ID."
+        },
+        {
+          "info": {
+            "name": "Workato Update a Recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/recipes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing recipe's name, code, config, or description."
+        },
+        {
+          "info": {
+            "name": "Workato Delete a Recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/recipes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a recipe from the workspace. The recipe must be stopped first."
+        },
+        {
+          "info": {
+            "name": "Workato Start a Recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/recipes/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ]
+          },
+          "docs": "Activates a recipe, enabling it to process trigger events."
+        },
+        {
+          "info": {
+            "name": "Workato Stop a Recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/recipes/:id/stop",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ]
+          },
+          "docs": "Deactivates a recipe, preventing it from processing new trigger events."
+        },
+        {
+          "info": {
+            "name": "Workato Copy a Recipe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/recipes/:id/copy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ]
+          },
+          "docs": "Creates a duplicate of an existing recipe."
+        },
+        {
+          "info": {
+            "name": "Workato List Recipe Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/recipes/:recipe_id/versions",
+            "params": [
+              {
+                "name": "recipe_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns the version history of a recipe."
+        },
+        {
+          "info": {
+            "name": "Workato Get a Recipe Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/recipes/:recipe_id/versions/:id",
+            "params": [
+              {
+                "name": "recipe_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Version number or ID."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific version of a recipe."
+        },
+        {
+          "info": {
+            "name": "Workato Get Recipe Health Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/recipes/:recipe_id/health",
+            "params": [
+              {
+                "name": "recipe_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ]
+          },
+          "docs": "Retrieves the most recent performance analysis report for a recipe. Rate limited to 20 requests per minute."
+        },
+        {
+          "info": {
+            "name": "Workato Queue Recipe Health Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/recipes/:recipe_id/health",
+            "params": [
+              {
+                "name": "recipe_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the recipe."
+              }
+            ]
+          },
+          "docs": "Queues a new performance analysis for a recipe. Analysis runs asynchronously and results are retrievable via GET. Rate limited to 20 requests per minute."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List Data Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/data_tables",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (maximum 100)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all data tables in the workspace."
+        },
+        {
+          "info": {
+            "name": "Workato Create a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/data_tables",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data table with the specified schema."
+        },
+        {
+          "info": {
+            "name": "Workato Get a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific data table by its ID."
+        },
+        {
+          "info": {
+            "name": "Workato Update a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the name, folder, or schema of an existing data table."
+        },
+        {
+          "info": {
+            "name": "Workato Delete a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a data table and all its records."
+        },
+        {
+          "info": {
+            "name": "Workato Truncate a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id/truncate",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ]
+          },
+          "docs": "Removes all records from a data table while preserving its structure and schema."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

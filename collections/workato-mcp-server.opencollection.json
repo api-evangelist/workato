@@ -1,0 +1,442 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workato MCP Server API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MCP Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List MCP Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/mcp/mcp_servers",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by project ID."
+              },
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by folder ID."
+              },
+              {
+                "name": "authentication_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter by authentication method."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search term to filter servers by name."
+              },
+              {
+                "name": "vua_required",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether virtual user account is required."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of MCP servers in the workspace, with optional filtering by project, folder, authentication method, and other criteria."
+        },
+        {
+          "info": {
+            "name": "Workato Create an MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/mcp/mcp_servers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new MCP server in the workspace. The server will generate a unique authenticated URL that AI agents can use to discover and invoke tools."
+        },
+        {
+          "info": {
+            "name": "Workato Get an MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific MCP server by its handle."
+        },
+        {
+          "info": {
+            "name": "Workato Update an MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing MCP server."
+        },
+        {
+          "info": {
+            "name": "Workato Delete an MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ]
+          },
+          "docs": "Permanently deletes an MCP server from the workspace."
+        },
+        {
+          "info": {
+            "name": "Workato Renew MCP Server Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle/token_renew",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ]
+          },
+          "docs": "Generates a new authentication token for an MCP server. The previous token is invalidated immediately."
+        },
+        {
+          "info": {
+            "name": "Workato Assign Tools to an MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle/assign_tools",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns one or more tools to an MCP server. Tools are API endpoints from connected recipe collections that AI agents can invoke."
+        },
+        {
+          "info": {
+            "name": "Workato Move MCP Server to Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle/update_folder",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves an MCP server to a different folder in the workspace."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato Assign User Groups to an MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle/assign_user_groups",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns identity provider user groups to an MCP server to control which users can access it."
+        },
+        {
+          "info": {
+            "name": "Workato Remove User Groups from an MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:handle/remove_user_groups",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes identity provider user groups from an MCP server."
+        },
+        {
+          "info": {
+            "name": "Workato List User Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/mcp/user_groups",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns a list of identity provider user groups available for MCP server assignment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato Get Server Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/server_policies",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ]
+          },
+          "docs": "Retrieves the security policy configuration for an MCP server, including rate limits, quota limits, and IP access controls."
+        },
+        {
+          "info": {
+            "name": "Workato Update Server Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/server_policies",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the security policy configuration for an MCP server, including rate limits, quota limits, and IP allow/deny lists."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List MCP Server Tools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/tools",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of tools assigned to an MCP server."
+        },
+        {
+          "info": {
+            "name": "Workato Update a Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/tools/:id",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the tool."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the description of a specific tool assigned to an MCP server. Tool descriptions help AI agents understand when and how to use the tool."
+        },
+        {
+          "info": {
+            "name": "Workato Remove a Tool from MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/tools/:id",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the tool to remove."
+              }
+            ]
+          },
+          "docs": "Removes a specific tool from an MCP server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
