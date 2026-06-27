@@ -52,13 +52,13 @@ apis:
     type: RateLimits
   - url: https://docs.workato.com/developing-connectors/sdk.html
     name: Workato Connector SDK - Developer Program
-    type: SDK
+    type: SDKs
   - url: https://github.com/workato/workato-connector-sdk
     name: Workato Connector SDK - GitHub
-    type: SDK
+    type: SDKs
   - url: https://docs.workato.com/developing-connectors/custom-connector.html
     name: Create a Custom Connector
-    type: SDK
+    type: SDKs
   - url: https://docs.workato.com/workato-api/pubsub.html
     name: Workato API - Event Streams Public API
     type: APIReference
@@ -211,60 +211,57 @@ access: 3rd-Party
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/workato/overview
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/workato-batch-publish-events-workflow.yml
-    name: Workato Batch Publish Events and Drain the Topic
-    summary: Publish a batch of messages to a topic, then consume them back.
-  - url: arazzo/workato-build-and-launch-genie-workflow.yml
-    name: Workato Build and Launch an AI Agent
-    summary: Create a genie, confirm it, and start it so it can handle requests.
-  - url: arazzo/workato-bulk-stop-recipes-in-folder-workflow.yml
-    name: Workato Stop the First Running Recipe in a Folder
-    summary: Find running recipes in a folder and stop the first match.
-  - url: arazzo/workato-clone-and-activate-recipe-workflow.yml
-    name: Workato Clone and Activate a Recipe
-    summary: Duplicate an existing recipe and bring the copy online.
-  - url: arazzo/workato-curate-mcp-server-tool-workflow.yml
-    name: Workato Curate an MCP Server's Tools
-    summary: Refine a tool's description on an MCP server, or remove it.
-  - url: arazzo/workato-decommission-genie-workflow.yml
-    name: Workato Decommission an AI Agent
-    summary: Stop a genie if running, then permanently delete it.
-  - url: arazzo/workato-equip-genie-with-knowledge-base-workflow.yml
-    name: Workato Equip a Genie with a Knowledge Base
-    summary: Create a knowledge base and attach it to an AI agent for context.
-  - url: arazzo/workato-provision-data-table-workflow.yml
-    name: Workato Provision a Data Table
-    summary: Create a data table with a schema and confirm it was provisioned.
-  - url: arazzo/workato-provision-mcp-server-with-tools-workflow.yml
-    name: Workato Provision an MCP Server with Tools
-    summary: Create an MCP server, assign tools, and confirm the tool list.
-  - url: arazzo/workato-publish-and-consume-event-workflow.yml
-    name: Workato Publish and Verify an Event Message
-    summary: Publish a message to a topic, then long-poll to consume it back.
-  - url: arazzo/workato-recipe-to-genie-skill-workflow.yml
-    name: Workato Turn a Recipe into a Genie Skill
-    summary: Convert an existing recipe into a skill and assign it to an AI agent.
-  - url: arazzo/workato-recipe-version-rollback-workflow.yml
-    name: Workato Inspect and Roll Back a Recipe Version
-    summary: Review a recipe's version history and restore an earlier version's code.
-  - url: arazzo/workato-reset-data-table-schema-workflow.yml
-    name: Workato Reset a Data Table's Data and Schema
-    summary: Truncate a data table's records, then update its schema in place.
-  - url: arazzo/workato-rotate-mcp-server-token-workflow.yml
-    name: Workato Rotate an MCP Server Token
-    summary: Find an MCP server by name and renew its authentication token.
-  - url: arazzo/workato-secure-mcp-server-access-workflow.yml
-    name: Workato Secure MCP Server Access
-    summary: Apply security policies and grant a user group access to an MCP server.
-  - url: arazzo/workato-start-recipe-with-health-check-workflow.yml
-    name: Workato Start a Recipe and Verify Its Health
-    summary: Activate a recipe and confirm it is running and healthy.
-  - url: arazzo/workato-stop-and-delete-recipe-workflow.yml
-    name: Workato Stop and Delete a Recipe
-    summary: Safely decommission a recipe by stopping it before deletion.
+- type: Arazzo
+  url: arazzo/workato-batch-publish-events-workflow.yml
+  name: Workato Batch Publish Events and Drain the Topic
+- type: Arazzo
+  url: arazzo/workato-build-and-launch-genie-workflow.yml
+  name: Workato Build and Launch an AI Agent
+- type: Arazzo
+  url: arazzo/workato-bulk-stop-recipes-in-folder-workflow.yml
+  name: Workato Stop the First Running Recipe in a Folder
+- type: Arazzo
+  url: arazzo/workato-clone-and-activate-recipe-workflow.yml
+  name: Workato Clone and Activate a Recipe
+- type: Arazzo
+  url: arazzo/workato-curate-mcp-server-tool-workflow.yml
+  name: Workato Curate an MCP Server's Tools
+- type: Arazzo
+  url: arazzo/workato-decommission-genie-workflow.yml
+  name: Workato Decommission an AI Agent
+- type: Arazzo
+  url: arazzo/workato-equip-genie-with-knowledge-base-workflow.yml
+  name: Workato Equip a Genie with a Knowledge Base
+- type: Arazzo
+  url: arazzo/workato-provision-data-table-workflow.yml
+  name: Workato Provision a Data Table
+- type: Arazzo
+  url: arazzo/workato-provision-mcp-server-with-tools-workflow.yml
+  name: Workato Provision an MCP Server with Tools
+- type: Arazzo
+  url: arazzo/workato-publish-and-consume-event-workflow.yml
+  name: Workato Publish and Verify an Event Message
+- type: Arazzo
+  url: arazzo/workato-recipe-to-genie-skill-workflow.yml
+  name: Workato Turn a Recipe into a Genie Skill
+- type: Arazzo
+  url: arazzo/workato-recipe-version-rollback-workflow.yml
+  name: Workato Inspect and Roll Back a Recipe Version
+- type: Arazzo
+  url: arazzo/workato-reset-data-table-schema-workflow.yml
+  name: Workato Reset a Data Table's Data and Schema
+- type: Arazzo
+  url: arazzo/workato-rotate-mcp-server-token-workflow.yml
+  name: Workato Rotate an MCP Server Token
+- type: Arazzo
+  url: arazzo/workato-secure-mcp-server-access-workflow.yml
+  name: Workato Secure MCP Server Access
+- type: Arazzo
+  url: arazzo/workato-start-recipe-with-health-check-workflow.yml
+  name: Workato Start a Recipe and Verify Its Health
+- type: Arazzo
+  url: arazzo/workato-stop-and-delete-recipe-workflow.yml
+  name: Workato Stop and Delete a Recipe
 - url: https://github.com/workato
   name: GitHub Organization
   type: GitHubOrganization
@@ -2621,7 +2618,7 @@ common:
   description: 'null'
 - url: https://docs.workato.com/en/workato-api.html#http-response-codes
   name: Workato API - Introduction | Workato Docs
-  type: Errors
+  type: ErrorCodes
   description: 'null'
 - url: https://docs.workato.com/en/mcp.html
   name: MCP | Workato Docs
@@ -2650,7 +2647,7 @@ common:
   - https://www.workato.com/pricing
   updated: '2026-05-04'
 - url: https://docs.workato.com/
-  type: Developer Portal
+  type: DeveloperPortal
 - url: https://docs.workato.com/workato-api/authentication.html
   type: Authentication
 - url: https://docs.workato.com/workato-api/rate-limiting.html
@@ -2662,7 +2659,7 @@ common:
 - url: https://support.workato.com/
   type: Support
 - url: https://www.workato.com/users/sign_up
-  type: SignUp
+  type: Signup
 - url: https://www.linkedin.com/company/workato/
   name: Workato on LinkedIn
   type: LinkedIn
@@ -2686,7 +2683,7 @@ common:
   type: Certification
 - url: https://systematic.workato.com/
   name: Workato Systematic Community
-  type: Forum
+  type: Forums
 - url: https://www.workato.com/events
   name: Workato Events
   type: Events
@@ -2710,7 +2707,7 @@ common:
   type: Documentation
 - url: https://docs.workato.com/developing-connectors/sdk.html
   name: Connector SDK Developer Program | Workato Docs
-  type: SDK
+  type: SDKs
 - url: https://docs.workato.com/api-management.html
   name: API Platform | Workato Docs
   type: Documentation
