@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/workato-agent-studio-openapi.yml, openapi/workato-developer-api-openapi.yml,
+  openapi/workato-event-streams-openapi.yml, openapi/workato-mcp-server-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'API client token obtained from the Workato platform. Include as Authorization:
+    Bearer {token}.'
+  sources:
+  - openapi/workato-agent-studio-openapi.yml
+  - openapi/workato-developer-api-openapi.yml
+  - openapi/workato-event-streams-openapi.yml
+  - openapi/workato-mcp-server-openapi.yml
