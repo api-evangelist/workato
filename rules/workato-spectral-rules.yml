@@ -1,5 +1,25 @@
+# workato — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 21/21 servers on workato.com
+#   - path-params-casing: snake @ 100% (n=50)
+#   - query-params-casing: snake @ 100% (n=47)
+#   - operationid-casing: camel @ 100% (n=60)
+#   - schema-names-casing: pascal @ 100% (n=31)
+#   - schema-properties-casing: snake @ 100% (n=115)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-401: 100% adherence
+#   - pagination params observed: ['page', 'per_page']
+#   - merge: kept 38 existing, added 5 measured, upgraded 0
+#   - added: path-params-casing, query-params-casing, schema-names-casing, schema-properties-casing, error-schema-defined
+extends:
+  - spectral:oas
 rules:
-  # INFO / METADATA
   info-title-workato-prefix:
     message: API title must begin with "Workato"
     severity: warn
@@ -7,8 +27,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^Workato'
-
+        match: ^Workato
   info-description-required:
     message: Info object must have a non-empty description
     severity: error
@@ -16,7 +35,6 @@ rules:
     then:
       field: description
       function: truthy
-
   info-version-required:
     message: Info object must have a version
     severity: error
@@ -24,7 +42,6 @@ rules:
     then:
       field: version
       function: truthy
-
   info-contact-required:
     message: Info object should include contact information
     severity: warn
@@ -32,8 +49,6 @@ rules:
     then:
       field: contact
       function: truthy
-
-  # OPENAPI VERSION
   openapi-version-3:
     message: Must use OpenAPI 3.0.x
     severity: error
@@ -41,9 +56,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^3\.0\.'
-
-  # SERVERS
+        match: ^3\.0\.
   servers-defined:
     message: At least one server must be defined
     severity: error
@@ -51,7 +64,6 @@ rules:
     then:
       field: servers
       function: truthy
-
   servers-https-only:
     message: Server URLs must use HTTPS
     severity: error
@@ -59,8 +71,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^https://'
-
+        match: ^https://
   servers-workato-domain:
     message: Server URLs should use the workato.com domain
     severity: warn
@@ -68,9 +79,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: 'workato\.com'
-
-  # PATHS — NAMING CONVENTIONS
+        match: workato\.com
   paths-kebab-case:
     message: Path segments must use kebab-case or snake_case (Workato uses snake_case)
     severity: info
@@ -78,8 +87,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^(/[a-z0-9{][a-z0-9\-._{}]*)*$'
-
+        match: ^(/[a-z0-9{][a-z0-9\-._{}]*)*$
   paths-no-trailing-slash:
     message: Paths must not have a trailing slash
     severity: warn
@@ -87,8 +95,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: '/$'
-
+        notMatch: /$
   paths-api-prefix:
     message: Workato API paths should begin with /api/
     severity: warn
@@ -96,9 +103,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^/api/'
-
-  # OPERATIONS
+        match: ^/api/
   operation-summary-required:
     message: All operations must have a summary
     severity: error
@@ -106,7 +111,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   operation-description-required:
     message: All operations must have a description
     severity: warn
@@ -114,7 +118,6 @@ rules:
     then:
       field: description
       function: truthy
-
   operation-id-required:
     message: All operations must have an operationId
     severity: error
@@ -122,7 +125,6 @@ rules:
     then:
       field: operationId
       function: truthy
-
   operation-id-camel-case:
     message: operationId must use camelCase
     severity: warn
@@ -130,8 +132,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-zA-Z0-9]*$'
-
+        match: ^[a-z][a-zA-Z0-9]*$
   operation-tags-required:
     message: Operations must have at least one tag
     severity: warn
@@ -139,7 +140,6 @@ rules:
     then:
       field: tags
       function: truthy
-
   operation-summary-workato-prefix:
     message: Operation summaries must start with "Workato"
     severity: warn
@@ -147,9 +147,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^Workato'
-
-  # TAGS
+        match: ^Workato
   tags-defined:
     message: Global tags array should be defined
     severity: info
@@ -157,8 +155,6 @@ rules:
     then:
       field: tags
       function: truthy
-
-  # PARAMETERS
   parameter-description-required:
     message: Parameters must have a description
     severity: warn
@@ -166,7 +162,6 @@ rules:
     then:
       field: description
       function: truthy
-
   parameter-schema-required:
     message: Parameters must have a schema
     severity: error
@@ -174,7 +169,6 @@ rules:
     then:
       field: schema
       function: truthy
-
   parameter-snake-case:
     message: Parameter names should use snake_case (Workato convention)
     severity: info
@@ -182,9 +176,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-z0-9_]*$'
-
-  # REQUEST BODIES
+        match: ^[a-z][a-z0-9_]*$
   request-body-json-content:
     message: Request bodies should use application/json content type
     severity: warn
@@ -192,8 +184,6 @@ rules:
     then:
       field: application/json
       function: truthy
-
-  # RESPONSES
   response-success-required:
     message: Operations must have a success response (200 or 201)
     severity: error
@@ -204,10 +194,12 @@ rules:
         schema:
           type: object
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['204']
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   response-description-required:
     message: All responses must have a description
     severity: error
@@ -215,7 +207,6 @@ rules:
     then:
       field: description
       function: truthy
-
   response-401-unauthorized:
     message: Authenticated endpoints must document 401 response
     severity: warn
@@ -223,7 +214,6 @@ rules:
     then:
       field: '401'
       function: truthy
-
   response-422-validation:
     message: POST/PUT endpoints should document 422 validation errors
     severity: info
@@ -231,8 +221,6 @@ rules:
     then:
       field: '422'
       function: truthy
-
-  # SCHEMAS — PROPERTY NAMING
   schema-description-required:
     message: Top-level schemas must have a description
     severity: warn
@@ -240,7 +228,6 @@ rules:
     then:
       field: description
       function: truthy
-
   schema-type-defined:
     message: Schemas must have a type defined
     severity: warn
@@ -248,7 +235,6 @@ rules:
     then:
       field: type
       function: truthy
-
   schema-property-snake-case:
     message: Schema properties should use snake_case (Workato convention)
     severity: warn
@@ -256,8 +242,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '^[a-z][a-z0-9_]*$'
-
+        match: ^[a-z][a-z0-9_]*$
   schema-property-description:
     message: Schema properties should have descriptions
     severity: info
@@ -265,8 +250,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # SECURITY
   security-schemes-defined:
     message: Security schemes must be defined in components
     severity: error
@@ -274,7 +257,6 @@ rules:
     then:
       field: securitySchemes
       function: truthy
-
   security-bearer-token:
     message: Workato APIs should use bearer token authentication
     severity: warn
@@ -283,8 +265,7 @@ rules:
       field: scheme
       function: pattern
       functionOptions:
-        match: '^bearer$'
-
+        match: ^bearer$
   security-header-api-token:
     message: API token should be in Authorization header as Bearer token
     severity: info
@@ -293,9 +274,8 @@ rules:
       field: in
       function: enumeration
       functionOptions:
-        values: [header]
-
-  # HTTP METHOD CONVENTIONS
+        values:
+        - header
   get-no-request-body:
     message: GET operations must not have a request body
     severity: error
@@ -303,7 +283,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
   delete-returns-success:
     message: DELETE operations should return 200 or 204
     severity: warn
@@ -314,10 +293,10 @@ rules:
         schema:
           type: object
           anyOf:
-            - required: ['200']
-            - required: ['204']
-
-  # GENERAL QUALITY
+          - required:
+            - '200'
+          - required:
+            - '204'
   no-empty-descriptions:
     message: Descriptions must not be empty strings
     severity: warn
@@ -325,8 +304,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: '.+'
-
+        match: .+
   operations-have-examples:
     message: Operations should have response examples for documentation and mocking
     severity: info
@@ -334,11 +312,52 @@ rules:
     then:
       field: examples
       function: truthy
-
   microcks-operation-extension:
     message: Operations should have x-microcks-operation extension for mock server compatibility
     severity: info
     given: $.paths[*][get,post,put,patch,delete]
     then:
       field: x-microcks-operation
+      function: truthy
+  path-params-casing:
+    description: Path parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
       function: truthy
