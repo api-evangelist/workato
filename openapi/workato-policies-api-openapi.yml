@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Workato Agent Studio Data Tables Policies API
+  description: The Workato Agent Studio API provides programmatic access to manage AI agents (genies), skills, and knowledge bases within the Workato Agentic Automation platform. Use this API to create and configure AI agents, assign skills and knowledge bases, and control agent lifecycle. Rate limits are 1,000 requests per minute for list/get operations and 60 requests per minute for all other operations.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+servers:
+- url: https://www.workato.com
+  description: US Production
+- url: https://app.eu.workato.com
+  description: EU Production
+- url: https://app.jp.workato.com
+  description: JP Production
+- url: https://app.sg.workato.com
+  description: SG Production
+- url: https://app.au.workato.com
+  description: AU Production
+security:
+- bearerAuth: []
+tags:
+- name: Policies
+  description: Security policies that govern rate limits, quotas, and IP access controls for MCP servers.
+paths:
+  /api/mcp/mcp_servers/{mcp_server_handle}/server_policies:
+    get:
+      operationId: getMcpServerPolicies
+      summary: Workato Get Server Policies
+      description: Retrieves the security policy configuration for an MCP server, including rate limits, quota limits, and IP access controls.
+      tags:
+      - Policies
+      parameters:
+      - $ref: '#/components/parameters/McpServerHandleForPolicies'
+      responses:
+        '200':
+          description: The server policy configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerPolicy'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateMcpServerPolicies
+      summary: Workato Update Server Policies
+      description: Updates the security policy configuration for an MCP server, including rate limits, quota limits, and IP allow/deny lists.
+      tags:
+      - Policies
+      parameters:
+      - $ref: '#/components/parameters/McpServerHandleForPolicies'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServerPolicy'
+      responses:
+        '200':
+          description: The updated server policy configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerPolicy'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ServerPolicy:
+      type: object
+      description: Security policy configuration for an MCP server.
+      properties:
+        rate_limit:
+          type: object
+          description: Rate limiting configuration.
+          properties:
+            requests_per_minute:
+              type: integer
+              description: Maximum number of requests allowed per minute.
+            requests_per_hour:
+              type: integer
+              description: Maximum number of requests allowed per hour.
+        quota_limit:
+          type: object
+          description: Quota configuration.
+          properties:
+            requests_per_month:
+              type: integer
+              description: Maximum number of requests allowed per month.
+        ip_allowlist:
+          type: array
+          items:
+            type: string
+          description: List of IP addresses or CIDR ranges that are allowed to access this MCP server.
+        ip_denylist:
+          type: array
+          items:
+            type: string
+          description: List of IP addresses or CIDR ranges that are denied access to this MCP server.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    McpServerHandleForPolicies:
+      name: mcp_server_handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API client token obtained from the Workato platform. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Workato Agent Studio API Documentation
+  url: https://docs.workato.com/workato-api/agent-studio.html

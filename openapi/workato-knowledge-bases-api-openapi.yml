@@ -1,0 +1,373 @@
+openapi: 3.1.0
+info:
+  title: Workato Agent Studio Data Tables Knowledge Bases API
+  description: The Workato Agent Studio API provides programmatic access to manage AI agents (genies), skills, and knowledge bases within the Workato Agentic Automation platform. Use this API to create and configure AI agents, assign skills and knowledge bases, and control agent lifecycle. Rate limits are 1,000 requests per minute for list/get operations and 60 requests per minute for all other operations.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+servers:
+- url: https://www.workato.com
+  description: US Production
+- url: https://app.eu.workato.com
+  description: EU Production
+- url: https://app.jp.workato.com
+  description: JP Production
+- url: https://app.sg.workato.com
+  description: SG Production
+- url: https://app.au.workato.com
+  description: AU Production
+security:
+- bearerAuth: []
+tags:
+- name: Knowledge Bases
+  description: Knowledge bases provide AI agents with contextual data from configured data sources such as documents, tables, and external systems.
+paths:
+  /api/agentic/knowledge_bases:
+    get:
+      operationId: listKnowledgeBases
+      summary: Workato List Knowledge Bases
+      description: Returns a paginated list of knowledge bases in the workspace. Knowledge bases provide AI agents with contextual data from configured data sources.
+      tags:
+      - Knowledge Bases
+      parameters:
+      - $ref: '#/components/parameters/FolderId'
+      - $ref: '#/components/parameters/ProjectId'
+      - $ref: '#/components/parameters/Query'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/SortTerm'
+      responses:
+        '200':
+          description: A list of knowledge bases.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KnowledgeBase'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createKnowledgeBase
+      summary: Workato Create a Knowledge Base
+      description: Creates a new knowledge base with the specified name, description, source type, and data sources for use by AI agents.
+      tags:
+      - Knowledge Bases
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeBaseInput'
+      responses:
+        '200':
+          description: The created knowledge base.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeBase'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/agentic/knowledge_bases/{id}:
+    get:
+      operationId: getKnowledgeBase
+      summary: Workato Get a Knowledge Base
+      description: Returns the details of a specific knowledge base by its ID.
+      tags:
+      - Knowledge Bases
+      parameters:
+      - $ref: '#/components/parameters/KnowledgeBaseId'
+      responses:
+        '200':
+          description: The knowledge base details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeBase'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateKnowledgeBase
+      summary: Workato Update a Knowledge Base
+      description: Updates the configuration of an existing knowledge base.
+      tags:
+      - Knowledge Bases
+      parameters:
+      - $ref: '#/components/parameters/KnowledgeBaseId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeBaseInput'
+      responses:
+        '200':
+          description: The updated knowledge base.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeBase'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteKnowledgeBase
+      summary: Workato Delete a Knowledge Base
+      description: Permanently deletes a knowledge base from the workspace.
+      tags:
+      - Knowledge Bases
+      parameters:
+      - $ref: '#/components/parameters/KnowledgeBaseId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/knowledge_bases/{id}/data_sources:
+    get:
+      operationId: listKnowledgeBaseDataSources
+      summary: Workato List Knowledge Base Data Sources
+      description: Returns all data sources configured for a specific knowledge base, including source type and connection details.
+      tags:
+      - Knowledge Bases
+      parameters:
+      - $ref: '#/components/parameters/KnowledgeBaseId'
+      responses:
+        '200':
+          description: Knowledge base ID and its configured data sources.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  knowledge_base_id:
+                    type: integer
+                    description: The ID of the knowledge base.
+                  data_sources:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataSource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/agentic/knowledge_bases/{id}/recipes:
+    get:
+      operationId: listKnowledgeBaseRecipes
+      summary: Workato List Recipes in a Knowledge Base
+      description: Returns a paginated list of recipes associated with a specific knowledge base.
+      tags:
+      - Knowledge Bases
+      parameters:
+      - $ref: '#/components/parameters/KnowledgeBaseId'
+      - $ref: '#/components/parameters/Query'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/SortTerm'
+      responses:
+        '200':
+          description: A list of recipes associated with the knowledge base.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      description: Recipe summary object.
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    SortTerm:
+      name: sort_term
+      in: query
+      description: Field to sort results by.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    Query:
+      name: query
+      in: query
+      description: Search query to filter results by name.
+      schema:
+        type: string
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
+    KnowledgeBaseId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the knowledge base.
+      schema:
+        type: integer
+  schemas:
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    KnowledgeBaseInput:
+      type: object
+      description: Input schema for creating or updating a knowledge base.
+      properties:
+        name:
+          type: string
+          description: Display name of the knowledge base.
+        description:
+          type: string
+          description: Human-readable description of the knowledge base's content.
+        folder_id:
+          type: integer
+          description: ID of the folder to place this knowledge base in.
+        source_type:
+          type: string
+          description: The type of data sources to use.
+        data_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSource'
+          description: List of data sources to configure.
+    KnowledgeBase:
+      type: object
+      description: A collection of data sources that provides contextual information to AI agents.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the knowledge base.
+        name:
+          type: string
+          description: Display name of the knowledge base.
+        description:
+          type: string
+          description: Human-readable description of the knowledge base's content.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this knowledge base.
+        source_type:
+          type: string
+          description: The type of data sources used in this knowledge base.
+        data_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSource'
+          description: List of data sources configured for this knowledge base.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the knowledge base was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the knowledge base was last updated.
+    DataSource:
+      type: object
+      description: A data source configuration for a knowledge base.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the data source.
+        source_type:
+          type: string
+          description: Type of the data source (e.g., document, table, api).
+        connection_id:
+          type: integer
+          description: ID of the connection used to access this data source.
+        config:
+          type: object
+          description: Source-specific configuration parameters.
+          additionalProperties: true
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API client token obtained from the Workato platform. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Workato Agent Studio API Documentation
+  url: https://docs.workato.com/workato-api/agent-studio.html

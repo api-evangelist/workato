@@ -1,0 +1,199 @@
+openapi: 3.1.0
+info:
+  title: Workato Agent Studio Data Tables User Groups API
+  description: The Workato Agent Studio API provides programmatic access to manage AI agents (genies), skills, and knowledge bases within the Workato Agentic Automation platform. Use this API to create and configure AI agents, assign skills and knowledge bases, and control agent lifecycle. Rate limits are 1,000 requests per minute for list/get operations and 60 requests per minute for all other operations.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+servers:
+- url: https://www.workato.com
+  description: US Production
+- url: https://app.eu.workato.com
+  description: EU Production
+- url: https://app.jp.workato.com
+  description: JP Production
+- url: https://app.sg.workato.com
+  description: SG Production
+- url: https://app.au.workato.com
+  description: AU Production
+security:
+- bearerAuth: []
+tags:
+- name: User Groups
+  description: Identity provider user groups used to control access to MCP servers.
+paths:
+  /api/mcp/mcp_servers/{handle}/assign_user_groups:
+    post:
+      operationId: assignUserGroupsToMcpServer
+      summary: Workato Assign User Groups to an MCP Server
+      description: Assigns identity provider user groups to an MCP server to control which users can access it.
+      tags:
+      - User Groups
+      parameters:
+      - $ref: '#/components/parameters/McpServerHandle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_group_ids
+              properties:
+                user_group_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of user group IDs to assign.
+      responses:
+        '200':
+          description: Updated user groups list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{handle}/remove_user_groups:
+    post:
+      operationId: removeUserGroupsFromMcpServer
+      summary: Workato Remove User Groups from an MCP Server
+      description: Removes identity provider user groups from an MCP server.
+      tags:
+      - User Groups
+      parameters:
+      - $ref: '#/components/parameters/McpServerHandle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_group_ids
+              properties:
+                user_group_ids:
+                  type: array
+                  items:
+                    type: integer
+                  description: Array of user group IDs to remove.
+      responses:
+        '200':
+          description: Updated user groups list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/user_groups:
+    get:
+      operationId: listMcpUserGroups
+      summary: Workato List User Groups
+      description: Returns a list of identity provider user groups available for MCP server assignment.
+      tags:
+      - User Groups
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of user groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserGroup'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    McpServerHandle:
+      name: handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+  schemas:
+    UserGroup:
+      type: object
+      description: An identity provider user group for access control.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the user group.
+        name:
+          type: string
+          description: Display name of the user group.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API client token obtained from the Workato platform. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Workato Agent Studio API Documentation
+  url: https://docs.workato.com/workato-api/agent-studio.html

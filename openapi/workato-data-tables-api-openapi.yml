@@ -1,0 +1,305 @@
+openapi: 3.1.0
+info:
+  title: Workato Agent Studio Data Tables API
+  description: The Workato Agent Studio API provides programmatic access to manage AI agents (genies), skills, and knowledge bases within the Workato Agentic Automation platform. Use this API to create and configure AI agents, assign skills and knowledge bases, and control agent lifecycle. Rate limits are 1,000 requests per minute for list/get operations and 60 requests per minute for all other operations.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+servers:
+- url: https://www.workato.com
+  description: US Production
+- url: https://app.eu.workato.com
+  description: EU Production
+- url: https://app.jp.workato.com
+  description: JP Production
+- url: https://app.sg.workato.com
+  description: SG Production
+- url: https://app.au.workato.com
+  description: AU Production
+security:
+- bearerAuth: []
+tags:
+- name: Data Tables
+  description: Data tables are structured storage within Workato for persisting and querying records used in recipe automation.
+paths:
+  /api/data_tables:
+    get:
+      operationId: listDataTables
+      summary: Workato List Data Tables
+      description: Returns a paginated list of all data tables in the workspace.
+      tags:
+      - Data Tables
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - name: per_page
+        in: query
+        description: Number of results per page (maximum 100).
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+      responses:
+        '200':
+          description: A list of data tables.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataTable'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createDataTable
+      summary: Workato Create a Data Table
+      description: Creates a new data table with the specified schema.
+      tags:
+      - Data Tables
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataTableInput'
+      responses:
+        '200':
+          description: The created data table.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTable'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/data_tables/{data_table_id}:
+    get:
+      operationId: getDataTable
+      summary: Workato Get a Data Table
+      description: Returns the details of a specific data table by its ID.
+      tags:
+      - Data Tables
+      parameters:
+      - $ref: '#/components/parameters/DataTableId'
+      responses:
+        '200':
+          description: The data table details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTable'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateDataTable
+      summary: Workato Update a Data Table
+      description: Updates the name, folder, or schema of an existing data table.
+      tags:
+      - Data Tables
+      parameters:
+      - $ref: '#/components/parameters/DataTableId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataTableInput'
+      responses:
+        '200':
+          description: The updated data table.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTable'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteDataTable
+      summary: Workato Delete a Data Table
+      description: Permanently deletes a data table and all its records.
+      tags:
+      - Data Tables
+      parameters:
+      - $ref: '#/components/parameters/DataTableId'
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/data_tables/{data_table_id}/truncate:
+    post:
+      operationId: truncateDataTable
+      summary: Workato Truncate a Data Table
+      description: Removes all records from a data table while preserving its structure and schema.
+      tags:
+      - Data Tables
+      parameters:
+      - $ref: '#/components/parameters/DataTableId'
+      responses:
+        '200':
+          description: Truncation confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    DataTableColumn:
+      type: object
+      description: A column definition in a data table schema.
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Column name used as the field identifier.
+        type:
+          type: string
+          description: Data type of the column.
+          enum:
+          - string
+          - integer
+          - number
+          - boolean
+          - date
+          - datetime
+          - object
+          - array
+        description:
+          type: string
+          description: Optional description of the column's purpose.
+        required:
+          type: boolean
+          description: Whether this column is required when creating records.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    DataTableInput:
+      type: object
+      description: Input schema for creating or updating a data table.
+      required:
+      - name
+      - folder_id
+      - schema
+      properties:
+        name:
+          type: string
+          description: Display name for the data table.
+        folder_id:
+          type: integer
+          description: ID of the folder to place the data table in.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataTableColumn'
+          description: Column definitions for the table.
+    DataTable:
+      type: object
+      description: A structured data storage table within the Workato workspace.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the data table.
+        name:
+          type: string
+          description: Display name of the data table.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this data table.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataTableColumn'
+          description: List of column definitions for the table.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the data table was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the data table was last updated.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    DataTableId:
+      name: data_table_id
+      in: path
+      required: true
+      description: Unique identifier of the data table.
+      schema:
+        type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API client token obtained from the Workato platform. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Workato Agent Studio API Documentation
+  url: https://docs.workato.com/workato-api/agent-studio.html

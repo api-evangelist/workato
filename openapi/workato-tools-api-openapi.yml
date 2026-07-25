@@ -1,0 +1,207 @@
+openapi: 3.1.0
+info:
+  title: Workato Agent Studio Data Tables Tools API
+  description: The Workato Agent Studio API provides programmatic access to manage AI agents (genies), skills, and knowledge bases within the Workato Agentic Automation platform. Use this API to create and configure AI agents, assign skills and knowledge bases, and control agent lifecycle. Rate limits are 1,000 requests per minute for list/get operations and 60 requests per minute for all other operations.
+  version: '1.0'
+  contact:
+    name: Workato Support
+    url: https://support.workato.com/
+  termsOfService: https://www.workato.com/legal
+servers:
+- url: https://www.workato.com
+  description: US Production
+- url: https://app.eu.workato.com
+  description: EU Production
+- url: https://app.jp.workato.com
+  description: JP Production
+- url: https://app.sg.workato.com
+  description: SG Production
+- url: https://app.au.workato.com
+  description: AU Production
+security:
+- bearerAuth: []
+tags:
+- name: Tools
+  description: Tools are individual API endpoints or actions exposed through an MCP server and available to AI agents.
+paths:
+  /api/mcp/mcp_servers/{mcp_server_handle}/tools:
+    get:
+      operationId: listMcpServerTools
+      summary: Workato List MCP Server Tools
+      description: Returns a paginated list of tools assigned to an MCP server.
+      tags:
+      - Tools
+      parameters:
+      - $ref: '#/components/parameters/McpServerHandleForPolicies'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: A list of tools assigned to the MCP server.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tool'
+                  next_page:
+                    type: boolean
+                    description: Whether there are more pages available.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/mcp/mcp_servers/{mcp_server_handle}/tools/{id}:
+    put:
+      operationId: updateMcpServerTool
+      summary: Workato Update a Tool
+      description: Updates the description of a specific tool assigned to an MCP server. Tool descriptions help AI agents understand when and how to use the tool.
+      tags:
+      - Tools
+      parameters:
+      - $ref: '#/components/parameters/McpServerHandleForPolicies'
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the tool.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: Updated description of what the tool does and when to use it.
+      responses:
+        '200':
+          description: The updated tool.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: removeMcpServerTool
+      summary: Workato Remove a Tool from MCP Server
+      description: Removes a specific tool from an MCP server.
+      tags:
+      - Tools
+      parameters:
+      - $ref: '#/components/parameters/McpServerHandleForPolicies'
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the tool to remove.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Removal confirmation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    McpServerHandleForPolicies:
+      name: mcp_server_handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+  schemas:
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    Tool:
+      type: object
+      description: An API endpoint or action exposed through an MCP server as a callable tool.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the tool within its application.
+        name:
+          type: string
+          description: Display name of the tool.
+        description:
+          type: string
+          description: Description of what the tool does and when AI agents should use it.
+        trigger_application:
+          type: string
+          description: The application or API collection that owns this tool.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'API client token obtained from the Workato platform. Include as Authorization: Bearer {token}.'
+externalDocs:
+  description: Workato Agent Studio API Documentation
+  url: https://docs.workato.com/workato-api/agent-studio.html
