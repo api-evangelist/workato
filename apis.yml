@@ -1,101 +1,6 @@
 aid: workato
 url: https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/apis.yml
 apis:
-- aid: workato:workato
-  name: Workato
-  tags:
-  - Agentic
-  - Embedded SaaS Integration
-  - iPaaS
-  - Orchestration
-  humanURL: https://www.workato.com/
-  properties:
-  - url: https://www.workato.com/
-    type: Documentation
-  - url: https://docs.workato.com/en/workato-api.html#base-url
-    name: Workato API - Introduction | Workato Docs
-    type: Documentation
-    description: 'null'
-  - url: https://docs.workato.com/en/workato-api.html#authentication
-    name: Workato API - Introduction | Workato Docs
-    type: Authentication
-    description: 'null'
-  - url: https://docs.workato.com/workato-api.html
-    name: Workato Developer API - Introduction
-    type: API Documentation
-  - url: https://docs.workato.com/workato-api/resources.html
-    name: Workato API - Resources
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/recipes.html
-    name: Workato API - Recipes
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/api-connectors.html
-    name: Workato API - Connectors
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/api-client-apis.html
-    name: Workato API - API Clients
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/api-platform.html
-    name: Workato API - API Platform
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/custom_connectors.html
-    name: Workato API - Custom Connectors
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
-    name: Workato API - Recipe Lifecycle Management
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/authentication.html
-    name: Workato API - Authentication
-    type: Authentication
-  - url: https://docs.workato.com/workato-api/rate-limiting.html
-    name: Workato API - Rate Limiting
-    type: RateLimits
-  - url: https://docs.workato.com/developing-connectors/sdk.html
-    name: Workato Connector SDK - Developer Program
-    type: SDKs
-  - url: https://github.com/workato/workato-connector-sdk
-    name: Workato Connector SDK - GitHub
-    type: SDKs
-  - url: https://docs.workato.com/developing-connectors/custom-connector.html
-    name: Create a Custom Connector
-    type: SDKs
-  - url: https://docs.workato.com/workato-api/pubsub.html
-    name: Workato API - Event Streams Public API
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/agent-studio.html
-    name: Workato API - Agent Studio
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/mcp-servers.html
-    name: Workato API - MCP Servers
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/test-automation.html
-    name: Workato API - Test Automation
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/data-tables.html
-    name: Workato API - Data Tables
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/tag-assignments.html
-    name: Workato API - Tag Assignments
-    type: APIReference
-  - url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
-    name: Workato API - Custom OAuth Profiles
-    type: APIReference
-  - url: openapi/workato-developer-api-openapi.yml
-    type: OpenAPI
-  - url: openapi/workato-agent-studio-openapi.yml
-    type: OpenAPI
-  - url: json-schema/workato-recipe-schema.json
-    type: JSONSchema
-  - url: json-schema/workato-genie-schema.json
-    type: JSONSchema
-  - url: graphql/workato-graphql.md
-    type: GraphQL
-  description: >-
-    Workato is an American multinational software company that provides a cloud-based platform for automation,
-    integration, and artificial intelligence orchestration across applications, data, and systems. The company was
-    founded in 2013 and is headquartered in Mountain View, California. Workato has been recognized as an 8x Leader and
-    3x Furthest in Vision in the 2026 Gartner Magic Quadrant for Integration Platform as a Service, and now positions
-    Enterprise MCP, Workato Genies, and Agent Studio as the agentic AI surface built on top of its iPaaS foundation.
 - aid: workato:embedded-api
   name: Workato Embedded Partner API
   tags:
@@ -138,61 +43,733 @@ apis:
     name: Workato Fully Embedded
     type: Documentation
   description: >-
-    The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes,
-    connections, and other assets within the Workato Embedded platform. These APIs support provisioning customer
-    workspaces, managing environments, and building fully embedded integration experiences within partner
-    applications.
-- aid: workato:event-streams-public-api
-  name: Workato Event Streams Public API
-  tags:
-  - Event Streams
-  - Messaging
-  - Pub/Sub
-  - REST
-  humanURL: https://docs.workato.com/workato-api/pubsub.html
-  properties:
-  - url: https://docs.workato.com/workato-api/pubsub.html
-    name: Workato API - Event Streams Public API
-    type: Documentation
-  - url: https://docs.workato.com/event-streams.html
-    name: Event Streams | Workato Docs
-    type: Documentation
-  - url: openapi/workato-event-streams-openapi.yml
-    type: OpenAPI
-  - url: asyncapi/workato-event-streams-asyncapi.yml
-    type: AsyncAPI
+    The Workato Embedded Partner APIs enable partners to programmatically create and manage customers,
+    recipes, connections, and other assets within the Workato Embedded platform. These APIs support provisioning
+    customer workspaces, managing environments, and building fully embedded integration experiences within
+    partner applications.
+- aid: workato:workato-data-tables-api
+  name: Workato Data Tables API
   description: >-
-    The Workato Event Streams Public API enables HTTP-based clients to publish and consume messages from event topics.
-    It supports single message publish, batch publish of up to 100 messages, and message consumption with long
-    polling. The API is separate from the Developer API's event streams management endpoints and is rate limited to 60
-    requests per minute with a 1 MB maximum payload.
-- aid: workato:mcp-server-api
-  name: Workato MCP Server API
+    Data tables are structured storage within Workato for persisting and querying records used in recipe
+    automation.
+  humanURL: https://www.workato.com/
   tags:
-  - AI Agents
-  - MCP
-  - Model Context Protocol
-  - REST
-  humanURL: https://docs.workato.com/mcp.html
+  - Data Tables
   properties:
-  - url: https://docs.workato.com/mcp.html
-    name: MCP | Workato Docs
-    type: Documentation
-  - url: https://docs.workato.com/workato-api/mcp-servers.html
-    name: Workato API - MCP Servers
-    type: APIReference
-  - url: https://docs.workato.com/en/mcp/expose-developer-apis.html
-    name: Workato Developer API MCP | Workato Docs
-    type: Documentation
-  - url: openapi/workato-mcp-server-openapi.yml
-    type: OpenAPI
+  - type: OpenAPI
+    url: openapi/workato-data-tables-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-genies-api
+  name: Workato Genies API
   description: >-
-    The Workato MCP Server API provides endpoints for creating, configuring, and managing Model Context Protocol (MCP)
-    servers that expose Workato API collections as tools for AI agents. It supports server creation, tool management,
-    user group assignment, and policy configuration. MCP servers generate unique authenticated URLs usable by AI
-    development environments like Claude Desktop and Cursor. Workato now markets this as Enterprise MCP, the agentic
-    AI surface built on top of the iPaaS, and recently added nine prebuilt MCP servers including Dropbox, Freshdesk,
-    ZoomInfo, Notion, Discord, and Microsoft Teams. MCP is available in the US, EU, AU, JP, and SG data centers.
+    AI agents (genies) that can be configured with skills, knowledge bases, and instructions to automate
+    complex workflows.
+  humanURL: https://www.workato.com/
+  tags:
+  - Genies
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-genies-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-knowledge-bases-api
+  name: Workato Knowledge Bases API
+  description: >-
+    Knowledge bases provide AI agents with contextual data from configured data sources such as documents,
+    tables, and external systems.
+  humanURL: https://www.workato.com/
+  tags:
+  - Knowledge Bases
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-knowledge-bases-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-mcp-servers-api
+  name: Workato MCP Servers API
+  description: >-
+    MCP servers expose Workato API endpoints as tools accessible to AI agents via the Model Context Protocol.
+  humanURL: https://www.workato.com/
+  tags:
+  - MCP Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-mcp-servers-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-messages-api
+  name: Workato Messages API
+  description: >-
+    Endpoints for publishing messages to event topics and consuming messages from event topics.
+  humanURL: https://www.workato.com/
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-messages-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-policies-api
+  name: Workato Policies API
+  description: >-
+    Security policies that govern rate limits, quotas, and IP access controls for MCP servers.
+  humanURL: https://www.workato.com/
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-policies-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-recipes-api
+  name: Workato Recipes API
+  description: >-
+    Recipes are automated workflows that connect applications and services. Manage recipe lifecycle including
+    creation, activation, and versioning.
+  humanURL: https://www.workato.com/
+  tags:
+  - Recipes
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-recipes-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-skills-api
+  name: Workato Skills API
+  description: >-
+    Skills are recipe-backed capabilities that can be assigned to AI agents to give them actionable tools.
+  humanURL: https://www.workato.com/
+  tags:
+  - Skills
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-skills-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-tools-api
+  name: Workato Tools API
+  description: >-
+    Tools are individual API endpoints or actions exposed through an MCP server and available to AI agents.
+  humanURL: https://www.workato.com/
+  tags:
+  - Tools
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-tools-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
+- aid: workato:workato-user-groups-api
+  name: Workato User Groups API
+  description: Identity provider user groups used to control access to MCP servers.
+  humanURL: https://www.workato.com/
+  tags:
+  - User Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/workato-user-groups-api-openapi.yml
+  - type: Documentation
+    url: https://www.workato.com/
+  - type: Documentation
+    url: https://docs.workato.com/en/workato-api.html#base-url
+  - type: Authentication
+    url: https://docs.workato.com/en/workato-api.html#authentication
+  - type: API Documentation
+    url: https://docs.workato.com/workato-api.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/resources.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipes.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-client-apis.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/api-platform.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom_connectors.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/recipe-lifecycle-management.html
+  - type: Authentication
+    url: https://docs.workato.com/workato-api/authentication.html
+  - type: RateLimits
+    url: https://docs.workato.com/workato-api/rate-limiting.html
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/sdk.html
+  - type: SDKs
+    url: https://github.com/workato/workato-connector-sdk
+  - type: SDKs
+    url: https://docs.workato.com/developing-connectors/custom-connector.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/agent-studio.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/mcp-servers.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/test-automation.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/data-tables.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/tag-assignments.html
+  - type: APIReference
+    url: https://docs.workato.com/workato-api/custom-oauth-profiles.html
+  - type: JSONSchema
+    url: json-schema/workato-recipe-schema.json
+  - type: JSONSchema
+    url: json-schema/workato-genie-schema.json
+  - type: GraphQL
+    url: graphql/workato-graphql.md
+  - type: Documentation
+    url: https://docs.workato.com/workato-api/pubsub.html
+  - type: Documentation
+    url: https://docs.workato.com/event-streams.html
+  - type: AsyncAPI
+    url: asyncapi/workato-event-streams-asyncapi.yml
+  - type: Documentation
+    url: https://docs.workato.com/mcp.html
+  - type: Documentation
+    url: https://docs.workato.com/en/mcp/expose-developer-apis.html
 name: Workato
 tags:
 - Agentic
@@ -206,6 +783,19 @@ tags:
 - Orchestration
 - Workflow
 type: Index
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.workato.com/wp-content/uploads/2023/01/workato-logo.svg
 access: 3rd-Party
 common:
