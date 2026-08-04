@@ -1,0 +1,32 @@
+{
+  "provider": "workato",
+  "sources": [
+    "workato-data-tables-api-openapi.yml",
+    "workato-genies-api-openapi.yml",
+    "workato-knowledge-bases-api-openapi.yml",
+    "workato-mcp-servers-api-openapi.yml",
+    "workato-messages-api-openapi.yml",
+    "workato-policies-api-openapi.yml",
+    "workato-recipes-api-openapi.yml",
+    "workato-skills-api-openapi.yml",
+    "workato-tools-api-openapi.yml",
+    "workato-user-groups-api-openapi.yml"
+  ],
+  "outputs": [
+    "workato-data-tables-api-openapi.yml",
+    "workato-genies-api-openapi.yml",
+    "workato-knowledge-bases-api-openapi.yml",
+    "workato-mcp-servers-api-openapi.yml",
+    "workato-messages-api-openapi.yml",
+    "workato-policies-api-openapi.yml",
+    "workato-recipes-api-openapi.yml",
+    "workato-skills-api-openapi.yml",
+    "workato-tools-api-openapi.yml",
+    "workato-user-groups-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
