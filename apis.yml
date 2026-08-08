@@ -3218,7 +3218,7 @@ common:
   description: 'null'
 - url: https://docs.workato.com/en/mcp.html
   name: MCP | Workato Docs
-  type: MCP
+  type: Documentation
   description: 'null'
 - data:
   - Base Workspace from ~$10K/year
