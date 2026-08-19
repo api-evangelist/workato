@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workato Agent Studio Data Tables Tools API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List MCP Server Tools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/tools",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of tools assigned to an MCP server."
+        },
+        {
+          "info": {
+            "name": "Workato Update a Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/tools/:id",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the tool."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the description of a specific tool assigned to an MCP server. Tool descriptions help AI agents understand when and how to use the tool."
+        },
+        {
+          "info": {
+            "name": "Workato Remove a Tool from MCP Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/tools/:id",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the tool to remove."
+              }
+            ]
+          },
+          "docs": "Removes a specific tool from an MCP server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

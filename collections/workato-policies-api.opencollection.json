@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workato Agent Studio Data Tables Policies API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato Get Server Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/server_policies",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ]
+          },
+          "docs": "Retrieves the security policy configuration for an MCP server, including rate limits, quota limits, and IP access controls."
+        },
+        {
+          "info": {
+            "name": "Workato Update Server Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/mcp/mcp_servers/:mcp_server_handle/server_policies",
+            "params": [
+              {
+                "name": "mcp_server_handle",
+                "value": "",
+                "type": "path",
+                "description": "Unique handle (slug) of the MCP server."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the security policy configuration for an MCP server, including rate limits, quota limits, and IP allow/deny lists."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workato Agent Studio Data Tables API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Tables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Workato List Data Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/data_tables",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-based)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (maximum 100)."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all data tables in the workspace."
+        },
+        {
+          "info": {
+            "name": "Workato Create a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/data_tables",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new data table with the specified schema."
+        },
+        {
+          "info": {
+            "name": "Workato Get a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific data table by its ID."
+        },
+        {
+          "info": {
+            "name": "Workato Update a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the name, folder, or schema of an existing data table."
+        },
+        {
+          "info": {
+            "name": "Workato Delete a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a data table and all its records."
+        },
+        {
+          "info": {
+            "name": "Workato Truncate a Data Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.workato.com/api/data_tables/:data_table_id/truncate",
+            "params": [
+              {
+                "name": "data_table_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the data table."
+              }
+            ]
+          },
+          "docs": "Removes all records from a data table while preserving its structure and schema."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
