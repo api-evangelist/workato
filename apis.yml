@@ -344,6 +344,8 @@ apis:
     Endpoints for publishing messages to event topics and consuming messages from event topics.
   humanURL: https://www.workato.com/
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -772,6 +774,17 @@ apis:
     url: https://docs.workato.com/en/mcp/expose-developer-apis.html
 name: Workato
 tags:
+- Agentic
+- API Management
+- Automation
+- B2B
+- Embedded iPaaS
+- Enterprise
+- Integration
+- iPaaS
+- Orchestration
+- Workflows
+tags_raw:
 - Agentic
 - API Management
 - Automation
