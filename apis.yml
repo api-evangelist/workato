@@ -796,6 +796,18 @@ tags_raw:
 - Orchestration
 - Workflow
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -812,6 +824,9 @@ accessModel:
 image: https://www.workato.com/wp-content/uploads/2023/01/workato-logo.svg
 access: 3rd-Party
 common:
+- type: CapabilityMap
+  url: capabilities/workato-capability-edges.yml
+  name: Workato Business Capability Map
 - type: AgenticAccess
   url: agentic-access/workato-agentic-access.yml
 - type: DomainSecurity
