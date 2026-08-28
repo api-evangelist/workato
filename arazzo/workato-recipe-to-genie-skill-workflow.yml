@@ -12,11 +12,14 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: developerApi
-  url: ../openapi/workato-developer-api-openapi.yml
+- name: geniesApi
+  url: ../openapi/workato-genies-api-openapi.yml
   type: openapi
-- name: agentStudioApi
-  url: ../openapi/workato-agent-studio-openapi.yml
+- name: recipesApi
+  url: ../openapi/workato-recipes-api-openapi.yml
+  type: openapi
+- name: skillsApi
+  url: ../openapi/workato-skills-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: recipe-to-genie-skill
@@ -39,7 +42,7 @@ workflows:
   steps:
   - stepId: getRecipe
     description: Confirm the source recipe exists before converting it into a skill.
-    operationId: $sourceDescriptions.developerApi.getRecipe
+    operationId: $sourceDescriptions.recipesApi.getRecipe
     parameters:
     - name: id
       in: path
@@ -50,7 +53,7 @@ workflows:
       recipeName: $response.body#/name
   - stepId: createSkill
     description: Convert the recipe into a recipe-backed skill.
-    operationId: $sourceDescriptions.agentStudioApi.createSkill
+    operationId: $sourceDescriptions.skillsApi.createSkill
     requestBody:
       contentType: application/json
       payload:
@@ -62,7 +65,7 @@ workflows:
       skillName: $response.body#/name
   - stepId: confirmSkill
     description: Read the created skill back to confirm the conversion succeeded.
-    operationId: $sourceDescriptions.agentStudioApi.getSkill
+    operationId: $sourceDescriptions.skillsApi.getSkill
     parameters:
     - name: id
       in: path
@@ -73,7 +76,7 @@ workflows:
       backingRecipeId: $response.body#/recipe_id
   - stepId: assignSkill
     description: Assign the new skill to the genie as an actionable tool.
-    operationId: $sourceDescriptions.agentStudioApi.assignSkillsToGenie
+    operationId: $sourceDescriptions.geniesApi.assignSkillsToGenie
     parameters:
     - name: id
       in: path

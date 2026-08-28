@@ -10,8 +10,14 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: mcpServerApi
-  url: ../openapi/workato-mcp-server-openapi.yml
+- name: mcpServersApi
+  url: ../openapi/workato-mcp-servers-api-openapi.yml
+  type: openapi
+- name: policiesApi
+  url: ../openapi/workato-policies-api-openapi.yml
+  type: openapi
+- name: userGroupsApi
+  url: ../openapi/workato-user-groups-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: secure-mcp-server-access

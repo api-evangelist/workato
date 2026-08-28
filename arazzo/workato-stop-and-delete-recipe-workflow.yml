@@ -10,8 +10,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: developerApi
-  url: ../openapi/workato-developer-api-openapi.yml
+- name: recipesApi
+  url: ../openapi/workato-recipes-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: stop-and-delete-recipe

@@ -10,8 +10,8 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: developerApi
-  url: ../openapi/workato-developer-api-openapi.yml
+- name: dataTablesApi
+  url: ../openapi/workato-data-tables-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-data-table

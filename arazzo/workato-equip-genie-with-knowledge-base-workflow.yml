@@ -11,8 +11,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: agentStudioApi
-  url: ../openapi/workato-agent-studio-openapi.yml
+- name: geniesApi
+  url: ../openapi/workato-genies-api-openapi.yml
+  type: openapi
+- name: knowledgeBasesApi
+  url: ../openapi/workato-knowledge-bases-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: equip-genie-with-knowledge-base

@@ -11,8 +11,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: eventStreamsApi
-  url: ../openapi/workato-event-streams-openapi.yml
+- name: messagesApi
+  url: ../openapi/workato-messages-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: batch-publish-events
