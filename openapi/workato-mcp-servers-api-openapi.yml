@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workato Agent Studio Data Tables MCP Servers API
-  description: The Workato Agent Studio API provides programmatic access to manage AI agents (genies), skills, and knowledge bases within the Workato Agentic Automation platform. Use this API to create and configure AI agents, assign skills and knowledge bases, and control agent lifecycle. Rate limits are 1,000 requests per minute for list/get operations and 60 requests per minute for all other operations.
+  title: Workato MCP Server MCP Servers API
+  description: The Workato MCP Server API provides programmatic management of Model Context Protocol (MCP) servers that expose Workato API collections as tools for AI agents. Use this API to create MCP servers, assign tools, configure access policies, and manage user group access. MCP servers generate unique authenticated URLs usable by AI development environments such as Claude Desktop and Cursor. Rate limit is 60 requests per minute.
   version: '1.0'
   contact:
     name: Workato Support
@@ -267,6 +267,12 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
     McpServerHandle:
       name: handle
       in: path
@@ -274,14 +280,6 @@ components:
       description: Unique handle (slug) of the MCP server.
       schema:
         type: string
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
     PerPage:
       name: per_page
       in: query
@@ -291,12 +289,14 @@ components:
         minimum: 1
         maximum: 100
         default: 100
-    FolderId:
-      name: folder_id
+    Page:
+      name: page
       in: query
-      description: Filter results by folder ID.
+      description: Page number for pagination (1-based).
       schema:
         type: integer
+        minimum: 1
+        default: 1
     ProjectId:
       name: project_id
       in: query
@@ -312,6 +312,16 @@ components:
           type: boolean
           description: Whether the operation was successful.
           example: true
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     McpServerInput:
       type: object
       description: Input schema for creating or updating an MCP server.
@@ -344,16 +354,6 @@ components:
         trigger_application:
           type: string
           description: The application or API collection that owns this tool.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     McpServer:
       type: object
       description: An MCP server that exposes Workato API endpoints as tools for AI agents.
@@ -407,5 +407,5 @@ components:
       scheme: bearer
       description: 'API client token obtained from the Workato platform. Include as Authorization: Bearer {token}.'
 externalDocs:
-  description: Workato Agent Studio API Documentation
-  url: https://docs.workato.com/workato-api/agent-studio.html
+  description: Workato MCP Server API Documentation
+  url: https://docs.workato.com/workato-api/mcp-servers.html

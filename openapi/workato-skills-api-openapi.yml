@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workato Agent Studio Data Tables Skills API
+  title: Workato Agent Studio Skills API
   description: The Workato Agent Studio API provides programmatic access to manage AI agents (genies), skills, and knowledge bases within the Workato Agentic Automation platform. Use this API to create and configure AI agents, assign skills and knowledge bases, and control agent lifecycle. Rate limits are 1,000 requests per minute for list/get operations and 60 requests per minute for all other operations.
   version: '1.0'
   contact:
@@ -106,6 +106,21 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
     SortTerm:
       name: sort_term
       in: query
@@ -120,21 +135,12 @@ components:
         type: integer
         minimum: 1
         default: 1
-    PerPage:
-      name: per_page
+    ProjectId:
+      name: project_id
       in: query
-      description: Number of results per page.
+      description: Filter results by project ID.
       schema:
         type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    Query:
-      name: query
-      in: query
-      description: Search query to filter results by name.
-      schema:
-        type: string
     SkillId:
       name: id
       in: path
@@ -142,18 +148,12 @@ components:
       description: Unique identifier of the skill.
       schema:
         type: integer
-    FolderId:
-      name: folder_id
+    Query:
+      name: query
       in: query
-      description: Filter results by folder ID.
+      description: Search query to filter results by name.
       schema:
-        type: integer
-    ProjectId:
-      name: project_id
-      in: query
-      description: Filter results by project ID.
-      schema:
-        type: integer
+        type: string
   responses:
     NotFound:
       description: The requested resource was not found.
@@ -174,6 +174,16 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     Skill:
       type: object
       description: A recipe-backed capability that can be assigned to an AI agent as a tool.
@@ -201,16 +211,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the skill was last updated.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
   securitySchemes:
     bearerAuth:
       type: http

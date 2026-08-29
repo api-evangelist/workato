@@ -1,32 +1,43 @@
 {
   "provider": "workato",
   "sources": [
-    "workato-data-tables-api-openapi.yml",
-    "workato-genies-api-openapi.yml",
-    "workato-knowledge-bases-api-openapi.yml",
-    "workato-mcp-servers-api-openapi.yml",
-    "workato-messages-api-openapi.yml",
-    "workato-policies-api-openapi.yml",
-    "workato-recipes-api-openapi.yml",
-    "workato-skills-api-openapi.yml",
-    "workato-tools-api-openapi.yml",
-    "workato-user-groups-api-openapi.yml"
+    "_original/workato-agent-studio-openapi.yml",
+    "_original/workato-developer-api-openapi.yml",
+    "_original/workato-event-streams-openapi.yml",
+    "_original/workato-mcp-server-openapi.yml"
   ],
   "outputs": [
-    "workato-data-tables-api-openapi.yml",
     "workato-genies-api-openapi.yml",
     "workato-knowledge-bases-api-openapi.yml",
-    "workato-mcp-servers-api-openapi.yml",
-    "workato-messages-api-openapi.yml",
-    "workato-policies-api-openapi.yml",
-    "workato-recipes-api-openapi.yml",
     "workato-skills-api-openapi.yml",
+    "workato-data-tables-api-openapi.yml",
+    "workato-recipes-api-openapi.yml",
+    "workato-messages-api-openapi.yml",
+    "workato-mcp-servers-api-openapi.yml",
+    "workato-policies-api-openapi.yml",
     "workato-tools-api-openapi.yml",
     "workato-user-groups-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "workato-agent-studio-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "workato-developer-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "workato-event-streams-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "workato-mcp-server-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "workato-data-tables-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-genies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-knowledge-bases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-mcp-servers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-recipes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-skills-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-tools-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workato-user-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
