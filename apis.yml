@@ -272,6 +272,8 @@ apis:
     MCP servers expose Workato API endpoints as tools accessible to AI agents via the Model Context Protocol.
   humanURL: https://www.workato.com/
   tags:
+  - MCP Server
+  tags_raw:
   - MCP Servers
   properties:
   - type: OpenAPI
