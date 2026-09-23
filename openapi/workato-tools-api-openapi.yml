@@ -119,24 +119,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     Tool:
       type: object
       description: An API endpoint or action exposed through an MCP server as a callable tool.
@@ -153,7 +135,32 @@ components:
         trigger_application:
           type: string
           description: The application or API collection that owns this tool.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
   parameters:
+    McpServerHandleForPolicies:
+      name: mcp_server_handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
     PerPage:
       name: per_page
       in: query
@@ -163,13 +170,6 @@ components:
         minimum: 1
         maximum: 100
         default: 100
-    McpServerHandleForPolicies:
-      name: mcp_server_handle
-      in: path
-      required: true
-      description: Unique handle (slug) of the MCP server.
-      schema:
-        type: string
     Page:
       name: page
       in: query

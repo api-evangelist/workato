@@ -26,7 +26,8 @@
     "workato-agent-studio-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "workato-developer-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "workato-event-streams-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "workato-mcp-server-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "workato-mcp-server-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "workato-data-tables-api-openapi.yml: previously refined output, superseded by openapi/_original/",

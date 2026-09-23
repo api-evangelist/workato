@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Workato Developer Recipes API
-  description: 'The Workato Developer API provides programmatic access to manage all aspects of a Workato workspace, including recipes, connections, jobs, folders, data tables, and more. It enables automation of workspace management, CI/CD pipeline integration, environment promotion, and operational monitoring. Authentication uses Bearer tokens from API clients configured in the Workato platform. Rate limits vary by endpoint: 1 req/sec for recipe creation, 20 req/min for health analysis, and 60 req/min for all other operations.'
+  description: The Workato Developer API provides programmatic access to manage all aspects of a Workato workspace, including recipes, connections, jobs, folders, data tables, and more.
   version: '1.0'
   contact:
     name: Workato Support
@@ -344,102 +344,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    RecipeIdPath:
-      name: recipe_id
-      in: path
-      required: true
-      description: Unique identifier of the recipe.
-      schema:
-        type: integer
-    RecipeId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the recipe.
-      schema:
-        type: integer
   schemas:
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
-    RecipeInput:
-      type: object
-      description: Input schema for creating or updating a recipe.
-      properties:
-        recipe:
-          type: object
-          properties:
-            name:
-              type: string
-              description: Display name for the recipe.
-            code:
-              type: string
-              description: JSON-encoded recipe definition code.
-            config:
-              type: string
-              description: JSON-encoded recipe configuration.
-            folder_id:
-              type: integer
-              description: ID of the folder to place the recipe in.
-            description:
-              type: string
-              description: Human-readable description of what the recipe does.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
-    RecipeVersion:
-      type: object
-      description: A specific version snapshot of a recipe.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of this version.
-        version_no:
-          type: integer
-          description: Sequential version number.
-        comment:
-          type: string
-          description: Optional comment describing changes in this version.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this version was created.
     Recipe:
       type: object
       description: A Workato recipe representing an automated workflow.
@@ -482,15 +387,110 @@ components:
         stop_cause:
           type: string
           description: Reason the recipe was stopped, if applicable.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    RecipeVersion:
+      type: object
+      description: A specific version snapshot of a recipe.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of this version.
+        version_no:
+          type: integer
+          description: Sequential version number.
+        comment:
+          type: string
+          description: Optional comment describing changes in this version.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this version was created.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    RecipeInput:
+      type: object
+      description: Input schema for creating or updating a recipe.
+      properties:
+        recipe:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Display name for the recipe.
+            code:
+              type: string
+              description: JSON-encoded recipe definition code.
+            config:
+              type: string
+              description: JSON-encoded recipe configuration.
+            folder_id:
+              type: integer
+              description: ID of the folder to place the recipe in.
+            description:
+              type: string
+              description: Human-readable description of what the recipe does.
+  parameters:
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    RecipeId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the recipe.
+      schema:
+        type: integer
+    RecipeIdPath:
+      name: recipe_id
+      in: path
+      required: true
+      description: Unique identifier of the recipe.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication token is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication token is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

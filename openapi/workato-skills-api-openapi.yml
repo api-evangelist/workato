@@ -105,74 +105,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    SortTerm:
-      name: sort_term
-      in: query
-      description: Field to sort results by.
-      schema:
-        type: string
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    ProjectId:
-      name: project_id
-      in: query
-      description: Filter results by project ID.
-      schema:
-        type: integer
-    SkillId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the skill.
-      schema:
-        type: integer
-    Query:
-      name: query
-      in: query
-      description: Search query to filter results by name.
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -211,6 +143,74 @@ components:
           type: string
           format: date-time
           description: Timestamp when the skill was last updated.
+  parameters:
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    SkillId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the skill.
+      schema:
+        type: integer
+    Query:
+      name: query
+      in: query
+      description: Search query to filter results by name.
+      schema:
+        type: string
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    SortTerm:
+      name: sort_term
+      in: query
+      description: Field to sort results by.
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

@@ -73,6 +73,16 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     ServerPolicy:
       type: object
       description: Security policy configuration for an MCP server.
@@ -104,16 +114,6 @@ components:
           items:
             type: string
           description: List of IP addresses or CIDR ranges that are denied access to this MCP server.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
   parameters:
     McpServerHandleForPolicies:
       name: mcp_server_handle

@@ -266,62 +266,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
-    McpServerHandle:
-      name: handle
-      in: path
-      required: true
-      description: Unique handle (slug) of the MCP server.
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    ProjectId:
-      name: project_id
-      in: query
-      description: Filter results by project ID.
-      schema:
-        type: integer
   schemas:
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     McpServerInput:
       type: object
       description: Input schema for creating or updating an MCP server.
@@ -354,6 +299,24 @@ components:
         trigger_application:
           type: string
           description: The application or API collection that owns this tool.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
     McpServer:
       type: object
       description: An MCP server that exposes Workato API endpoints as tools for AI agents.
@@ -382,15 +345,52 @@ components:
           type: string
           format: date-time
           description: Timestamp when the MCP server was last updated.
+  parameters:
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    McpServerHandle:
+      name: handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication token is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication token is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
