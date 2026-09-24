@@ -1,1 +1,0 @@
-# Workato GraphQL API

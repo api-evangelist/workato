@@ -108,8 +108,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -181,8 +179,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -254,8 +250,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -328,8 +322,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -402,8 +394,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -474,8 +464,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -547,8 +535,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -619,8 +605,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -691,8 +675,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -762,8 +744,6 @@ apis:
     url: json-schema/workato-recipe-schema.json
   - type: JSONSchema
     url: json-schema/workato-genie-schema.json
-  - type: GraphQL
-    url: graphql/workato-graphql.md
   - type: Documentation
     url: https://docs.workato.com/workato-api/pubsub.html
   - type: Documentation
@@ -776,7 +756,7 @@ apis:
     url: https://docs.workato.com/en/mcp/expose-developer-apis.html
 name: Workato
 tags:
-- Agentic
+- AI Agents
 - API Management
 - Automation
 - B2B
@@ -786,6 +766,7 @@ tags:
 - iPaaS
 - Orchestration
 - Workflows
+- Workflow Automation
 tags_raw:
 - Agentic
 - API Management
@@ -797,6 +778,7 @@ tags_raw:
 - iPaaS
 - Orchestration
 - Workflow
+- Workflow-Automation
 type: Index
 deliveryModel:
   model: saas
