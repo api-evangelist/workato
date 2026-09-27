@@ -207,33 +207,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    DataSource:
-      type: object
-      description: A data source configuration for a knowledge base.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the data source.
-        source_type:
-          type: string
-          description: Type of the data source (e.g., document, table, api).
-        connection_id:
-          type: integer
-          description: ID of the connection used to access this data source.
-        config:
-          type: object
-          description: Source-specific configuration parameters.
-          additionalProperties: true
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     KnowledgeBase:
       type: object
       description: A collection of data sources that provides contextual information to AI agents.
@@ -266,14 +239,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the knowledge base was last updated.
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
     KnowledgeBaseInput:
       type: object
       description: Input schema for creating or updating a knowledge base.
@@ -295,13 +260,75 @@ components:
           items:
             $ref: '#/components/schemas/DataSource'
           description: List of data sources to configure.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    DataSource:
+      type: object
+      description: A data source configuration for a knowledge base.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the data source.
+        source_type:
+          type: string
+          description: Type of the data source (e.g., document, table, api).
+        connection_id:
+          type: integer
+          description: ID of the connection used to access this data source.
+        config:
+          type: object
+          description: Source-specific configuration parameters.
+          additionalProperties: true
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
   parameters:
+    KnowledgeBaseId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the knowledge base.
+      schema:
+        type: integer
+    Query:
+      name: query
+      in: query
+      description: Search query to filter results by name.
+      schema:
+        type: string
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
     FolderId:
       name: folder_id
       in: query
       description: Filter results by folder ID.
       schema:
         type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     PerPage:
       name: per_page
       in: query
@@ -317,33 +344,6 @@ components:
       description: Field to sort results by.
       schema:
         type: string
-    ProjectId:
-      name: project_id
-      in: query
-      description: Filter results by project ID.
-      schema:
-        type: integer
-    Query:
-      name: query
-      in: query
-      description: Search query to filter results by name.
-      schema:
-        type: string
-    KnowledgeBaseId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the knowledge base.
-      schema:
-        type: integer
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   responses:
     Unauthorized:
       description: Authentication token is missing or invalid.
@@ -351,14 +351,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

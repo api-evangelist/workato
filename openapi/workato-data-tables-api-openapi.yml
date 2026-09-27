@@ -168,23 +168,44 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    DataTableId:
-      name: data_table_id
-      in: path
-      required: true
-      description: Unique identifier of the data table.
-      schema:
-        type: integer
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   schemas:
+    DataTableInput:
+      type: object
+      description: Input schema for creating or updating a data table.
+      required:
+      - name
+      - folder_id
+      - schema
+      properties:
+        name:
+          type: string
+          description: Display name for the data table.
+        folder_id:
+          type: integer
+          description: ID of the folder to place the data table in.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataTableColumn'
+          description: Column definitions for the table.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
     DataTableColumn:
       type: object
       description: A column definition in a data table schema.
@@ -213,43 +234,6 @@ components:
         required:
           type: boolean
           description: Whether this column is required when creating records.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
-    DataTableInput:
-      type: object
-      description: Input schema for creating or updating a data table.
-      required:
-      - name
-      - folder_id
-      - schema
-      properties:
-        name:
-          type: string
-          description: Display name for the data table.
-        folder_id:
-          type: integer
-          description: ID of the folder to place the data table in.
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataTableColumn'
-          description: Column definitions for the table.
     DataTable:
       type: object
       description: A structured data storage table within the Workato workspace.
@@ -277,14 +261,14 @@ components:
           format: date-time
           description: Timestamp when the data table was last updated.
   responses:
-    Unauthorized:
-      description: Authentication token is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication token is missing or invalid.
       content:
         application/json:
           schema:
@@ -295,6 +279,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    DataTableId:
+      name: data_table_id
+      in: path
+      required: true
+      description: Unique identifier of the data table.
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

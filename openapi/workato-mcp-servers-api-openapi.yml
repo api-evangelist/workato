@@ -266,7 +266,64 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    McpServer:
+      type: object
+      description: An MCP server that exposes Workato API endpoints as tools for AI agents.
+      properties:
+        handle:
+          type: string
+          description: Unique slug identifier of the MCP server.
+        name:
+          type: string
+          description: Display name of the MCP server.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this MCP server.
+        mcp_url:
+          type: string
+          format: uri
+          description: The authenticated MCP URL that AI agents connect to.
+        authentication_method:
+          type: string
+          description: Authentication method used by this MCP server.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the MCP server was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the MCP server was last updated.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     McpServerInput:
       type: object
       description: Input schema for creating or updating an MCP server.
@@ -299,16 +356,6 @@ components:
         trigger_application:
           type: string
           description: The application or API collection that owns this tool.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     SuccessResponse:
       type: object
       description: Standard success response.
@@ -317,54 +364,24 @@ components:
           type: boolean
           description: Whether the operation was successful.
           example: true
-    McpServer:
-      type: object
-      description: An MCP server that exposes Workato API endpoints as tools for AI agents.
-      properties:
-        handle:
-          type: string
-          description: Unique slug identifier of the MCP server.
-        name:
-          type: string
-          description: Display name of the MCP server.
-        folder_id:
-          type: integer
-          description: ID of the folder containing this MCP server.
-        mcp_url:
-          type: string
-          format: uri
-          description: The authenticated MCP URL that AI agents connect to.
-        authentication_method:
-          type: string
-          description: Authentication method used by this MCP server.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the MCP server was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the MCP server was last updated.
   parameters:
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
     ProjectId:
       name: project_id
       in: query
       description: Filter results by project ID.
+      schema:
+        type: integer
+    McpServerHandle:
+      name: handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
       schema:
         type: integer
     Page:
@@ -375,32 +392,15 @@ components:
         type: integer
         minimum: 1
         default: 1
-    McpServerHandle:
-      name: handle
-      in: path
-      required: true
-      description: Unique handle (slug) of the MCP server.
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
       schema:
-        type: string
-  responses:
-    Unauthorized:
-      description: Authentication token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
   securitySchemes:
     bearerAuth:
       type: http

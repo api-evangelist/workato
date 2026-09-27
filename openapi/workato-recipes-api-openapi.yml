@@ -344,49 +344,45 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    RecipeIdPath:
+      name: recipe_id
+      in: path
+      required: true
+      description: Unique identifier of the recipe.
+      schema:
+        type: integer
+    RecipeId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the recipe.
+      schema:
+        type: integer
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
   schemas:
-    Recipe:
-      type: object
-      description: A Workato recipe representing an automated workflow.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the recipe.
-        name:
-          type: string
-          description: Display name of the recipe.
-        description:
-          type: string
-          description: Human-readable description of what the recipe does.
-        folder_id:
-          type: integer
-          description: ID of the folder containing this recipe.
-        running:
-          type: boolean
-          description: Whether the recipe is currently active and processing events.
-        trigger_application:
-          type: string
-          description: The connector used for the recipe's trigger.
-        action_applications:
-          type: array
-          items:
-            type: string
-          description: List of connectors used in the recipe's actions.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the recipe was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the recipe was last updated.
-        stopped_at:
-          type: string
-          format: date-time
-          description: Timestamp when the recipe was last stopped.
-        stop_cause:
-          type: string
-          description: Reason the recipe was stopped, if applicable.
     ErrorResponse:
       type: object
       description: Standard error response.
@@ -444,44 +440,48 @@ components:
             description:
               type: string
               description: Human-readable description of what the recipe does.
-  parameters:
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    RecipeId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the recipe.
-      schema:
-        type: integer
-    RecipeIdPath:
-      name: recipe_id
-      in: path
-      required: true
-      description: Unique identifier of the recipe.
-      schema:
-        type: integer
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
+    Recipe:
+      type: object
+      description: A Workato recipe representing an automated workflow.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the recipe.
+        name:
+          type: string
+          description: Display name of the recipe.
+        description:
+          type: string
+          description: Human-readable description of what the recipe does.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this recipe.
+        running:
+          type: boolean
+          description: Whether the recipe is currently active and processing events.
+        trigger_application:
+          type: string
+          description: The connector used for the recipe's trigger.
+        action_applications:
+          type: array
+          items:
+            type: string
+          description: List of connectors used in the recipe's actions.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the recipe was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the recipe was last updated.
+        stopped_at:
+          type: string
+          format: date-time
+          description: Timestamp when the recipe was last stopped.
+        stop_cause:
+          type: string
+          description: Reason the recipe was stopped, if applicable.
   responses:
     Unauthorized:
       description: Authentication token is missing or invalid.
@@ -489,14 +489,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

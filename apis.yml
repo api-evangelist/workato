@@ -3221,7 +3221,7 @@ common:
   name: 'The #1 iPaaS for the AI and Agentic Era | Workato'
   type: Website
   description: 'null'
-- url: https://app.workato.com/users/sign_in?_gl=1*191kgyn*_gcl_au*MjA2NDIyNDEyNS4xNzQ5MTM5OTgw
+- url: https://app.workato.com/users/sign_in
   name: Login to build your integrations, automations | Workato
   type: Login
   description: 'null'

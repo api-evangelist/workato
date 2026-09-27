@@ -119,6 +119,16 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     Tool:
       type: object
       description: An API endpoint or action exposed through an MCP server as a callable tool.
@@ -135,16 +145,6 @@ components:
         trigger_application:
           type: string
           description: The application or API collection that owns this tool.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     SuccessResponse:
       type: object
       description: Standard success response.
@@ -161,6 +161,14 @@ components:
       description: Unique handle (slug) of the MCP server.
       schema:
         type: string
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
     PerPage:
       name: per_page
       in: query
@@ -170,14 +178,6 @@ components:
         minimum: 1
         maximum: 100
         default: 100
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
   responses:
     Unauthorized:
       description: Authentication token is missing or invalid.
@@ -185,14 +185,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

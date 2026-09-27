@@ -118,52 +118,6 @@ paths:
           $ref: '#/components/responses/RateLimitExceeded'
 components:
   schemas:
-    PublishResponse:
-      type: object
-      description: Response from a successful single message publish.
-      properties:
-        message_id:
-          type: string
-          description: Unique identifier assigned to the published message.
-    Message:
-      type: object
-      description: A single message from an event topic.
-      properties:
-        message_id:
-          type: string
-          description: Unique identifier of the message within the topic.
-        payload:
-          type: object
-          description: The message payload conforming to the topic's schema.
-          additionalProperties: true
-        time:
-          type: string
-          format: date-time
-          description: RFC 3339 timestamp when the message was published.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
-    BatchPublishRequest:
-      type: object
-      description: Request body for batch publishing messages.
-      required:
-      - payloads
-      properties:
-        payloads:
-          type: array
-          description: Array of message payloads to publish. Each must conform to the topic's schema. Maximum 100 items.
-          maxItems: 100
-          items:
-            type: object
-            description: A message payload conforming to the topic's schema.
-            additionalProperties: true
     BatchPublishResponse:
       type: object
       description: Results of a batch publish operation.
@@ -183,6 +137,13 @@ components:
               result:
                 type: string
                 description: Result status for this individual message.
+    PublishResponse:
+      type: object
+      description: Response from a successful single message publish.
+      properties:
+        message_id:
+          type: string
+          description: Unique identifier assigned to the published message.
     ConsumeRequest:
       type: object
       description: Options for consuming messages from a topic.
@@ -205,6 +166,16 @@ components:
           minimum: 0
           maximum: 60
           default: 0
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     ConsumeResponse:
       type: object
       description: A batch of messages consumed from a topic.
@@ -214,6 +185,35 @@ components:
           items:
             $ref: '#/components/schemas/Message'
           description: List of messages retrieved from the topic.
+    BatchPublishRequest:
+      type: object
+      description: Request body for batch publishing messages.
+      required:
+      - payloads
+      properties:
+        payloads:
+          type: array
+          description: Array of message payloads to publish. Each must conform to the topic's schema. Maximum 100 items.
+          maxItems: 100
+          items:
+            type: object
+            description: A message payload conforming to the topic's schema.
+            additionalProperties: true
+    Message:
+      type: object
+      description: A single message from an event topic.
+      properties:
+        message_id:
+          type: string
+          description: Unique identifier of the message within the topic.
+        payload:
+          type: object
+          description: The message payload conforming to the topic's schema.
+          additionalProperties: true
+        time:
+          type: string
+          format: date-time
+          description: RFC 3339 timestamp when the message was published.
   responses:
     RateLimitExceeded:
       description: Rate limit of 60 requests per minute has been exceeded.
@@ -227,14 +227,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified topic was not found.
+    BadRequest:
+      description: The request payload is invalid or does not match the topic schema.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request payload is invalid or does not match the topic schema.
+    NotFound:
+      description: The specified topic was not found.
       content:
         application/json:
           schema:
