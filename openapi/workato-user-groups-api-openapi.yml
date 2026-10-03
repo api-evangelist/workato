@@ -130,35 +130,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  schemas:
-    UserGroup:
-      type: object
-      description: An identity provider user group for access control.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the user group.
-        name:
-          type: string
-          description: Display name of the user group.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
   parameters:
-    McpServerHandle:
-      name: handle
-      in: path
-      required: true
-      description: Unique handle (slug) of the MCP server.
-      schema:
-        type: string
     Page:
       name: page
       in: query
@@ -176,15 +148,43 @@ components:
         minimum: 1
         maximum: 100
         default: 100
+    McpServerHandle:
+      name: handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    UserGroup:
+      type: object
+      description: An identity provider user group for access control.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the user group.
+        name:
+          type: string
+          description: Display name of the user group.
   responses:
-    Unauthorized:
-      description: Authentication token is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication token is missing or invalid.
       content:
         application/json:
           schema:

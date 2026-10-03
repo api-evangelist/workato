@@ -429,49 +429,44 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    GenieId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the genie.
+      schema:
+        type: integer
   schemas:
-    KnowledgeBase:
-      type: object
-      description: A collection of data sources that provides contextual information to AI agents.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the knowledge base.
-        name:
-          type: string
-          description: Display name of the knowledge base.
-        description:
-          type: string
-          description: Human-readable description of the knowledge base's content.
-        folder_id:
-          type: integer
-          description: ID of the folder containing this knowledge base.
-        source_type:
-          type: string
-          description: The type of data sources used in this knowledge base.
-        data_sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataSource'
-          description: List of data sources configured for this knowledge base.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the knowledge base was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the knowledge base was last updated.
-    UserGroup:
-      type: object
-      description: An identity provider user group for access control.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the user group.
-        name:
-          type: string
-          description: Display name of the user group.
     ErrorResponse:
       type: object
       description: Standard error response.
@@ -482,23 +477,6 @@ components:
         code:
           type: string
           description: Machine-readable error code.
-    DataSource:
-      type: object
-      description: A data source configuration for a knowledge base.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the data source.
-        source_type:
-          type: string
-          description: Type of the data source (e.g., document, table, api).
-        connection_id:
-          type: integer
-          description: ID of the connection used to access this data source.
-        config:
-          type: object
-          description: Source-specific configuration parameters.
-          additionalProperties: true
     Skill:
       type: object
       description: A recipe-backed capability that can be assigned to an AI agent as a tool.
@@ -526,14 +504,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the skill was last updated.
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
     Genie:
       type: object
       description: An AI agent configured to handle automated tasks using skills and knowledge bases.
@@ -570,6 +540,73 @@ components:
           type: string
           format: date-time
           description: Timestamp when the genie was last updated.
+    DataSource:
+      type: object
+      description: A data source configuration for a knowledge base.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the data source.
+        source_type:
+          type: string
+          description: Type of the data source (e.g., document, table, api).
+        connection_id:
+          type: integer
+          description: ID of the connection used to access this data source.
+        config:
+          type: object
+          description: Source-specific configuration parameters.
+          additionalProperties: true
+    UserGroup:
+      type: object
+      description: An identity provider user group for access control.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the user group.
+        name:
+          type: string
+          description: Display name of the user group.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
+    KnowledgeBase:
+      type: object
+      description: A collection of data sources that provides contextual information to AI agents.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the knowledge base.
+        name:
+          type: string
+          description: Display name of the knowledge base.
+        description:
+          type: string
+          description: Human-readable description of the knowledge base's content.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this knowledge base.
+        source_type:
+          type: string
+          description: The type of data sources used in this knowledge base.
+        data_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSource'
+          description: List of data sources configured for this knowledge base.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the knowledge base was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the knowledge base was last updated.
     GenieInput:
       type: object
       description: Input schema for creating or updating a genie.
@@ -600,12 +637,6 @@ components:
           description: Additional configuration matrix for the genie.
           additionalProperties: true
   responses:
-    Unauthorized:
-      description: Authentication token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -618,43 +649,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    ProjectId:
-      name: project_id
-      in: query
-      description: Filter results by project ID.
-      schema:
-        type: integer
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    GenieId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the genie.
-      schema:
-        type: integer
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

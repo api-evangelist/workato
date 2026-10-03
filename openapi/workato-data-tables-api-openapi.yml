@@ -169,6 +169,32 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    DataTable:
+      type: object
+      description: A structured data storage table within the Workato workspace.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the data table.
+        name:
+          type: string
+          description: Display name of the data table.
+        folder_id:
+          type: integer
+          description: ID of the folder containing this data table.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataTableColumn'
+          description: List of column definitions for the table.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the data table was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the data table was last updated.
     DataTableInput:
       type: object
       description: Input schema for creating or updating a data table.
@@ -198,14 +224,6 @@ components:
         code:
           type: string
           description: Machine-readable error code.
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
     DataTableColumn:
       type: object
       description: A column definition in a data table schema.
@@ -234,51 +252,14 @@ components:
         required:
           type: boolean
           description: Whether this column is required when creating records.
-    DataTable:
+    SuccessResponse:
       type: object
-      description: A structured data storage table within the Workato workspace.
+      description: Standard success response.
       properties:
-        id:
-          type: integer
-          description: Unique identifier of the data table.
-        name:
-          type: string
-          description: Display name of the data table.
-        folder_id:
-          type: integer
-          description: ID of the folder containing this data table.
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataTableColumn'
-          description: List of column definitions for the table.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the data table was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp when the data table was last updated.
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
   parameters:
     Page:
       name: page
@@ -295,6 +276,25 @@ components:
       description: Unique identifier of the data table.
       schema:
         type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

@@ -266,26 +266,33 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    Tool:
+      type: object
+      description: An API endpoint or action exposed through an MCP server as a callable tool.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the tool within its application.
+        name:
+          type: string
+          description: Display name of the tool.
+        description:
+          type: string
+          description: Description of what the tool does and when AI agents should use it.
+        trigger_application:
+          type: string
+          description: The application or API collection that owns this tool.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     McpServer:
       type: object
       description: An MCP server that exposes Workato API endpoints as tools for AI agents.
@@ -314,16 +321,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the MCP server was last updated.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     McpServerInput:
       type: object
       description: Input schema for creating or updating an MCP server.
@@ -340,22 +337,6 @@ components:
         authentication_method:
           type: string
           description: Authentication method to use for the MCP server.
-    Tool:
-      type: object
-      description: An API endpoint or action exposed through an MCP server as a callable tool.
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the tool within its application.
-        name:
-          type: string
-          description: Display name of the tool.
-        description:
-          type: string
-          description: Description of what the tool does and when AI agents should use it.
-        trigger_application:
-          type: string
-          description: The application or API collection that owns this tool.
     SuccessResponse:
       type: object
       description: Standard success response.
@@ -371,19 +352,6 @@ components:
       description: Filter results by project ID.
       schema:
         type: integer
-    McpServerHandle:
-      name: handle
-      in: path
-      required: true
-      description: Unique handle (slug) of the MCP server.
-      schema:
-        type: string
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
     Page:
       name: page
       in: query
@@ -392,6 +360,12 @@ components:
         type: integer
         minimum: 1
         default: 1
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
     PerPage:
       name: per_page
       in: query
@@ -401,6 +375,32 @@ components:
         minimum: 1
         maximum: 100
         default: 100
+    McpServerHandle:
+      name: handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request body is invalid or missing required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http
