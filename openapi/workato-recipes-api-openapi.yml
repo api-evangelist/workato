@@ -345,6 +345,63 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
+    RecipeInput:
+      type: object
+      description: Input schema for creating or updating a recipe.
+      properties:
+        recipe:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Display name for the recipe.
+            code:
+              type: string
+              description: JSON-encoded recipe definition code.
+            config:
+              type: string
+              description: JSON-encoded recipe configuration.
+            folder_id:
+              type: integer
+              description: ID of the folder to place the recipe in.
+            description:
+              type: string
+              description: Human-readable description of what the recipe does.
+    RecipeVersion:
+      type: object
+      description: A specific version snapshot of a recipe.
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of this version.
+        version_no:
+          type: integer
+          description: Sequential version number.
+        comment:
+          type: string
+          description: Optional comment describing changes in this version.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when this version was created.
+    SuccessResponse:
+      type: object
+      description: Standard success response.
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
     Recipe:
       type: object
       description: A Workato recipe representing an automated workflow.
@@ -387,63 +444,6 @@ components:
         stop_cause:
           type: string
           description: Reason the recipe was stopped, if applicable.
-    RecipeVersion:
-      type: object
-      description: A specific version snapshot of a recipe.
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of this version.
-        version_no:
-          type: integer
-          description: Sequential version number.
-        comment:
-          type: string
-          description: Optional comment describing changes in this version.
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when this version was created.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
-    RecipeInput:
-      type: object
-      description: Input schema for creating or updating a recipe.
-      properties:
-        recipe:
-          type: object
-          properties:
-            name:
-              type: string
-              description: Display name for the recipe.
-            code:
-              type: string
-              description: JSON-encoded recipe definition code.
-            config:
-              type: string
-              description: JSON-encoded recipe configuration.
-            folder_id:
-              type: integer
-              description: ID of the folder to place the recipe in.
-            description:
-              type: string
-              description: Human-readable description of what the recipe does.
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
   parameters:
     RecipeId:
       name: id
@@ -460,6 +460,13 @@ components:
         type: integer
         minimum: 1
         default: 1
+    RecipeIdPath:
+      name: recipe_id
+      in: path
+      required: true
+      description: Unique identifier of the recipe.
+      schema:
+        type: integer
     FolderId:
       name: folder_id
       in: query
@@ -475,22 +482,15 @@ components:
         minimum: 1
         maximum: 100
         default: 100
-    RecipeIdPath:
-      name: recipe_id
-      in: path
-      required: true
-      description: Unique identifier of the recipe.
-      schema:
-        type: integer
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

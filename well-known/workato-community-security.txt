@@ -1,0 +1,7 @@
+# Tightknit Security Policy
+# See RFC 9116 for the security.txt specification: https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:security@tightknit.ai
+Expires: 2027-04-08T00:00:00.000Z
+Preferred-Languages: en
+Policy: https://docs.tightknit.ai/security/vulnerability-disclosure

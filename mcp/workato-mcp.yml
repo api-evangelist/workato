@@ -1,0 +1,9 @@
+generated: '2026-10-04'
+method: probed
+source: https://app.workato.com/airo_mcp
+status: "401"
+deployment:
+  mode: remote
+  endpoint: https://app.workato.com/airo_mcp
+  auth: oauth
+  verified: probed

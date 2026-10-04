@@ -1,0 +1,46 @@
+generated: '2026-10-04'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://www.workato.com/the-connector/snhu-title-iv-compliance/
+sources:
+- https://www.workato.com/the-connector/snhu-title-iv-compliance/
+- https://www.workato.com/platform/security
+- https://www.workato.com/the-connector/introducing-workato-genies/
+standards:
+- id: soc2
+  conforms: true
+  evidence: Compliance & governance SOC 1/2/3, ISO 27001/27701, ISO 42001, HIPAA, PCI-DSS 4.0.1, IRAP, and NIST 800-171A r2 certified.
+- id: soc2
+  conforms: true
+  evidence: Compliance & governance SOC 1/2/3, ISO 27001/27701, ISO 42001, HIPAA, PCI-DSS 4.0.1, IRAP, and NIST 800-171A r2 certified.
+- id: iso-27001
+  conforms: true
+  evidence: Compliance & governance SOC 1/2/3, ISO 27001/27701, ISO 42001, HIPAA, PCI-DSS 4.0.1, IRAP, and NIST 800-171A r2 certified.
+- id: iso-27001
+  conforms: true
+  evidence: Compliance & governance SOC 1/2/3, ISO 27001/27701, ISO 42001, HIPAA, PCI-DSS 4.0.1, IRAP, and NIST 800-171A r2 certified.
+- id: hipaa
+  conforms: true
+  evidence: Compliance & governance SOC 1/2/3, ISO 27001/27701, ISO 42001, HIPAA, PCI-DSS 4.0.1, IRAP, and NIST 800-171A r2 certified.
+- id: pci-dss
+  conforms: true
+  evidence: Compliance & governance SOC 1/2/3, ISO 27001/27701, ISO 42001, HIPAA, PCI-DSS 4.0.1, IRAP, and NIST 800-171A r2 certified.
+- id: nist-csf
+  conforms: true
+  evidence: Compliance & governance SOC 1/2/3, ISO 27001/27701, ISO 42001, HIPAA, PCI-DSS 4.0.1, IRAP, and NIST 800-171A r2 certified.
+- id: openapi-3.2
+  conforms: true
+  evidence: the document declares 3.2.0
+- id: oauth2
+  conforms: false
+  evidence: 'securitySchemes: bearerAuth (http)'
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take page, per_page
+docs: https://www.workato.com/the-connector/snhu-title-iv-compliance/
