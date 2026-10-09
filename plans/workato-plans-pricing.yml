@@ -97,3 +97,44 @@ plans:
       - name: Dedicated CSM
       - name: SOC 2 Type 2 + HIPAA
       - name: Workbot for chat ops
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units:
+  - period
+  plans:
+  - name: Base Workspace
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - year
+  - name: Typical Subscription
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - year
+  - name: High-Volume Recipes (HVR)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - period
+    periods:
+    - month
+  - name: Enterprise
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - year
