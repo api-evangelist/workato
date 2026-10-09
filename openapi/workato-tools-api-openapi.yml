@@ -119,6 +119,16 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     Tool:
       type: object
       description: An API endpoint or action exposed through an MCP server as a callable tool.
@@ -135,16 +145,6 @@ components:
         trigger_application:
           type: string
           description: The application or API collection that owns this tool.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     SuccessResponse:
       type: object
       description: Standard success response.
@@ -162,6 +162,13 @@ components:
         type: integer
         minimum: 1
         default: 1
+    McpServerHandleForPolicies:
+      name: mcp_server_handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
+      schema:
+        type: string
     PerPage:
       name: per_page
       in: query
@@ -171,22 +178,15 @@ components:
         minimum: 1
         maximum: 100
         default: 100
-    McpServerHandleForPolicies:
-      name: mcp_server_handle
-      in: path
-      required: true
-      description: Unique handle (slug) of the MCP server.
-      schema:
-        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

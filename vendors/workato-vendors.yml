@@ -1,0 +1,84 @@
+generated: '2026-10-04'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: cloudflare
+  name: Cloudflare
+  area: cdn
+  host: docs.workato.com
+  evidence: header:cf-ray
+  signal: header
+  confidence: high
+  kin_score:
+  - https_enforced
+  - hsts
+- vendor: cloudfront
+  name: Amazon CloudFront
+  area: cdn
+  host: www.workato.com
+  evidence: header:x-amz-cf-id
+  signal: header
+  confidence: high
+  kin_score: []
+- vendor: vitepress
+  name: VitePress
+  area: documentation
+  host: docs.workato.com
+  evidence: markup:vitepress
+  signal: docs-platform
+  confidence: medium
+  kin_score: []
+- vendor: cloudflare-pages
+  name: Cloudflare Pages
+  area: hosting
+  host: docs.workato.com
+  evidence: cname:docs-2wy.pages.dev
+  signal: docs-platform
+  confidence: medium
+  kin_score: []
+- vendor: freshdesk
+  name: Freshdesk
+  area: support
+  host: support.workato.com
+  evidence: cname:freshdesk.com
+  signal: cname
+  confidence: high
+  kin_score:
+  - support_channel
+reliance:
+  areas_vendor_served:
+  - cdn
+  - documentation
+  - hosting
+  - support
+  vendor_count: 5
+  areas_observed: 12
+  share_of_observable_areas: 0.333
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: vitepress'
+- docs.workato.com (GettingStarted)
+- docs.workato.com (Portal)
+- docs.workato.com (Documentation)
+- www.workato.com (Website)
+- app.workato.com (Login)
+- docs.workato.com (DeveloperPortal)
+- status.workato.com (StatusPage)
+- community.workato.com (Community)
+- support.workato.com (Support)
+- app.workato.com (mcp)

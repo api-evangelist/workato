@@ -1,0 +1,321 @@
+generated: '2026-10-04'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 25
+  own: 18
+  other_domain: 1
+  platform: 6
+  roles:
+  - community
+  - identity
+  - other
+  - partner
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: academy.workato.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  types:
+  - Academy
+  serves:
+  - docs
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.au.workato.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.eu.workato.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.il.workato.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.jp.workato.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.kr.workato.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.sg.workato.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.uk.workato.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: app.workato.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - Integrations
+  - Login
+  serves: []
+  registrable_domain: workato.com
+  role: identity
+  relation: own
+- host: community.workato.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - Community
+  serves: []
+  registrable_domain: workato.com
+  role: community
+  relation: own
+- host: docs.workato.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - well-known
+  - vendor-detect
+  types:
+  - GettingStarted
+  - Portal
+  - Documentation
+  - ErrorCodes
+  - DeveloperPortal
+  - Authentication
+  - RateLimits
+  - SDKs
+  serves:
+  - docs
+  - cdn
+  - documentation
+  - hosting
+  vendor: cloudflare
+  registrable_domain: workato.com
+  role: portal
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: marketplace.workato.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: partners.workato.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Partners
+  serves: []
+  registrable_domain: workato.com
+  role: partner
+  relation: own
+- host: status.workato.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: workato.com
+  role: status
+  relation: own
+- host: support.workato.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  - vendor-detect
+  types:
+  - Support
+  serves:
+  - support
+  vendor: freshdesk
+  registrable_domain: workato.com
+  role: support
+  relation: own
+- host: systematic.workato.com
+  found_by:
+  - pointer
+  - probed
+  types:
+  - Forums
+  serves: []
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: trust.workato.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  types:
+  - TrustCenter
+  serves:
+  - docs
+  registrable_domain: workato.com
+  role: other
+  relation: own
+- host: twitter.com
+  found_by:
+  - pointer
+  types:
+  - Twitter
+  serves: []
+  registrable_domain: twitter.com
+  role: other
+  relation: platform
+- host: www.facebook.com
+  found_by:
+  - pointer
+  types:
+  - Facebook
+  serves: []
+  registrable_domain: facebook.com
+  role: other
+  relation: platform
+- host: www.instagram.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Instagram
+  serves: []
+  registrable_domain: instagram.com
+  role: other
+  relation: other-domain
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.postman.com
+  found_by:
+  - pointer
+  types:
+  - PostmanWorkspace
+  serves: []
+  registrable_domain: postman.com
+  role: other
+  relation: platform
+- host: www.workato.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Pricing
+  - Security
+  - UseCases
+  - Solutions
+  - Resources
+  - Blog
+  - ' WhatsNew'
+  - ChangeLog
+  - Customers
+  - PrivacyPolicy
+  - TermsOfService
+  - About
+  - Website
+  - Signup
+  - Certification
+  - Events
+  - Press
+  - Careers
+  - Contact
+  - Product
+  serves:
+  - docs
+  - cdn
+  vendor: cloudfront
+  registrable_domain: workato.com
+  role: website
+  relation: own
+- host: www.youtube.com
+  found_by:
+  - pointer
+  types:
+  - YouTube
+  serves: []
+  registrable_domain: youtube.com
+  role: other
+  relation: platform

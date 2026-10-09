@@ -169,6 +169,16 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     DataTable:
       type: object
       description: A structured data storage table within the Workato workspace.
@@ -195,35 +205,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the data table was last updated.
-    DataTableInput:
-      type: object
-      description: Input schema for creating or updating a data table.
-      required:
-      - name
-      - folder_id
-      - schema
-      properties:
-        name:
-          type: string
-          description: Display name for the data table.
-        folder_id:
-          type: integer
-          description: ID of the folder to place the data table in.
-        schema:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataTableColumn'
-          description: Column definitions for the table.
-    ErrorResponse:
-      type: object
-      description: Standard error response.
-      properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
     DataTableColumn:
       type: object
       description: A column definition in a data table schema.
@@ -252,6 +233,25 @@ components:
         required:
           type: boolean
           description: Whether this column is required when creating records.
+    DataTableInput:
+      type: object
+      description: Input schema for creating or updating a data table.
+      required:
+      - name
+      - folder_id
+      - schema
+      properties:
+        name:
+          type: string
+          description: Display name for the data table.
+        folder_id:
+          type: integer
+          description: ID of the folder to place the data table in.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataTableColumn'
+          description: Column definitions for the table.
     SuccessResponse:
       type: object
       description: Standard success response.
@@ -261,6 +261,13 @@ components:
           description: Whether the operation was successful.
           example: true
   parameters:
+    DataTableId:
+      name: data_table_id
+      in: path
+      required: true
+      description: Unique identifier of the data table.
+      schema:
+        type: integer
     Page:
       name: page
       in: query
@@ -269,22 +276,15 @@ components:
         type: integer
         minimum: 1
         default: 1
-    DataTableId:
-      name: data_table_id
-      in: path
-      required: true
-      description: Unique identifier of the data table.
-      schema:
-        type: integer
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

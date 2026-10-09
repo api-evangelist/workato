@@ -1,0 +1,32 @@
+generated: '2026-10-04'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/workato-genies-api-openapi.yml
+skills:
+- file: skills/workato-create-and-start-recipe.md
+  name: workato-create-and-start-recipe
+  api: openapi/workato-recipes-api-openapi.yml
+  operations:
+  - createRecipe
+  - startRecipe
+- file: skills/workato-data-tables-crud.md
+  name: workato-data-tables-crud
+  api: openapi/workato-data-tables-api-openapi.yml
+  operations:
+  - createDataTable
+  - getDataTable
+  - updateDataTable
+  - deleteDataTable
+- file: skills/workato-create-and-retrieve-skill.md
+  name: workato-create-and-retrieve-skill
+  api: openapi/workato-skills-api-openapi.yml
+  operations:
+  - createSkill
+  - getSkill
+  - listSkills
+- file: skills/workato-publish-and-consume-messages.md
+  name: workato-publish-and-consume-messages
+  api: openapi/workato-messages-api-openapi.yml
+  operations:
+  - publishMessage
+  - consumeMessages

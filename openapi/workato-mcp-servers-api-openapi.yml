@@ -267,6 +267,32 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    McpServerInput:
+      type: object
+      description: Input schema for creating or updating an MCP server.
+      required:
+      - name
+      - folder_id
+      properties:
+        name:
+          type: string
+          description: Display name for the MCP server.
+        folder_id:
+          type: integer
+          description: ID of the folder to place the MCP server in.
+        authentication_method:
+          type: string
+          description: Authentication method to use for the MCP server.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     Tool:
       type: object
       description: An API endpoint or action exposed through an MCP server as a callable tool.
@@ -283,16 +309,14 @@ components:
         trigger_application:
           type: string
           description: The application or API collection that owns this tool.
-    ErrorResponse:
+    SuccessResponse:
       type: object
-      description: Standard error response.
+      description: Standard success response.
       properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
     McpServer:
       type: object
       description: An MCP server that exposes Workato API endpoints as tools for AI agents.
@@ -321,37 +345,14 @@ components:
           type: string
           format: date-time
           description: Timestamp when the MCP server was last updated.
-    McpServerInput:
-      type: object
-      description: Input schema for creating or updating an MCP server.
-      required:
-      - name
-      - folder_id
-      properties:
-        name:
-          type: string
-          description: Display name for the MCP server.
-        folder_id:
-          type: integer
-          description: ID of the folder to place the MCP server in.
-        authentication_method:
-          type: string
-          description: Authentication method to use for the MCP server.
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
   parameters:
-    ProjectId:
-      name: project_id
-      in: query
-      description: Filter results by project ID.
+    McpServerHandle:
+      name: handle
+      in: path
+      required: true
+      description: Unique handle (slug) of the MCP server.
       schema:
-        type: integer
+        type: string
     Page:
       name: page
       in: query
@@ -366,6 +367,12 @@ components:
       description: Filter results by folder ID.
       schema:
         type: integer
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
     PerPage:
       name: per_page
       in: query
@@ -375,22 +382,15 @@ components:
         minimum: 1
         maximum: 100
         default: 100
-    McpServerHandle:
-      name: handle
-      in: path
-      required: true
-      description: Unique handle (slug) of the MCP server.
-      schema:
-        type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

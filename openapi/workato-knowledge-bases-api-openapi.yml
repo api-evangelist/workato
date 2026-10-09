@@ -206,56 +206,17 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    ProjectId:
-      name: project_id
-      in: query
-      description: Filter results by project ID.
-      schema:
-        type: integer
-    Page:
-      name: page
-      in: query
-      description: Page number for pagination (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-    FolderId:
-      name: folder_id
-      in: query
-      description: Filter results by folder ID.
-      schema:
-        type: integer
-    SortTerm:
-      name: sort_term
-      in: query
-      description: Field to sort results by.
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      in: query
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    Query:
-      name: query
-      in: query
-      description: Search query to filter results by name.
-      schema:
-        type: string
-    KnowledgeBaseId:
-      name: id
-      in: path
-      required: true
-      description: Unique identifier of the knowledge base.
-      schema:
-        type: integer
   schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        message:
+          type: string
+          description: Human-readable error message.
+        code:
+          type: string
+          description: Machine-readable error code.
     KnowledgeBaseInput:
       type: object
       description: Input schema for creating or updating a knowledge base.
@@ -277,16 +238,14 @@ components:
           items:
             $ref: '#/components/schemas/DataSource'
           description: List of data sources to configure.
-    ErrorResponse:
+    SuccessResponse:
       type: object
-      description: Standard error response.
+      description: Standard success response.
       properties:
-        message:
-          type: string
-          description: Human-readable error message.
-        code:
-          type: string
-          description: Machine-readable error code.
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+          example: true
     DataSource:
       type: object
       description: A data source configuration for a knowledge base.
@@ -304,14 +263,6 @@ components:
           type: object
           description: Source-specific configuration parameters.
           additionalProperties: true
-    SuccessResponse:
-      type: object
-      description: Standard success response.
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-          example: true
     KnowledgeBase:
       type: object
       description: A collection of data sources that provides contextual information to AI agents.
@@ -344,15 +295,64 @@ components:
           type: string
           format: date-time
           description: Timestamp when the knowledge base was last updated.
+  parameters:
+    Query:
+      name: query
+      in: query
+      description: Search query to filter results by name.
+      schema:
+        type: string
+    SortTerm:
+      name: sort_term
+      in: query
+      description: Field to sort results by.
+      schema:
+        type: string
+    FolderId:
+      name: folder_id
+      in: query
+      description: Filter results by folder ID.
+      schema:
+        type: integer
+    Page:
+      name: page
+      in: query
+      description: Page number for pagination (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    KnowledgeBaseId:
+      name: id
+      in: path
+      required: true
+      description: Unique identifier of the knowledge base.
+      schema:
+        type: integer
+    ProjectId:
+      name: project_id
+      in: query
+      description: Filter results by project ID.
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      in: query
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    BadRequest:
+      description: The request body is invalid or missing required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request body is invalid or missing required fields.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
