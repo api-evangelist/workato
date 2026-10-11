@@ -4,6 +4,10 @@ url: https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/ap
 
 name: Workato
 
+x-docs-platform: vitepress
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-04
+x-docs-hosting: cloudflare-pages
 tags:
 - AI Agents
 - API Management
