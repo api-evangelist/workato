@@ -11,6 +11,7 @@ checked:
 - https://monid.ai/tools/workato
 - https://n8n.io/integrations/workato/
 - https://zapier.com/apps/workato/integrations
+- stripe/integrations/stripe-integration-edges.yml
 - workday/integrations/workday-integration-edges.yml
 summary: null
 marketplace_apps: []
@@ -34,6 +35,23 @@ edges:
   seller_name: Workato, Inc.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Stripe (own)
+  partner: stripe
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.stripe.com/apps/workato-stripe
+  mirror_of: stripe/integrations/stripe-integration-edges.yml
+  apps:
+  - Workato
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: productivity
 - partner_name: Workday (own)
   partner: workday
   partner_match: mirror
