@@ -2,25 +2,25 @@
 kin_checks:
   slug: workato
   schema_version: 0.23.0
-  scored_at: '2026-10-03'
-  run_ts: 2026-10-03T024842
+  scored_at: '2026-10-11'
+  run_ts: 2026-10-11T110117
   note: Actionable checks (missed + partial) in `checks`, plus the ids that did not
     apply in `na`. Everything else in rubric/scoring-0.23.0.yml was earned; counts
     below let you verify that.
   counts:
     total: 153
-    earned: 42
-    partial: 33
-    missed: 52
+    earned: 44
+    partial: 35
+    missed: 48
     na: 26
   checks:
   - id: leadership_present
     status: missed
+  - id: human_url_per_api
+    status: missed
   - id: base_url_per_api
     status: missed
   - id: well_known_published
-    status: missed
-  - id: llms_txt_published
     status: missed
   - id: apis_json_self_hosted
     status: missed
@@ -40,9 +40,11 @@ kin_checks:
       (unknown)
   - id: inbound_contract_published
     status: missed
-  - id: domain_standard_conformance
+  - id: json_schema_present
     status: missed
-  - id: conformance_declared
+  - id: json_schema_per_resource
+    status: missed
+  - id: domain_standard_conformance
     status: missed
   - id: overlay_published
     status: missed
@@ -54,13 +56,9 @@ kin_checks:
     status: missed
   - id: examples_published
     status: missed
-  - id: getting_started_present
-    status: missed
   - id: cli_present
     status: missed
   - id: console_or_sandbox
-    status: missed
-  - id: agent_skill_present
     status: missed
   - id: compliance_published
     status: missed
@@ -108,8 +106,6 @@ kin_checks:
     status: missed
   - id: openapi_examples
     status: missed
-  - id: agent_skills
-    status: missed
   - id: well_known_catalog
     status: missed
   - id: consent_identity
@@ -117,10 +113,6 @@ kin_checks:
   - id: agent_card
     status: missed
   - id: dry_run_mode
-    status: missed
-  - id: delegated_identity
-    status: missed
-  - id: dynamic_client_registration
     status: missed
   - id: agentic_commerce
     status: missed
@@ -205,12 +197,6 @@ kin_checks:
     earned: 3.6
     detail: 10 of 10 openapi documents pass; credited at 90% because of their provenance
       (unknown)
-  - id: json_schema_present
-    status: partial
-    earned: 5.4
-  - id: json_schema_per_resource
-    status: partial
-    earned: 3.6
   - id: rules_present
     status: partial
     earned: 2.5
@@ -223,6 +209,9 @@ kin_checks:
   - id: vocabulary_published
     status: partial
     earned: 4.5
+  - id: conformance_declared
+    status: partial
+    earned: 5.4
   - id: rate_limits_documented
     status: partial
     earned: 2.0
@@ -232,6 +221,9 @@ kin_checks:
   - id: postman_present
     status: partial
     earned: 0.5
+  - id: agent_skill_present
+    status: partial
+    earned: 2.7
   - id: plans_present
     status: partial
     earned: 2.0
@@ -242,10 +234,14 @@ kin_checks:
     status: partial
     earned: 2.5
     detail: 'authorship: derived'
+  - id: mcp_server
+    status: partial
+    earned: 4.8
+    detail: 'grade: documented'
   - id: auth_clarity
     status: partial
-    earned: 3.5
-    detail: 'grade: bearer'
+    earned: 9.0
+    detail: 'grade: served'
   - id: error_semantics
     status: partial
     earned: 4.0
@@ -258,6 +254,10 @@ kin_checks:
     status: partial
     earned: 1.5
     detail: 'authorship: derived'
+  - id: agent_skills
+    status: partial
+    earned: 4.5
+    detail: 'authorship: unknown'
   na:
   - asyncapi_3_x
   - channels_defined
