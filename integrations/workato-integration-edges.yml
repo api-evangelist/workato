@@ -15,6 +15,7 @@ checked:
 - slack/integrations/slack-integration-edges.yml
 - stripe/integrations/stripe-integration-edges.yml
 - workday/integrations/workday-integration-edges.yml
+- zendesk/integrations/zendesk-integration-edges.yml
 - zoom/integrations/zoom-integration-edges.yml
 summary: null
 marketplace_apps: []
@@ -34,46 +35,10 @@ edges:
   - Embedded Integrations Platform as a Service (iPaaS)
   - Workato One
   - Sales Genie
-  - IT Genie
+  - Support Genie - B2B Package
   seller_name: Workato, Inc.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
-- partner_name: Stripe (own)
-  partner: stripe
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.stripe.com/apps/workato-stripe
-  mirror_of: stripe/integrations/stripe-integration-edges.yml
-  apps:
-  - Workato
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: productivity
-- partner_name: Workday (own)
-  partner: workday
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.workday.com/apps/414856/workato-worker-onboarding-automation
-  mirror_of: workday/integrations/workday-integration-edges.yml
-  apps:
-  - Workato Worker Onboarding Automation
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Region & Country
-  badges:
-  - Workday Approved
 - partner_name: Microsoft Teams (own)
   partner: microsoft-teams
   partner_match: mirror
@@ -110,6 +75,59 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: Slack app
+- partner_name: Stripe (own)
+  partner: stripe
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.stripe.com/apps/workato-stripe
+  mirror_of: stripe/integrations/stripe-integration-edges.yml
+  apps:
+  - Workato
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: productivity
+- partner_name: Workday (own)
+  partner: workday
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.workday.com/apps/414856/workato-worker-onboarding-automation
+  mirror_of: workday/integrations/workday-integration-edges.yml
+  apps:
+  - Workato Worker Onboarding Automation
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+  category: Region & Country
+  badges:
+  - Workday Approved
+- partner_name: Zendesk (own)
+  partner: zendesk
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.zendesk.com/marketplace/apps/support/70000/workato/
+  mirror_of: zendesk/integrations/zendesk-integration-edges.yml
+  apps:
+  - Workato
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Workflows
 - partner_name: Zoom (own)
   partner: zoom
   partner_match: mirror
