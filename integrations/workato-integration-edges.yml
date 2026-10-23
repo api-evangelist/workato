@@ -31,6 +31,7 @@ checked:
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
 - hubspot/integrations/hubspot-integration-edges.yml
+- intercom/integrations/intercom-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -257,4 +258,21 @@ edges:
   detected: '2026-10-21'
   detected_by: mirror-platform-listings.py
   category: CONNECTOR
+- partner_name: Intercom (own)
+  partner: intercom
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.intercom.com/app-store/?app_package_code=workato
+  mirror_of: intercom/integrations/intercom-integration-edges.yml
+  apps:
+  - Workato
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Automation platforms
 templates: []
