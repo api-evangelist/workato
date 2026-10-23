@@ -32,6 +32,8 @@ checked:
 - https://www.sequoiacap.com/sitemap.xml
 - hubspot/integrations/hubspot-integration-edges.yml
 - intercom/integrations/intercom-integration-edges.yml
+- adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+- workfront/integrations/workfront-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -275,4 +277,38 @@ edges:
   detected: '2026-10-23'
   detected_by: mirror-platform-listings.py
   category: Automation platforms
+- partner_name: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://exchange.adobe.com/apps/ec/103198
+  mirror_of: adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+  apps:
+  - Workato Automation for Adobe Commerce
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Exchange Experience Cloud listing (Commerce)
+- partner_name: Adobe Workfront (own)
+  partner: workfront
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://exchange.adobe.com/apps/ec/108083
+  mirror_of: workfront/integrations/workfront-integration-edges.yml
+  apps:
+  - Workato Automation for Adobe Workfront
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Exchange Experience Cloud listing (Workfront)
 templates: []

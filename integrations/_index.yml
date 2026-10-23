@@ -198,3 +198,29 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: workato-adobe-commerce-own
+  label: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_name: Adobe Commerce (own)
+  category: Adobe Exchange Experience Cloud listing (Commerce)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103198
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: workato-adobe-workfront-own
+  label: Adobe Workfront (own)
+  partner: workfront
+  partner_name: Adobe Workfront (own)
+  category: Adobe Exchange Experience Cloud listing (Workfront)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/108083
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
