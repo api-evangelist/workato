@@ -1,4 +1,4 @@
-# Workato (workato)
+# Workato
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,232 +66,315 @@
 
 Workato is an enterprise automation and integration platform that enables organizations to integrate their apps and automate business workflows without extensive coding. It provides a low-code/no-code interface for creating integrations between cloud applications, on-premises systems, and databases. The platform now layers Enterprise MCP, Workato Genies AI agents, Agent Studio, and Workato Embedded on top of its iPaaS foundation, with API Edge Gateway for on-premises deployment and RBAC 2.0 with environment- and project-scoped roles.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/workato/refs/heads/main/apis.yml)
+**Areas:** AI Agents · API Management · Automation · B2B · Embedded iPaaS · Enterprise · Integration · iPaaS · Orchestration · Workflows · Workflow Automation
 
-## Scope
+## Workato on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Workato is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/workato/](https://apis.io/providers/workato/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- Agentic
-- API Management
-- Automation
-- B2B
-- Embedded iPaaS
-- Enterprise
-- Integration
-- iPaaS
-- Orchestration
-- Workflow
+- [Workato Embedded Partner API](https://apis.io/apis/workato/embedded-api/) — The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes, connections, and other assets within the Workato…
+- [Workato Data Tables API](https://apis.io/apis/workato/workato-data-tables-api/) — Data tables are structured storage within Workato for persisting and querying records used in recipe automation.
+- [Workato Genies API](https://apis.io/apis/workato/workato-genies-api/) — AI agents (genies) that can be configured with skills, knowledge bases, and instructions to automate complex workflows.
+- [Workato Knowledge Bases API](https://apis.io/apis/workato/workato-knowledge-bases-api/) — Knowledge bases provide AI agents with contextual data from configured data sources such as documents, tables, and external systems.
+- [Workato MCP Servers API](https://apis.io/apis/workato/workato-mcp-servers-api/) — MCP servers expose Workato API endpoints as tools accessible to AI agents via the Model Context Protocol.
+- [Workato Messages API](https://apis.io/apis/workato/workato-messages-api/) — Endpoints for publishing messages to event topics and consuming messages from event topics.
+- [Workato Policies API](https://apis.io/apis/workato/workato-policies-api/) — Security policies that govern rate limits, quotas, and IP access controls for MCP servers.
+- [Workato Recipes API](https://apis.io/apis/workato/workato-recipes-api/) — Recipes are automated workflows that connect applications and services. Manage recipe lifecycle including creation, activation, and versioning.
+- [Workato Skills API](https://apis.io/apis/workato/workato-skills-api/) — Skills are recipe-backed capabilities that can be assigned to AI agents to give them actionable tools.
+- [Workato Tools API](https://apis.io/apis/workato/workato-tools-api/) — Tools are individual API endpoints or actions exposed through an MCP server and available to AI agents.
+- [Workato User Groups API](https://apis.io/apis/workato/workato-user-groups-api/) — Identity provider user groups used to control access to MCP servers.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-06-05T00:00:00.000Z
-- **Modified:** 2026-05-22
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (17)
 
-### Workato
+Multi-step workflows that chain operations into a business task.
 
-Workato is an American multinational software company that provides a cloud-based platform for automation, integration, and artificial intelligence orchestration across applications, data, and systems. The company was founded in 2013 and is headquartered in Mountain View, California. Workato has been recognized as an 8x Leader and 3x Furthest in Vision in the 2026 Gartner Magic Quadrant for Integration Platform as a Service, and now positions Enterprise MCP, Workato Genies, and Agent Studio as the agentic AI surface built on top of its iPaaS foundation.
+- [Workato Batch Publish Events and Drain the Topic](https://apis.io/arazzos/workato/workato-batch-publish-events-workflow/)
+- [Workato Build and Launch an AI Agent](https://apis.io/arazzos/workato/workato-build-and-launch-genie-workflow/)
+- [Workato Stop the First Running Recipe in a Folder](https://apis.io/arazzos/workato/workato-bulk-stop-recipes-in-folder-workflow/)
+- [Workato Clone and Activate a Recipe](https://apis.io/arazzos/workato/workato-clone-and-activate-recipe-workflow/)
+- [Workato Curate an MCP Server's Tools](https://apis.io/arazzos/workato/workato-curate-mcp-server-tool-workflow/)
+- [Workato Decommission an AI Agent](https://apis.io/arazzos/workato/workato-decommission-genie-workflow/)
+- [Workato Equip a Genie with a Knowledge Base](https://apis.io/arazzos/workato/workato-equip-genie-with-knowledge-base-workflow/)
+- [Workato Provision a Data Table](https://apis.io/arazzos/workato/workato-provision-data-table-workflow/)
+- [Workato Provision an MCP Server with Tools](https://apis.io/arazzos/workato/workato-provision-mcp-server-with-tools-workflow/)
+- [Workato Publish and Verify an Event Message](https://apis.io/arazzos/workato/workato-publish-and-consume-event-workflow/)
+- [Workato Turn a Recipe into a Genie Skill](https://apis.io/arazzos/workato/workato-recipe-to-genie-skill-workflow/)
+- [Workato Inspect and Roll Back a Recipe Version](https://apis.io/arazzos/workato/workato-recipe-version-rollback-workflow/)
+- [Workato Reset a Data Table's Data and Schema](https://apis.io/arazzos/workato/workato-reset-data-table-schema-workflow/)
+- [Workato Rotate an MCP Server Token](https://apis.io/arazzos/workato/workato-rotate-mcp-server-token-workflow/)
+- [Workato Secure MCP Server Access](https://apis.io/arazzos/workato/workato-secure-mcp-server-access-workflow/)
+- [Workato Start a Recipe and Verify Its Health](https://apis.io/arazzos/workato/workato-start-recipe-with-health-check-workflow/)
+- [Workato Stop and Delete a Recipe](https://apis.io/arazzos/workato/workato-stop-and-delete-recipe-workflow/)
 
-- **Human URL:** [https://www.workato.com/](https://www.workato.com/)
+#### AsyncAPI (1)
 
-#### Tags
+Event-driven and webhook contracts.
 
-- Agentic
-- Embedded SaaS Integration
-- iPaaS
-- Orchestration
+- [Workato Event Streams](https://apis.io/asyncapis/workato/workato-event-streams-asyncapi/)
 
-#### Properties
+#### Event channels (3)
 
-- [Documentation](https://www.workato.com/)
-- [Documentation](https://docs.workato.com/en/workato-api.html#base-url)
-- [Authentication](https://docs.workato.com/en/workato-api.html#authentication)
-- [A P I  Documentation](https://docs.workato.com/workato-api.html)
-- [API Reference](https://docs.workato.com/workato-api/resources.html)
-- [API Reference](https://docs.workato.com/workato-api/recipes.html)
-- [API Reference](https://docs.workato.com/workato-api/api-connectors.html)
-- [API Reference](https://docs.workato.com/workato-api/api-client-apis.html)
-- [API Reference](https://docs.workato.com/workato-api/api-platform.html)
-- [API Reference](https://docs.workato.com/workato-api/custom_connectors.html)
-- [API Reference](https://docs.workato.com/workato-api/recipe-lifecycle-management.html)
-- [Authentication](https://docs.workato.com/workato-api/authentication.html)
-- [Rate Limits](https://docs.workato.com/workato-api/rate-limiting.html)
-- [SDK](https://docs.workato.com/developing-connectors/sdk.html)
-- [SDK](https://github.com/workato/workato-connector-sdk)
-- [SDK](https://docs.workato.com/developing-connectors/custom-connector.html)
-- [API Reference](https://docs.workato.com/workato-api/pubsub.html)
-- [API Reference](https://docs.workato.com/workato-api/agent-studio.html)
-- [API Reference](https://docs.workato.com/workato-api/mcp-servers.html)
-- [API Reference](https://docs.workato.com/workato-api/test-automation.html)
-- [API Reference](https://docs.workato.com/workato-api/data-tables.html)
-- [API Reference](https://docs.workato.com/workato-api/tag-assignments.html)
-- [API Reference](https://docs.workato.com/workato-api/custom-oauth-profiles.html)
-- [OpenAPI](openapi/workato-developer-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workato-developer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-developer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [OpenAPI](openapi/workato-agent-studio-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workato-agent-studio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-agent-studio.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/workato-recipe-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-genie-schema.json) — [JSON Schema](https://json-schema.org/specification)
+Individual events and webhooks the provider emits.
 
-### Workato Embedded Partner API
+- [/api/v1/batch/topics/{topic_id}/publish](https://apis.io/channels/workato/api-v1-batch-topics-topic-id-publish/)
+- [/api/v1/topics/{topic_id}/consume](https://apis.io/channels/workato/api-v1-topics-topic-id-consume/)
+- [/api/v1/topics/{topic_id}/publish](https://apis.io/channels/workato/api-v1-topics-topic-id-publish/)
 
-The Workato Embedded Partner APIs enable partners to programmatically create and manage customers, recipes, connections, and other assets within the Workato Embedded platform. These APIs support provisioning customer workspaces, managing environments, and building fully embedded integration experiences within partner applications.
+#### GraphQL (1)
 
-- **Human URL:** [https://docs.workato.com/oem/oem-api.html](https://docs.workato.com/oem/oem-api.html)
+GraphQL schemas.
 
-#### Tags
+- [Moved to /providers/workato/](https://apis.io/graphqls/workato/workato-graphql/)
 
-- Embedded iPaaS
-- OEM
-- Partner API
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [A P I  Documentation](https://docs.workato.com/oem/oem-api.html)
-- [API Reference](https://docs.workato.com/oem/oem-api/managed-users.html)
-- [API Reference](https://docs.workato.com/oem/oem-api/connections.html)
-- [API Reference](https://docs.workato.com/oem/oem-api/api-platform.html)
-- [API Reference](https://docs.workato.com/oem/oem-api/adapters.html)
-- [API Reference](https://docs.workato.com/oem/oem-api/jobs)
-- [API Reference](https://docs.workato.com/oem/oem-api/team.html)
-- [API Reference](https://docs.workato.com/oem/embedded-environments/embedded-environments-api.html)
-- [F A Q](https://docs.workato.com/oem/oem-api-faqs.html)
-- [Documentation](https://docs.workato.com/oem.html)
-- [Documentation](https://docs.workato.com/oem/workato-embedded.html)
-- [Postman Collection](collections/workato-agent-studio.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-agent-studio.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/workato-developer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-developer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/workato-event-streams.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-event-streams.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/workato-mcp-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-mcp-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [workato](https://apis.io/servers/workato/workato/)
 
-### Workato Event Streams Public API
+#### Agentic access (1)
 
-The Workato Event Streams Public API enables HTTP-based clients to publish and consume messages from event topics. It supports single message publish, batch publish of up to 100 messages, and message consumption with long polling. The API is separate from the Developer API's event streams management endpoints and is rate limited to 60 requests per minute with a 1 MB maximum payload.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.workato.com/workato-api/pubsub.html](https://docs.workato.com/workato-api/pubsub.html)
+- [Workato Agentic Access](https://apis.io/agentic-access/workato/workato-agentic-access/)
 
-#### Tags
+#### JSON Schema (26)
 
-- Event Streams
-- Messaging
-- Pub/Sub
-- REST
+The data models the API reads and writes.
 
-#### Properties
+- [DataSource](https://apis.io/schemas/workato/workato-agent-studio-data-source/)
+- [Genie](https://apis.io/schemas/workato/workato-agent-studio-genie/)
+- [GenieInput](https://apis.io/schemas/workato/workato-agent-studio-genie-input/)
+- [KnowledgeBase](https://apis.io/schemas/workato/workato-agent-studio-knowledge-base/)
+- [KnowledgeBaseInput](https://apis.io/schemas/workato/workato-agent-studio-knowledge-base-input/)
+- [Skill](https://apis.io/schemas/workato/workato-agent-studio-skill/)
+- [UserGroup](https://apis.io/schemas/workato/workato-agent-studio-user-group/)
+- [DataTable](https://apis.io/schemas/workato/workato-developer-api-data-table/)
+- [DataTableColumn](https://apis.io/schemas/workato/workato-developer-api-data-table-column/)
+- [DataTableInput](https://apis.io/schemas/workato/workato-developer-api-data-table-input/)
+- [Recipe](https://apis.io/schemas/workato/workato-developer-api-recipe/)
+- [RecipeInput](https://apis.io/schemas/workato/workato-developer-api-recipe-input/)
+- [RecipeVersion](https://apis.io/schemas/workato/workato-developer-api-recipe-version/)
+- [BatchPublishRequest](https://apis.io/schemas/workato/workato-event-streams-batch-publish-request/)
+- [BatchPublishResponse](https://apis.io/schemas/workato/workato-event-streams-batch-publish-response/)
+- [ConsumeRequest](https://apis.io/schemas/workato/workato-event-streams-consume-request/)
+- [ConsumeResponse](https://apis.io/schemas/workato/workato-event-streams-consume-response/)
+- [Message](https://apis.io/schemas/workato/workato-event-streams-message/)
+- [PublishResponse](https://apis.io/schemas/workato/workato-event-streams-publish-response/)
+- [Workato Genie](https://apis.io/schemas/workato/workato-genie/)
+- [McpServer](https://apis.io/schemas/workato/workato-mcp-server-mcp-server/)
+- [McpServerInput](https://apis.io/schemas/workato/workato-mcp-server-mcp-server-input/)
+- [ServerPolicy](https://apis.io/schemas/workato/workato-mcp-server-server-policy/)
+- [Tool](https://apis.io/schemas/workato/workato-mcp-server-tool/)
+- [UserGroup](https://apis.io/schemas/workato/workato-mcp-server-user-group/)
+- …and 1 more published on APIs.io
 
-- [Documentation](https://docs.workato.com/workato-api/pubsub.html)
-- [Documentation](https://docs.workato.com/event-streams.html)
-- [OpenAPI](openapi/workato-event-streams-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workato-event-streams.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-event-streams.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/workato-event-streams-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+#### JSON Structure (26)
 
-### Workato MCP Server API
+Data models expressed in JSON Structure.
 
-The Workato MCP Server API provides endpoints for creating, configuring, and managing Model Context Protocol (MCP) servers that expose Workato API collections as tools for AI agents. It supports server creation, tool management, user group assignment, and policy configuration. MCP servers generate unique authenticated URLs usable by AI development environments like Claude Desktop and Cursor. Workato now markets this as Enterprise MCP, the agentic AI surface built on top of the iPaaS, and recently added nine prebuilt MCP servers including Dropbox, Freshdesk, ZoomInfo, Notion, Discord, and Microsoft Teams. MCP is available in the US, EU, AU, JP, and SG data centers.
+- [Workato Agent Studio Data Source Structure](https://apis.io/json-structure/workato/workato-agent-studio-data-source-structure/)
+- [Workato Agent Studio Genie Input Structure](https://apis.io/json-structure/workato/workato-agent-studio-genie-input-structure/)
+- [Workato Agent Studio Genie Structure](https://apis.io/json-structure/workato/workato-agent-studio-genie-structure/)
+- [Workato Agent Studio Knowledge Base Input Structure](https://apis.io/json-structure/workato/workato-agent-studio-knowledge-base-input-structure/)
+- [Workato Agent Studio Knowledge Base Structure](https://apis.io/json-structure/workato/workato-agent-studio-knowledge-base-structure/)
+- [Workato Agent Studio Skill Structure](https://apis.io/json-structure/workato/workato-agent-studio-skill-structure/)
+- [Workato Agent Studio User Group Structure](https://apis.io/json-structure/workato/workato-agent-studio-user-group-structure/)
+- [Workato Developer Api Data Table Column Structure](https://apis.io/json-structure/workato/workato-developer-api-data-table-column-structure/)
+- [Workato Developer Api Data Table Input Structure](https://apis.io/json-structure/workato/workato-developer-api-data-table-input-structure/)
+- [Workato Developer Api Data Table Structure](https://apis.io/json-structure/workato/workato-developer-api-data-table-structure/)
+- [Workato Developer Api Recipe Input Structure](https://apis.io/json-structure/workato/workato-developer-api-recipe-input-structure/)
+- [Workato Developer Api Recipe Structure](https://apis.io/json-structure/workato/workato-developer-api-recipe-structure/)
+- [Workato Developer Api Recipe Version Structure](https://apis.io/json-structure/workato/workato-developer-api-recipe-version-structure/)
+- [Workato Event Streams Batch Publish Request Structure](https://apis.io/json-structure/workato/workato-event-streams-batch-publish-request-structure/)
+- [Workato Event Streams Batch Publish Response Structure](https://apis.io/json-structure/workato/workato-event-streams-batch-publish-response-structure/)
+- [Workato Event Streams Consume Request Structure](https://apis.io/json-structure/workato/workato-event-streams-consume-request-structure/)
+- [Workato Event Streams Consume Response Structure](https://apis.io/json-structure/workato/workato-event-streams-consume-response-structure/)
+- [Workato Event Streams Message Structure](https://apis.io/json-structure/workato/workato-event-streams-message-structure/)
+- [Workato Event Streams Publish Response Structure](https://apis.io/json-structure/workato/workato-event-streams-publish-response-structure/)
+- [Workato Genie Structure](https://apis.io/json-structure/workato/workato-genie-structure/)
+- [Workato Mcp Server Mcp Server Input Structure](https://apis.io/json-structure/workato/workato-mcp-server-mcp-server-input-structure/)
+- [Workato Mcp Server Mcp Server Structure](https://apis.io/json-structure/workato/workato-mcp-server-mcp-server-structure/)
+- [Workato Mcp Server Server Policy Structure](https://apis.io/json-structure/workato/workato-mcp-server-server-policy-structure/)
+- [Workato Mcp Server Tool Structure](https://apis.io/json-structure/workato/workato-mcp-server-tool-structure/)
+- [Workato Mcp Server User Group Structure](https://apis.io/json-structure/workato/workato-mcp-server-user-group-structure/)
+- …and 1 more published on APIs.io
 
-- **Human URL:** [https://docs.workato.com/mcp.html](https://docs.workato.com/mcp.html)
+#### JSON-LD (1)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- AI Agents
-- MCP
-- Model Context Protocol
-- REST
+- [Workato Context](https://apis.io/jsonld/workato/workato-context/)
 
-#### Properties
+#### Vocabulary (1)
 
-- [Documentation](https://docs.workato.com/mcp.html)
-- [API Reference](https://docs.workato.com/workato-api/mcp-servers.html)
-- [Documentation](https://docs.workato.com/en/mcp/expose-developer-apis.html)
-- [OpenAPI](openapi/workato-mcp-server-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workato-mcp-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workato-mcp-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The provider's domain terms, defined.
 
-## Common Properties
+- [Workato Vocabulary](https://apis.io/vocabularies/workato/workato-vocabulary/)
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [GitHub Organization](https://github.com/workato)
-- [Pricing](https://www.workato.com/pricing)
-- [Security](https://www.workato.com/platform/security)
-- [Use Cases](https://www.workato.com/use_cases)
-- [Solutions](https://www.workato.com/solutions/)
-- [Use Cases](https://www.workato.com/solutions/)
-- [Resources](https://www.workato.com/resources)
-- [Blog](https://www.workato.com/the-connector/)
-- [Whats New](https://www.workato.com/product-hub/whats-new/)
-- [Whats New](https://www.workato.com/product-hub/whats-new/)
-- [Changelog](https://www.workato.com/product-hub/changelog/)
-- [Customers](https://www.workato.com/the-connector/category/customer-stories/americas/)
-- [Partners](https://partners.workato.com/consultants)
-- [Portal](https://docs.workato.com/en/)
-- [Portal](https://docs.workato.com/en/)
-- [Integrations](https://app.workato.com/browse/recipes)
-- [Documentation](https://docs.workato.com/en/)
-- [Integrations](https://app.workato.com/browse/recipes)
-- [Integrations](undefined)
-- [Privacy Policy](https://www.workato.com/legal)
-- [Terms of Service](https://www.workato.com/legal/terms-of-service)
-- [Security](https://www.workato.com/legal/security)
-- [About](https://www.workato.com/about_us)
+#### Examples (26)
+
+Example requests and responses.
+
+- [Workato Agent Studio Data Source Example](https://apis.io/examples/workato/workato-agent-studio-data-source-example/)
+- [Workato Agent Studio Genie Example](https://apis.io/examples/workato/workato-agent-studio-genie-example/)
+- [Workato Agent Studio Genie Input Example](https://apis.io/examples/workato/workato-agent-studio-genie-input-example/)
+- [Workato Agent Studio Knowledge Base Example](https://apis.io/examples/workato/workato-agent-studio-knowledge-base-example/)
+- [Workato Agent Studio Knowledge Base Input Example](https://apis.io/examples/workato/workato-agent-studio-knowledge-base-input-example/)
+- [Workato Agent Studio Skill Example](https://apis.io/examples/workato/workato-agent-studio-skill-example/)
+- [Workato Agent Studio User Group Example](https://apis.io/examples/workato/workato-agent-studio-user-group-example/)
+- [Workato Developer Api Data Table Column Example](https://apis.io/examples/workato/workato-developer-api-data-table-column-example/)
+- [Workato Developer Api Data Table Example](https://apis.io/examples/workato/workato-developer-api-data-table-example/)
+- [Workato Developer Api Data Table Input Example](https://apis.io/examples/workato/workato-developer-api-data-table-input-example/)
+- [Workato Developer Api Recipe Example](https://apis.io/examples/workato/workato-developer-api-recipe-example/)
+- [Workato Developer Api Recipe Input Example](https://apis.io/examples/workato/workato-developer-api-recipe-input-example/)
+- [Workato Developer Api Recipe Version Example](https://apis.io/examples/workato/workato-developer-api-recipe-version-example/)
+- [Workato Event Streams Batch Publish Request Example](https://apis.io/examples/workato/workato-event-streams-batch-publish-request-example/)
+- [Workato Event Streams Batch Publish Response Example](https://apis.io/examples/workato/workato-event-streams-batch-publish-response-example/)
+- [Workato Event Streams Consume Request Example](https://apis.io/examples/workato/workato-event-streams-consume-request-example/)
+- [Workato Event Streams Consume Response Example](https://apis.io/examples/workato/workato-event-streams-consume-response-example/)
+- [Workato Event Streams Message Example](https://apis.io/examples/workato/workato-event-streams-message-example/)
+- [Workato Event Streams Publish Response Example](https://apis.io/examples/workato/workato-event-streams-publish-response-example/)
+- [Workato Genie Example](https://apis.io/examples/workato/workato-genie-example/)
+- [Workato Mcp Server Mcp Server Example](https://apis.io/examples/workato/workato-mcp-server-mcp-server-example/)
+- [Workato Mcp Server Mcp Server Input Example](https://apis.io/examples/workato/workato-mcp-server-mcp-server-input-example/)
+- [Workato Mcp Server Server Policy Example](https://apis.io/examples/workato/workato-mcp-server-server-policy-example/)
+- [Workato Mcp Server Tool Example](https://apis.io/examples/workato/workato-mcp-server-tool-example/)
+- [Workato Mcp Server User Group Example](https://apis.io/examples/workato/workato-mcp-server-user-group-example/)
+- …and 1 more published on APIs.io
+
+#### Collections (18)
+
+Postman and Open Collection request collections.
+
+- [Workato Agent Studio API](https://apis.io/collections/workato/open-workato-agent-studio/)
+- [Workato Agent Studio Data Tables API](https://apis.io/collections/workato/open-workato-data-tables-api/)
+- [Workato Developer API](https://apis.io/collections/workato/open-workato-developer-api/)
+- [Workato Event Streams Public API](https://apis.io/collections/workato/open-workato-event-streams/)
+- [Workato Agent Studio Data Tables Genies API](https://apis.io/collections/workato/open-workato-genies-api/)
+- [Workato Agent Studio Data Tables Knowledge Bases API](https://apis.io/collections/workato/open-workato-knowledge-bases-api/)
+- [Workato MCP Server API](https://apis.io/collections/workato/open-workato-mcp-server/)
+- [Workato Agent Studio Data Tables MCP Servers API](https://apis.io/collections/workato/open-workato-mcp-servers-api/)
+- [Workato Agent Studio Data Tables Messages API](https://apis.io/collections/workato/open-workato-messages-api/)
+- [Workato Agent Studio Data Tables Policies API](https://apis.io/collections/workato/open-workato-policies-api/)
+- [Workato Agent Studio Data Tables Recipes API](https://apis.io/collections/workato/open-workato-recipes-api/)
+- [Workato Agent Studio Data Tables Skills API](https://apis.io/collections/workato/open-workato-skills-api/)
+- [Workato Agent Studio Data Tables Tools API](https://apis.io/collections/workato/open-workato-tools-api/)
+- [Workato Agent Studio Data Tables User Groups API](https://apis.io/collections/workato/open-workato-user-groups-api/)
+- [Workato Agent Studio API](https://apis.io/collections/workato/postman-workato-agent-studio/)
+- [Workato Developer API](https://apis.io/collections/workato/postman-workato-developer-api/)
+- [Workato Event Streams Public API](https://apis.io/collections/workato/postman-workato-event-streams/)
+- [Workato MCP Server API](https://apis.io/collections/workato/postman-workato-mcp-server/)
+
+#### Governance rules (4)
+
+Spectral rulesets for the provider's contracts.
+
+- [Workato — asyncapi rules](https://apis.io/rules/workato/workato-asyncapi-spectral-rules/)
+- [Workato — jsonschema rules](https://apis.io/rules/workato/workato-jsonschema-spectral-rules/)
+- [Workato API Rules](https://apis.io/rules/workato/workato-rules/)
+- [Workato API Rules](https://apis.io/rules/workato/workato-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Workato Authentication](https://apis.io/security/workato/workato-authentication/)
+- [Workato Domain Security](https://apis.io/security/workato/workato-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Workato Plans Pricing](https://apis.io/plans/workato/workato-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Workato Rate Limits](https://apis.io/rate-limits/workato/workato-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Workato Finops](https://apis.io/finops/workato/workato-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.workato.com/)
-- [Login](https://app.workato.com/users/sign_in?_gl=1*191kgyn*_gcl_au*MjA2NDIyNDEyNS4xNzQ5MTM5OTgw)
-- [Errors](https://docs.workato.com/en/workato-api.html#http-response-codes)
-- [M C P](https://docs.workato.com/en/mcp.html)
-- [Features](undefined)
-- [Developer  Portal](https://docs.workato.com/)
-- [Authentication](https://docs.workato.com/workato-api/authentication.html)
-- [Rate Limits](https://docs.workato.com/workato-api/rate-limiting.html)
-- [Status Page](https://status.workato.com/)
-- [Community](https://community.workato.com/)
+- [Documentation](https://docs.workato.com/en/)
+- [Getting started](https://docs.workato.com/getting-started/what-is-workato.html)
+- [Pricing](https://www.workato.com/pricing)
 - [Support](https://support.workato.com/)
-- [Sign Up](https://www.workato.com/users/sign_up)
-- [LinkedIn](https://www.linkedin.com/company/workato/)
-- [Twitter](https://twitter.com/workato)
-- [YouTube](https://www.youtube.com/user/workato)
-- [Facebook](https://www.facebook.com/workato/)
-- [Instagram](https://www.instagram.com/workatohq/)
-- [Academy](https://academy.workato.com/)
-- [Certification](https://www.workato.com/certification)
-- [Forum](https://systematic.workato.com/)
-- [Events](https://www.workato.com/events)
-- [Trust Center](https://trust.workato.com/)
-- [Press](https://www.workato.com/press)
-- [Careers](https://www.workato.com/careers)
-- [Contact](https://www.workato.com/request_demo)
-- [Product](https://www.workato.com/embed-saas-integrations)
-- [Documentation](https://docs.workato.com/on-prem.html)
-- [SDK](https://docs.workato.com/developing-connectors/sdk.html)
-- [Documentation](https://docs.workato.com/api-management.html)
-- [Portal](https://docs.workato.com/api-mgmt/api-developer-portal.html)
-- [Partners](https://partners.workato.com/)
-- [Events](https://www.workato.com/events/automate)
-- [JSON-LD](json-ld/workato-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/workato-recipe-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-genie-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-developer-api-recipe-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-developer-api-data-table-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-agent-studio-genie-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-agent-studio-skill-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-agent-studio-knowledge-base-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-event-streams-message-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-mcp-server-mcp-server-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/workato-mcp-server-tool-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Spectral Rules](rules/workato-spectral-rules.yml)
-- [Vocabulary](vocabulary/workato-vocabulary.yml)
+- [Changelog](https://www.workato.com/product-hub/changelog/)
+- [Blog](https://www.workato.com/the-connector/)
+- [Security](https://www.workato.com/platform/security)
+- [Trust centre](https://trust.workato.com/)
+- [Terms of service](https://www.workato.com/legal/terms-of-service)
+- [Privacy policy](https://www.workato.com/legal)
+- [GitHub](https://github.com/workato)
+- [Status](https://status.workato.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 65.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 65.0 |
+| Contract quality | 70.6 |
+| Contract governance | 45.5 |
+| Operational transparency | 55.3 |
+| Developer ergonomics | 76.8 |
+| Access clarity | 60.5 |
+
+**Agent readiness 52.2** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/workato/](https://apis.io/providers/workato/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Workato: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/workato/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
